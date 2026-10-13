@@ -1,8 +1,2 @@
-import { FramerPublicPage } from "@/components/FramerPublicPage";
-
-export default function Home() {
-  return (
-    <FramerPublicPage />
-  );
-}
-
+import Link from "next/link";
+export default function HomePage() { return <main className="starter-shell"><p className="starter-eyebrow">SIZA / JOHANNESBURG</p><h1>Cleaning, properly arranged.</h1><p className="starter-copy">The public frontend is being rebuilt. The booking and cleaner application services remain available.</p><div className="starter-actions"><Link href="/book">Request a clean</Link><Link href="/cleaners/apply">Become a cleaner</Link></div></main>; }
