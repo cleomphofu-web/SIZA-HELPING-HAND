@@ -32,3 +32,7 @@ Thumbs.db
 
 # Local Supabase state
 .supabase/
+
+# added by tools/bootstrap.mjs
+playwright-report
+test-results

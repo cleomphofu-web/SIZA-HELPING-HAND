@@ -7,7 +7,14 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "build:copy": "node tools/content/build-copy.mjs",
+    "build:copy:strict": "node tools/content/build-copy.mjs --strict",
+    "check:structure": "node tools/quality/check-structure.mjs",
+    "design:extract": "node tools/design/extract-framer-tokens.mjs https://siza.framer.website docs/design-reference/extract",
+    "design:capture": "node tools/design/visual-diff.mjs capture",
+    "design:compare": "node tools/design/visual-diff.mjs compare",
+    "knip": "knip"
   },
   "dependencies": {
     "@supabase/ssr": "0.7.0",
@@ -27,6 +34,10 @@
     "@types/react-dom": "19.2.2",
     "eslint": "9.38.0",
     "eslint-config-next": "16.4.0",
+    "knip": "^6.41.0",
+    "pixelmatch": "^8.0.0",
+    "playwright": "^1.64.1",
+    "pngjs": "^7.0.0",
     "tailwindcss": "4.1.14",
     "typescript": "5.9.3",
     "vitest": "^5.0.3"
