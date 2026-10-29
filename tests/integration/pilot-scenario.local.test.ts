@@ -215,6 +215,7 @@ integration("End-to-End Pilot Scenario: Host Request -> Helper Rotation -> Check
       .eq("booking_id", bookingId);
     expect(offerError).toBeNull();
     expect(offers?.length).toBe(3);
+    primaryHelperId = offers![0].helper_id;
     expect(offers?.some((o) => o.helper_id === primaryHelperId)).toBe(true);
   });
 
