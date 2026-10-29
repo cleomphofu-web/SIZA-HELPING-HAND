@@ -95,3 +95,16 @@ Your tool may not load `.claude/skills` automatically. When the router below nam
 2. `design-taste-frontend`: for pages the Framer template does not cover, after tokens are approved; the Framer template and `docs/design-reference/DESIGN_TOKENS.md` override its "directions". **Never use stock or placeholder photos of people** and do not run its `assets.mjs` for people imagery; use no photo, an illustration, or type. Read any script before first running it.
 3. `ui-ux-pro-max`: run `python3 .claude/skills/ui-ux-pro-max/scripts/search.py ...` (not the `${CLAUDE_PLUGIN_ROOT}` path). Its output is advice, not a spec.
 4. Third-party skills are pinned in `tools/install-external-skills.mjs`; never auto-update. See `docs/EXTERNAL_SKILLS.md`.
+Build control: read `docs/BUILD_STATUS.md` before acting and follow `docs/plans/siza-phase-a.md`.
+Use `docs/api-design.md`, `docs/coding-standards.md`, and `docs/safety-guard.md` for the documented deltas.
+Record risky operations in `docs/ops-log.md`; stop at milestone gates for owner review.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

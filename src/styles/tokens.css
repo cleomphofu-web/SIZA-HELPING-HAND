@@ -1,0 +1,17 @@
+:root {
+  --siza-bg: #f5f5f5;
+  --siza-surface: #ffffff;
+  --siza-ink: #000000;
+  --siza-muted: #666666;
+  --siza-line: #cccccc;
+  --siza-space-2: 8px;
+  --siza-space-5: 16px;
+  --siza-space-6: 20px;
+  --siza-space-7: 24px;
+  --siza-space-9: 48px;
+  --siza-space-10: 60px;
+  --siza-radius-card: 8px;
+  --siza-carved-heading-height: 212px;
+  --siza-carved-heading-max-width: 880px;
+  --siza-font: Arial, Helvetica, sans-serif;
+}

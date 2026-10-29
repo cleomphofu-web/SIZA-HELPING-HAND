@@ -1,0 +1,1356 @@
+{
+  "page": {
+    "title": "Interior Design Agency Framer Template - Interio",
+    "lang": "en",
+    "scrollHeight": 2981,
+    "bodyBackground": "rgb(245, 245, 245)"
+  },
+  "cssVariables": {
+    "--token-ac0c662b-4250-4586-9bed-0f686bea2a4e": "#b3b3b3",
+    "--token-68c912bd-8c25-4cee-bbc8-dc294bdf3289": "#f5f5f5",
+    "--token-05f1db4d-8688-46b3-bf5f-b74ebb2a836f": "#666",
+    "--token-88eff137-1274-4a36-b366-ef51c420159a": "#000",
+    "--token-e50dac00-7054-4d7a-a43e-c46ce7de76fb": "#ccc",
+    "--token-7cc43143-e5c7-467f-8763-76424c3834ea": "#fff",
+    "--token-3e0285fd-4a85-479f-9c05-6286ae1211c6": "#191919",
+    "--token-6cae9d17-97cf-4de5-bfc5-d57af2839c4a": "#f2f2f2",
+    "--token-0c86702d-68fd-448c-9acd-a93eb7230d97": "#e6e6e6",
+    "--token-de5fb930-8f11-483a-9194-6cda4c8e5176": "#ccc",
+    "--framer-will-change-override": "none",
+    "--framer-will-change-filter-override": "none"
+  },
+  "fontFaces": [
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/GrgcKwrN6d3Uz8EwcLHZxwEfC4.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/hyOgCu0Xnghbimh0pE8QTvtt2AU.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/NeGmSOXrPBfEFIy5YZeHq17LEDA.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/oYaAX5himiTPYuN8vLWnqBbfD2s.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/lEJLP4R0yuCaMCjSXYHtJw72M.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/cRJyLNuTJR5jbyKzGi33wU9cqIQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/yDtI2UI8XcEg1W2je9XPN3Noo.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/A0Wcc7NgXMjUuFdquHDrIZpzZw0.woff2\")"
+    },
+    {
+      "family": "\"Geist Placeholder\"",
+      "weight": "",
+      "style": "",
+      "src": "local(\"Arial\")"
+    },
+    {
+      "family": "\"Inter Placeholder\"",
+      "weight": "",
+      "style": "",
+      "src": "local(\"Arial\")"
+    }
+  ],
+  "textStyles": [
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 48px | 500 | 48px | -1.44px | none",
+      "count": 22,
+      "color": "rgb(255, 255, 255)",
+      "sample": "R",
+      "layer": "SERVICES"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 12px | 500 | 18px | normal | none",
+      "count": 14,
+      "color": "rgb(255, 255, 255)",
+      "sample": "START YOUR JOURNEY //",
+      "layer": "Nav item"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 10px | 500 | 13px | normal | none",
+      "count": 8,
+      "color": "rgb(179, 179, 179)",
+      "sample": "24/7 DAYS",
+      "layer": "Nav item"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 20px | 500 | 28px | normal | none",
+      "count": 7,
+      "color": "rgb(255, 255, 255)",
+      "sample": "siZa.",
+      "layer": "INTERIO®"
+    },
+    {
+      "value": "Geist | 16px | 400 | 24px | normal | none",
+      "count": 6,
+      "color": "rgba(0, 0, 0, 0.4)",
+      "sample": "Select your project",
+      "layer": "Card Content"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 20px | 500 | 26px | normal | none",
+      "count": 4,
+      "color": "rgb(255, 255, 255)",
+      "sample": "ABOUT",
+      "layer": "Text"
+    },
+    {
+      "value": "sans-serif | 12px | 400 | normal | normal | none",
+      "count": 2,
+      "color": "rgb(0, 0, 0)",
+      "sample": "<style>[data-framer-form] input[name=framer-nosc",
+      "layer": "Card Content"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 16px | 400 | 24px | normal | none",
+      "count": 1,
+      "color": "rgb(102, 102, 102)",
+      "sample": "We begin with a consultation to understand your ",
+      "layer": "We begin with a consultation to understand your vision, requirements, timeline, & budget before developing a tailored design strategy with complete clarity and confidence."
+    }
+  ],
+  "textColors": [
+    {
+      "value": "rgb(255, 255, 255)",
+      "count": 23
+    },
+    {
+      "value": "rgb(0, 0, 0)",
+      "count": 21
+    },
+    {
+      "value": "rgb(102, 102, 102)",
+      "count": 8
+    },
+    {
+      "value": "rgb(245, 245, 245)",
+      "count": 5
+    },
+    {
+      "value": "rgb(179, 179, 179)",
+      "count": 4
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.4)",
+      "count": 2
+    },
+    {
+      "value": "rgb(0, 0, 238)",
+      "count": 1
+    }
+  ],
+  "backgrounds": [
+    {
+      "value": "rgb(255, 255, 255)",
+      "count": 46,
+      "layer": "Line"
+    },
+    {
+      "value": "rgba(255, 255, 255, 0.2)",
+      "count": 32,
+      "layer": "Line"
+    },
+    {
+      "value": "rgb(0, 0, 0)",
+      "count": 25,
+      "layer": "Phone"
+    },
+    {
+      "value": "rgb(245, 245, 245)",
+      "count": 2,
+      "layer": null
+    }
+  ],
+  "borders": [
+    {
+      "value": "2px inset rgb(118, 118, 118)",
+      "count": 11
+    }
+  ],
+  "radii": [
+    {
+      "value": "2px",
+      "count": 12
+    },
+    {
+      "value": "100px",
+      "count": 7
+    },
+    {
+      "value": "8px",
+      "count": 6
+    },
+    {
+      "value": "10px",
+      "count": 3
+    },
+    {
+      "value": "11px",
+      "count": 2
+    }
+  ],
+  "shadows": [
+    {
+      "value": "rgb(0, 0, 0) 0px 0px 0px 1px inset",
+      "count": 2
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.17) 0px 0.602187px 1.56569px -1.5px, rgba(0, 0, 0, 0.14) 0px 2.28853px 5.95019px -3px, rgba(0, 0, 0, 0.02) 0px 10px 26px -4.5px",
+      "count": 1
+    }
+  ],
+  "transitions": [],
+  "gaps": [
+    {
+      "value": "10px",
+      "count": 38
+    },
+    {
+      "value": "0px",
+      "count": 36
+    },
+    {
+      "value": "3px",
+      "count": 13
+    },
+    {
+      "value": "24px",
+      "count": 13
+    },
+    {
+      "value": "12px",
+      "count": 7
+    },
+    {
+      "value": "8px",
+      "count": 4
+    },
+    {
+      "value": "104px",
+      "count": 1
+    },
+    {
+      "value": "20px",
+      "count": 1
+    },
+    {
+      "value": "4px",
+      "count": 1
+    },
+    {
+      "value": "48px",
+      "count": 1
+    },
+    {
+      "value": "44px",
+      "count": 1
+    },
+    {
+      "value": "64px",
+      "count": 1
+    },
+    {
+      "value": "16px",
+      "count": 1
+    },
+    {
+      "value": "18px",
+      "count": 1
+    }
+  ],
+  "layers": [
+    {
+      "name": "Phone",
+      "tag": "nav",
+      "top": -70,
+      "width": 768,
+      "height": 84,
+      "background": "rgb(0, 0, 0)",
+      "padding": "20px",
+      "display": "flex"
+    },
+    {
+      "name": "Dropdown",
+      "tag": "div",
+      "top": -902,
+      "width": 580,
+      "height": 716,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrapper",
+      "tag": "div",
+      "top": -902,
+      "width": 321,
+      "height": 360,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": -902,
+      "width": 321,
+      "height": 360,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -902,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -812,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -722,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -632,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": -542,
+      "width": 580,
+      "height": 356,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": -542,
+      "width": 580,
+      "height": 356,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": -50,
+      "width": 580,
+      "height": 44,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": " Icon Wrap",
+      "tag": "div",
+      "top": -50,
+      "width": 44,
+      "height": 44,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Hero Area",
+      "tag": "div",
+      "top": 0,
+      "width": 768,
+      "height": 435,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Hero Section",
+      "tag": "header",
+      "top": 0,
+      "width": 768,
+      "height": 435,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Hero Videos",
+      "tag": "div",
+      "top": 2,
+      "width": 768,
+      "height": 430,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Glow",
+      "tag": "div",
+      "top": 2,
+      "width": 768,
+      "height": 430,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 0,
+      "width": 580,
+      "height": 435,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "200px 20px 76px",
+      "display": "flex"
+    },
+    {
+      "name": "Line wrap",
+      "tag": "div",
+      "top": 0,
+      "width": 580,
+      "height": 435,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 875,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 875,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Header",
+      "tag": "div",
+      "top": 200,
+      "width": 540,
+      "height": 159,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Subtext",
+      "tag": "div",
+      "top": 200,
+      "width": 540,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "12px 16px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 262,
+      "width": 540,
+      "height": 97,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "6",
+      "tag": "section",
+      "top": 0,
+      "width": 768,
+      "height": 435,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": -1,
+      "width": 768,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Top",
+      "tag": "div",
+      "top": -1,
+      "width": 768,
+      "height": 218,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Bottom",
+      "tag": "div",
+      "top": 217,
+      "width": 768,
+      "height": 218,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Consultation Section",
+      "tag": "section",
+      "top": 435,
+      "width": 768,
+      "height": 950,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Background",
+      "tag": "div",
+      "top": 434,
+      "width": 768,
+      "height": 950,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 495,
+      "width": 580,
+      "height": 830,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 495,
+      "width": 580,
+      "height": 92,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 521,
+      "width": 580,
+      "height": 66,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 521,
+      "width": 580,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 635,
+      "width": 580,
+      "height": 690,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Disabled",
+      "tag": "button",
+      "top": 1283,
+      "width": 580,
+      "height": 42,
+      "background": "rgb(255, 255, 255)",
+      "padding": "12px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "FAQ Section",
+      "tag": "section",
+      "top": 1385,
+      "width": 768,
+      "height": 876,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 1445,
+      "width": 580,
+      "height": 756,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 1445,
+      "width": 580,
+      "height": 92,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 1471,
+      "width": 580,
+      "height": 66,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 1471,
+      "width": 580,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "div",
+      "top": 1581,
+      "width": 580,
+      "height": 620,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Active",
+      "tag": "div",
+      "top": 1581,
+      "width": 580,
+      "height": 172,
+      "background": "rgb(255, 255, 255)",
+      "padding": "24px",
+      "display": "flex"
+    },
+    {
+      "name": "We begin with a consultation to understand your vision, requirements, timeline, & budget before developing a tailored design strategy with complete clarity and confidence.",
+      "tag": "div",
+      "top": 1657,
+      "width": 532,
+      "height": 72,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Deafault",
+      "tag": "div",
+      "top": 1761,
+      "width": 580,
+      "height": 104,
+      "background": "rgb(255, 255, 255)",
+      "padding": "24px",
+      "display": "flex"
+    },
+    {
+      "name": "Questions",
+      "tag": "div",
+      "top": 1785,
+      "width": 532,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "How does the design process begin?",
+      "tag": "div",
+      "top": 1785,
+      "width": 484,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Deafault",
+      "tag": "div",
+      "top": 1873,
+      "width": 580,
+      "height": 76,
+      "background": "rgb(255, 255, 255)",
+      "padding": "24px",
+      "display": "flex"
+    },
+    {
+      "name": "Deafault",
+      "tag": "div",
+      "top": 1957,
+      "width": 580,
+      "height": 76,
+      "background": "rgb(255, 255, 255)",
+      "padding": "24px",
+      "display": "flex"
+    },
+    {
+      "name": "Deafault",
+      "tag": "div",
+      "top": 2041,
+      "width": 580,
+      "height": 76,
+      "background": "rgb(255, 255, 255)",
+      "padding": "24px",
+      "display": "flex"
+    },
+    {
+      "name": "Deafault",
+      "tag": "div",
+      "top": 2125,
+      "width": 580,
+      "height": 76,
+      "background": "rgb(255, 255, 255)",
+      "padding": "24px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "footer",
+      "top": 2261,
+      "width": 768,
+      "height": 721,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "48px 20px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Background",
+      "tag": "div",
+      "top": 2260,
+      "width": 768,
+      "height": 721,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 2309,
+      "width": 580,
+      "height": 673,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": 2309,
+      "width": 580,
+      "height": 248,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 2309,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 2309,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 2375,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 2375,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 2441,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 2441,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 2507,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 2507,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 2621,
+      "width": 580,
+      "height": 91,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Logo",
+      "tag": "div",
+      "top": 2663,
+      "width": 348,
+      "height": 54,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Buttom Wrap",
+      "tag": "div",
+      "top": 2775,
+      "width": 580,
+      "height": 206,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 2775,
+      "width": 580,
+      "height": 206,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "All Rights",
+      "tag": "div",
+      "top": 2775,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 2775,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Privacy",
+      "tag": "div",
+      "top": 2820,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 2820,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Terms",
+      "tag": "div",
+      "top": 2865,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 2865,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Social Media",
+      "tag": "div",
+      "top": 2910,
+      "width": 580,
+      "height": 71,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 26px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 2910,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    }
+  ],
+  "links": [
+    {
+      "text": "ABOUT",
+      "href": "./about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "./project"
+    },
+    {
+      "text": "BLOG",
+      "href": "./blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "./contact"
+    },
+    {
+      "text": "siZa.",
+      "href": "./"
+    },
+    {
+      "text": "ABOUT",
+      "href": "./about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "./project"
+    },
+    {
+      "text": "BLOG",
+      "href": "./blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "./contact"
+    },
+    {
+      "text": "PRIVACY  POLICY",
+      "href": "./legal/privacy-policy"
+    },
+    {
+      "text": "TERMS  &  CONDITIONS",
+      "href": "./legal/terms-conditions"
+    },
+    {
+      "text": "INSTAGRAM",
+      "href": "https://www.instagram.com"
+    },
+    {
+      "text": "FACEBOOK",
+      "href": "https://www.facebook.com"
+    },
+    {
+      "text": "TWITTER",
+      "href": "https://x.com"
+    },
+    {
+      "text": "Create a free website with Framer, the website builder loved",
+      "href": "https://www.framer.com"
+    }
+  ],
+  "media": [
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/C7jW978YB72otWVXn4wxBY9Je4.png?scale-down-to=1024&width=2560&height=1440",
+      "alt": "Nav Image",
+      "w": 580,
+      "h": 326
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JxRRWGCXXd2dxoRyuFe1XIRiW0Q.png?scale-down-to=1024&width=2238&height=400",
+      "alt": "Hero Image",
+      "w": 540,
+      "h": 96
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/yBVjbVAuBJFp8H1ff8ujMTX8M.png?width=700&height=2200",
+      "alt": "Background",
+      "w": 768,
+      "h": 2413
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/yBVjbVAuBJFp8H1ff8ujMTX8M.png?width=700&height=2200",
+      "alt": "Background",
+      "w": 768,
+      "h": 2413
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/1mMC0RSqNKZgwHx9VeLGdOoCP60.png?width=774&height=322",
+      "alt": "Logo",
+      "w": 580,
+      "h": 241
+    },
+    {
+      "type": "video",
+      "src": "https://framerusercontent.com/assets/PTN6glsYPLF4947jjfh7tEDGbE4.mp4",
+      "autoplay": true,
+      "loop": true,
+      "muted": true
+    }
+  ],
+  "animationsRunning": 0
+}

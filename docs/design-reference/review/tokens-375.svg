@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812" role="img" aria-labelledby="title description">
+  <title id="title">SIZA proposed mobile design token preview</title>
+  <desc id="description">A black editorial header, monochrome colour swatches, Geist typography, a button and a card at 375 pixels wide.</desc>
+  <rect width="375" height="812" fill="#f5f5f5"/>
+  <rect width="375" height="184" fill="#000000"/>
+  <path d="M20 0V184M355 0V184" stroke="rgba(255,255,255,.2)"/>
+  <text x="20" y="36" fill="#fff" font-family="Geist, Arial, sans-serif" font-size="12" font-weight="500" letter-spacing="1.2">SIZA // TOKEN PREVIEW</text>
+  <text x="20" y="105" fill="#fff" font-family="Geist, Arial, sans-serif" font-size="48" font-weight="500" letter-spacing="-1.44">HELP, MADE</text>
+  <text x="20" y="153" fill="#fff" font-family="Geist, Arial, sans-serif" font-size="48" font-weight="500" letter-spacing="-1.44">FAIR.</text>
+  <text x="20" y="218" fill="#666" font-family="Geist, Arial, sans-serif" font-size="12" font-weight="500" letter-spacing="1.2">COLOUR ROLES //</text>
+  <g transform="translate(20 240)">
+    <rect width="64" height="56" fill="#000"/><text x="0" y="74" fill="#191919" font-family="Geist, Arial, sans-serif" font-size="10">INK</text>
+    <rect x="72" width="64" height="56" fill="#191919"/><text x="72" y="74" fill="#191919" font-family="Geist, Arial, sans-serif" font-size="10">STRONG</text>
+    <rect x="144" width="64" height="56" fill="#fff" stroke="#ccc"/><text x="144" y="74" fill="#191919" font-family="Geist, Arial, sans-serif" font-size="10">SURFACE</text>
+    <rect x="216" width="64" height="56" fill="#e6e6e6"/><text x="216" y="74" fill="#191919" font-family="Geist, Arial, sans-serif" font-size="10">SOFT</text>
+    <rect x="288" width="47" height="56" fill="#b3b3b3"/><text x="288" y="74" fill="#191919" font-family="Geist, Arial, sans-serif" font-size="10">SUBTLE</text>
+  </g>
+  <text x="20" y="348" fill="#666" font-family="Geist, Arial, sans-serif" font-size="12" font-weight="500" letter-spacing="1.2">TYPE //</text>
+  <text x="20" y="396" fill="#000" font-family="Geist, Arial, sans-serif" font-size="28" font-weight="500" letter-spacing="-.84">A clear, warm system.</text>
+  <text x="20" y="430" fill="#666" font-family="Geist, Arial, sans-serif" font-size="16">Geist 16 / 24 — plain, readable body copy.</text>
+  <rect x="20" y="462" width="335" height="48" rx="2" fill="#000"/>
+  <text x="187.5" y="492" text-anchor="middle" fill="#fff" font-family="Geist, Arial, sans-serif" font-size="12" font-weight="500" letter-spacing=".8">REQUEST A HELPER</text>
+  <rect x="20" y="542" width="335" height="190" rx="8" fill="#fff"/>
+  <rect x="20" y="542" width="335" height="1" fill="#ccc"/>
+  <text x="44" y="580" fill="#666" font-family="Geist, Arial, sans-serif" font-size="12" font-weight="500" letter-spacing="1.2">// STEP 01</text>
+  <text x="44" y="624" fill="#000" font-family="Geist, Arial, sans-serif" font-size="28" font-weight="500" letter-spacing="-.84">Tell us what you need</text>
+  <text x="44" y="660" fill="#666" font-family="Geist, Arial, sans-serif" font-size="16">Short, practical copy with quiet rules</text>
+  <text x="44" y="686" fill="#666" font-family="Geist, Arial, sans-serif" font-size="16">and generous spacing.</text>
+  <line x1="20" y1="770" x2="355" y2="770" stroke="#ccc"/>
+  <text x="20" y="794" fill="#666" font-family="Geist, Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="1">375 PX / PROPOSED MOBILE TOKENS</text>
+</svg>

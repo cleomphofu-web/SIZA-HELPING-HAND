@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Capture reference screenshots and extract design tokens from a live site (built for Framer sites).
-// Usage: node extract-framer-tokens.mjs <baseUrl> <outDir> [path ...]   (no paths = discover the pages from the home page links)
+// Usage: node extract-framer-tokens.mjs <baseUrl> <outDir> [path ...] [--only=desktop] [--skip-existing]
+// (no paths = discover the pages from the home page links; --only limits to one screen size; --skip-existing resumes an interrupted run)
 // Example: node extract-framer-tokens.mjs https://siza.framer.website docs/design-reference/extract / /about /contact
 // Needs: npm i -D playwright && npx playwright install chromium
 import { chromium } from 'playwright';
@@ -8,7 +9,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { collect } from './collect-in-page.mjs';
 
-const [base, outDir = 'docs/design-reference/extract', ...paths] = process.argv.slice(2);
+const argv = process.argv.slice(2);
+const flags = argv.filter((a) => a.startsWith('--'));
+const [base, outDir = 'docs/design-reference/extract', ...paths] = argv.filter((a) => !a.startsWith('--'));
+const only = (flags.find((f) => f.startsWith('--only=')) || '').split('=')[1]; // --only=mobile|tablet|desktop
+const skipExisting = flags.includes('--skip-existing'); // resume after an interrupted run
 if (!base) { console.error('usage: node extract-framer-tokens.mjs <baseUrl> <outDir> [path ...]'); process.exit(2); }
 let pages = paths.length ? paths : null; // null = discover the site's own pages from its links
 const VIEWPORTS = [
@@ -21,10 +26,11 @@ const slug = (p) => (p === '/' ? 'home' : p.replace(/^\/|\/$/g, '').replace(/[^a
 async function autoScroll(page) {
   await page.evaluate(async () => {
     await new Promise((resolve) => {
-      let y = 0; const step = 400;
+      let y = 0; let n = 0; const step = 400;
       const t = setInterval(() => {
         window.scrollBy(0, step); y += step;
-        if (y >= document.documentElement.scrollHeight + step) {
+        n++;
+        if (y >= document.documentElement.scrollHeight + step || n > 120) {
           clearInterval(t); window.scrollTo(0, 0); setTimeout(resolve, 800);
         }
       }, 150);
@@ -55,8 +61,9 @@ if (!pages) {
 }
 const assets = new Set();
 const summary = [];
+const failures = [];
 try {
-  for (const vp of VIEWPORTS) {
+  for (const vp of VIEWPORTS.filter((v) => !only || v.name === only)) {
     const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: 1 });
     const page = await ctx.newPage();
     page.on('response', (r) => {
@@ -64,16 +71,26 @@ try {
       if (/framerusercontent\.com|fonts\.(gstatic|googleapis)\.com|fontshare|\.(woff2?|ttf|otf|mp4|webm|png|jpe?g|webp|svg)(\?|$)/i.test(u)) assets.add(u);
     });
     for (const p of pages) {
-      const url = new URL(p, base).toString();
-      await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
-      await autoScroll(page);
-      await page.waitForTimeout(1200);
       const name = `${slug(p)}-${vp.width}`;
-      await page.screenshot({ path: path.join(outDir, 'screens', `${name}.png`), fullPage: true });
-      const data = await page.evaluate(collect);
-      await fs.writeFile(path.join(outDir, `tokens-${name}.json`), JSON.stringify(data, null, 2));
-      summary.push({ page: p, viewport: vp.name, height: data.page.scrollHeight, textStyles: data.textStyles.length, colors: data.backgrounds.length });
-      console.log(`captured ${name} (height ${data.page.scrollHeight}px)`);
+      const shot = path.join(outDir, 'screens', `${name}.png`);
+      const tok = path.join(outDir, `tokens-${name}.json`);
+      if (skipExisting && (await fs.stat(shot).catch(() => null)) && (await fs.stat(tok).catch(() => null))) {
+        console.log(`skipped ${name} (already captured)`);
+        continue;
+      }
+      try {
+        await page.goto(new URL(p, base).toString(), { waitUntil: 'networkidle', timeout: 90000 });
+        await autoScroll(page);
+        await page.waitForTimeout(1200);
+        await page.screenshot({ path: shot, fullPage: true, timeout: 180000 });
+        const data = await page.evaluate(collect);
+        await fs.writeFile(tok, JSON.stringify(data, null, 2));
+        summary.push({ page: p, viewport: vp.name, height: data.page.scrollHeight, textStyles: data.textStyles.length, colors: data.backgrounds.length });
+        console.log(`captured ${name} (height ${data.page.scrollHeight}px)`);
+      } catch (e) {
+        failures.push(`${name}: ${e.message.split('\n')[0]}`);
+        console.error(`FAILED ${name}: ${e.message.split('\n')[0]} (run again with --skip-existing to resume)`);
+      }
     }
     await ctx.close();
   }
@@ -83,3 +100,4 @@ try {
 await fs.writeFile(path.join(outDir, 'assets-manifest.json'), JSON.stringify([...assets].sort(), null, 2));
 await fs.writeFile(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2));
 console.log(`done: ${outDir} (assets listed, not downloaded: check the template licence before reusing any asset)`);
+if (failures.length) { console.error(`${failures.length} capture(s) failed:\n- ${failures.join('\n- ')}`); process.exit(1); }

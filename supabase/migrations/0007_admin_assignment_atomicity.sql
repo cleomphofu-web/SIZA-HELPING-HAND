@@ -1,0 +1,179 @@
+-- Assign selected helpers as one transaction, including booking state and audit record.
+-- Previously applied migrations (especially 0001_init.sql) are immutable.
+
+create or replace function public.admin_assign_phase_a_helpers(
+  p_actor_id uuid,
+  p_booking_id uuid,
+  p_helper_ids uuid[]
+)
+returns integer
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  booking_row public.phase_a_bookings;
+  helper_row public.helper_details;
+  helper_id uuid;
+  slot_number integer;
+  occupied_slot_count integer;
+  accepted_count integer;
+  requested_count integer;
+begin
+  if auth.role() is distinct from 'service_role' then
+    raise exception 'admin_required' using errcode = '42501';
+  end if;
+
+  if p_actor_id is null or not exists (
+    select 1
+    from public.profiles p
+    join public.admins a on a.user_id = p.id
+    where p.id = p_actor_id and p.role = 'admin'
+  ) then
+    raise exception 'admin_required' using errcode = '42501';
+  end if;
+
+  requested_count := coalesce(cardinality(p_helper_ids), 0);
+  if requested_count < 1 or requested_count > 4
+    or exists (select 1 from unnest(p_helper_ids) selected(id) where selected.id is null)
+    or (select count(distinct selected.id) from unnest(p_helper_ids) selected(id)) <> requested_count then
+    raise exception 'invalid_selection' using errcode = '22023';
+  end if;
+
+  select * into booking_row
+  from public.phase_a_bookings
+  where id = p_booking_id
+  for update;
+
+  if booking_row.id is null or booking_row.status not in ('open', 'assigned') then
+    raise exception 'booking_unavailable' using errcode = 'P0002';
+  end if;
+
+  select count(*) into occupied_slot_count
+  from public.booking_assignments a
+  where a.booking_id = p_booking_id;
+
+  if requested_count > booking_row.helpers_needed - occupied_slot_count then
+    raise exception 'insufficient_slots' using errcode = 'P0001';
+  end if;
+
+  -- Lock selected helper/profile rows in stable order so eligibility changes serialize
+  -- with this assignment and concurrent multi-helper assignments do not deadlock.
+  perform 1
+  from public.helper_details h
+  join public.profiles p on p.id = h.user_id
+  where h.user_id = any(p_helper_ids)
+  order by h.user_id
+  for update of h, p;
+
+  foreach helper_id in array p_helper_ids loop
+    select h.* into helper_row
+    from public.helper_details h
+    join public.profiles p on p.id = h.user_id
+    where h.user_id = helper_id
+      and p.role = 'helper'
+        and h.status = 'approved'
+        and (h.first_job_completed_at is null or (h.subscription_status = 'active' and h.subscription_paid_until > now()))
+        and h.services && booking_row.services
+        and h.suburbs @> array[booking_row.suburb];
+
+    if helper_row.user_id is null or exists (
+      select 1 from public.booking_assignments a
+      where a.booking_id = p_booking_id and a.helper_id = helper_id
+    ) then
+      raise exception 'helper_unavailable' using errcode = 'P0001';
+    end if;
+
+    select slot into slot_number
+    from generate_series(1, booking_row.helpers_needed) as free_slot(slot)
+    where not exists (
+      select 1 from public.booking_assignments a
+      where a.booking_id = p_booking_id and a.slot = free_slot.slot
+    )
+    order by slot
+    limit 1;
+
+    if slot_number is null then
+      raise exception 'insufficient_slots' using errcode = 'P0001';
+    end if;
+
+    insert into public.booking_assignments (booking_id, helper_id, slot, status)
+    values (p_booking_id, helper_id, slot_number, 'accepted');
+  end loop;
+
+  select count(*) into accepted_count
+  from public.booking_assignments a
+  where a.booking_id = p_booking_id and a.status = 'accepted';
+
+  update public.phase_a_bookings
+  set status = case when accepted_count >= booking_row.helpers_needed then 'assigned'::public.siza_booking_status else 'open'::public.siza_booking_status end,
+      assigned_at = case when accepted_count >= booking_row.helpers_needed then coalesce(assigned_at, now()) else assigned_at end,
+      updated_at = now()
+  where id = p_booking_id;
+
+  insert into public.phase_a_audit_log (actor_id, action, entity, entity_id)
+  values (p_actor_id, 'helpers_assigned', 'phase_a_bookings', p_booking_id);
+
+  return requested_count;
+end;
+$$;
+
+revoke execute on function public.admin_assign_phase_a_helpers(uuid, uuid, uuid[]) from public, anon, authenticated;
+grant execute on function public.admin_assign_phase_a_helpers(uuid, uuid, uuid[]) to service_role;
+
+create or replace function public.admin_set_phase_a_booking_status(
+  p_actor_id uuid,
+  p_booking_id uuid,
+  p_next_status text
+)
+returns boolean
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  booking_row public.phase_a_bookings;
+  target_status public.siza_booking_status;
+begin
+  if auth.role() is distinct from 'service_role'
+    or p_actor_id is null
+    or not exists (
+      select 1
+      from public.profiles p
+      join public.admins a on a.user_id = p.id
+      where p.id = p_actor_id and p.role = 'admin'
+    ) then
+    raise exception 'admin_required' using errcode = '42501';
+  end if;
+
+  if p_next_status is null or p_next_status not in ('cancelled', 'disputed') then
+    raise exception 'invalid_status' using errcode = '22023';
+  end if;
+  target_status := p_next_status::public.siza_booking_status;
+
+  select * into booking_row
+  from public.phase_a_bookings
+  where id = p_booking_id
+  for update;
+  if booking_row.id is null then
+    raise exception 'booking_unavailable' using errcode = 'P0002';
+  end if;
+
+  if (target_status = 'cancelled' and booking_row.status not in ('open', 'assigned'))
+    or (target_status = 'disputed' and booking_row.status not in ('in_progress', 'completed')) then
+    raise exception 'invalid_transition' using errcode = 'P0001';
+  end if;
+
+  update public.phase_a_bookings
+  set status = target_status, updated_at = now()
+  where id = p_booking_id;
+
+  insert into public.phase_a_audit_log (actor_id, action, entity, entity_id)
+  values (p_actor_id, 'booking_' || p_next_status, 'phase_a_bookings', p_booking_id);
+
+  return true;
+end;
+$$;
+
+revoke execute on function public.admin_set_phase_a_booking_status(uuid, uuid, text) from public, anon, authenticated;
+grant execute on function public.admin_set_phase_a_booking_status(uuid, uuid, text) to service_role;

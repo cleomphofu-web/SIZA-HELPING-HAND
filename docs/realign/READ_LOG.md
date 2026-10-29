@@ -77,3 +77,8 @@
 - `DESIGN_DIRECTIONS.md` -> archive: it is explicitly historical and conflicts with the Framer-token direction.
 - `LANDING_PAGE_CONTENT.md` -> archive: its routes, wording, placeholder content, and service model are superseded by the copy deck and blueprint.
 - `SECURITY_REVIEW.md` -> preserve its findings on private storage, encryption, RLS testing, Turnstile and sender readiness in `GAPS.md`.
+
+## Owner follow-up: migration and design extraction
+
+- The owner confirmed `supabase/migrations/0001_init.sql` is already applied: preserve it and use forward-only migrations.
+- With owner permission, Chromium was downloaded and the Framer home page's 375 px token capture succeeded; later long captures are interrupted by this environment and remain a documented prerequisite.

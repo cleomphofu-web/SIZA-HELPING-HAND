@@ -1,235 +1,223 @@
-# Blueprint: SIZA Phase A (core flow, no money held by SIZA)
+# SIZA build plan: Phase A
 
-**Objective:** Ship a working SIZA for a pilot in 1-2 Johannesburg suburbs: hosts request cleaners, approved cleaners are offered jobs on a fair rotation and the first to accept wins, addresses are revealed only after assignment, a check-in code proves arrival, and cleaners pay a prepaid subscription after their first confirmed job.
-**Sources:** `docs/SIZA-v2-spec.md` (v2.1), `AGENTS.md`, the `siza-*` skills, `docs/EXTERNAL_SKILLS.md`.
-**Decisions kept as originally agreed:** light private ID check, fair rotation then first-accept, SIZA-calculated recommended pay with floor, host never negotiates, fee never taken from worker pay, prepaid subscription (no debit order), check-in code, confirmation lock, no AI.
-**Legal track:** per your instruction legal work is deferred. It does not block building. It does block Step 12 (real users): the items are listed in "Deferred, not dropped" at the end so they are not forgotten.
-**Mode:** direct (no git yet). With a repo: one branch and PR per step, `step-NN-slug`.
+**Purpose:** the single detailed plan for building SIZA Phase A. `docs/BUILD_STATUS.md` is the short current-state ledger and points here. Product behavior comes from `docs/SIZA-v2-spec.md`; public UX comes from `docs/ux/ux-blueprint.md`; architecture decisions live in `docs/architecture.md` and `docs/adr/`.
 
-## In scope (Phase A)
-Accounts and roles, host profile, cleaner profile + approval, booking request with locked price, rotation + atomic accept, reveal rules, WhatsApp hand-off, check-in code, no-show handling, confirmation lock, auto-complete, reports, admin (cleaners, bookings, reports, overview, rate card and config editing), cleaner subscription gate with manual payment marking and reminders, landing pages, retention jobs, security review.
-## Out of scope
-Card payments, ledger, payouts, reviews and ratings (Phase B), tips, chat, trade categories, maps, SMS, any AI.
+**Phase A outcome:** a pilot-ready, non-holding marketplace where a host requests help, approved helpers receive fair offers, one helper accepts each slot atomically, permitted details are revealed after assignment, the job is checked in and confirmed, reports reach admin, and helper subscription eligibility is enforced. SIZA does not hold customer money in Phase A.
 
-## Inputs only you can give (Step 0)
-| # | Input | Default if you do not decide |
-|---|---|---|
-| 1 | Suburbs for the pilot (1-2) and transport zones with amounts | none: required |
-| 2 | Rate card: hourly rate per service, minutes per bedroom/bathroom/add-on | none: required |
-| 3 | Subscription price and period (30 days default), grace days | period 30, grace 3, price required |
-| 4 | Minimum pay per hour and `floor_percent` | floor 100% of recommended |
-| 5 | Service list (cleaning only at launch) and job titles | standard, deep, Airbnb turnover, laundry, windows, oven, fridge |
-| 6 | Offer window, no-show minutes, confirm grace, auto-release, strike limit | 10 min, 30, 12 h, 24 h, 3 |
-| 7 | WhatsApp group link, admin email, support email/phone | required |
-| 8 | Domain and sending address for email | required |
-| 9 | Subscription payment method in Phase A | manual EFT with reference; admin marks as paid (no provider integration) |
-| 10 | Design interview answers and assets (logo SVGs, hero video ID/poster) | placeholders |
-| 11 | Hosting and Supabase plan (paid recommended; free tiers can pause or restrict commercial use) | paid |
+**Hard gates:** the owner approved the design tokens on 26 October 2026. Linked Supabase is read-only unless the owner explicitly authorises a write; `0001_init.sql` is immutable; legal and security gates block real users; Phase B payment/ledger/payout work is excluded.
 
-## Answers received (2026-10-15) and what they change
-| Item | Your answer | Effect on the plan |
-|---|---|---|
-| Area | Johannesburg and the Vaal | Two regions in the data (`suburbs.region`); each suburb has transport zone and an `enabled` flag; a suburb opens to hosts only after 3 approved cleaners. Long distances between regions use the highest transport zone |
-| Rate card | You asked me to help | Draft in `SIZA-rate-card-draft.md` (validate with 5 cleaners and 5 hosts per region) |
-| Subscription | R100 per 30 days until Phase B is published | Seed `app_config`; first job free |
-| Admin and support email | sizahelpinghand@gmail.com | Used as support contact and admin notification address |
-| Sending email | Gmail address for now | Not possible to send app emails from a gmail.com address through Resend: it needs a domain you own (SPF/DKIM). Buy a .co.za domain (about R99 a year) before Step 4's email work; keep the Gmail as the reply-to and admin inbox |
-| Hosting | Vercel, Netlify or Cloudflare | Recommend Vercel Pro for launch (see costs). The upload code uses `sharp`, which needs a Node runtime; Vercel and Netlify functions run it, Cloudflare Workers as far as I know do not |
-| Supabase | Upgrade before publish | Develop on the local Supabase stack or free project; paid plan before real users |
-| Subscription payment | Concern about EFT reversal; asked about 1Voucher or direct payment | Phase A: direct EFT to the SIZA account with a unique reference; admin marks paid **only after the money shows as cleared in your own bank app, never from a screenshot**. 1Voucher goes into Phase B with a payment gateway |
-| Phase B trigger | You asked how many jobs | See "Phase B gate" below |
-| Skills | Agent must use the skills to decide how to code | New "Skill-first protocol" section below |
+## Working routine for every milestone
 
-## Invariants (check after every step)
-1. Everything in `AGENTS.md` hard rules and `siza-*` skills holds.
-2. No money handled by SIZA code; no Phase B tables or provider logic beyond the interface stub.
-3. RLS on every table, no public policies; anon client fails everywhere.
-4. Gate green: `typecheck`, `lint`, `test`, `npm audit --audit-level=high`.
-5. Copy lint passes; mandatory notices present where required.
-6. Fake data only until Step 12.
-Stop after every step for your review.
+1. **Grill with docs first:** load the named skills, read the relevant spec/blueprint, write or update the milestone design/acceptance document, and surface unresolved decisions.
+2. **Implement to build:** write tests first, make the smallest change behind the documented seam, and keep the active milestone narrow.
+3. **Review at the end:** run the code-review skill against standards and spec, then run the verification gate and record results.
+4. **Security pairing:** use `santa-method` for auth, uploads, encryption, RLS, and other security-critical changes.
+5. **Stop at the milestone gate:** update `docs/BUILD_STATUS.md`, `docs/ops-log.md` when an operation is risky, and wait for owner review unless the owner explicitly continues.
 
-## Skill-first protocol (mandatory for every step)
-For each step the agent must, in this order: (1) load the skills listed below, (2) write the listed design document(s) into `docs/` **before any code**, (3) stop for your approval where marked **[OK]**, (4) build and test from those documents, (5) update the documents if reality changes, (6) finish with `verification-loop` and the hand-off note. The agent decides its approach from the skills, not from memory. If this table and a step's own "Skills" line differ, this table wins.
+## Numbered stages and milestones
 
-| Step | Skills to load | Write first (in `docs/`) |
-|---|---|---|
-| 0 / 2 Design and landing | siza-design-fidelity, ui-ux-pro-max, siza-brand-voice-and-copy, frontend-a11y | `design-reference/DESIGN_TOKENS.md` **[OK]**, `copy-deck.md` (all public text and mandatory notices) **[OK]**, `design-reference/template-scrub-list.md` |
-| 1 Foundation | siza-architecture, architecture-decision-records, siza-agentic-workflow, siza-security-privacy | `architecture.md` **[OK]** (folder tree, boundaries, request flow, config, jobs, errors), `adr/001-stack.md`, `adr/002-dependencies.md`, `adr/003-hosting-and-regions.md` |
-| 3 Schema and RLS | siza-database-supabase, postgres-patterns, database-migrations, intent-driven-development | `data-model.md` **[OK]** (ER diagram, constraints, RLS matrix by role, SQL function specs, retention) |
-| 4 Core libraries and email | siza-api-design, api-design, error-handling, siza-security-privacy, siza-testing-tdd | `api-contracts.md` (every action and route: input schema, authorization, errors, idempotency, rate-limit bucket), `pricing-and-rotation.md` |
-| 5 Auth | security-review, siza-security-privacy | `threat-model.md` (assets, attackers, abuse cases, each mapped to a test) **[OK]** |
-| 6 / 7 Host and cleaner flows | siza-product-domain, siza-frontend, ui-ux-pro-max, frontend-a11y, intent-driven-development | `ux/host-flow.md`, `ux/cleaner-flow.md` (screens, four states each, copy), `acceptance/step-6.md`, `acceptance/step-7.md` |
-| 8 Offers and check-in | siza-product-domain, siza-database-supabase, intent-driven-development, ai-regression-testing | `acceptance/step-8.md` including race-condition and abuse cases **[OK]** |
-| 9 / 10 Subscription and admin | siza-product-domain, siza-frontend, ui-ux-pro-max | `acceptance/step-9.md`, `ux/admin.md`, `runbooks/subscription-payments.md` (how to verify cleared EFT) |
-| 11 Hardening | security-review, verification-loop, production-audit, santa-method | `SECURITY_REVIEW.md` **[OK]**, `DEPLOY_CHECKLIST.md`, `runbooks/breach.md`, `runbooks/restore.md`, `ADMIN_GUIDE.md` |
-The UX blueprint (`docs/ux/ux-blueprint.md`) is an input to Steps 2, 6, 7, 9 and 10: the agent turns it into the `ux/*.md` and `acceptance/*.md` documents above and must not invent screens that are not in it without asking.
-Every step also uses: siza-agentic-workflow, siza-testing-tdd, tdd-workflow, conventional-commit-review. Install Tier 2 skills (`--with-later`) before Step 8.
+### Stage 0 — Documentation and control plane
 
-## Which model for which step (your tools)
-I do not know how Luna 6, Luna 5.6, Terra 5.6 or Gemini 3.8 behave, so do not trust my ranking of them: test them (bake-off below). The rule that matters is **match the risk to the model, and make the task small and written down.**
-| Tier | Work | Use |
-|---|---|---|
-| S: security and correctness critical | Step 3 (schema, RLS, SQL functions), Step 4 crypto, uploads, pricing and rotation, Step 5 (auth), Step 7 (documents and approval), Step 8 (accept, reveal, check-in, locks), Step 11 (review) | Your strongest model (Claude Opus 4.6 in Antigravity is the one I can vouch for), or any model that wins the bake-off |
-| M: feature work from a written step document | Steps 1, 6, 9, 10, component logic | Sonnet 4.6, or the mid Codex model that does well in the bake-off |
-| L: mechanical work from a precise spec | Porting components from tokens and screenshots (Step 2), copy changes, tests from a written list, docs, formatting | The cheapest models that pass the bake-off (for example Gemini 3.8 Flash mid or high) |
-Rules: (1) **never let a cheaper model change migrations, RLS, auth, uploads or crypto without a review from a stronger or different model**; (2) code written by one model family is reviewed by another (cross-model review catches blind spots); (3) smaller models get smaller tasks: one component or one function per task, files and tests named up front, from the step documents in `docs/`; (4) always run the gate commands, never trust "done".
-**Bake-off (about half a day):** give every model you own the same task: Step 1's `lib/env.ts` with tests plus the import-boundary lint rule, from the same step document. Score each: tests and lint pass first time (0-2), followed the skills and boundaries (0-2), added no unapproved dependency (0-1), hand-off note quality (0-2), correction rounds needed (fewer is better), time and cost. Then a second task for the cheap tier: build the Nav component from the tokens and compare with `visual-diff`. Put the winners per tier in `docs/model-routing.md`.
+#### 0.1 Documentation set
 
-## Dependency graph
-```
-0 inputs + design interview
- └► 1 foundation
-     └► 2 landing + legal placeholders ── GATE: you approve the landing page ──┐
-                                                                                ▼
-                  ┌──────────────────────────┬─────────────────────────────────┐
-                  3 schema + RLS + SQL fns   4 core libs + email module   (parallel)
-                  └──────────────┬───────────┘
-                                 5 auth + roles + abuse controls
-                       ┌─────────┴─────────┐
-                       6 host flow         7 cleaner flow + admin approval   (parallel)
-                       └─────────┬─────────┘
-                                 8 offers, accept, reveal, check-in, confirm
-                       ┌─────────┴─────────┐
-                       9 subscription gate  10 admin ops + reports            (parallel)
-                       └─────────┬─────────┘
-                                 11 hardening, jobs, E2E, deploy
-                                 12 pilot (needs your legal items)
-```
-Parallel groups: {3, 4}, {6, 7}, {9, 10}. You may waive the landing gate so 3 and 4 start earlier; the spec's default is to show the landing page first.
-Model tier: strongest for 3, 4 (crypto/uploads), 5, 7 (uploads/approval), 8, 11; default for the rest.
+Create/update the architecture, API route inventory, coding-standards delta, safety policy, build ledger, and operations log. Remove `docs/appflow.md` because it was an untracked prior working note that duplicated and conflicted with the UX blueprint; `docs/ux/ux-blueprint.md` is the UX source of truth.
 
----
+Acceptance: all documents link to the correct source of truth; no duplicate route or UX map remains; `AGENTS.md` gains only a three-line pointer to the build ledger and plan.
 
-## Step 0: Inputs and design interview (no code) | Owner
-Complete the inputs table. Run the design interview (3-5 questions per round) and produce `docs/DESIGN_BRIEF.md` with tokens and motifs (taken from the Framer template via `tools/design`, see `siza-design-fidelity`). Gather assets.
-**Exit:** inputs 1-8 and 11 answered; brief approved.
+Tests/checks: documentation link/path check, structure check, diff check.
 
-## Step 1: Foundation | Size M | Skills: siza-architecture, siza-security-privacy, siza-agentic-workflow
-**Brief:** Next.js App Router + TypeScript strict + Tailwind; Supabase local stack; Vitest; Playwright later. Layout per `siza-architecture`.
-**Tasks:**
-- [ ] Scaffold, pin versions, `src/` layout, route groups `(public) (host) (cleaner) (admin)`, `server/` with `import 'server-only'`.
-- [ ] ESLint `no-restricted-imports` (components cannot import `server/**`; only `server/db` creates Supabase clients).
-- [ ] `lib/env.ts` Zod-validated env (fails fast); `.env.example`; `.gitignore` covers `.env*`.
-- [ ] Security headers and CSP (Supabase, Turnstile, YouTube-nocookie only), HSTS.
-- [ ] Structured logger with field allowlist; Sentry with PII scrubbing; `AppError` and `Result` types; incident-id error page.
-- [ ] CI script: typecheck, lint, test, audit.
-- [ ] Add `tools/design` and dev dependencies (playwright, pngjs, pixelmatch); place the Framer export and extraction output under `docs/design-reference/` (excluded from build, lint and tests). Install skills (`node tools/install-external-skills.mjs`), copy docs to `docs/`.
-- [ ] ADR-001 stack and ADR-002 dependencies (each package justified: zod, @supabase/ssr, @supabase/supabase-js, sharp, resend, @sentry/nextjs, vitest, playwright).
-**Verify:** build passes; missing env var fails loudly (test); headers test; import-boundary lint test (a client file importing `server/` fails).
-**Exit:** all green. **Rollback:** delete scaffold.
+Skills: `siza-agentic-workflow`, `siza-architecture`, `api-design`, `coding-standards`, `safety-guard`, `verification-loop`.
 
-## Step 2: Landing pages and legal placeholders | Size M | Skills: siza-design-fidelity, ui-ux-pro-max, siza-frontend, siza-brand-voice-and-copy, frontend-a11y
-**Design source:** the Framer template (https://siza.framer.website/), exported home and contact pages, plus screenshots and tokens from `tools/design`. Order: tokens (owner approves `DESIGN_TOKENS.md`) -> fidelity pass with template text -> content pass with `copy-deck.md` -> scrub the template leftovers list. The About page follows `SIZA-about-page.md`.
-**Brief:** Host landing `/`, `/for-cleaners`, `/how-it-works` (with the exact payment notice for Phase A), "How we vet" listing only the checks actually done, `/privacy` and `/terms` with `{{LEGAL_TEXT_PENDING}}`. Hero video after `load`, poster-only for reduced motion/data saver. CTA "Request cleaners".
-**Tasks:** TDD the `HeroVideo` component and copy-lint test; build pages from `DESIGN_BRIEF.md`; no stock photos of people.
-**Verify:** 375 px, AA contrast on the template's palette, LCP under 2.5 s throttled 4G (video excluded), keyboard pass, copy lint, banned-claim scan.
-**Exit / GATE:** you approve the landing page in a browser. Nothing behind it starts first.
+#### 0.2 Architecture review, no refactor
 
-## Step 3: Schema, RLS, SQL functions | Size L | Skills: siza-database-supabase, postgres-patterns, database-migrations, siza-testing-tdd | Strongest tier
-**Brief:** Spec section 6 Phase A tables only: `profiles`, `host_details`, `cleaner_details` (with `category_id`, `id_number_encrypted`, `id_hash`, `strikes`, `subscription_*`), `cleaner_private_docs`, `service_categories`, `bookings` (with `pay_per_worker_cents`, `transport_per_worker_cents`, `check_in_code_hash`, `idempotency_key`), `booking_slots`/`booking_assignments`, `booking_offers`, `reports`, `audit_log` (append-only), `admins`, `app_config`, `rate_card`, `transport_zones`, `rate_limits`, `subscription_payments` (manual marks: amount, reference, period, marked_by).
-**Tasks (tests first):**
-- [ ] Migrations with constraints, enums, indexes on all foreign keys, `unique(phone)`, `unique(id_hash)`, `unique(booking_id, cleaner_id)`.
-- [ ] RLS on, grants revoked, `is_admin()` helper, private storage buckets.
-- [ ] SQL functions: `claim_slot`, `rate_limit_hit`, `register_code_attempt`, `transition_booking` (table-driven allowed moves).
-- [ ] Triggers: append-only on `audit_log`.
-- [ ] Seed `app_config`, `rate_card`, `transport_zones`, `service_categories` from Step 0 inputs.
-**Verify:** RLS matrix for every table (anon, wrong role, owner, admin); 20 parallel `claim_slot` calls give one winner; illegal transitions raise; audit update/delete raises; migration applies from scratch.
-**Exit:** all green. **Rollback:** down-migrations on dev DB only.
+Run the requested architecture-review skill and create its HTML report in the OS temp directory. Present the deepening candidates and wait for the owner to choose. Do not refactor during this milestone. The default candidate is actor-aware reads, but selection remains owner-controlled.
 
-## Step 4: Core libraries and email module | Size L | Skills: siza-security-privacy, siza-api-design, siza-testing-tdd | Strongest tier | parallel with 3
-**Tasks (pure code, tests first):**
-- [ ] `money` (cents, ZAR formatting), `phone` (E.164 from 082 123 4567, 0821234567, +27821234567), dates (UTC, Africa/Johannesburg).
-- [ ] Zod schemas: booking, host profile, cleaner application, report; `.strict()`, length limits, allow-lists, start not in past, end after start.
-- [ ] SA ID number validator (13 digits, valid date, check digit) and DOB-matches-ID and 18+ check.
-- [ ] Crypto: AES-256-GCM encrypt/decrypt (random IV, tamper detection); HMAC helpers for `id_hash` and check-in code; secure random 6-digit code.
-- [ ] Upload pipeline: magic bytes (jpg, png, webp), 8 MB cap, re-encode with `sharp`, strip EXIF, random object names, all-or-nothing rollback helper.
-- [ ] Pricing: `recommendedPay(booking)` from rate card and transport zone (integer maths); floor check.
-- [ ] Rotation: `rankEligible`, `offerVisibility(now)`.
-- [ ] State-machine module wrapping `transition_booking`.
-- [ ] Rate limiter wrapper over `rate_limit_hit`; Turnstile verify (fails closed); honeypot.
-- [ ] Email module (Resend), idempotent sends keyed by event id; templates with no sensitive data.
-**Verify:** unit tests per item including hostile inputs; encrypt round-trip and tamper; EXIF removal test; rotation ordering with fake clock; log-redaction test.
-**Exit:** all green, no secrets in logs (grep test).
+Acceptance: report names files, shallow interfaces, seams, locality/leverage benefits, before/after diagrams, and a top recommendation; no source files are changed by the review.
 
-## Step 5: Auth, roles, abuse controls | Size M | Skills: siza-security-privacy, siza-api-design, security-review
-**Tasks:**
-- [ ] Supabase Auth via `@supabase/ssr`; server authorization with `getUser()`; `requireUser`, `requireRole`, `requireAdmin`.
-- [ ] Sign-up per role with consent records (terms, privacy, public-profile for cleaners) and versions; cleaners enter DOB (18+).
-- [ ] No-enumeration responses for sign-up/sign-in; lockout 5 per 15 min.
-- [ ] Admin MFA (verify provider support; if unavailable record the exception in an ADR).
-- [ ] Per-role layouts and navigation; role chosen at sign-up and fixed.
-**Verify:** wrong role gets redirected/404; unauthenticated blocked; enumeration test (same response); lockout test; consent rows stored with versions.
-**Exit:** all green.
+Tests/checks: read-only scan, report existence, `git diff --check`.
 
-## Step 6: Host flow | Size M | Skills: siza-frontend, siza-api-design, siza-product-domain | parallel with 7
-**Tasks:**
-- [ ] Onboarding (name, cell, default address, suburb from list) and profile edit.
-- [ ] Booking form: services checklist, cleaners needed, date/time, estimated hours, access notes, gender preference, pay per worker (prefilled from recommendation, editable upward only per floor), transport allowance (suggested per suburb, editable upward).
-- [ ] Three mandatory notices next to the button; idempotency key; price locked server-side on create (never trust client price).
-- [ ] Host requests list and detail with status; cancel (free before assignment).
-- [ ] Admin notification email once per new request; rotation offers created on create.
-- [ ] Confirmation lock check on create.
-**Verify:** client-sent price below floor rejected; double submit gives one booking and one email; honeypot saves nothing; 11th request 429; notices present (copy lint); host cannot read another host's booking.
-**Exit:** all acceptance tests green.
+Skills: `improve-codebase-architecture`, `codebase-design`, `siza-architecture`.
 
-## Step 7: Cleaner flow and admin approval | Size L | Skills: siza-security-privacy, siza-legal-guardrails, siza-frontend | Strongest tier | parallel with 6
-**Tasks:**
-- [ ] Cleaner onboarding: public profile fields (first name, selfie, title, services, suburbs, bio), private (surname, phone), ID photo, selfie-with-ID, ID number (validated, encrypted), one reference; consent checkbox with the exact public-profile text.
-- [ ] All-or-nothing upload with rollback; duplicate checks (`phone`, `id_hash`) with identical responses for new vs existing.
-- [ ] Admin cleaners queue (pending/approved/declined/suspended), detail with documents via 60 s signed URLs, duplicate flag.
-- [ ] Approve: server-side blocked unless the three checklist items you actually perform are ticked; stores `vetted_at`; erases `id_number_encrypted`, keeps `id_hash`; sends one approval email with the WhatsApp link; repeat approve is a no-op; separate "resend email" action; decline with reason; audit log entries.
-- [ ] Pending cleaners cannot see jobs.
-**Verify:** wrong file types and over-size create nothing; forced mid-flow failure leaves no files or rows; approve fails with any box unticked when called directly; repeat approve sends nothing; declined/suspended ID hash cannot re-register; documents unreachable without admin.
-**Exit:** all green.
+### Stage 1 — Public design and UX track
 
-## Step 8: Offers, accept, reveal, check-in, confirmation | Size L | Skills: siza-product-domain, siza-database-supabase, siza-api-design | Strongest tier
-**Tasks:**
-- [ ] Jobs list: cleaners see only offered jobs during the window, all eligible after; shows suburb, transport, pay, host first name and completed-job count; never the address.
-- [ ] Accept: atomic `claim_slot`; clear "already taken" message; partial fills ("2 of 3"); booking becomes `assigned` when all slots fill.
-- [ ] Reveal: redaction views; after assignment cleaner sees address and host phone, host sees cleaner phone; WhatsApp links; WhatsApp-ready job summary without client contact details.
-- [ ] Check-in code: generated on assignment, shown to host and emailed, cleaner enters on arrival; 5 attempts then 15-minute lock and admin alert; expiry.
-- [ ] No-show: after `no_show_minutes` host may cancel with a strike for the cleaner and the job re-opens to rotation.
-- [ ] Complete: both confirm, or auto-complete at `auto_release_hours`; confirmation lock applied to the unconfirmed party only; reminders queued.
-- [ ] Decline never penalises (test).
-**Verify:** 20 parallel accepts, one winner per slot; unassigned cleaner cannot read address or host phone; wrong code counts and locks; lock binds only the unconfirmed party; auto-complete fires with fake clock; strike only for no-show.
-**Exit:** all green; Playwright flow host requests, cleaner accepts, address revealed only to that cleaner.
+#### 1.1 Token approval gate
 
-## Step 9: Subscription gate | Size M | Skills: siza-product-domain, siza-api-design | parallel with 10
-**Tasks:**
-- [ ] `first_job_completed_at` set only when check-in recorded and completion confirmed or auto-completed.
-- [ ] Accept refused server-side without an active subscription after the first job; jobs list shows the paywall with price and bank reference.
-- [ ] Admin marks a payment received (amount, reference, period) which extends `subscription_paid_until` by one period from the later of today and the current end; audit logged; cleaner can pay 1, 3 or 6 periods.
-- [ ] Reminders (email + in-app banner) at 5, 2 and 0 days; 3-day grace; lapse job.
-**Verify:** first free job counts only with check-in; accept refused when lapsed; extension maths including early payment; reminders sent once.
-**Exit:** all green.
+Use the extracted Framer references and 375 px token preview. The owner approved the full token direction on 26 October 2026. Apply the existing token source consistently; do not invent values outside `docs/design-reference/DESIGN_TOKENS.md`.
 
-## Step 10: Admin operations and reports | Size M | Skills: siza-frontend, ui-ux-pro-max, siza-api-design | parallel with 9
-**Tasks:**
-- [ ] Admin bookings list/detail (status, urgent flag when unassigned near start, re-offer, manual assign for emergencies with audit entry).
-- [ ] Reports: any party can file with category and text; admin queue with status, resolve or dismiss, suspend user, notes; a report freezes auto-complete on that booking.
-- [ ] Overview: counts (hosts, cleaners by status, bookings by status, open requests), jobs per cleaner, approved cleaners per suburb, database size and row counts with an "approaching limits" indicator.
-- [ ] Editors for `app_config`, `rate_card`, `transport_zones` with validation and audit log.
-**Verify:** non-admin blocked on every admin route and action; report freezes auto-complete; config edits validated and audited.
-**Exit:** all green.
+Acceptance: owner approval is recorded; token preview and 375/768/1440 extraction status are documented; no values outside the approved token source are introduced.
 
-## Step 11: Hardening, jobs, E2E, deploy | Size L | Skills: security-review, verification-loop, ai-regression-testing, production-audit (+ santa-method) | Strongest tier
-**Tasks:**
-- [ ] Scheduled jobs: delete ID photos and selfie-check files 30 days after decision, expire old open bookings, auto-complete, lapse subscriptions, send reminders; each idempotent; one authenticated cron route plus pg_cron for database-only work.
-- [ ] Rate limits tuned; Turnstile fail-closed tested in staging.
-- [ ] `SECURITY_REVIEW.md` with pass/fail/unsure for every item in spec section 11 and the skills' checklists; independent review of auth, RLS, uploads and crypto code (second reviewer or `santa-method`).
-- [ ] Playwright E2E for the five main flows; backup/restore drill; key rotation note; `docs/DEPLOY_CHECKLIST.md` and `docs/ADMIN_GUIDE.md` (approvals, WhatsApp group set to "approve new members", marking payments, handling reports, where the encryption key backup lives).
-- [ ] Production env, domain, email DNS (SPF/DKIM), Sentry, uptime check.
-**Exit:** zero unresolved fails; reviewer sign-off.
+Tests/checks: token/source consistency, 375 px visual check, accessibility contrast review.
 
-## Step 12: Pilot | Owner + you
-Real users only after the "Deferred, not dropped" items below are done. Launch to 1-2 suburbs, run the subscription gate, record metrics: requests per week, share accepted within 30 minutes, median time to accept, completion rate, repeat hosts, no-show rate, active approved cleaners, subscription conversions. **Phase B gate (recommended):** start Phase B only when ALL hold over at least 6 weeks: 30 or more completed jobs (both confirmed, check-in recorded); at least 15 different hosts and 5 repeat hosts; at least 10 cleaners who completed a job; median time to accept 30 minutes or less; no-show rate 5% or less; fewer than 5 reports per 100 jobs; at least half of cleaners who finished their first job paid their first R100; and the legal and accounting items are done. If these are not met, keep improving Phase A instead.
+Skills: `siza-design-fidelity`, `siza-frontend`, `frontend-a11y`, `verification-loop`.
 
-## Deferred, not dropped (before Step 12)
-Information Officer named and registered, privacy notice and terms from a lawyer (replace `{{LEGAL_TEXT_PENDING}}`), lawyer view on worker status, retention of `id_hash`, selfies as biometric data, insurance position, company registration, tax/VAT registration. The build does not depend on these; real users do.
+#### 1.2 Home and public information sections
 
-## Self-review
-Every Phase A item in the spec maps to a step. Known assumptions to confirm: subscription collected by manual EFT in Phase A; ratings replaced by completed-job count until Phase B; admin MFA depends on provider support; pg_cron and scheduled routes depend on your plan. Review was done by me, not an independent reviewer: run `santa-method` on this file if you want a second pass.
+Build the public home page from `docs/ux/ux-blueprint.md`: hero, host/helper audience switch, host steps, fast picks, truthful trust cues, helper block, FAQ, final calls to action, footer, and legal/contact links. Do not create separate Services or How it works marketing pages; those are home sections in the blueprint. Keep Request and Apply as compatibility hand-offs.
 
-## Mutation log
-- 2026-10-14: created. Landing gate kept ahead of backend per spec; reviews moved wholly to Phase B.
+Acceptance: public pages use copy-deck keys, asset-manifest slots, approved hero assets, no invented claims, no forms on the holding page, and no links to unbuilt routes. `/request` and `/apply` resolve through their role-specific signup hand-off; while prototype routes are disabled, signup/login stay reachable as non-collecting holding states, with all mutation APIs still fail-closed.
+
+Tests/checks: copy build, banned-claim scan, 375 px keyboard/accessibility pass, reduced-motion check, speed/LCP check, public browser smoke test.
+
+Skills: `siza-design-fidelity`, `siza-frontend`, `siza-brand-voice-and-copy`, `frontend-a11y`, `ui-ux-pro-max`.
+
+#### 1.3 Public copy, assets, and legal placeholders
+
+Wire the copy deck and asset slots; preserve `{{LEGAL_TEXT_PENDING}}` and owner markers. Add Terms, Privacy, contact details only where supplied by the owner. Do not invent support hours, insurance, cancellation, worker-status, or retention claims.
+
+Acceptance: all public text comes from generated copy; asset references use `SiteImage`/manifest slots; strict copy remains blocked only by documented owner/legal markers.
+
+Tests/checks: `npm run build:copy`, `npm run check:assets`, structure check, copy lint.
+
+Skills: `siza-brand-voice-and-copy`, `siza-legal-guardrails`, `siza-frontend`, `verification-loop`.
+
+### Stage 2 — Foundation and host prerequisite
+
+#### 2.1 Actor-aware read seam
+
+Before expanding host pages, implement the owner-selected actor-aware read module. Move host/helper/admin page reads behind redacted, role-aware view interfaces; pages must not construct service-role queries directly. Test first against the existing booking redaction rules.
+
+Acceptance: host, helper, and admin callers receive only role/state-appropriate fields; unassigned helpers cannot read address or host phone; page modules contain presentation only.
+
+Tests/checks: redaction, wrong-role, wrong-owner, admin-allowed, and RLS integration tests against local Supabase or a separate disposable test project.
+
+Skills: `siza-product-domain`, `siza-security-privacy`, `siza-architecture`, `siza-testing-tdd`, `security-review`, `santa-method`.
+
+#### 2.2 Shared request pipeline
+
+Centralize the repeated route/action pipeline while preserving the required order: prototype switch → rate limit → bot check → input validation → authorisation → server service → database. Keep form redirects and JSON envelopes at the outer route seam.
+
+Acceptance: every API route and server action has the shared prototype guard; ordering and fail-closed behavior are covered once and route-specific behavior stays explicit.
+
+Tests/checks: unauthenticated, wrong-role, wrong-owner, invalid-input, rate-limit, bot-failure, prototype-disabled, idempotency, and JSON/form response tests.
+
+Skills: `siza-api-design`, `api-design`, `siza-security-privacy`, `siza-testing-tdd`, `security-review`, `santa-method`.
+
+#### 2.3 Accounts, host onboarding, and admin MFA
+
+Complete role-fixed signup/login, consent versions, host onboarding, profile edit, and route navigation. Keep account responses non-enumerating and keep admin login separate from public navigation.
+
+Acceptance: role-fixed host/helper signup submits the server-verified bot token and recorded consent; public signup responses do not disclose account existence; public login routes only profile-verified hosts/helpers to their own surface and refuses admins; a host can save and revisit only their own address/onboarding details and reach the host home without bypassing authorization. Admin login stays separate and unlinked; it requires an active persisted admin profile and membership, then Supabase TOTP enrollment/challenge, and every protected page/action/read checks active profile, membership and `aal2`. MFA verification has a separate configured Postgres attempt bucket and atomically reserves a keyed digest to reject TOTP code replay before calling Auth. The lost-authenticator break-glass process and session/security review must be owner-reviewed before the real admin account uses this flow.
+
+Tests/checks: auth/session tests, consent persistence, wrong-role redirects, login rate-limit/lockout behavior, TOTP enrollment/challenge/aal2 guard against local Supabase, host-profile redaction and wrong-owner denial, browser smoke flow.
+
+Skills: `siza-security-privacy`, `siza-frontend`, `siza-api-design`, `siza-testing-tdd`, `security-review`, `santa-method`.
+
+### Stage 3 — Host booking and helper application
+
+#### 3.1 Host request flow
+
+Build host home, service selection, booking form, review state, server-calculated price, idempotency, offer creation, activity history, cancellation/no-show paths, and status views. Use the home sections and app-screen direction in the UX blueprint.
+
+Acceptance: client price/status cannot override server values; duplicate submission returns one booking; host sees only owned requests; request states lead to finding and assignment. Owner decisions (2026-10-26): hosts set their offered hourly amount with a R100/hour floor; starting service suggestions for helper testing are standard R100/hour, deep R160/hour, and Airbnb turnover R155/hour; selected service rates add for the full estimated time, with the primary service setting duration; jobs are at least 3 hours per helper. Keep values and minimum in configuration, store the chosen amount on the booking, and verify the legal wording before enabling prices for real users.
+
+Tests/checks: pricing floor, idempotency, ownership, notices, rate limit, no-show, state-machine tests.
+
+Skills: `siza-product-domain`, `siza-frontend`, `siza-api-design`, `siza-testing-tdd`, `ui-ux-pro-max`.
+
+#### 3.2 Helper application intake
+
+Add helper profile, identity documents, consent, one-reference capture/storage, pending state, private retention records, and rollback-safe upload handling. Add a forward-only migration for reference data; never edit `0001_init.sql`.
+
+Acceptance: application stays pending until admin checks pass; references and documents are admin-only; profile and document metadata insert atomically; retries cannot overwrite an existing application; definite failed writes leave no database rows and trigger compensating deletion of staged objects; an ambiguous RPC outcome preserves potentially referenced images and tells the helper to check before retrying; ID encryption/hash remain intact and the configured retention clock starts at approve/decline. Retryable orphan cleanup and real-user privacy approval remain open.
+
+Tests/checks: schema/RLS matrix, upload type/size/EXIF/rollback tests, duplicate phone/ID tests, retention tests, disposable local/test-project integration tests.
+
+Skills: `siza-database-supabase`, `database-migrations`, `postgres-patterns`, `siza-security-privacy`, `siza-frontend`, `siza-testing-tdd`, `security-review`, `santa-method`.
+
+#### 3.3 Rotation, acceptance, reveal, check-in, completion
+
+Complete helper jobs, fair rotation, atomic first acceptance, address/phone reveal, check-in code, no-show, confirmation lock, auto-complete, reports, and subscription eligibility. The owner also approved one optional soft host gender preference: a helper may self-describe a single private matching category; this affects offer ranking only after workload fairness, never eligibility. No other personal attribute may affect matching. Exclude helpers with another accepted job that overlaps the requested time from offers and admin shortlists; serialize acceptance/assignment so concurrent requests cannot double-book a helper. Keep all Phase B money holding out of scope.
+
+Acceptance: exactly one helper wins a slot; a helper with an overlapping accepted job is absent from offers, helper open-job views, and admin shortlists; simultaneous overlapping claims/assignments cannot both succeed. Reveal rules hold; a valid check-in atomically records attendance and moves the booking to `in_progress`; five wrong attempts cause the configured lock; expiry denies entry; after the lock ends, a new attempt window starts. Only the assigned active helper may use the check-in function; wrong-code retries do not claim success and correct-code retries are safe. A helper confirmation records that helper's side; host confirmation after all active assigned helpers have checked in completes the booking. Completion updates assignment state and first-job subscription eligibility atomically. The separate auto-release function must complete only overdue bookings with every active requested slot assigned and checked in, no host confirmation, and no open/reviewing report; its configured interval must be a positive whole number; Stage 4.4 must schedule it. Later acceptance requires active subscription eligibility. Optional gender preference changes ranking only after fair workload ordering; non-opted helpers remain eligible, helper preferences are private, and only the signed-in helper can change their own preference. No other personal trait affects matching. For a no-show, only that helper's slot reopens, other helpers keep their jobs, and the absent helper gets one strike atomically. After the configured 60-minute recovery window, the host may proceed with fewer helpers or close only the vacant slot. Either choice blocks further claims to that slot; closing the only remaining slot cancels the booking, while other active helpers retain their work. This choice is recorded atomically and safely replayed. The host page exposes both actions. Privacy notice approval remains a gate before real preference collection.
+
+Tests/checks: 20-way slot concurrency, overlapping-request race, offer/read/shortlist exclusion, state transitions, reveal/RLS, check-in expiry/lockout, confirmation ownership/concurrency, multi-helper check-in requirement, atomic assignment/first-job completion, confirmation lock, auto-complete, subscription gate, local Supabase preference/mix/opt-out tests, and Playwright journey.
+
+Skills: `siza-product-domain`, `siza-database-supabase`, `siza-api-design`, `siza-frontend`, `e2e-testing`, `siza-testing-tdd`, `security-review`, `santa-method`.
+
+### Stage 4 — Admin, email, subscription operations, and jobs
+
+#### 4.1 Admin operations
+
+Build the admin overview, helper queue/detail, booking queue/detail, reports resolution, rate-card editor, suburb/transport/config settings, and append-only audit visibility. The overview snapshot is implemented as request-time aggregate counts; it is not online presence or an error dashboard. The read-only `/admin/audit` page is in progress and does not replace the remaining operations screens. TOTP enrollment and `aal2` authorization are implemented; do not call the admin flow complete until the security review, recovery/runbook decision, real owner-account setup, remaining operations screens, and owner UX review pass.
+
+Acceptance: non-admin access is denied on every page/action; config edits are validated/audited; documents use short-lived signed URLs; MFA lockout/session handling passes review.
+
+Tests/checks: admin authorization, audit append-only, config validation, MFA security tests, RLS tests.
+
+Skills: `siza-frontend`, `siza-api-design`, `siza-security-privacy`, `security-review`, `santa-method`, `ui-ux-pro-max`.
+
+#### 4.2 Email sending and domain setup
+
+Generated-copy templates and Resend idempotency keys now cover request received/no-helper, host/helper assignment, helper approval/decline, and admin request/application notifications. The provider retains keys for 24 hours, so durable event/outbox wiring remains required before the full event-once acceptance can pass. Wire those messages to domain events and add check-in/subscription reminders. Keep sender/domain status unclaimed until DNS and provider verification; use Gmail as reply-to only if the owner supplies it.
+
+Acceptance: no email contains private IDs, addresses, or secrets; duplicate events send once; domain/sender configuration is documented and not claimed ready until verified.
+
+Tests/checks: template/copy tests, idempotency tests, provider failure tests, no-PII log tests.
+
+Skills: `siza-api-design`, `siza-brand-voice-and-copy`, `siza-security-privacy`, `siza-testing-tdd`, `security-review`.
+
+#### 4.3 Subscription marking and reminders
+
+Implement manual cleared-payment marking, payment reference, period extension, reminders at configured intervals, grace period, and paywall. This is not card processing or funds holding.
+
+Acceptance: admin can mark only a cleared payment; extension math is correct; reminders are idempotent; lapsed helpers cannot accept later jobs.
+
+Tests/checks: payment-mark authorization, extension math, duplicate reminders, subscription gate integration tests.
+
+Skills: `siza-product-domain`, `siza-api-design`, `siza-security-privacy`, `siza-testing-tdd`, `santa-method`.
+
+#### 4.4 Retention scheduling and operational jobs
+
+The document-retention service and a bearer-authenticated, fail-closed `POST /api/jobs/retention` entry point are implemented. Choose and configure a scheduler only after the owner selects the provider, secret storage, cadence, and runbook owner. Then schedule document deletion, booking expiry, auto-complete, subscription lapse, and reminder jobs through authenticated idempotent jobs. Record operations in `docs/ops-log.md`.
+
+Acceptance: each job is safe to run twice, has an owner/runbook, and does not expose PII in logs.
+
+Tests/checks: fake-clock job tests, replay/idempotency tests, retention integration tests.
+
+Skills: `siza-architecture`, `siza-security-privacy`, `siza-testing-tdd`, `safety-guard`.
+
+### Stage 5 — Hardening, pilot, and Phase B gate
+
+#### 5.1 Security and data verification
+
+Run local Supabase or a separate disposable test project for RLS, migrations, concurrency, uploads, auth, and encryption. The linked project remains read-only unless the owner explicitly authorises a write.
+
+Acceptance: all required RLS and abuse tests pass; no real linked-project records are changed; disposable fixtures are deleted; independent security review is complete.
+
+Skills: `siza-database-supabase`, `siza-security-privacy`, `security-review`, `santa-method`, `safety-guard`, `verification-loop`.
+
+#### 5.2 Backup, restore, deploy, and domain checklist
+
+Complete backup/restore drill, key-backup/rotation note, deploy checklist, domain/email DNS checklist, monitoring, and admin guide. Record actual outcomes, not intentions.
+
+Acceptance: restore is proven on a disposable target; deploy checklist is executable; domain/email/security headers are verified before real users.
+
+Skills: `siza-architecture`, `siza-security-privacy`, `production-audit`, `verification-loop`, `safety-guard`.
+
+#### 5.3 Legal, pilot metrics, and real-user gate
+
+Resolve legal/privacy/terms, worker-status, retention, insurance, company/tax, and support-owner items before real users. During the pilot track requests per week, acceptance time, completion rate, repeat hosts, no-shows, approved helpers, reports, and subscription conversion.
+
+Acceptance: legal owner sign-off is recorded; metrics are defined without analytics trackers; pilot scope is limited to approved suburbs/helpers; owner signs the launch gate.
+
+Skills: `siza-legal-guardrails`, `siza-brand-voice-and-copy`, `production-audit`, `verification-loop`.
+
+#### 5.4 Phase B gate
+
+Do not begin card payments, holding, ledger, payouts, refunds, or reviews until the legal/accounting gate and the pilot evidence meet the owner-approved thresholds in the spec. Record the decision in an ADR.
+
+Acceptance: legal/accounting approval, pilot metrics review, and explicit written owner authorization are all present.
+
+Skills: `siza-payments-ledger`, `siza-legal-guardrails`, `architecture-decision-records`, `security-review`, `santa-method`.
+
+## Required verification gate
+
+Run and record: `npm test`, `npm run typecheck`, `npm run lint`, `npm run check:structure`, `npm run check:assets`, `npm run build:copy`, `npm run knip`, `npm audit --audit-level=high`, and `npm run build`. If a command is blocked by the environment, record the exact blocker in `docs/BUILD_STATUS.md` and `docs/ops-log.md`; never mark the milestone green.
+
+## Current known blockers
+
+- Pricing interpretation is owner-decided: hosts set the hourly amount above a R100/hour floor; the listed rates are starting suggestions, selected rates add for the full primary-service duration, and jobs have a 3-hour minimum per helper. Configuration and legal wording must still be verified before enabling prices for real users.
+- Helper reference capture/storage, admin MFA review/recovery and the real owner-account enrollment are Phase A completion blockers.
+- Legal/owner copy markers remain unresolved.
+- Linked Supabase is read-only unless explicitly authorised for a write.
+- Phase B remains gated.

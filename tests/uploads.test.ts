@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { validateUpload } from "@/lib/uploads";
+import { validateUpload } from "@/server/security/uploads";
 
 describe("upload validation", () => {
   it("accepts a real PNG signature", () => {
@@ -13,5 +13,9 @@ describe("upload validation", () => {
   it("rejects files over 8 MB", () => {
     const bytes = new Uint8Array(8 * 1024 * 1024 + 1);
     expect(validateUpload({ name: "large.png", size: bytes.length, bytes }).ok).toBe(false);
+  });
+  it("rejects PDF because helper selfie and ID uploads are image-only", () => {
+    const bytes = new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x2d]);
+    expect(validateUpload({ name: "document.pdf", size: bytes.length, bytes }).ok).toBe(false);
   });
 });

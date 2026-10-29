@@ -29,3 +29,7 @@ node tools/design/visual-diff.mjs compare docs/design-reference/extract/screens/
 It compares the page in 900 px slices and prints the mismatch percentage per slice, plus any page-height difference. Exit code 1 means a slice or the height is outside tolerance. Options: `--tol 8`, `--slice 900`, `--skip 3,4` (ignore slices with video or counters), `--height-tol 5`.
 
 Tested here: the comparison logic and the in-page collector (against a sample page). The browser launch and live capture are untested because this environment cannot download browsers: run step 1 yourself and tell the agent if anything fails.
+
+## If the agent's environment cannot run the capture (no internet or browser)
+Double-click `tools/windows/capture-desktop-design.bat` (or `capture-all-design.bat`) in File Explorer. It runs the capture on your own computer, shows progress, and says when it is finished; then tell the agent. If it is interrupted, double-click it again: finished pages are skipped. To see the site while it is being built, double-click `tools/windows/start-site.bat`. These .bat files are untested (written without a Windows machine): if one fails, send the text in the window to the agent.
+Options for the script: `--only=mobile|tablet|desktop` and `--skip-existing`.

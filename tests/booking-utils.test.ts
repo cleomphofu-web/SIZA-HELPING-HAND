@@ -3,7 +3,7 @@ import { buildJobSummary, isUnassignedUrgent, whatsappLink } from "@/lib/booking
 
 describe("booking utilities", () => {
   it("builds a WhatsApp-safe summary without client contacts", () => {
-    const summary = buildJobSummary({ suburb: "Rosebank", start_at: "2030-01-01T10:00:00.000Z", property_type: "2-bed", cleaners_needed: 1, access_notes: "Key safe" });
+    const summary = buildJobSummary({ suburb: "Rosebank", start_at: "2030-01-01T10:00:00.000Z", property_type: "2-bed", helpers_needed: 1, access_notes: "Key safe" });
     expect(summary).toContain("Rosebank");
     expect(summary).not.toContain("@");
     expect(summary).not.toContain("+27");

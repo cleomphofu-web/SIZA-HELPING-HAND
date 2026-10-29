@@ -1,2 +1,0 @@
-import Link from "next/link";
-export default function CleanerApplyPage() { return <main className="starter-shell"><p className="starter-eyebrow">CLEANER APPLICATIONS</p><h1>Become a SIZA cleaner.</h1><p className="starter-copy">The application interface is being refreshed. The existing application API and validation remain preserved at <code>/api/cleaners/apply</code>.</p><Link className="starter-link" href="/">Back to home</Link></main>; }

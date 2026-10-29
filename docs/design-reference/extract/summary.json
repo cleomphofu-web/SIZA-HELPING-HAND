@@ -1,0 +1,254 @@
+[
+  {
+    "page": "/",
+    "viewport": "mobile",
+    "height": 15606,
+    "textStyles": 11,
+    "colors": 5
+  },
+  {
+    "page": "/about",
+    "viewport": "mobile",
+    "height": 10663,
+    "textStyles": 11,
+    "colors": 6
+  },
+  {
+    "page": "/project",
+    "viewport": "mobile",
+    "height": 6901,
+    "textStyles": 9,
+    "colors": 4
+  },
+  {
+    "page": "/blog",
+    "viewport": "mobile",
+    "height": 4976,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/contact",
+    "viewport": "mobile",
+    "height": 3170,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/home-clean",
+    "viewport": "mobile",
+    "height": 6652,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/executive-office-workspace",
+    "viewport": "mobile",
+    "height": 6748,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/boutique-caf%C3%A9-interior",
+    "viewport": "mobile",
+    "height": 6700,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/luxury-penthouse-design",
+    "viewport": "mobile",
+    "height": 6748,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/modern-retail-showroom",
+    "viewport": "mobile",
+    "height": 6700,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/contemporary-villa-interior",
+    "viewport": "mobile",
+    "height": 6700,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/blog/how-to-create-functional-living-spaces-style",
+    "viewport": "mobile",
+    "height": 5584,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/",
+    "viewport": "tablet",
+    "height": 18475,
+    "textStyles": 11,
+    "colors": 5
+  },
+  {
+    "page": "/about",
+    "viewport": "tablet",
+    "height": 11531,
+    "textStyles": 11,
+    "colors": 6
+  },
+  {
+    "page": "/project",
+    "viewport": "tablet",
+    "height": 8947,
+    "textStyles": 9,
+    "colors": 4
+  },
+  {
+    "page": "/blog",
+    "viewport": "tablet",
+    "height": 6596,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/contact",
+    "viewport": "tablet",
+    "height": 2981,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/home-clean",
+    "viewport": "tablet",
+    "height": 7417,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/executive-office-workspace",
+    "viewport": "tablet",
+    "height": 7465,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/boutique-caf%C3%A9-interior",
+    "viewport": "tablet",
+    "height": 7417,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/luxury-penthouse-design",
+    "viewport": "tablet",
+    "height": 7465,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/modern-retail-showroom",
+    "viewport": "tablet",
+    "height": 7465,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/contemporary-villa-interior",
+    "viewport": "tablet",
+    "height": 7465,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/blog/how-to-create-functional-living-spaces-style",
+    "viewport": "tablet",
+    "height": 4973,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/",
+    "viewport": "desktop",
+    "height": 12900,
+    "textStyles": 10,
+    "colors": 5
+  },
+  {
+    "page": "/about",
+    "viewport": "desktop",
+    "height": 8412,
+    "textStyles": 10,
+    "colors": 6
+  },
+  {
+    "page": "/project",
+    "viewport": "desktop",
+    "height": 5424,
+    "textStyles": 9,
+    "colors": 4
+  },
+  {
+    "page": "/blog",
+    "viewport": "desktop",
+    "height": 4094,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/contact",
+    "viewport": "desktop",
+    "height": 3563,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/home-clean",
+    "viewport": "desktop",
+    "height": 7874,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/executive-office-workspace",
+    "viewport": "desktop",
+    "height": 7970,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/boutique-caf%C3%A9-interior",
+    "viewport": "desktop",
+    "height": 7874,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/luxury-penthouse-design",
+    "viewport": "desktop",
+    "height": 7874,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/modern-retail-showroom",
+    "viewport": "desktop",
+    "height": 7874,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/project/contemporary-villa-interior",
+    "viewport": "desktop",
+    "height": 7970,
+    "textStyles": 8,
+    "colors": 4
+  },
+  {
+    "page": "/blog/how-to-create-functional-living-spaces-style",
+    "viewport": "desktop",
+    "height": 4443,
+    "textStyles": 8,
+    "colors": 4
+  }
+]

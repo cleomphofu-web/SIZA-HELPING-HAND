@@ -1,0 +1,4414 @@
+{
+  "page": {
+    "title": "Interior Design Agency Framer Template - Interio",
+    "lang": "en",
+    "scrollHeight": 8947,
+    "bodyBackground": "rgb(245, 245, 245)"
+  },
+  "cssVariables": {
+    "--token-ac0c662b-4250-4586-9bed-0f686bea2a4e": "#b3b3b3",
+    "--token-68c912bd-8c25-4cee-bbc8-dc294bdf3289": "#f5f5f5",
+    "--token-05f1db4d-8688-46b3-bf5f-b74ebb2a836f": "#666",
+    "--token-88eff137-1274-4a36-b366-ef51c420159a": "#000",
+    "--token-e50dac00-7054-4d7a-a43e-c46ce7de76fb": "#ccc",
+    "--token-7cc43143-e5c7-467f-8763-76424c3834ea": "#fff",
+    "--token-3e0285fd-4a85-479f-9c05-6286ae1211c6": "#191919",
+    "--token-6cae9d17-97cf-4de5-bfc5-d57af2839c4a": "#f2f2f2",
+    "--token-0c86702d-68fd-448c-9acd-a93eb7230d97": "#e6e6e6",
+    "--token-de5fb930-8f11-483a-9194-6cda4c8e5176": "#ccc",
+    "--framer-will-change-override": "none",
+    "--framer-will-change-filter-override": "none",
+    "--framer-dir-multiplier": "1"
+  },
+  "fontFaces": [
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/GrgcKwrN6d3Uz8EwcLHZxwEfC4.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/hyOgCu0Xnghbimh0pE8QTvtt2AU.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/NeGmSOXrPBfEFIy5YZeHq17LEDA.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/oYaAX5himiTPYuN8vLWnqBbfD2s.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/lEJLP4R0yuCaMCjSXYHtJw72M.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/cRJyLNuTJR5jbyKzGi33wU9cqIQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/yDtI2UI8XcEg1W2je9XPN3Noo.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/A0Wcc7NgXMjUuFdquHDrIZpzZw0.woff2\")"
+    },
+    {
+      "family": "\"Geist Placeholder\"",
+      "weight": "",
+      "style": "",
+      "src": "local(\"Arial\")"
+    },
+    {
+      "family": "\"Inter Placeholder\"",
+      "weight": "",
+      "style": "",
+      "src": "local(\"Arial\")"
+    }
+  ],
+  "textStyles": [
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 48px | 500 | 48px | -1.44px | none",
+      "count": 40,
+      "color": "rgb(0, 0, 0)",
+      "sample": "F",
+      "layer": "SERVICES"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 20px | 500 | 28px | normal | none",
+      "count": 18,
+      "color": "rgb(255, 255, 255)",
+      "sample": "siZa.",
+      "layer": "INTERIO®"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 12px | 500 | 18px | normal | none",
+      "count": 10,
+      "color": "rgb(102, 102, 102)",
+      "sample": "HOW WE WORK //",
+      "layer": "Nav item"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 10px | 500 | 13px | normal | none",
+      "count": 8,
+      "color": "rgb(179, 179, 179)",
+      "sample": "4.9/5",
+      "layer": "Nav item"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 24px | 500 | 31.2px | normal | none",
+      "count": 6,
+      "color": "rgb(0, 0, 0)",
+      "sample": "Home Clean",
+      "layer": "Executive Office Workspace"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 26px | 500 | 31.2px | -0.78px | none",
+      "count": 5,
+      "color": "rgb(0, 0, 0)",
+      "sample": "Outstanding attention to fine details, custom st",
+      "layer": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch."
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 16px | 400 | 24px | normal | none",
+      "count": 5,
+      "color": "rgb(102, 102, 102)",
+      "sample": "Creative Director",
+      "layer": "Text"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 20px | 500 | 26px | normal | none",
+      "count": 4,
+      "color": "rgb(255, 255, 255)",
+      "sample": "ABOUT",
+      "layer": "Text"
+    },
+    {
+      "value": "sans-serif | 12px | 400 | normal | normal | none",
+      "count": 1,
+      "color": "rgb(0, 0, 238)",
+      "sample": "Create a free website with Framer, the website b",
+      "layer": "Content"
+    }
+  ],
+  "textColors": [
+    {
+      "value": "rgb(0, 0, 0)",
+      "count": 56
+    },
+    {
+      "value": "rgb(179, 179, 179)",
+      "count": 17
+    },
+    {
+      "value": "rgb(102, 102, 102)",
+      "count": 14
+    },
+    {
+      "value": "rgb(255, 255, 255)",
+      "count": 9
+    },
+    {
+      "value": "rgb(0, 0, 238)",
+      "count": 1
+    }
+  ],
+  "backgrounds": [
+    {
+      "value": "rgba(255, 255, 255, 0.2)",
+      "count": 32,
+      "layer": "Line"
+    },
+    {
+      "value": "rgb(0, 0, 0)",
+      "count": 20,
+      "layer": "Phone"
+    },
+    {
+      "value": "rgb(255, 255, 255)",
+      "count": 16,
+      "layer": "Line"
+    },
+    {
+      "value": "rgb(245, 245, 245)",
+      "count": 2,
+      "layer": null
+    }
+  ],
+  "borders": [],
+  "radii": [
+    {
+      "value": "8px",
+      "count": 94
+    },
+    {
+      "value": "10px",
+      "count": 3
+    },
+    {
+      "value": "11px",
+      "count": 2
+    }
+  ],
+  "shadows": [
+    {
+      "value": "rgb(0, 0, 0) 0px 0px 0px 1px inset",
+      "count": 2
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.17) 0px 0.602187px 1.56569px -1.5px, rgba(0, 0, 0, 0.14) 0px 2.28853px 5.95019px -3px, rgba(0, 0, 0, 0.02) 0px 10px 26px -4.5px",
+      "count": 1
+    }
+  ],
+  "transitions": [],
+  "gaps": [
+    {
+      "value": "10px",
+      "count": 44
+    },
+    {
+      "value": "0px",
+      "count": 35
+    },
+    {
+      "value": "3px",
+      "count": 13
+    },
+    {
+      "value": "20px",
+      "count": 10
+    },
+    {
+      "value": "24px",
+      "count": 7
+    },
+    {
+      "value": "8px",
+      "count": 5
+    },
+    {
+      "value": "12px",
+      "count": 5
+    },
+    {
+      "value": "40px",
+      "count": 5
+    },
+    {
+      "value": "60px",
+      "count": 5
+    },
+    {
+      "value": "26px",
+      "count": 5
+    },
+    {
+      "value": "6px",
+      "count": 5
+    },
+    {
+      "value": "16px",
+      "count": 2
+    },
+    {
+      "value": "104px",
+      "count": 1
+    },
+    {
+      "value": "4px",
+      "count": 1
+    },
+    {
+      "value": "44px",
+      "count": 1
+    },
+    {
+      "value": "48px",
+      "count": 1
+    },
+    {
+      "value": "80px",
+      "count": 1
+    },
+    {
+      "value": "42px",
+      "count": 1
+    },
+    {
+      "value": "64px",
+      "count": 1
+    },
+    {
+      "value": "18px",
+      "count": 1
+    }
+  ],
+  "layers": [
+    {
+      "name": "Phone",
+      "tag": "nav",
+      "top": -70,
+      "width": 768,
+      "height": 84,
+      "background": "rgb(0, 0, 0)",
+      "padding": "20px",
+      "display": "flex"
+    },
+    {
+      "name": "Dropdown",
+      "tag": "div",
+      "top": -902,
+      "width": 580,
+      "height": 716,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrapper",
+      "tag": "div",
+      "top": -902,
+      "width": 321,
+      "height": 360,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": -902,
+      "width": 321,
+      "height": 360,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -902,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -812,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -722,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -632,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": -542,
+      "width": 580,
+      "height": 356,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": -542,
+      "width": 580,
+      "height": 356,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": -50,
+      "width": 580,
+      "height": 44,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": " Icon Wrap",
+      "tag": "div",
+      "top": -50,
+      "width": 44,
+      "height": 44,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Hero Area",
+      "tag": "div",
+      "top": 0,
+      "width": 768,
+      "height": 439,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Hero Section",
+      "tag": "header",
+      "top": 0,
+      "width": 768,
+      "height": 439,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Hero Videos",
+      "tag": "div",
+      "top": 1,
+      "width": 768,
+      "height": 439,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Glow",
+      "tag": "div",
+      "top": 1,
+      "width": 768,
+      "height": 439,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 0,
+      "width": 580,
+      "height": 439,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "200px 20px 76px",
+      "display": "flex"
+    },
+    {
+      "name": "Line wrap",
+      "tag": "div",
+      "top": 0,
+      "width": 580,
+      "height": 439,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 875,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 875,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Header",
+      "tag": "div",
+      "top": 200,
+      "width": 540,
+      "height": 163,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Subtext",
+      "tag": "div",
+      "top": 200,
+      "width": 540,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "12px 8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 274,
+      "width": 540,
+      "height": 89,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "6",
+      "tag": "section",
+      "top": 0,
+      "width": 768,
+      "height": 439,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": -1,
+      "width": 768,
+      "height": 441,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Top",
+      "tag": "div",
+      "top": -1,
+      "width": 768,
+      "height": 220,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Bottom",
+      "tag": "div",
+      "top": 219,
+      "width": 768,
+      "height": 220,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Project Section",
+      "tag": "section",
+      "top": 439,
+      "width": 768,
+      "height": 5077,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 499,
+      "width": 580,
+      "height": 4957,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 499,
+      "width": 580,
+      "height": 112,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 537,
+      "width": 580,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 537,
+      "width": 580,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 655,
+      "width": 580,
+      "height": 4801,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Row",
+      "tag": "div",
+      "top": 715,
+      "width": 580,
+      "height": 4801,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 715,
+      "width": 580,
+      "height": 787,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 12px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 791,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 791,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 791,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 1518,
+      "width": 580,
+      "height": 787,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 12px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 1594,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 1594,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 1594,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 2321,
+      "width": 580,
+      "height": 787,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 12px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 2397,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 2397,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 2397,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 3124,
+      "width": 580,
+      "height": 787,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 12px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 3200,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 3200,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 3200,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 3926,
+      "width": 580,
+      "height": 787,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 12px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4002,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 4002,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4002,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 4729,
+      "width": 580,
+      "height": 787,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 12px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4805,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 4805,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4805,
+      "width": 556,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Section",
+      "tag": "section",
+      "top": 5516,
+      "width": 768,
+      "height": 1591,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 5576,
+      "width": 580,
+      "height": 1471,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 5576,
+      "width": 580,
+      "height": 92,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 5602,
+      "width": 580,
+      "height": 66,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 5602,
+      "width": 580,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Slider Wrap",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 5716,
+      "width": 580,
+      "height": 1203,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5742,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 5942,
+      "width": 580,
+      "height": 765,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6747,
+      "width": 580,
+      "height": 146,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6999,
+      "width": 580,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6999,
+      "width": 100,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Testimonials Section",
+      "tag": "section",
+      "top": 7107,
+      "width": 768,
+      "height": 1119,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px 80px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 7167,
+      "width": 580,
+      "height": 979,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 7167,
+      "width": 580,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 7205,
+      "width": 580,
+      "height": 122,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 7205,
+      "width": 580,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Container",
+      "tag": "div",
+      "top": 7369,
+      "width": 580,
+      "height": 777,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 271,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 187,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 737,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 156,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8048,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8048,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 271,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 187,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 271,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 187,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 737,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 156,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8048,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8048,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 271,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 187,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 271,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 187,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 737,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 156,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8048,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8048,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 271,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 187,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 271,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 187,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 737,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 156,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8048,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8048,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 7369,
+      "width": 390,
+      "height": 437,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 7377,
+      "width": 374,
+      "height": 421,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 271,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 7866,
+      "width": 390,
+      "height": 187,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 8079,
+      "width": 390,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "footer",
+      "top": 8226,
+      "width": 768,
+      "height": 721,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "48px 20px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Background",
+      "tag": "div",
+      "top": 8226,
+      "width": 768,
+      "height": 721,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 8274,
+      "width": 580,
+      "height": 673,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": 8274,
+      "width": 580,
+      "height": 248,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 8274,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 8274,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 8340,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 8340,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 8406,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 8406,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 8472,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 8472,
+      "width": 580,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 8586,
+      "width": 580,
+      "height": 91,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Logo",
+      "tag": "div",
+      "top": 8628,
+      "width": 348,
+      "height": 54,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Buttom Wrap",
+      "tag": "div",
+      "top": 8741,
+      "width": 580,
+      "height": 206,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 8741,
+      "width": 580,
+      "height": 206,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "All Rights",
+      "tag": "div",
+      "top": 8741,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 8741,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Privacy",
+      "tag": "div",
+      "top": 8786,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 8786,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Terms",
+      "tag": "div",
+      "top": 8831,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 8831,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Social Media",
+      "tag": "div",
+      "top": 8876,
+      "width": 580,
+      "height": 71,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 26px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 8876,
+      "width": 580,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    }
+  ],
+  "links": [
+    {
+      "text": "ABOUT",
+      "href": "./about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "./project"
+    },
+    {
+      "text": "BLOG",
+      "href": "./blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "./contact"
+    },
+    {
+      "text": "siZa.",
+      "href": "./"
+    },
+    {
+      "text": "New York, USA( 2026)Home Clean",
+      "href": "./project/home-clean"
+    },
+    {
+      "text": "Los Angeles, USA( 2026)Executive Office Workspace",
+      "href": "./project/executive-office-workspace"
+    },
+    {
+      "text": "Chicago, USA( 2026)Boutique Café Interior",
+      "href": "./project/boutique-café-interior"
+    },
+    {
+      "text": "Miami, Florida( 2026)Luxury Penthouse Design",
+      "href": "./project/luxury-penthouse-design"
+    },
+    {
+      "text": "Malibu, California( 2026)Contemporary Villa Interior",
+      "href": "./project/contemporary-villa-interior"
+    },
+    {
+      "text": "Austin, Texas( 2026)Modern Retail Showroom",
+      "href": "./project/modern-retail-showroom"
+    },
+    {
+      "text": "ABOUT",
+      "href": "./about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "./project"
+    },
+    {
+      "text": "BLOG",
+      "href": "./blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "./contact"
+    },
+    {
+      "text": "PRIVACY  POLICY",
+      "href": "./legal/privacy-policy"
+    },
+    {
+      "text": "TERMS  &  CONDITIONS",
+      "href": "./legal/terms-conditions"
+    },
+    {
+      "text": "INSTAGRAM",
+      "href": "https://www.instagram.com"
+    },
+    {
+      "text": "FACEBOOK",
+      "href": "https://www.facebook.com"
+    },
+    {
+      "text": "TWITTER",
+      "href": "https://x.com"
+    },
+    {
+      "text": "Create a free website with Framer, the website builder loved",
+      "href": "https://www.framer.com"
+    }
+  ],
+  "media": [
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/C7jW978YB72otWVXn4wxBY9Je4.png?scale-down-to=1024&width=2560&height=1440",
+      "alt": "Nav Image",
+      "w": 580,
+      "h": 326
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/9bI5POzushce1ao6tSnV12XXM.png?scale-down-to=1024&width=2232&height=400",
+      "alt": "Hero Image",
+      "w": 540,
+      "h": 97
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 923,
+      "h": 1033
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/2dLkYzCsvadOSl9vFvLYWx8Gk.jpg?scale-down-to=1024&width=2268&height=4032",
+      "alt": "white and black kitchen cabinet",
+      "w": 556,
+      "h": 988
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 923,
+      "h": 1033
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/6OOmZryglh0hIAMML06hWU2iXFw.png?scale-down-to=1024&width=1516&height=2288",
+      "alt": "Project Image",
+      "w": 556,
+      "h": 839
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 923,
+      "h": 1033
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/4UHoEJv4kUbteX84bnjQXF3peJU.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "Project Image",
+      "w": 556,
+      "h": 622
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 923,
+      "h": 1033
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/G6WPHwhmGXBuRiFDEmTUzDgHi4.png?scale-down-to=1024&width=1516&height=2288",
+      "alt": "Project Image",
+      "w": 556,
+      "h": 839
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 923,
+      "h": 1033
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/VJFySsuiGiXfE2rhvgs1eetq1k.png?scale-down-to=1024&width=1516&height=2288",
+      "alt": "Project Image",
+      "w": 556,
+      "h": 839
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 923,
+      "h": 1033
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DemHiAagPXtfLftJtXuKYFSMco.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "Project Image",
+      "w": 556,
+      "h": 622
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NA6qScHmC0ksxzq4eywwWu0n0U.png?scale-down-to=512&width=1448&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 96
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZkd7aeOwXFO5mbfh1b9h5tfz60.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/WhP5sGLyh4Q524v8emH6Gaqw8.png?scale-down-to=512&width=784&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 89
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/lX3mApLc1InI47PrubyWHaAHc.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tNLrhlMtG5xcatb8aTk7m2LnOK8.png?scale-down-to=512&width=808&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 86
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N3zBUBEU45TLsnGvfXpRo1Hs6DY.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/QEU4ySoMXHxMEh0QMuqnniCKM.png?scale-down-to=512&width=840&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 83
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Nd1r1jWlSRD4yjX0LlQDuagpG4.png?scale-down-to=512&width=690&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 101
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/KYcPa3nOPIaeLjhgwg607o2uF4.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/w0BIZiwSSeKOI7yIyVVReoUI.png?scale-down-to=512&width=848&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 82
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/XJ5aKRJAqZq91nCe9MQtv9kZc.png?scale-down-to=512&width=828&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 84
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/HtwsZDi1ew2Od6Y9Y9O5UU50Ttg.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/8eBzGbZBVg7J2UgSaXPIkCHGvA.png?scale-down-to=512&width=754&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 92
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NA6qScHmC0ksxzq4eywwWu0n0U.png?scale-down-to=512&width=1448&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 96
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZkd7aeOwXFO5mbfh1b9h5tfz60.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/WhP5sGLyh4Q524v8emH6Gaqw8.png?scale-down-to=512&width=784&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 89
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/lX3mApLc1InI47PrubyWHaAHc.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tNLrhlMtG5xcatb8aTk7m2LnOK8.png?scale-down-to=512&width=808&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 86
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N3zBUBEU45TLsnGvfXpRo1Hs6DY.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/QEU4ySoMXHxMEh0QMuqnniCKM.png?scale-down-to=512&width=840&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 83
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Nd1r1jWlSRD4yjX0LlQDuagpG4.png?scale-down-to=512&width=690&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 101
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/KYcPa3nOPIaeLjhgwg607o2uF4.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/w0BIZiwSSeKOI7yIyVVReoUI.png?scale-down-to=512&width=848&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 82
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/XJ5aKRJAqZq91nCe9MQtv9kZc.png?scale-down-to=512&width=828&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 84
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/HtwsZDi1ew2Od6Y9Y9O5UU50Ttg.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/8eBzGbZBVg7J2UgSaXPIkCHGvA.png?scale-down-to=512&width=754&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 92
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NA6qScHmC0ksxzq4eywwWu0n0U.png?scale-down-to=512&width=1448&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 96
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZkd7aeOwXFO5mbfh1b9h5tfz60.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/WhP5sGLyh4Q524v8emH6Gaqw8.png?scale-down-to=512&width=784&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 89
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/lX3mApLc1InI47PrubyWHaAHc.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tNLrhlMtG5xcatb8aTk7m2LnOK8.png?scale-down-to=512&width=808&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 86
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N3zBUBEU45TLsnGvfXpRo1Hs6DY.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/QEU4ySoMXHxMEh0QMuqnniCKM.png?scale-down-to=512&width=840&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 83
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Nd1r1jWlSRD4yjX0LlQDuagpG4.png?scale-down-to=512&width=690&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 101
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/KYcPa3nOPIaeLjhgwg607o2uF4.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/w0BIZiwSSeKOI7yIyVVReoUI.png?scale-down-to=512&width=848&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 82
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/XJ5aKRJAqZq91nCe9MQtv9kZc.png?scale-down-to=512&width=828&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 84
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/HtwsZDi1ew2Od6Y9Y9O5UU50Ttg.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/8eBzGbZBVg7J2UgSaXPIkCHGvA.png?scale-down-to=512&width=754&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 92
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NA6qScHmC0ksxzq4eywwWu0n0U.png?scale-down-to=512&width=1448&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 96
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZkd7aeOwXFO5mbfh1b9h5tfz60.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/WhP5sGLyh4Q524v8emH6Gaqw8.png?scale-down-to=512&width=784&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 89
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/lX3mApLc1InI47PrubyWHaAHc.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tNLrhlMtG5xcatb8aTk7m2LnOK8.png?scale-down-to=512&width=808&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 86
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N3zBUBEU45TLsnGvfXpRo1Hs6DY.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/QEU4ySoMXHxMEh0QMuqnniCKM.png?scale-down-to=512&width=840&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 83
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Nd1r1jWlSRD4yjX0LlQDuagpG4.png?scale-down-to=512&width=690&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 101
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/KYcPa3nOPIaeLjhgwg607o2uF4.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/w0BIZiwSSeKOI7yIyVVReoUI.png?scale-down-to=512&width=848&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 82
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/XJ5aKRJAqZq91nCe9MQtv9kZc.png?scale-down-to=512&width=828&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 84
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/HtwsZDi1ew2Od6Y9Y9O5UU50Ttg.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 350,
+      "h": 437
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/8eBzGbZBVg7J2UgSaXPIkCHGvA.png?scale-down-to=512&width=754&height=200",
+      "alt": "Nmae",
+      "w": 350,
+      "h": 92
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg?arrow=left",
+      "alt": "Back Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg?arrow=right",
+      "alt": "Next Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N4xWETXWH1ww5AQE9OA7BRRpAg.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/7IHoesXa2ZttPnV1aNCaj2N6c6g.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JRkoddRXFSd6wqHeLD7eNncQqI.png?width=288&height=288",
+      "alt": "Profile Image",
+      "w": 288,
+      "h": 288
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/T1xuBzhwjKxVlF7UFONSrx23lk.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ZgmLTiqavdGS3FLJucGpNxhhxU.png?width=160&height=160",
+      "alt": "Profile Image",
+      "w": 160,
+      "h": 160
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N4xWETXWH1ww5AQE9OA7BRRpAg.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/7IHoesXa2ZttPnV1aNCaj2N6c6g.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JRkoddRXFSd6wqHeLD7eNncQqI.png?width=288&height=288",
+      "alt": "Profile Image",
+      "w": 288,
+      "h": 288
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/T1xuBzhwjKxVlF7UFONSrx23lk.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ZgmLTiqavdGS3FLJucGpNxhhxU.png?width=160&height=160",
+      "alt": "Profile Image",
+      "w": 160,
+      "h": 160
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N4xWETXWH1ww5AQE9OA7BRRpAg.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/7IHoesXa2ZttPnV1aNCaj2N6c6g.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JRkoddRXFSd6wqHeLD7eNncQqI.png?width=288&height=288",
+      "alt": "Profile Image",
+      "w": 288,
+      "h": 288
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/T1xuBzhwjKxVlF7UFONSrx23lk.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ZgmLTiqavdGS3FLJucGpNxhhxU.png?width=160&height=160",
+      "alt": "Profile Image",
+      "w": 160,
+      "h": 160
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N4xWETXWH1ww5AQE9OA7BRRpAg.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/7IHoesXa2ZttPnV1aNCaj2N6c6g.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JRkoddRXFSd6wqHeLD7eNncQqI.png?width=288&height=288",
+      "alt": "Profile Image",
+      "w": 288,
+      "h": 288
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/T1xuBzhwjKxVlF7UFONSrx23lk.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ZgmLTiqavdGS3FLJucGpNxhhxU.png?width=160&height=160",
+      "alt": "Profile Image",
+      "w": 160,
+      "h": 160
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg?arrow=left",
+      "alt": "Back Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg?arrow=right",
+      "alt": "Next Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NvhKmZQDB0Ser4dK0xLS9YJoFQ.png?scale-down-to=1024&width=1086&height=1448",
+      "alt": "",
+      "w": 444,
+      "h": 592
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/zzhR1XOv2JKRjyifYnIdSSc9AE.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5gaADhoyHBNS2pECySGIJs3VRA.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NvhKmZQDB0Ser4dK0xLS9YJoFQ.png?scale-down-to=1024&width=1086&height=1448",
+      "alt": "",
+      "w": 334,
+      "h": 445
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/zzhR1XOv2JKRjyifYnIdSSc9AE.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5gaADhoyHBNS2pECySGIJs3VRA.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NvhKmZQDB0Ser4dK0xLS9YJoFQ.png?scale-down-to=1024&width=1086&height=1448",
+      "alt": "",
+      "w": 334,
+      "h": 445
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/zzhR1XOv2JKRjyifYnIdSSc9AE.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5gaADhoyHBNS2pECySGIJs3VRA.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NvhKmZQDB0Ser4dK0xLS9YJoFQ.png?scale-down-to=1024&width=1086&height=1448",
+      "alt": "",
+      "w": 334,
+      "h": 445
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/zzhR1XOv2JKRjyifYnIdSSc9AE.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5gaADhoyHBNS2pECySGIJs3VRA.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg?arrow=left",
+      "alt": "Back Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg?arrow=right",
+      "alt": "Next Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/yBVjbVAuBJFp8H1ff8ujMTX8M.png?width=700&height=2200",
+      "alt": "Background",
+      "w": 768,
+      "h": 2413
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/1mMC0RSqNKZgwHx9VeLGdOoCP60.png?width=774&height=322",
+      "alt": "Logo",
+      "w": 580,
+      "h": 241
+    },
+    {
+      "type": "video",
+      "src": "https://framerusercontent.com/assets/XWcsx36nBuIgcXbG2mvXR4qF0o4.mp4",
+      "autoplay": true,
+      "loop": true,
+      "muted": true
+    }
+  ],
+  "animationsRunning": 0
+}

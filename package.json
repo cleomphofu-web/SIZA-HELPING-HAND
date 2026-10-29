@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run",
+    "typecheck": "tsc --noEmit",
     "build:copy": "node tools/content/build-copy.mjs",
     "build:copy:strict": "node tools/content/build-copy.mjs --strict",
     "check:structure": "node tools/quality/check-structure.mjs",
+    "check:assets": "node tools/quality/check-assets.mjs",
     "design:extract": "node tools/design/extract-framer-tokens.mjs https://siza.framer.website docs/design-reference/extract",
     "design:capture": "node tools/design/visual-diff.mjs capture",
     "design:compare": "node tools/design/visual-diff.mjs compare",
@@ -19,13 +21,13 @@
   "dependencies": {
     "@supabase/ssr": "0.7.0",
     "@supabase/supabase-js": "2.76.1",
-    "framer-motion": "^14.1.0",
-    "geist": "^1.7.2",
-    "next": "16.4.0",
+    "next": "^16.4.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "resend": "6.1.0",
-    "zod": "4.1.12"
+    "server-only": "0.0.1",
+    "sharp": "0.35.5",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.14",

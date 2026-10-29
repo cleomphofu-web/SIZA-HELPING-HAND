@@ -1,0 +1,5589 @@
+{
+  "page": {
+    "title": "Interior Design Agency Framer Template - Interio",
+    "lang": "en",
+    "scrollHeight": 8412,
+    "bodyBackground": "rgb(245, 245, 245)"
+  },
+  "cssVariables": {
+    "--token-ac0c662b-4250-4586-9bed-0f686bea2a4e": "#b3b3b3",
+    "--token-68c912bd-8c25-4cee-bbc8-dc294bdf3289": "#f5f5f5",
+    "--token-05f1db4d-8688-46b3-bf5f-b74ebb2a836f": "#666",
+    "--token-88eff137-1274-4a36-b366-ef51c420159a": "#000",
+    "--token-e50dac00-7054-4d7a-a43e-c46ce7de76fb": "#ccc",
+    "--token-7cc43143-e5c7-467f-8763-76424c3834ea": "#fff",
+    "--token-3e0285fd-4a85-479f-9c05-6286ae1211c6": "#191919",
+    "--token-6cae9d17-97cf-4de5-bfc5-d57af2839c4a": "#f2f2f2",
+    "--token-0c86702d-68fd-448c-9acd-a93eb7230d97": "#e6e6e6",
+    "--token-de5fb930-8f11-483a-9194-6cda4c8e5176": "#ccc",
+    "--framer-will-change-override": "none",
+    "--framer-will-change-filter-override": "none",
+    "--framer-dir-multiplier": "1"
+  },
+  "fontFaces": [
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/GrgcKwrN6d3Uz8EwcLHZxwEfC4.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/hyOgCu0Xnghbimh0pE8QTvtt2AU.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/NeGmSOXrPBfEFIy5YZeHq17LEDA.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/oYaAX5himiTPYuN8vLWnqBbfD2s.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/lEJLP4R0yuCaMCjSXYHtJw72M.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/cRJyLNuTJR5jbyKzGi33wU9cqIQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/yDtI2UI8XcEg1W2je9XPN3Noo.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/A0Wcc7NgXMjUuFdquHDrIZpzZw0.woff2\")"
+    },
+    {
+      "family": "\"Geist Placeholder\"",
+      "weight": "",
+      "style": "",
+      "src": "local(\"Arial\")"
+    },
+    {
+      "family": "\"Inter Placeholder\"",
+      "weight": "",
+      "style": "",
+      "src": "local(\"Arial\")"
+    }
+  ],
+  "textStyles": [
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 96px | 500 | 96px | -2.88px | none",
+      "count": 67,
+      "color": "rgb(0, 0, 0)",
+      "sample": "12+",
+      "layer": "Counter"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 16px | 500 | 24px | normal | none",
+      "count": 29,
+      "color": "rgb(255, 255, 255)",
+      "sample": "ABOUT",
+      "layer": "Text"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 56px | 500 | 61.6px | -1.68px | none",
+      "count": 24,
+      "color": "rgb(0, 0, 0)",
+      "sample": "Join",
+      "layer": "Creates elegant interiors that combine timeless design, and everyday functionality, exceptional craftsmanship with lasting quality and excellence."
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 20px | 500 | 28px | normal | none",
+      "count": 16,
+      "color": "rgb(255, 255, 255)",
+      "sample": "siZa.",
+      "layer": "INTERIO®"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 16px | 400 | 24px | normal | none",
+      "count": 15,
+      "color": "rgb(102, 102, 102)",
+      "sample": "Delivering thoughtful interiors with precision a",
+      "layer": "Delivering thoughtful interiors with precision and timeless expertise."
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 24px | 500 | 31.2px | normal | none",
+      "count": 11,
+      "color": "rgb(102, 102, 102)",
+      "sample": "//Step 01",
+      "layer": "//Step 01"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 12px | 500 | 15.6px | normal | none",
+      "count": 8,
+      "color": "rgb(179, 179, 179)",
+      "sample": "4.9/5",
+      "layer": "Nav item"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 40px | 500 | 48px | -1.2px | none",
+      "count": 5,
+      "color": "rgb(0, 0, 0)",
+      "sample": "The team transformed our ideas into a timeless i",
+      "layer": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch."
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 32px | 500 | 41.6px | normal | none",
+      "count": 4,
+      "color": "rgb(255, 255, 255)",
+      "sample": "ABOUT",
+      "layer": "Text"
+    },
+    {
+      "value": "sans-serif | 12px | 400 | normal | normal | none",
+      "count": 1,
+      "color": "rgb(0, 0, 238)",
+      "sample": "Create a free website with Framer, the website b",
+      "layer": "Content"
+    }
+  ],
+  "textColors": [
+    {
+      "value": "rgb(0, 0, 0)",
+      "count": 97
+    },
+    {
+      "value": "rgb(255, 255, 255)",
+      "count": 38
+    },
+    {
+      "value": "rgb(102, 102, 102)",
+      "count": 33
+    },
+    {
+      "value": "rgb(179, 179, 179)",
+      "count": 7
+    },
+    {
+      "value": "rgb(204, 204, 204)",
+      "count": 4
+    },
+    {
+      "value": "rgb(0, 0, 238)",
+      "count": 1
+    }
+  ],
+  "backgrounds": [
+    {
+      "value": "rgba(255, 255, 255, 0.2)",
+      "count": 34,
+      "layer": "Line"
+    },
+    {
+      "value": "rgb(255, 255, 255)",
+      "count": 29,
+      "layer": "Line"
+    },
+    {
+      "value": "rgb(0, 0, 0)",
+      "count": 25,
+      "layer": "Desktop"
+    },
+    {
+      "value": "rgb(242, 242, 242)",
+      "count": 9,
+      "layer": "Dot 01"
+    },
+    {
+      "value": "rgb(245, 245, 245)",
+      "count": 2,
+      "layer": null
+    },
+    {
+      "value": "rgb(244, 244, 244)",
+      "count": 1,
+      "layer": "Brand Section"
+    }
+  ],
+  "borders": [],
+  "radii": [
+    {
+      "value": "8px",
+      "count": 105
+    },
+    {
+      "value": "100px",
+      "count": 5
+    },
+    {
+      "value": "10px",
+      "count": 3
+    },
+    {
+      "value": "11px",
+      "count": 2
+    }
+  ],
+  "shadows": [
+    {
+      "value": "rgb(0, 0, 0) 0px 0px 0px 1px inset",
+      "count": 2
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.17) 0px 0.602187px 1.56569px -1.5px, rgba(0, 0, 0, 0.14) 0px 2.28853px 5.95019px -3px, rgba(0, 0, 0, 0.02) 0px 10px 26px -4.5px",
+      "count": 1
+    }
+  ],
+  "transitions": [],
+  "gaps": [
+    {
+      "value": "10px",
+      "count": 68
+    },
+    {
+      "value": "0px",
+      "count": 46
+    },
+    {
+      "value": "3px",
+      "count": 16
+    },
+    {
+      "value": "12px",
+      "count": 13
+    },
+    {
+      "value": "144px",
+      "count": 9
+    },
+    {
+      "value": "40px",
+      "count": 6
+    },
+    {
+      "value": "245px",
+      "count": 5
+    },
+    {
+      "value": "6px",
+      "count": 5
+    },
+    {
+      "value": "20px",
+      "count": 4
+    },
+    {
+      "value": "24px",
+      "count": 4
+    },
+    {
+      "value": "8px",
+      "count": 3
+    },
+    {
+      "value": "48px",
+      "count": 3
+    },
+    {
+      "value": "16px",
+      "count": 3
+    },
+    {
+      "value": "80px",
+      "count": 3
+    },
+    {
+      "value": "216px",
+      "count": 3
+    },
+    {
+      "value": "64px",
+      "count": 3
+    },
+    {
+      "value": "166px",
+      "count": 1
+    },
+    {
+      "value": "104px",
+      "count": 1
+    },
+    {
+      "value": "412px",
+      "count": 1
+    },
+    {
+      "value": "63px",
+      "count": 1
+    }
+  ],
+  "layers": [
+    {
+      "name": "Desktop",
+      "tag": "nav",
+      "top": -70,
+      "width": 1440,
+      "height": 88,
+      "background": "rgb(0, 0, 0)",
+      "padding": "20px 80px",
+      "display": "flex"
+    },
+    {
+      "name": "Dropdown",
+      "tag": "div",
+      "top": -1078,
+      "width": 1280,
+      "height": 696,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrapper",
+      "tag": "div",
+      "top": -1078,
+      "width": 321,
+      "height": 696,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": -941,
+      "width": 321,
+      "height": 422,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -941,
+      "width": 321,
+      "height": 106,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 2",
+      "tag": "a",
+      "top": -909,
+      "width": 107,
+      "height": 42,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": -909,
+      "width": 107,
+      "height": 42,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -836,
+      "width": 321,
+      "height": 106,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 2",
+      "tag": "a",
+      "top": -804,
+      "width": 145,
+      "height": 42,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": -804,
+      "width": 145,
+      "height": 42,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -730,
+      "width": 321,
+      "height": 106,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 2",
+      "tag": "a",
+      "top": -698,
+      "width": 86,
+      "height": 42,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": -698,
+      "width": 86,
+      "height": 42,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -624,
+      "width": 321,
+      "height": 106,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 2",
+      "tag": "a",
+      "top": -592,
+      "width": 147,
+      "height": 42,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": -592,
+      "width": 147,
+      "height": 42,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": -1078,
+      "width": 640,
+      "height": 696,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": -1078,
+      "width": 640,
+      "height": 696,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": -50,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Dropdown",
+      "tag": "div",
+      "top": -50,
+      "width": 805,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": -50,
+      "width": 805,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -50,
+      "width": 70,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "12px 8px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -50,
+      "width": 89,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "12px 8px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -50,
+      "width": 59,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "12px 8px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -50,
+      "width": 89,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "12px 8px",
+      "display": "flex"
+    },
+    {
+      "name": " Icon Wrap",
+      "tag": "div",
+      "top": -48,
+      "width": 44,
+      "height": 44,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Hero Area",
+      "tag": "div",
+      "top": 0,
+      "width": 1440,
+      "height": 774,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Hero Section",
+      "tag": "header",
+      "top": 0,
+      "width": 1440,
+      "height": 774,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Hero Videos",
+      "tag": "div",
+      "top": 0,
+      "width": 1440,
+      "height": 774,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Glow",
+      "tag": "div",
+      "top": 0,
+      "width": 1440,
+      "height": 774,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 0,
+      "width": 1280,
+      "height": 774,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "436px 0px 76px",
+      "display": "flex"
+    },
+    {
+      "name": "Line wrap",
+      "tag": "div",
+      "top": 0,
+      "width": 1280,
+      "height": 774,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 875,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Middle Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1280,
+      "height": 491,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 491,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 491,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 875,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Header",
+      "tag": "div",
+      "top": 436,
+      "width": 874,
+      "height": 262,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Subtext",
+      "tag": "div",
+      "top": 436,
+      "width": 412,
+      "height": 55,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "12px 16px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 554,
+      "width": 874,
+      "height": 144,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "6",
+      "tag": "section",
+      "top": 0,
+      "width": 1440,
+      "height": 774,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": -1,
+      "width": 1440,
+      "height": 776,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Top",
+      "tag": "div",
+      "top": -1,
+      "width": 1440,
+      "height": 388,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Bottom",
+      "tag": "div",
+      "top": 387,
+      "width": 1440,
+      "height": 388,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Brand Section",
+      "tag": "section",
+      "top": 774,
+      "width": 1440,
+      "height": 424,
+      "background": "rgb(244, 244, 244)",
+      "padding": "96px 30px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 870,
+      "width": 1280,
+      "height": 232,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Ticker",
+      "tag": "div",
+      "top": 942,
+      "width": 1280,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Logo Wrap",
+      "tag": "div",
+      "top": 942,
+      "width": 1880,
+      "height": 160,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Logos 01",
+      "tag": "div",
+      "top": 942,
+      "width": 300,
+      "height": 160,
+      "background": "rgb(255, 255, 255)",
+      "padding": "62px 67px",
+      "display": "flex"
+    },
+    {
+      "name": "Logos 02",
+      "tag": "div",
+      "top": 942,
+      "width": 300,
+      "height": 160,
+      "background": "rgb(255, 255, 255)",
+      "padding": "62px 67px",
+      "display": "flex"
+    },
+    {
+      "name": "Logos 03",
+      "tag": "div",
+      "top": 942,
+      "width": 300,
+      "height": 160,
+      "background": "rgb(255, 255, 255)",
+      "padding": "62px 67px",
+      "display": "flex"
+    },
+    {
+      "name": "Logos 04",
+      "tag": "div",
+      "top": 942,
+      "width": 300,
+      "height": 160,
+      "background": "rgb(255, 255, 255)",
+      "padding": "62px 67px",
+      "display": "flex"
+    },
+    {
+      "name": "Logos 05",
+      "tag": "div",
+      "top": 942,
+      "width": 300,
+      "height": 160,
+      "background": "rgb(255, 255, 255)",
+      "padding": "62px 67px",
+      "display": "flex"
+    },
+    {
+      "name": "Logos 06",
+      "tag": "div",
+      "top": 942,
+      "width": 300,
+      "height": 160,
+      "background": "rgb(255, 255, 255)",
+      "padding": "62px 67px",
+      "display": "flex"
+    },
+    {
+      "name": "Our Journey Section",
+      "tag": "section",
+      "top": 1198,
+      "width": 1440,
+      "height": 1406,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "96px 30px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 1294,
+      "width": 1280,
+      "height": 1214,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Logo Wrap",
+      "tag": "div",
+      "top": 1294,
+      "width": 1280,
+      "height": 212,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Logo",
+      "tag": "div",
+      "top": 1294,
+      "width": 880,
+      "height": 212,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 1586,
+      "width": 1280,
+      "height": 370,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Creates elegant interiors that combine timeless design, and everyday functionality, exceptional craftsmanship with lasting quality and excellence.",
+      "tag": "div",
+      "top": 1586,
+      "width": 850,
+      "height": 370,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 2036,
+      "width": 1280,
+      "height": 472,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "div",
+      "top": 2036,
+      "width": 416,
+      "height": 472,
+      "background": "rgb(255, 255, 255)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Counter",
+      "tag": "div",
+      "top": 2308,
+      "width": 352,
+      "height": 168,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Delivering thoughtful interiors with precision and timeless expertise.",
+      "tag": "div",
+      "top": 2428,
+      "width": 352,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "div",
+      "top": 2036,
+      "width": 416,
+      "height": 472,
+      "background": "rgb(255, 255, 255)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Counter",
+      "tag": "div",
+      "top": 2308,
+      "width": 352,
+      "height": 168,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Delivering thoughtful interiors with precision and timeless expertise.",
+      "tag": "div",
+      "top": 2428,
+      "width": 352,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "div",
+      "top": 2036,
+      "width": 416,
+      "height": 472,
+      "background": "rgb(255, 255, 255)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Counter",
+      "tag": "div",
+      "top": 2308,
+      "width": 352,
+      "height": 168,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Delivering thoughtful interiors with precision and timeless expertise.",
+      "tag": "div",
+      "top": 2428,
+      "width": 352,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Work Section",
+      "tag": "section",
+      "top": 2604,
+      "width": 1440,
+      "height": 1329,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "96px 30px",
+      "display": "flex"
+    },
+    {
+      "name": "Background",
+      "tag": "div",
+      "top": 2604,
+      "width": 1440,
+      "height": 1329,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 2700,
+      "width": 1280,
+      "height": 1137,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 2700,
+      "width": 1280,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 2700,
+      "width": 880,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 2700,
+      "width": 873,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 2844,
+      "width": 1280,
+      "height": 993,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "grid"
+    },
+    {
+      "name": "Card 02",
+      "tag": "div",
+      "top": 2844,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Videos Wrap",
+      "tag": "div",
+      "top": 2844,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 2842,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Card 01",
+      "tag": "div",
+      "top": 2844,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Text wrap",
+      "tag": "div",
+      "top": 3051,
+      "width": 363,
+      "height": 91,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Understanding your vision, lifestyle, & goals to build the perfect foundation.",
+      "tag": "div",
+      "top": 3094,
+      "width": 363,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card 01",
+      "tag": "div",
+      "top": 2844,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Text wrap",
+      "tag": "div",
+      "top": 3051,
+      "width": 363,
+      "height": 91,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Understanding your vision, lifestyle, & goals to build the perfect foundation.",
+      "tag": "div",
+      "top": 3094,
+      "width": 363,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Blank Card",
+      "tag": "div",
+      "top": 3175,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Card 02",
+      "tag": "div",
+      "top": 3175,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Videos Wrap",
+      "tag": "div",
+      "top": 3175,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 3173,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Blank Card",
+      "tag": "div",
+      "top": 3175,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Card 01",
+      "tag": "div",
+      "top": 3506,
+      "width": 427,
+      "height": 330,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Text wrap",
+      "tag": "div",
+      "top": 3713,
+      "width": 363,
+      "height": 91,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Understanding your vision, lifestyle, & goals to build the perfect foundation.",
+      "tag": "div",
+      "top": 3756,
+      "width": 363,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card 01",
+      "tag": "div",
+      "top": 3506,
+      "width": 427,
+      "height": 330,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px",
+      "display": "flex"
+    },
+    {
+      "name": "Text wrap",
+      "tag": "div",
+      "top": 3713,
+      "width": 363,
+      "height": 91,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Understanding your vision, lifestyle, & goals to build the perfect foundation.",
+      "tag": "div",
+      "top": 3756,
+      "width": 363,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card 02",
+      "tag": "div",
+      "top": 3506,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Videos Wrap",
+      "tag": "div",
+      "top": 3506,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 3504,
+      "width": 427,
+      "height": 331,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Section",
+      "tag": "section",
+      "top": 3933,
+      "width": 1440,
+      "height": 1138,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "96px 30px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 4029,
+      "width": 1224,
+      "height": 946,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 4029,
+      "width": 1224,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 4029,
+      "width": 880,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 4029,
+      "width": 697,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop 01",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 786,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Slider Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Team Tab",
+      "tag": "div",
+      "top": 4189,
+      "width": 1224,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4386,
+      "width": 400,
+      "height": 110,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Team Image",
+      "tag": "div",
+      "top": 4189,
+      "width": 384,
+      "height": 506,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4391,
+      "width": 400,
+      "height": 101,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 4895,
+      "width": 1224,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 120px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4895,
+      "width": 78,
+      "height": 80,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Awards Section",
+      "tag": "section",
+      "top": 5071,
+      "width": 1440,
+      "height": 624,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "96px 30px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 5167,
+      "width": 1280,
+      "height": 432,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 5167,
+      "width": 1280,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 5167,
+      "width": 880,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 5167,
+      "width": 403,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Container",
+      "tag": "div",
+      "top": 5327,
+      "width": 1280,
+      "height": 272,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Awards Card",
+      "tag": "div",
+      "top": 5327,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 5327,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text & Button",
+      "tag": "div",
+      "top": 5327,
+      "width": 880,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "a",
+      "top": 5327,
+      "width": 130,
+      "height": 48,
+      "background": "rgb(0, 0, 0)",
+      "padding": "12px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Awards Card",
+      "tag": "div",
+      "top": 5383,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 5383,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text & Button",
+      "tag": "div",
+      "top": 5383,
+      "width": 880,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "a",
+      "top": 5383,
+      "width": 134,
+      "height": 48,
+      "background": "rgb(0, 0, 0)",
+      "padding": "12px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Awards Card",
+      "tag": "div",
+      "top": 5439,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 5439,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text & Button",
+      "tag": "div",
+      "top": 5439,
+      "width": 880,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "a",
+      "top": 5439,
+      "width": 134,
+      "height": 48,
+      "background": "rgb(0, 0, 0)",
+      "padding": "12px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Awards Card",
+      "tag": "div",
+      "top": 5495,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 5495,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text & Button",
+      "tag": "div",
+      "top": 5495,
+      "width": 880,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "a",
+      "top": 5495,
+      "width": 134,
+      "height": 48,
+      "background": "rgb(0, 0, 0)",
+      "padding": "12px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Awards Card",
+      "tag": "div",
+      "top": 5551,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 5551,
+      "width": 1280,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text & Button",
+      "tag": "div",
+      "top": 5551,
+      "width": 880,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "a",
+      "top": 5551,
+      "width": 134,
+      "height": 48,
+      "background": "rgb(0, 0, 0)",
+      "padding": "12px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Testimonials Section",
+      "tag": "section",
+      "top": 5695,
+      "width": 1440,
+      "height": 868,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "96px 30px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 5791,
+      "width": 1280,
+      "height": 676,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 5791,
+      "width": 1280,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 5791,
+      "width": 880,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 5791,
+      "width": 1292,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Container",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "div",
+      "top": 5951,
+      "width": 1280,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5951,
+      "width": 460,
+      "height": 516,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "8px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5959,
+      "width": 444,
+      "height": 500,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Icon",
+      "tag": "div",
+      "top": 6031,
+      "width": 120,
+      "height": 120,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 338,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "The team transformed our ideas into a timeless interior with us remarkable creativity and precision. Every moment of the experience felt effortless & topnotch.",
+      "tag": "div",
+      "top": 6129,
+      "width": 660,
+      "height": 240,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Profile Wrap",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 6409,
+      "width": 660,
+      "height": 58,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Blog Section",
+      "tag": "section",
+      "top": 6563,
+      "width": 1440,
+      "height": 1031,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "96px 30px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 6659,
+      "width": 1280,
+      "height": 839,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 6659,
+      "width": 1280,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 6659,
+      "width": 880,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 6659,
+      "width": 493,
+      "height": 96,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 6803,
+      "width": 1280,
+      "height": 695,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 575,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 420,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 420,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 7223,
+      "width": 421,
+      "height": 154,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 24px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Executive Office Workspace",
+      "tag": "div",
+      "top": 7283,
+      "width": 373,
+      "height": 62,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Big Card",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 695,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 540,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 540,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 7343,
+      "width": 421,
+      "height": 154,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 24px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Executive Office Workspace",
+      "tag": "div",
+      "top": 7403,
+      "width": 373,
+      "height": 62,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 575,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 420,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 6803,
+      "width": 421,
+      "height": 420,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Text",
+      "tag": "div",
+      "top": 7223,
+      "width": 421,
+      "height": 154,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 24px 32px",
+      "display": "flex"
+    },
+    {
+      "name": "Executive Office Workspace",
+      "tag": "div",
+      "top": 7283,
+      "width": 373,
+      "height": 62,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Desktop",
+      "tag": "footer",
+      "top": 7594,
+      "width": 1440,
+      "height": 818,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 30px",
+      "display": "flex"
+    },
+    {
+      "name": "Background",
+      "tag": "div",
+      "top": 7593,
+      "width": 1440,
+      "height": 818,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 7594,
+      "width": 1280,
+      "height": 818,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": 7594,
+      "width": 1280,
+      "height": 275,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 7594,
+      "width": 320,
+      "height": 220,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "164px 0px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 7758,
+      "width": 320,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 7594,
+      "width": 320,
+      "height": 275,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "219px 0px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 7813,
+      "width": 320,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 7594,
+      "width": 320,
+      "height": 220,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "164px 0px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 7758,
+      "width": 320,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 7594,
+      "width": 320,
+      "height": 275,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "219px 0px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 7813,
+      "width": 320,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 8009,
+      "width": 1280,
+      "height": 190,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Logo",
+      "tag": "div",
+      "top": 8071,
+      "width": 728,
+      "height": 114,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Buttom Wrap",
+      "tag": "div",
+      "top": 8338,
+      "width": 1280,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 8338,
+      "width": 1280,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "All Rights",
+      "tag": "div",
+      "top": 8338,
+      "width": 320,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 26px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 8338,
+      "width": 320,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Privacy",
+      "tag": "div",
+      "top": 8338,
+      "width": 320,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 26px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 8338,
+      "width": 320,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Terms",
+      "tag": "div",
+      "top": 8338,
+      "width": 320,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 26px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 8338,
+      "width": 320,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Social Media",
+      "tag": "div",
+      "top": 8338,
+      "width": 320,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 26px",
+      "display": "flex"
+    }
+  ],
+  "links": [
+    {
+      "text": "ABOUT",
+      "href": "./about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "./project"
+    },
+    {
+      "text": "BLOG",
+      "href": "./blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "./contact"
+    },
+    {
+      "text": "siZa.",
+      "href": "./"
+    },
+    {
+      "text": "ABOUT",
+      "href": "./about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "./project"
+    },
+    {
+      "text": "BLOG",
+      "href": "./blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "./contact"
+    },
+    {
+      "text": "*AWARD 01",
+      "href": "./contact#heto"
+    },
+    {
+      "text": "*AWARD 02",
+      "href": "./contact#heto"
+    },
+    {
+      "text": "*AWARD 03",
+      "href": "./contact#heto"
+    },
+    {
+      "text": "*AWARD 04",
+      "href": "./contact#heto"
+    },
+    {
+      "text": "*AWARD 05",
+      "href": "./contact#heto"
+    },
+    {
+      "text": "JUN 15, 2026How to Create Functional Living Spaces Style",
+      "href": "./blog/how-to-create-functional-living-spaces-style"
+    },
+    {
+      "text": "July 10, 2026Choosing Perfect Materials for a Timeless Inter",
+      "href": "./blog/choosing-perfect-materials-for-a-timeless-interior"
+    },
+    {
+      "text": "JUly 20, 2026Designing Timeless Spaces for Modern Living",
+      "href": "./blog/designing-timeless-spaces-for-modern-living"
+    },
+    {
+      "text": "ABOUT",
+      "href": "./about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "./project"
+    },
+    {
+      "text": "BLOG",
+      "href": "./blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "./contact"
+    },
+    {
+      "text": "PRIVACY  POLICY",
+      "href": "./legal/privacy-policy"
+    },
+    {
+      "text": "TERMS  &  CONDITIONS",
+      "href": "./legal/terms-conditions"
+    },
+    {
+      "text": "INSTAGRAM",
+      "href": "https://www.instagram.com"
+    },
+    {
+      "text": "FACEBOOK",
+      "href": "https://www.facebook.com"
+    },
+    {
+      "text": "TWITTER",
+      "href": "https://x.com"
+    },
+    {
+      "text": "Create a free website with Framer, the website builder loved",
+      "href": "https://www.framer.com"
+    }
+  ],
+  "media": [
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5pq4CixxaCBg2w88zC52eDJOdg.png?scale-down-to=1024&width=2560&height=2784",
+      "alt": "Nav Image",
+      "w": 640,
+      "h": 696
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/05YKwnppJ9ZUmYNYG19ghMkI.png?width=168&height=48",
+      "alt": "Profile image",
+      "w": 168,
+      "h": 48
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tigCbTgjfyoKstosJSXGLsZs.png?scale-down-to=1024&width=1748&height=400",
+      "alt": "Hero Image",
+      "w": 874,
+      "h": 199
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/LXa4bL1WyPSisWXws8VdpceFaY.png?width=168&height=48",
+      "alt": "Logo",
+      "w": 168,
+      "h": 48
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/IoJelUGGQPfDrRg5B7kODmbN8.png?width=208&height=64",
+      "alt": "Logo",
+      "w": 208,
+      "h": 64
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/TR54E7253xhnqLupH2YOGR0eh4.png?width=200&height=48",
+      "alt": "Logo",
+      "w": 200,
+      "h": 48
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/VkcKgMGsVvyjRvCit8YUUw2Po4.png?width=176&height=48",
+      "alt": "Logo",
+      "w": 176,
+      "h": 48
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Uw65pZeKoK3qFs8T2aCJ6IrQ.png?width=160&height=48",
+      "alt": "Logo",
+      "w": 160,
+      "h": 48
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/LXa4bL1WyPSisWXws8VdpceFaY.png?width=168&height=48",
+      "alt": "Logo",
+      "w": 168,
+      "h": 48
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZdwJJyAwkuZ5Upn4SgNs72P4zo.png?scale-down-to=2048&width=3520&height=848",
+      "alt": "Logo",
+      "w": 1440,
+      "h": 346
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/TwDRXsWoIk1kZye7mDTdTLoEgCg.png?scale-down-to=2048&width=2880&height=2664",
+      "alt": "Background",
+      "w": 1440,
+      "h": 1331
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/LKMglOwQCIQkfPdFpfpVjm5las.png?scale-down-to=512&width=854&height=664",
+      "alt": "Work image",
+      "w": 426,
+      "h": 331
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ejbUTK3LjquKamIopgKCgI1g.png?scale-down-to=512&width=853&height=664",
+      "alt": "Work image",
+      "w": 426,
+      "h": 332
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/a1xs0VEQAX6puPvZlhginlteHO8.png?scale-down-to=512&width=855&height=664",
+      "alt": "Work image",
+      "w": 426,
+      "h": 331
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NA6qScHmC0ksxzq4eywwWu0n0U.png?scale-down-to=512&width=1448&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 103
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZkd7aeOwXFO5mbfh1b9h5tfz60.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 94
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/WhP5sGLyh4Q524v8emH6Gaqw8.png?scale-down-to=512&width=784&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 95
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/lX3mApLc1InI47PrubyWHaAHc.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 94
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tNLrhlMtG5xcatb8aTk7m2LnOK8.png?scale-down-to=512&width=808&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 92
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N3zBUBEU45TLsnGvfXpRo1Hs6DY.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/QEU4ySoMXHxMEh0QMuqnniCKM.png?scale-down-to=512&width=840&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 89
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Nd1r1jWlSRD4yjX0LlQDuagpG4.png?scale-down-to=512&width=690&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 108
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/KYcPa3nOPIaeLjhgwg607o2uF4.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/w0BIZiwSSeKOI7yIyVVReoUI.png?scale-down-to=512&width=848&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/XJ5aKRJAqZq91nCe9MQtv9kZc.png?scale-down-to=512&width=828&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 90
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/HtwsZDi1ew2Od6Y9Y9O5UU50Ttg.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/8eBzGbZBVg7J2UgSaXPIkCHGvA.png?scale-down-to=512&width=754&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 99
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NA6qScHmC0ksxzq4eywwWu0n0U.png?scale-down-to=512&width=1448&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 103
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZkd7aeOwXFO5mbfh1b9h5tfz60.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 94
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/WhP5sGLyh4Q524v8emH6Gaqw8.png?scale-down-to=512&width=784&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 95
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/lX3mApLc1InI47PrubyWHaAHc.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 94
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tNLrhlMtG5xcatb8aTk7m2LnOK8.png?scale-down-to=512&width=808&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 92
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N3zBUBEU45TLsnGvfXpRo1Hs6DY.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/QEU4ySoMXHxMEh0QMuqnniCKM.png?scale-down-to=512&width=840&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 89
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Nd1r1jWlSRD4yjX0LlQDuagpG4.png?scale-down-to=512&width=690&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 108
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/KYcPa3nOPIaeLjhgwg607o2uF4.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/w0BIZiwSSeKOI7yIyVVReoUI.png?scale-down-to=512&width=848&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/XJ5aKRJAqZq91nCe9MQtv9kZc.png?scale-down-to=512&width=828&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 90
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/HtwsZDi1ew2Od6Y9Y9O5UU50Ttg.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/8eBzGbZBVg7J2UgSaXPIkCHGvA.png?scale-down-to=512&width=754&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 99
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NA6qScHmC0ksxzq4eywwWu0n0U.png?scale-down-to=512&width=1448&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 103
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZkd7aeOwXFO5mbfh1b9h5tfz60.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 94
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/WhP5sGLyh4Q524v8emH6Gaqw8.png?scale-down-to=512&width=784&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 95
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/lX3mApLc1InI47PrubyWHaAHc.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 94
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tNLrhlMtG5xcatb8aTk7m2LnOK8.png?scale-down-to=512&width=808&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 92
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N3zBUBEU45TLsnGvfXpRo1Hs6DY.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/QEU4ySoMXHxMEh0QMuqnniCKM.png?scale-down-to=512&width=840&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 89
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Nd1r1jWlSRD4yjX0LlQDuagpG4.png?scale-down-to=512&width=690&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 108
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/KYcPa3nOPIaeLjhgwg607o2uF4.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/w0BIZiwSSeKOI7yIyVVReoUI.png?scale-down-to=512&width=848&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/XJ5aKRJAqZq91nCe9MQtv9kZc.png?scale-down-to=512&width=828&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 90
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/HtwsZDi1ew2Od6Y9Y9O5UU50Ttg.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/8eBzGbZBVg7J2UgSaXPIkCHGvA.png?scale-down-to=512&width=754&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 99
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NA6qScHmC0ksxzq4eywwWu0n0U.png?scale-down-to=512&width=1448&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 103
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/DZkd7aeOwXFO5mbfh1b9h5tfz60.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 94
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/WhP5sGLyh4Q524v8emH6Gaqw8.png?scale-down-to=512&width=784&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 95
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/lX3mApLc1InI47PrubyWHaAHc.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/65BbxnHPqAtcxVA4gK6FvtAT2A.png?scale-down-to=512&width=1592&height=400",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 94
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tNLrhlMtG5xcatb8aTk7m2LnOK8.png?scale-down-to=512&width=808&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 92
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N3zBUBEU45TLsnGvfXpRo1Hs6DY.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/QEU4ySoMXHxMEh0QMuqnniCKM.png?scale-down-to=512&width=840&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 89
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/Nd1r1jWlSRD4yjX0LlQDuagpG4.png?scale-down-to=512&width=690&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 108
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/KYcPa3nOPIaeLjhgwg607o2uF4.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/w0BIZiwSSeKOI7yIyVVReoUI.png?scale-down-to=512&width=848&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 88
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/XJ5aKRJAqZq91nCe9MQtv9kZc.png?scale-down-to=512&width=828&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 90
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/HtwsZDi1ew2Od6Y9Y9O5UU50Ttg.png?width=768&height=960",
+      "alt": "Team Image",
+      "w": 374,
+      "h": 468
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/8eBzGbZBVg7J2UgSaXPIkCHGvA.png?scale-down-to=512&width=754&height=200",
+      "alt": "Nmae",
+      "w": 374,
+      "h": 99
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg?arrow=left",
+      "alt": "Back Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg?arrow=right",
+      "alt": "Next Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N4xWETXWH1ww5AQE9OA7BRRpAg.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/7IHoesXa2ZttPnV1aNCaj2N6c6g.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JRkoddRXFSd6wqHeLD7eNncQqI.png?width=288&height=288",
+      "alt": "Profile Image",
+      "w": 288,
+      "h": 288
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/T1xuBzhwjKxVlF7UFONSrx23lk.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ZgmLTiqavdGS3FLJucGpNxhhxU.png?width=160&height=160",
+      "alt": "Profile Image",
+      "w": 160,
+      "h": 160
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N4xWETXWH1ww5AQE9OA7BRRpAg.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/7IHoesXa2ZttPnV1aNCaj2N6c6g.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JRkoddRXFSd6wqHeLD7eNncQqI.png?width=288&height=288",
+      "alt": "Profile Image",
+      "w": 288,
+      "h": 288
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/T1xuBzhwjKxVlF7UFONSrx23lk.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ZgmLTiqavdGS3FLJucGpNxhhxU.png?width=160&height=160",
+      "alt": "Profile Image",
+      "w": 160,
+      "h": 160
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N4xWETXWH1ww5AQE9OA7BRRpAg.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/7IHoesXa2ZttPnV1aNCaj2N6c6g.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JRkoddRXFSd6wqHeLD7eNncQqI.png?width=288&height=288",
+      "alt": "Profile Image",
+      "w": 288,
+      "h": 288
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/T1xuBzhwjKxVlF7UFONSrx23lk.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ZgmLTiqavdGS3FLJucGpNxhhxU.png?width=160&height=160",
+      "alt": "Profile Image",
+      "w": 160,
+      "h": 160
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/N4xWETXWH1ww5AQE9OA7BRRpAg.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/7IHoesXa2ZttPnV1aNCaj2N6c6g.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/JRkoddRXFSd6wqHeLD7eNncQqI.png?width=288&height=288",
+      "alt": "Profile Image",
+      "w": 288,
+      "h": 288
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/T1xuBzhwjKxVlF7UFONSrx23lk.png?width=320&height=320",
+      "alt": "Profile Image",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ZgmLTiqavdGS3FLJucGpNxhhxU.png?width=160&height=160",
+      "alt": "Profile Image",
+      "w": 160,
+      "h": 160
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg?arrow=left",
+      "alt": "Back Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg?arrow=right",
+      "alt": "Next Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5gaADhoyHBNS2pECySGIJs3VRA.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NvhKmZQDB0Ser4dK0xLS9YJoFQ.png?scale-down-to=1024&width=1086&height=1448",
+      "alt": "Card Image",
+      "w": 444,
+      "h": 592
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/zzhR1XOv2JKRjyifYnIdSSc9AE.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5gaADhoyHBNS2pECySGIJs3VRA.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NvhKmZQDB0Ser4dK0xLS9YJoFQ.png?scale-down-to=1024&width=1086&height=1448",
+      "alt": "Card Image",
+      "w": 444,
+      "h": 592
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/zzhR1XOv2JKRjyifYnIdSSc9AE.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5gaADhoyHBNS2pECySGIJs3VRA.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NvhKmZQDB0Ser4dK0xLS9YJoFQ.png?scale-down-to=1024&width=1086&height=1448",
+      "alt": "Card Image",
+      "w": 444,
+      "h": 592
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/zzhR1XOv2JKRjyifYnIdSSc9AE.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/5gaADhoyHBNS2pECySGIJs3VRA.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/NvhKmZQDB0Ser4dK0xLS9YJoFQ.png?scale-down-to=1024&width=1086&height=1448",
+      "alt": "Card Image",
+      "w": 444,
+      "h": 592
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/zzhR1XOv2JKRjyifYnIdSSc9AE.png?width=320&height=320",
+      "alt": "",
+      "w": 320,
+      "h": 320
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/SLiQF8IhSI39dPiPxjmWTjab3CI.png?width=480&height=480",
+      "alt": "",
+      "w": 480,
+      "h": 480
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg?arrow=left",
+      "alt": "Back Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg?arrow=right",
+      "alt": "Next Arrow",
+      "w": 40,
+      "h": 40
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/3nrkY1dPNyU7AkzYffZoeXuWY.png?scale-down-to=1024&width=1516&height=2288",
+      "alt": "",
+      "w": 421,
+      "h": 636
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/ddeDaCiqFCTeTkGoizpOM7Xl4o.png?scale-down-to=512&width=1684&height=1680",
+      "alt": "Blog Image",
+      "w": 421,
+      "h": 420
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/3nrkY1dPNyU7AkzYffZoeXuWY.png?scale-down-to=1024&width=1516&height=2288",
+      "alt": "",
+      "w": 421,
+      "h": 636
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/aNRedHzt0bx1CtGCsWmQ8Jz8IEA.png?scale-down-to=512&width=1684&height=1680",
+      "alt": "Blog Image",
+      "w": 421,
+      "h": 420
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/3nrkY1dPNyU7AkzYffZoeXuWY.png?scale-down-to=1024&width=1516&height=2288",
+      "alt": "",
+      "w": 421,
+      "h": 636
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/hRdF0kGBHS87a3NxMk7VdT6F8.png?scale-down-to=512&width=1684&height=1680",
+      "alt": "Blog Image",
+      "w": 421,
+      "h": 420
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/GzyFwVAUGaadD9333bSgEp7zjk.png?width=1361&height=766",
+      "alt": "Background",
+      "w": 1440,
+      "h": 810
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/1mMC0RSqNKZgwHx9VeLGdOoCP60.png?width=774&height=322",
+      "alt": "Logo",
+      "w": 1213,
+      "h": 505
+    },
+    {
+      "type": "video",
+      "src": "https://framerusercontent.com/assets/BOIfHkNIgIOutY5y6yNirOD4aC0.mp4",
+      "autoplay": true,
+      "loop": true,
+      "muted": true
+    }
+  ],
+  "animationsRunning": 0
+}

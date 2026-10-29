@@ -1,0 +1,2017 @@
+{
+  "page": {
+    "title": "Interior Design Agency Framer Template - Interio",
+    "lang": "en",
+    "scrollHeight": 6652,
+    "bodyBackground": "rgb(245, 245, 245)"
+  },
+  "cssVariables": {
+    "--token-ac0c662b-4250-4586-9bed-0f686bea2a4e": "#b3b3b3",
+    "--token-68c912bd-8c25-4cee-bbc8-dc294bdf3289": "#f5f5f5",
+    "--token-05f1db4d-8688-46b3-bf5f-b74ebb2a836f": "#666",
+    "--token-88eff137-1274-4a36-b366-ef51c420159a": "#000",
+    "--token-e50dac00-7054-4d7a-a43e-c46ce7de76fb": "#ccc",
+    "--token-7cc43143-e5c7-467f-8763-76424c3834ea": "#fff",
+    "--token-3e0285fd-4a85-479f-9c05-6286ae1211c6": "#191919",
+    "--token-6cae9d17-97cf-4de5-bfc5-d57af2839c4a": "#f2f2f2",
+    "--token-0c86702d-68fd-448c-9acd-a93eb7230d97": "#e6e6e6",
+    "--token-de5fb930-8f11-483a-9194-6cda4c8e5176": "#ccc",
+    "--framer-will-change-override": "none",
+    "--framer-will-change-filter-override": "none"
+  },
+  "fontFaces": [
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFqHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFOHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFiHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFmHP7Tc.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "italic",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyB8hwUxId8gMEwZKFeHPw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "500",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwRGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwTGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwSGFWfOw.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Geist",
+      "weight": "700",
+      "style": "normal",
+      "src": "url(\"https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2\") format(\"woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/GrgcKwrN6d3Uz8EwcLHZxwEfC4.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "400",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/hyOgCu0Xnghbimh0pE8QTvtt2AU.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/NeGmSOXrPBfEFIy5YZeHq17LEDA.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/oYaAX5himiTPYuN8vLWnqBbfD2s.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/lEJLP4R0yuCaMCjSXYHtJw72M.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/cRJyLNuTJR5jbyKzGi33wU9cqIQ.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/yDtI2UI8XcEg1W2je9XPN3Noo.woff2\")"
+    },
+    {
+      "family": "Inter",
+      "weight": "600",
+      "style": "normal",
+      "src": "url(\"https://framerusercontent.com/assets/A0Wcc7NgXMjUuFdquHDrIZpzZw0.woff2\")"
+    },
+    {
+      "family": "\"Geist Placeholder\"",
+      "weight": "",
+      "style": "",
+      "src": "local(\"Arial\")"
+    },
+    {
+      "family": "\"Inter Placeholder\"",
+      "weight": "",
+      "style": "",
+      "src": "local(\"Arial\")"
+    }
+  ],
+  "textStyles": [
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 48px | 500 | 48px | -1.44px | none",
+      "count": 52,
+      "color": "rgb(255, 255, 255)",
+      "sample": "H",
+      "layer": "Header"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 12px | 500 | 18px | normal | none",
+      "count": 27,
+      "color": "rgb(102, 102, 102)",
+      "sample": "PROJECT DETAILS //",
+      "layer": "Nav item"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 16px | 400 | 24px | normal | none",
+      "count": 13,
+      "color": "rgb(102, 102, 102)",
+      "sample": "RESIDENTIAL INTERIOR",
+      "layer": "RESIDENTIAL INTERIOR"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 20px | 500 | 26px | normal | none",
+      "count": 8,
+      "color": "rgb(255, 255, 255)",
+      "sample": "ABOUT",
+      "layer": "Text"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 10px | 500 | 13px | normal | none",
+      "count": 8,
+      "color": "rgb(179, 179, 179)",
+      "sample": "4.9/5",
+      "layer": "Nav item"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 20px | 500 | 28px | normal | none",
+      "count": 7,
+      "color": "rgb(255, 255, 255)",
+      "sample": "siZa.",
+      "layer": "INTERIO®"
+    },
+    {
+      "value": "Geist, \"Geist Placeholder\", sans-serif | 24px | 500 | 31.2px | normal | none",
+      "count": 3,
+      "color": "rgb(0, 0, 0)",
+      "sample": "Home Clean",
+      "layer": "Executive Office Workspace"
+    },
+    {
+      "value": "sans-serif | 12px | 400 | normal | normal | none",
+      "count": 1,
+      "color": "rgb(0, 0, 238)",
+      "sample": "Create a free website with Framer, the website b",
+      "layer": "Content"
+    }
+  ],
+  "textColors": [
+    {
+      "value": "rgb(0, 0, 0)",
+      "count": 50
+    },
+    {
+      "value": "rgb(102, 102, 102)",
+      "count": 24
+    },
+    {
+      "value": "rgb(255, 255, 255)",
+      "count": 19
+    },
+    {
+      "value": "rgb(179, 179, 179)",
+      "count": 13
+    },
+    {
+      "value": "rgb(25, 25, 25)",
+      "count": 12
+    },
+    {
+      "value": "rgb(0, 0, 238)",
+      "count": 1
+    }
+  ],
+  "backgrounds": [
+    {
+      "value": "rgba(255, 255, 255, 0.2)",
+      "count": 32,
+      "layer": "Line"
+    },
+    {
+      "value": "rgb(0, 0, 0)",
+      "count": 18,
+      "layer": "Phone"
+    },
+    {
+      "value": "rgb(255, 255, 255)",
+      "count": 16,
+      "layer": "Line"
+    },
+    {
+      "value": "rgb(245, 245, 245)",
+      "count": 2,
+      "layer": null
+    }
+  ],
+  "borders": [],
+  "radii": [
+    {
+      "value": "8px",
+      "count": 12
+    },
+    {
+      "value": "10px",
+      "count": 3
+    },
+    {
+      "value": "11px",
+      "count": 2
+    },
+    {
+      "value": "100px",
+      "count": 1
+    }
+  ],
+  "shadows": [
+    {
+      "value": "rgb(0, 0, 0) 0px 0px 0px 1px inset",
+      "count": 2
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.17) 0px 0.602187px 1.56569px -1.5px, rgba(0, 0, 0, 0.14) 0px 2.28853px 5.95019px -3px, rgba(0, 0, 0, 0.02) 0px 10px 26px -4.5px",
+      "count": 1
+    }
+  ],
+  "transitions": [],
+  "gaps": [
+    {
+      "value": "0px",
+      "count": 35
+    },
+    {
+      "value": "10px",
+      "count": 35
+    },
+    {
+      "value": "3px",
+      "count": 12
+    },
+    {
+      "value": "20px",
+      "count": 8
+    },
+    {
+      "value": "8px",
+      "count": 7
+    },
+    {
+      "value": "16px",
+      "count": 6
+    },
+    {
+      "value": "12px",
+      "count": 5
+    },
+    {
+      "value": "32px",
+      "count": 5
+    },
+    {
+      "value": "44px",
+      "count": 4
+    },
+    {
+      "value": "24px",
+      "count": 3
+    },
+    {
+      "value": "4px",
+      "count": 2
+    },
+    {
+      "value": "104px",
+      "count": 1
+    },
+    {
+      "value": "22px",
+      "count": 1
+    },
+    {
+      "value": "40px",
+      "count": 1
+    },
+    {
+      "value": "64px",
+      "count": 1
+    },
+    {
+      "value": "18px",
+      "count": 1
+    }
+  ],
+  "layers": [
+    {
+      "name": "Phone",
+      "tag": "nav",
+      "top": -70,
+      "width": 375,
+      "height": 84,
+      "background": "rgb(0, 0, 0)",
+      "padding": "20px",
+      "display": "flex"
+    },
+    {
+      "name": "Dropdown",
+      "tag": "div",
+      "top": -776,
+      "width": 375,
+      "height": 590,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrapper",
+      "tag": "div",
+      "top": -776,
+      "width": 321,
+      "height": 360,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": -776,
+      "width": 321,
+      "height": 360,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -776,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -686,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -596,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": -506,
+      "width": 321,
+      "height": 90,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "32px 24px 32px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": -416,
+      "width": 375,
+      "height": 230,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": -416,
+      "width": 375,
+      "height": 230,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": -50,
+      "width": 335,
+      "height": 44,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": " Icon Wrap",
+      "tag": "div",
+      "top": -50,
+      "width": 44,
+      "height": 44,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Hero Area",
+      "tag": "div",
+      "top": 0,
+      "width": 375,
+      "height": 394,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Hero Section",
+      "tag": "header",
+      "top": 0,
+      "width": 375,
+      "height": 394,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Glow",
+      "tag": "div",
+      "top": 2,
+      "width": 375,
+      "height": 390,
+      "background": "rgb(0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Background",
+      "tag": "div",
+      "top": 0,
+      "width": 375,
+      "height": 394,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 0,
+      "width": 375,
+      "height": 394,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "200px 20px 76px",
+      "display": "flex"
+    },
+    {
+      "name": "Line wrap",
+      "tag": "div",
+      "top": 0,
+      "width": 375,
+      "height": 394,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 875,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Line",
+      "tag": "div",
+      "top": 0,
+      "width": 1,
+      "height": 875,
+      "background": "rgba(255, 255, 255, 0.2)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Header",
+      "tag": "div",
+      "top": 200,
+      "width": 335,
+      "height": 118,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Subtext",
+      "tag": "div",
+      "top": 200,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "12px 15px 12px 18px",
+      "display": "flex"
+    },
+    {
+      "name": "6",
+      "tag": "section",
+      "top": 0,
+      "width": 375,
+      "height": 394,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": -1,
+      "width": 375,
+      "height": 396,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Top",
+      "tag": "div",
+      "top": -1,
+      "width": 375,
+      "height": 198,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Bottom",
+      "tag": "div",
+      "top": 197,
+      "width": 375,
+      "height": 198,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Project Details Section",
+      "tag": "section",
+      "top": 394,
+      "width": 375,
+      "height": 1152,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 454,
+      "width": 335,
+      "height": 1032,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 454,
+      "width": 335,
+      "height": 112,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 492,
+      "width": 335,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 492,
+      "width": 335,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 610,
+      "width": 335,
+      "height": 628,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 610,
+      "width": 335,
+      "height": 628,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 610,
+      "width": 335,
+      "height": 628,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Modern Luxury Residence is a bespoke residential interior designed to combine timeless elegance with everyday functionality. Featuring premium materials, custom furnishings, and thoughtfully planned spaces, the project delivers a refined living experience tailored to the client's lifestyle.",
+      "tag": "div",
+      "top": 610,
+      "width": 335,
+      "height": 260,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details Wrap",
+      "tag": "div",
+      "top": 902,
+      "width": 335,
+      "height": 336,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 902,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 958,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 1014,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 1070,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 1126,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 1182,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 1282,
+      "width": 335,
+      "height": 204,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 1282,
+      "width": 335,
+      "height": 204,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Challenge Section",
+      "tag": "section",
+      "top": 1546,
+      "width": 375,
+      "height": 618,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 1606,
+      "width": 335,
+      "height": 498,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 1606,
+      "width": 335,
+      "height": 112,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 1644,
+      "width": 335,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 1644,
+      "width": 335,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 1762,
+      "width": 335,
+      "height": 342,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 1762,
+      "width": 335,
+      "height": 342,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 1762,
+      "width": 335,
+      "height": 342,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Modern Luxury Residence is a bespoke residential interior designed to combine timeless elegance with everyday functionality. Featuring premium materials, custom furnishings, and thoughtfully planned spaces, the project delivers a refined living experience tailored to the client's lifestyle.",
+      "tag": "div",
+      "top": 1762,
+      "width": 335,
+      "height": 104,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 1898,
+      "width": 335,
+      "height": 206,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 1898,
+      "width": 335,
+      "height": 206,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Solution Section",
+      "tag": "section",
+      "top": 2164,
+      "width": 375,
+      "height": 1044,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 2224,
+      "width": 335,
+      "height": 924,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 2224,
+      "width": 335,
+      "height": 112,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 2262,
+      "width": 335,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 2262,
+      "width": 335,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 2380,
+      "width": 335,
+      "height": 520,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 2380,
+      "width": 335,
+      "height": 520,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 2380,
+      "width": 335,
+      "height": 520,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Modern Luxury Residence is a bespoke residential interior designed to combine timeless elegance with everyday functionality. Featuring premium materials, custom furnishings, and thoughtfully planned spaces, the project delivers a refined living experience tailored to the client's lifestyle.",
+      "tag": "div",
+      "top": 2380,
+      "width": 335,
+      "height": 104,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Modern Luxury Residence is a bespoke residential interior designed to combine timeless elegance with everyday functionality. Featuring premium materials, custom furnishings, and thoughtfully planned spaces, the project delivers a refined living experience tailored to the client's lifestyle.",
+      "tag": "div",
+      "top": 2516,
+      "width": 335,
+      "height": 384,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 2944,
+      "width": 335,
+      "height": 204,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 2944,
+      "width": 335,
+      "height": 204,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Highlights Section",
+      "tag": "section",
+      "top": 3208,
+      "width": 375,
+      "height": 874,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 3268,
+      "width": 335,
+      "height": 754,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 3268,
+      "width": 335,
+      "height": 112,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 3306,
+      "width": 335,
+      "height": 74,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 3306,
+      "width": 335,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 3424,
+      "width": 335,
+      "height": 598,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 3424,
+      "width": 335,
+      "height": 598,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 3424,
+      "width": 335,
+      "height": 598,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Modern Luxury Residence is a bespoke residential interior designed to combine timeless elegance with everyday functionality. Featuring premium materials, custom furnishings, and thoughtfully planned spaces, the project delivers a refined living experience tailored to the client's lifestyle.",
+      "tag": "div",
+      "top": 3424,
+      "width": 335,
+      "height": 156,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details Wrap",
+      "tag": "div",
+      "top": 3612,
+      "width": 335,
+      "height": 336,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 3612,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 3668,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 3724,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 3780,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 3836,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Details",
+      "tag": "div",
+      "top": 3892,
+      "width": 335,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Variant 1",
+      "tag": "a",
+      "top": 3980,
+      "width": 335,
+      "height": 42,
+      "background": "rgb(0, 0, 0)",
+      "padding": "12px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Project Section",
+      "tag": "section",
+      "top": 4082,
+      "width": 375,
+      "height": 1888,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "60px 20px",
+      "display": "flex"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 4142,
+      "width": 335,
+      "height": 1768,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Heading",
+      "tag": "div",
+      "top": 4142,
+      "width": 335,
+      "height": 92,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Text Wrap",
+      "tag": "div",
+      "top": 4168,
+      "width": 335,
+      "height": 66,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "SERVICES",
+      "tag": "div",
+      "top": 4168,
+      "width": 335,
+      "height": 48,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 4314,
+      "width": 335,
+      "height": 1636,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Row",
+      "tag": "div",
+      "top": 4314,
+      "width": 335,
+      "height": 1636,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 4314,
+      "width": 335,
+      "height": 495,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 16px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4390,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 4390,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4390,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 4825,
+      "width": 335,
+      "height": 554,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 16px",
+      "display": "flex"
+    },
+    {
+      "name": "Locations",
+      "tag": "div",
+      "top": 4849,
+      "width": 303,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Nav item",
+      "tag": "div",
+      "top": 4849,
+      "width": 152,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 4929,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 4929,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 4929,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Executive Office Workspace",
+      "tag": "div",
+      "top": 5293,
+      "width": 303,
+      "height": 62,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Small Card",
+      "tag": "div",
+      "top": 5395,
+      "width": 335,
+      "height": 554,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "24px 16px",
+      "display": "flex"
+    },
+    {
+      "name": "Locations",
+      "tag": "div",
+      "top": 5419,
+      "width": 303,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Nav item",
+      "tag": "div",
+      "top": 5419,
+      "width": 152,
+      "height": 56,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Image Wrap",
+      "tag": "div",
+      "top": 5499,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "BG",
+      "tag": "div",
+      "top": 5499,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Image",
+      "tag": "div",
+      "top": 5499,
+      "width": 303,
+      "height": 340,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Executive Office Workspace",
+      "tag": "div",
+      "top": 5863,
+      "width": 303,
+      "height": 62,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Phone",
+      "tag": "footer",
+      "top": 5969,
+      "width": 375,
+      "height": 682,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "48px 20px 0px",
+      "display": "flex"
+    },
+    {
+      "name": "Background",
+      "tag": "div",
+      "top": 5969,
+      "width": 375,
+      "height": 682,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "block"
+    },
+    {
+      "name": "Container",
+      "tag": "div",
+      "top": 6017,
+      "width": 335,
+      "height": 634,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu Wrap",
+      "tag": "div",
+      "top": 6017,
+      "width": 335,
+      "height": 248,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 6017,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 6017,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 6083,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 6083,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 6149,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 6149,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Menu",
+      "tag": "div",
+      "top": 6215,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Links",
+      "tag": "div",
+      "top": 6215,
+      "width": 335,
+      "height": 50,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 24px",
+      "display": "flex"
+    },
+    {
+      "name": "Card Content",
+      "tag": "div",
+      "top": 6329,
+      "width": 335,
+      "height": 52,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Buttom Wrap",
+      "tag": "div",
+      "top": 6446,
+      "width": 335,
+      "height": 206,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Content",
+      "tag": "div",
+      "top": 6446,
+      "width": 335,
+      "height": 206,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "All Rights",
+      "tag": "div",
+      "top": 6446,
+      "width": 335,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 6446,
+      "width": 335,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Privacy",
+      "tag": "div",
+      "top": 6491,
+      "width": 335,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 6491,
+      "width": 335,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Terms",
+      "tag": "div",
+      "top": 6536,
+      "width": 335,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 6536,
+      "width": 335,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    },
+    {
+      "name": "Social Media",
+      "tag": "div",
+      "top": 6581,
+      "width": 335,
+      "height": 71,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "0px 0px 26px",
+      "display": "flex"
+    },
+    {
+      "name": "Main",
+      "tag": "div",
+      "top": 6581,
+      "width": 335,
+      "height": 45,
+      "background": "rgba(0, 0, 0, 0)",
+      "padding": "16px 12px",
+      "display": "flex"
+    }
+  ],
+  "links": [
+    {
+      "text": "ABOUT",
+      "href": "../about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "../project"
+    },
+    {
+      "text": "BLOG",
+      "href": "../blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "../contact"
+    },
+    {
+      "text": "siZa.",
+      "href": "../"
+    },
+    {
+      "text": "START PROJECT",
+      "href": "../project"
+    },
+    {
+      "text": "New York, USA( 2026)Home Clean",
+      "href": "./home-clean#hero"
+    },
+    {
+      "text": "Los Angeles, USA( 2026)Executive Office Workspace",
+      "href": "./executive-office-workspace#hero"
+    },
+    {
+      "text": "Los Angeles, USA( 2026)Executive Office Workspace",
+      "href": "./boutique-café-interior#hero"
+    },
+    {
+      "text": "ABOUT",
+      "href": "../about"
+    },
+    {
+      "text": "PROJECT",
+      "href": "../project"
+    },
+    {
+      "text": "BLOG",
+      "href": "../blog"
+    },
+    {
+      "text": "CONTACT",
+      "href": "../contact"
+    },
+    {
+      "text": "PRIVACY  POLICY",
+      "href": "../legal/privacy-policy"
+    },
+    {
+      "text": "TERMS  &  CONDITIONS",
+      "href": "../legal/terms-conditions"
+    },
+    {
+      "text": "INSTAGRAM",
+      "href": "https://www.instagram.com"
+    },
+    {
+      "text": "FACEBOOK",
+      "href": "https://www.facebook.com"
+    },
+    {
+      "text": "TWITTER",
+      "href": "https://x.com"
+    },
+    {
+      "text": "Create a free website with Framer, the website builder loved",
+      "href": "https://www.framer.com"
+    }
+  ],
+  "media": [
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/C7jW978YB72otWVXn4wxBY9Je4.png?scale-down-to=512&width=2560&height=1440",
+      "alt": "Nav Image",
+      "w": 375,
+      "h": 210
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/2dLkYzCsvadOSl9vFvLYWx8Gk.jpg?scale-down-to=1024&width=2268&height=4032",
+      "alt": "white and black kitchen cabinet",
+      "w": 375,
+      "h": 666
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/4F6QJoiZjh1aGtKBVXGqwWW76U.png?scale-down-to=512&width=3840&height=2340",
+      "alt": "",
+      "w": 335,
+      "h": 204
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tYs644EUpo2CSHwhuxEPm8Cldc.png?scale-down-to=512&width=3840&height=2340",
+      "alt": "Details Image",
+      "w": 335,
+      "h": 204
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/cVetAXPMNTwEkqRtW5ZmIDEg1Q.png?scale-down-to=512&width=3520&height=2160",
+      "alt": "",
+      "w": 335,
+      "h": 205
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/GELapW1jMftx8KLHJSwbXqsakw.png?scale-down-to=512&width=3520&height=2160",
+      "alt": "Challenge Image",
+      "w": 335,
+      "h": 205
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/4F6QJoiZjh1aGtKBVXGqwWW76U.png?scale-down-to=512&width=3840&height=2340",
+      "alt": "",
+      "w": 335,
+      "h": 204
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/tYs644EUpo2CSHwhuxEPm8Cldc.png?scale-down-to=512&width=3840&height=2340",
+      "alt": "Details Image",
+      "w": 335,
+      "h": 204
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 503,
+      "h": 563
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/2dLkYzCsvadOSl9vFvLYWx8Gk.jpg?scale-down-to=1024&width=2268&height=4032",
+      "alt": "white and black kitchen cabinet",
+      "w": 375,
+      "h": 666
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 503,
+      "h": 563
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/aNRedHzt0bx1CtGCsWmQ8Jz8IEA.png?scale-down-to=512&width=1684&height=1680",
+      "alt": "Project Image",
+      "w": 303,
+      "h": 302
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/M26KmLQKhdQSpC3gLR8h6ua1WY.png?scale-down-to=1024&width=1516&height=1696",
+      "alt": "",
+      "w": 503,
+      "h": 563
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/aNRedHzt0bx1CtGCsWmQ8Jz8IEA.png?scale-down-to=512&width=1684&height=1680",
+      "alt": "Project Image",
+      "w": 303,
+      "h": 302
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/yBVjbVAuBJFp8H1ff8ujMTX8M.png?scale-down-to=2048&width=700&height=2200",
+      "alt": "Background",
+      "w": 375,
+      "h": 1179
+    },
+    {
+      "type": "img",
+      "src": "https://framerusercontent.com/images/1mMC0RSqNKZgwHx9VeLGdOoCP60.png?scale-down-to=512&width=774&height=322",
+      "alt": "Logo",
+      "w": 335,
+      "h": 139
+    }
+  ],
+  "animationsRunning": 0
+}

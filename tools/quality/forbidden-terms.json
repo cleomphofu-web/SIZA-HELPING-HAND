@@ -1,13 +1,13 @@
 {
   "scanDirs": ["src", "supabase", "tests", "e2e", "scripts", "public"],
-  "ignoreDirs": ["node_modules", ".next", "docs", "coverage", "public/assets/images", "public/assets/videos"],
-  "ignoreFiles": ["src/content/copy.generated.ts"],
+  "ignoreDirs": ["node_modules", ".next", "docs", "coverage", "public/assets/images", "public/assets/videos", "supabase/.temp"],
+  "ignoreFiles": ["src/content/copy.generated.ts", "supabase/migrations/0001_init.sql", "supabase/migrations/0002_helper_terminology.sql"],
   "rules": [
     { "id": "old-term-cleaner", "pattern": "\\bcleaners?\\b", "flags": "i", "message": "Use \"helper\" in code, routes and UI (helper_details, /helper/...)." },
     { "id": "template-branding", "pattern": "interio|interior design agency|framer template", "flags": "i", "message": "Template branding must not appear in the product." },
     { "id": "template-leftovers", "pattern": "PLACEHOLDER REQUESTS|Amsterdam|Barcelona|New York|Los Angeles|Malibu|Boutique Caf", "flags": "", "message": "Template placeholder content." },
     { "id": "hotlinked-assets", "pattern": "framerusercontent\\.com|images\\.unsplash\\.com|source\\.unsplash\\.com|picsum\\.photos", "flags": "i", "message": "No hotlinked images. Put approved files in public/assets/images and register them in docs/ASSET_MANIFEST.md." },
-    { "id": "old-copy", "pattern": "request a clean\\b|become a cleaner|first month free|\\/book\\b|\\/cleaners\\/apply", "flags": "i", "message": "Old direction: use /request, /apply, \"Request a helper\", first JOB free then R{subscriptionPrice} per {subscriptionDays} days." },
+    { "id": "old-copy", "pattern": "request a clean\\b|become a cleaner|first month free|(?<!\\/app)\\/book\\b|\\/cleaners\\/apply", "flags": "i", "message": "Old direction: use /request, /apply, \"Request a helper\", first JOB free then R{subscriptionPrice} per {subscriptionDays} days." },
     { "id": "banned-claims", "pattern": "guarantee[ds]?\\b|\\binsured\\b|background[- ]check|secure payment|\\bescrow\\b|100% safe|you choose", "flags": "i", "message": "Banned claim. Claims live in docs/copy-deck.md claim.* keys and are shown only when enforced." },
     { "id": "inline-site-text", "pattern": "\\bRequest a helper\\b|\\bApply to be a helper\\b", "flags": "", "message": "Site text must come from the copy deck via t(\"...\"), not be typed in components.", "onlyIn": ["src/components", "src/app"] }
   ],

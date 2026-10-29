@@ -1,0 +1,18 @@
+{
+  "entry": [
+    "src/**/*.{ts,tsx}",
+    "scripts/*.mjs",
+    "tools/**/*.mjs"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "tests/**/*.{ts,tsx}",
+    "src/**/*.css"
+  ],
+  "ignore": [
+    "tools/**",
+    ".claude/**",
+    "docs/**",
+    "scripts/**"
+  ]
+}

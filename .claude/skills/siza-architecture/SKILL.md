@@ -18,13 +18,13 @@ metadata:
 src/
   app/
     (public)/        landing, how-it-works, privacy, terms
-    (host)/host/...  host area, own layout
-    (cleaner)/cleaner/...  cleaner area, own layout (never share state with host)
+    (host)/app/...   host area, own layout; `/signup` and `/login` sit here
+    (helper)/helper/... helper area, own layout (never share state with host)
     (admin)/admin/...
     api/webhooks/... external callbacks only (raw body)
   server/            ALWAYS `import 'server-only'`
     db/              the only place that creates Supabase clients (service-role)
-    services/        business logic (booking, offers, cleaners, subscription, reports)
+    services/        business logic and discard-only mock services (booking, offers, helpers, subscription, reports)
     policies/        authorize(user, action, resource) per role + ownership
     views/           redacted DTO builders by role and booking state
     payments/        PaymentProvider interface (+ Phase B adapters)
