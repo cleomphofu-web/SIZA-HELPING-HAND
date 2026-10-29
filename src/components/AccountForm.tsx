@@ -6,12 +6,6 @@ import { TurnstileWidget } from "@/components/TurnstileWidget";
 
 type AccountFormProps = { mode: "signup" | "login"; defaultRole?: "host" | "helper"; turnstileSiteKey: string };
 
-declare global {
-  interface Window {
-    turnstile?: { reset: () => void };
-  }
-}
-
 export function AccountForm({ mode, defaultRole = "host", turnstileSiteKey }: AccountFormProps) {
   const signup = mode === "signup";
   const [message, setMessage] = useState("");
@@ -22,18 +16,28 @@ export function AccountForm({ mode, defaultRole = "host", turnstileSiteKey }: Ac
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (pending || ((signup || challengeRequired) && !turnstileSiteKey)) return;
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const token = formData.get("turnstileToken");
+    if ((signup || challengeRequired) && turnstileSiteKey && (!token || String(token).trim() === "")) {
+      setMessage("Please complete the verification check before continuing.");
+      return;
+    }
     setPending(true);
     setMessage("");
     try {
       const response = await fetch(signup ? "/api/auth/signup" : "/api/auth/login", {
         method: "POST",
-        body: new FormData(event.currentTarget),
+        body: formData,
         headers: { Accept: "application/json" },
         credentials: "same-origin",
       });
       const result = await response.json() as { ok?: boolean; data?: { destination?: string }; error?: { code?: string; message?: string } };
-      if (result.error?.code === "challenge_required") setChallengeRequired(true);
-      else window.turnstile?.reset();
+      if (result.error?.code === "challenge_required") {
+        setChallengeRequired(true);
+      } else {
+        try { window.turnstile?.reset(); } catch { /* ignore */ }
+      }
       if (signup && response.status === 202 && result.ok) {
         setComplete(true);
         setMessage(t("account.success"));
