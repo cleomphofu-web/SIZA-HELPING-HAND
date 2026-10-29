@@ -487,6 +487,10 @@ host.home.recent_requests: Recent requests
 host.home.loading: Loading your requests…
 host.home.empty_requests: No requests yet. Start by telling us what you need.
 host.home.view_requests: View all requests
+host.home.carousel.title: Homes cared for with pride
+host.home.carousel.subtitle: Real spaces refreshed by trusted local helpers across Johannesburg.
+host.home.impact.title: Every request changes a household
+host.home.impact.body: When you book on SIZA, your helper keeps their earnings and transport. Your request brings reliable, dignified income directly to hardworking individuals providing for their families.
 host.home.status.open: Looking for a helper
 host.home.status.assigned: Helper confirmed
 host.home.status.in_progress: Job in progress

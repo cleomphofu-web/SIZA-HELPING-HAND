@@ -18,6 +18,8 @@ import {
   Flower2,
   DollarSign,
   Info,
+  Navigation,
+  Loader2,
 } from "lucide-react";
 import { t } from "@/content/t";
 import type { CopyKey } from "@/content/copy.generated";
@@ -26,7 +28,6 @@ import { estimateBooking, type BookingEstimateInput } from "@/lib/booking-estima
 import { formatZarCents, parseZarToCents } from "@/lib/money";
 import type { HostProfileView } from "@/server/views/host-profile";
 import type { HostBookingFormView } from "@/server/views/booking-form";
-import { HostFloatingDock } from "@/components/HostFloatingDock";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -68,6 +69,32 @@ type HostBookingFormProps = {
 
 type PropertyType = "flat" | "complex" | "house";
 
+const SUBURB_COORDINATES: Record<string, { lat: number; lng: number }> = {
+  Rosebank: { lat: -26.1459, lng: 28.0427 },
+  Sandton: { lat: -26.1071, lng: 28.0567 },
+  Parkhurst: { lat: -26.1404, lng: 28.0143 },
+  Craighall: { lat: -26.1232, lng: 28.0285 },
+  Melville: { lat: -26.1764, lng: 27.9957 },
+  Braamfontein: { lat: -26.1964, lng: 28.0347 },
+  Fourways: { lat: -26.0142, lng: 28.0097 },
+  Midrand: { lat: -25.9971, lng: 28.1289 },
+  Vanderbijlpark: { lat: -26.6993, lng: 27.8352 },
+  Vereeniging: { lat: -26.6739, lng: 27.9298 },
+};
+
+function distanceKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (lon2 - lon1) * (Math.PI / 180);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * (Math.PI / 180)) *
+      Math.cos(lat2 * (Math.PI / 180)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return 6371 * c;
+}
+
 export function HostBookingForm({
   profile,
   config,
@@ -88,6 +115,74 @@ export function HostBookingForm({
   const initialService = availableServices[0]?.service ?? "";
   const [selectedServices, setSelectedServices] = useState<string[]>(initialService ? [initialService] : []);
   const [primaryService, setPrimaryService] = useState(initialService);
+
+  // Auto location detection state
+  const [isLocating, setIsLocating] = useState(false);
+  const [locationStatus, setLocationStatus] = useState<string | null>(null);
+
+  function handleDetectLocation() {
+    if (typeof window === "undefined" || !("geolocation" in navigator)) {
+      setLocationStatus("Geolocation is not supported by your browser.");
+      return;
+    }
+    setIsLocating(true);
+    setLocationStatus(null);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setIsLocating(false);
+        const { latitude, longitude } = position.coords;
+
+        let nearestSuburb = "";
+        let minDistance = Infinity;
+
+        for (const areaOption of config.areas) {
+          const coords = SUBURB_COORDINATES[areaOption.suburb];
+          if (coords) {
+            const dist = distanceKm(latitude, longitude, coords.lat, coords.lng);
+            if (dist < minDistance) {
+              minDistance = dist;
+              nearestSuburb = areaOption.suburb;
+            }
+          }
+        }
+
+        if (nearestSuburb) {
+          const nextArea = config.areas.find((item) => item.suburb === nearestSuburb);
+          const currentCombination = nextArea?.serviceSets.find(
+            (set) =>
+              set.services.length === selectedServices.length &&
+              set.services.every((service) => selectedServices.includes(service))
+          );
+          const nextCombination =
+            currentCombination ?? nextArea?.serviceSets.find((set) => set.services.length === 1);
+          const nextSelected = nextCombination?.services ?? [];
+
+          setSuburb(nearestSuburb);
+          setSelectedServices(nextSelected);
+          setHelpersNeeded((current) =>
+            String(Math.min(Number(current), nextCombination?.eligibleHelperCount ?? 1))
+          );
+          if (!nextSelected.includes(primaryService)) setPrimaryService(nextSelected[0] ?? "");
+          setAddons([]);
+
+          const distDisplay = minDistance < 1 ? "<1 km" : `~${minDistance.toFixed(0)} km`;
+          setLocationStatus(`Auto-detected: ${nearestSuburb} (${distDisplay})`);
+        } else {
+          setLocationStatus("Could not find a supported pilot suburb near your location.");
+        }
+      },
+      (err) => {
+        setIsLocating(false);
+        if (err.code === 1) {
+          setLocationStatus("Location permission denied. Please choose your suburb below.");
+        } else {
+          setLocationStatus("Location unavailable. Please choose your suburb below.");
+        }
+      },
+      { enableHighAccuracy: true, timeout: 8000 }
+    );
+  }
 
   // Property type and access
   const [propertyType, setPropertyType] = useState<PropertyType>("flat");
@@ -334,6 +429,41 @@ export function HostBookingForm({
                 </div>
               </div>
               <MapPin className="size-5 text-neutral-400" />
+            </div>
+
+            {/* Auto-detect Location Bar (Uber-style) */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-neutral-50 border border-neutral-200/90 transition-colors">
+              <div className="flex items-center gap-2.5">
+                <div className="size-7 rounded-lg bg-neutral-200/70 flex items-center justify-center shrink-0">
+                  <Navigation className="size-3.5 text-neutral-800" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-neutral-900">
+                    {locationStatus ? locationStatus : "Automatic Location Detection"}
+                  </p>
+                  <p className="text-[11px] text-neutral-500">
+                    {locationStatus ? "Nearest pilot suburb selected." : "Detect your nearest pilot suburb automatically like Uber."}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleDetectLocation}
+                disabled={isLocating}
+                className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 disabled:opacity-50 transition-colors cursor-pointer shrink-0 shadow-sm"
+              >
+                {isLocating ? (
+                  <>
+                    <Loader2 className="size-3.5 animate-spin" />
+                    <span>Locating...</span>
+                  </>
+                ) : (
+                  <>
+                    <Navigation className="size-3.5" />
+                    <span>Auto-detect location</span>
+                  </>
+                )}
+              </button>
             </div>
 
             {/* Suburb & Address Inputs */}
@@ -1162,9 +1292,6 @@ export function HostBookingForm({
           </dialog>
         </form>
       </div>
-
-      {/* Floating Bottom Navigation Dock */}
-      <HostFloatingDock />
     </main>
   );
 }

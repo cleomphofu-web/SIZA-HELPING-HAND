@@ -1,9 +1,15 @@
 import { redirect } from "next/navigation";
 import { requireActor } from "@/server/policies/auth";
+import { HostFloatingDock } from "@/components/HostFloatingDock";
 
 export default async function HostAppLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   let actor;
   try { actor = await requireActor(); } catch { redirect("/login"); }
   if (actor.role !== "host") redirect("/");
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <HostFloatingDock />
+    </>
+  );
 }
