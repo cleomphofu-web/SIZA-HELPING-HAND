@@ -28,7 +28,7 @@ export default async function HelperDetailPage({
         .select("first_name, last_name, phone")
         .eq("id", id)
         .maybeSingle(),
-      supabase.from("helper_private_docs").select("id, type").eq("helper_id", id),
+      supabase.from("helper_private_docs").select("id, type, storage_path").eq("helper_id", id),
       supabase
         .from("phase_a_helper_references")
         .select("name, phone")
@@ -39,10 +39,24 @@ export default async function HelperDetailPage({
   if (!helper || !profile) notFound();
 
   const signedDocuments = await Promise.all(
-    (documents ?? []).map(async (document) => ({
-      ...document,
-      url: await getSignedDocumentUrl(document.id),
-    }))
+    (documents ?? []).map(async (document) => {
+      let url: string | null = null;
+      try {
+        if (document.storage_path) {
+          const { data } = await supabase.storage
+            .from("helper-docs")
+            .createSignedUrl(document.storage_path, 3600);
+          url = data?.signedUrl ?? null;
+        }
+      } catch {
+        url = null;
+      }
+      return {
+        id: document.id,
+        type: document.type,
+        url,
+      };
+    })
   );
 
   return (
@@ -134,15 +148,22 @@ export default async function HelperDetailPage({
                 <ul className="space-y-2">
                   {signedDocuments.map((document) => (
                     <li key={document.id}>
-                      <a
-                        href={document.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-xs font-semibold text-neutral-900 transition-colors w-full justify-between"
-                      >
-                        <span className="capitalize">{document.type.replace("_", " ")}</span>
-                        <span>Open ↗</span>
-                      </a>
+                      {document.url ? (
+                        <a
+                          href={document.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-xs font-semibold text-neutral-900 transition-colors w-full justify-between"
+                        >
+                          <span className="capitalize">{document.type.replace("_", " ")}</span>
+                          <span>Open ↗</span>
+                        </a>
+                      ) : (
+                        <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-neutral-50 text-xs text-neutral-400">
+                          <span className="capitalize">{document.type.replace("_", " ")}</span>
+                          <span>Unavailable</span>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>

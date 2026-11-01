@@ -58,20 +58,20 @@ export async function suspendHelper(id: string, reason: string) {
   return pipeline.data;
 }
 
-export async function getSignedDocumentUrl(documentId: string) {
-  const pipeline = await runServerActionPipeline({
-    rateLimit: limitAdminAction, botCheck: async () => true,
-    validate: async () => { const parsed = HelperDocumentIdSchema.safeParse(documentId); return parsed.success ? { ok: true as const, data: parsed.data } : { ok: false as const, error: "invalid" }; },
-    authorize: async () => ({ ok: true as const, data: await requireAdmin() }),
-    service: async (id) => {
-      const supabase = createSupabaseAdminClient();
-      const { data: document, error } = await supabase.from("helper_private_docs").select("storage_path").eq("id", id).single();
-      if (error || !document) throw new Error("Document unavailable");
-      const { data, error: signedError } = await supabase.storage.from("helper-docs").createSignedUrl(document.storage_path, 60);
-      if (signedError || !data) throw new Error("Document unavailable");
-      return data.signedUrl;
-    },
-  });
-  if (!pipeline.ok) throw new Error(pipeline.stage === "rate_limit" ? "Please wait before trying this again." : "Document unavailable");
-  return pipeline.data;
+export async function getSignedDocumentUrl(documentId: string): Promise<string | null> {
+  await requireAdmin();
+  const parsed = HelperDocumentIdSchema.safeParse(documentId);
+  if (!parsed.success) return null;
+  const supabase = createSupabaseAdminClient();
+  const { data: document, error } = await supabase
+    .from("helper_private_docs")
+    .select("storage_path")
+    .eq("id", parsed.data)
+    .maybeSingle();
+  if (error || !document?.storage_path) return null;
+  const { data, error: signedError } = await supabase.storage
+    .from("helper-docs")
+    .createSignedUrl(document.storage_path, 3600);
+  if (signedError || !data?.signedUrl) return null;
+  return data.signedUrl;
 }
