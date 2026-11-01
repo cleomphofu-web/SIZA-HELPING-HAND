@@ -47,13 +47,13 @@ export function HostProfileForm({
           aria-labelledby="host-home-profile-title"
         >
           <div className="border-b border-neutral-100 pb-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1 starter-eyebrow">
+            <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1">
               SIZA / HOST
             </p>
             <h1 id="host-home-profile-title" className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
               {t(titleKey)}
             </h1>
-            <p className="text-sm text-neutral-600 mt-1 starter-copy">
+            <p className="text-sm text-neutral-600 mt-1">
               {t("host.onboarding.body")}
             </p>
           </div>

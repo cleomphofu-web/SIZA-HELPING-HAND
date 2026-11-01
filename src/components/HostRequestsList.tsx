@@ -45,7 +45,7 @@ export function HostRequestsList({ requests, loadFailed }: { requests: HostBooki
             <h1 id="host-activity-title" className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
               {t("host.requests.title")}
             </h1>
-            <p className="text-sm text-neutral-600 mt-1 starter-copy">
+            <p className="text-sm text-neutral-600 mt-1">
               {t("host.requests.body")}
             </p>
           </div>

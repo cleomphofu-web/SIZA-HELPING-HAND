@@ -60,7 +60,7 @@ export default async function HelperReportPage({
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">
           {t("phase_a.report.title")}
         </h1>
-        <p className="starter-copy text-sm text-neutral-300 mt-2 leading-relaxed">
+        <p className="text-sm text-neutral-200 mt-2 leading-relaxed font-normal">
           {t("phase_a.report.body")}
         </p>
 

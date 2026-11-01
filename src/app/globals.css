@@ -203,9 +203,9 @@ a { color: inherit; }
   .public-menu-links a { text-decoration: none; }
 }
 .starter-shell { display: grid; align-content: center; min-height: 100svh; width: min(100% - 2.5rem, 72rem); margin: 0 auto; padding: 4rem 0; }
-.starter-eyebrow { margin: 0 0 2rem; color: var(--siza-muted, #666666); font-size: .75rem; font-weight: 700; letter-spacing: .12em; }
+.starter-eyebrow { margin: 0 0 1rem; color: #404040; font-size: .75rem; font-weight: 700; letter-spacing: .12em; }
 .starter-shell h1 { max-width: 10ch; margin: 0; font-size: clamp(3.5rem, 11vw, 9rem); line-height: .9; letter-spacing: -.08em; }
-.starter-copy { max-width: 34rem; margin: 2rem 0 0; color: var(--siza-muted, #666666); font-size: 1.1rem; line-height: 1.6; }
+.starter-copy { max-width: 34rem; margin: 1.5rem 0 0; color: #333333; font-size: 1.1rem; line-height: 1.6; }
 .starter-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
 .starter-actions a, .starter-link { display: inline-flex; width: fit-content; padding: .9rem 1.1rem; background: var(--ink); color: white; text-decoration: none; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .starter-actions a:last-child { background: transparent; color: var(--ink); border: 1px solid var(--ink); } .starter-link { margin-top: 2rem; } code { font-family: monospace; }

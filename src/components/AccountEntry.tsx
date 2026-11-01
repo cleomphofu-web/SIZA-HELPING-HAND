@@ -17,8 +17,8 @@ export function AccountEntry({ areas, enabled, mode, role = "host", supportEmail
     <main className="phase-a-shell">
       <section className="phase-a-card" aria-labelledby="account-unavailable-title">
         <h1 id="account-unavailable-title">{t("holding.title", { areas })}</h1>
-        <p className="starter-copy">{t("holding.body")}</p>
-        <p className="starter-copy">{t("holding.contact", { supportEmail })}</p>
+        <p className="text-neutral-700 mt-2">{t("holding.body")}</p>
+        <p className="text-neutral-700 mt-1">{t("holding.contact", { supportEmail })}</p>
       </section>
     </main>
   );

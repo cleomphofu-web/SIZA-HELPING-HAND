@@ -13,7 +13,7 @@ export function HostAccountForm({ account, notice }: { account: HostAccountView;
         <h2 id="host-contact-title" className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900">
           {t("host.account.contact.title")}
         </h2>
-        <p className="text-sm text-neutral-600 mt-1 starter-copy">
+        <p className="text-sm text-neutral-600 mt-1">
           {t("host.account.contact.body")}
         </p>
       </div>
