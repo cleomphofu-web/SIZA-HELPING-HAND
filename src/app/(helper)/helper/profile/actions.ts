@@ -17,3 +17,4 @@ export async function updateHelperBio(bio: string) {
   revalidatePath("/helper/profile");
   return { success: true };
 }
+

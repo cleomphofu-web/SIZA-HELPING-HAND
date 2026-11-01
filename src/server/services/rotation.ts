@@ -15,8 +15,51 @@ export type BookingTimeWindow = { bookingId: string; startAt: string; endAt: str
 export type AssignmentForVisibility = { bookingId: string; helperId: string; slot: number; status: "accepted" | "cancelled" | "completed" | "no_show"; noShowAt?: string | null; noShowResolution?: string | null };
 export type OfferForVisibility = { bookingId: string; helperId: string; slot: number; expiresAt: string; offeredAt?: string; round?: number };
 
+const SERVICE_CANONICAL_MAP: Record<string, string> = {
+  home: "home",
+  home_cleaning: "home",
+  deep_clean: "deep_cleaning",
+  deep_cleaning: "deep_cleaning",
+  office: "office",
+  office_cleaning: "office",
+  airbnb_turnover: "airbnb_turnover",
+  post_construction: "post_construction",
+  move_out: "deep_cleaning",
+};
+
+export const SERVICE_ALIASES: Record<string, string[]> = {
+  home: ["home", "home_cleaning"],
+  home_cleaning: ["home", "home_cleaning"],
+  deep_clean: ["deep_clean", "deep_cleaning"],
+  deep_cleaning: ["deep_clean", "deep_cleaning"],
+  office: ["office", "office_cleaning"],
+  office_cleaning: ["office", "office_cleaning"],
+  airbnb_turnover: ["airbnb_turnover"],
+  post_construction: ["post_construction"],
+  move_out: ["move_out", "deep_cleaning", "deep_clean"],
+};
+
+export function canonicalService(service: string): string {
+  return SERVICE_CANONICAL_MAP[service] ?? service;
+}
+
+export function expandServiceAliases(services: readonly string[]): string[] {
+  const set = new Set<string>();
+  for (const s of services) {
+    set.add(s);
+    for (const alias of SERVICE_ALIASES[s] ?? []) {
+      set.add(alias);
+    }
+  }
+  return [...set];
+}
+
 export function coversRequiredServices(requiredServices: readonly string[], helperServices: readonly string[]): boolean {
-  return requiredServices.length > 0 && requiredServices.every((service) => helperServices.includes(service));
+  if (requiredServices.length === 0) return false;
+  const canonicalHelper = new Set(helperServices.map(canonicalService));
+  return requiredServices.every((service) =>
+    helperServices.includes(service) || canonicalHelper.has(canonicalService(service))
+  );
 }
 
 export function helperCanSeeOpenOffer(status: "open" | "assigned" | "in_progress" | "completed" | "cancelled" | "disputed" | "expired", hasFreeNoShowSlot: boolean): boolean {

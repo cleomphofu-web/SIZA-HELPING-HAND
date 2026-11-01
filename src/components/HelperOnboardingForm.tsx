@@ -357,10 +357,24 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
     setIsLoading(true);
     setError(null);
 
+    const SERVICE_ALIASES: Record<string, string[]> = {
+      home: ["home", "home_cleaning"],
+      home_cleaning: ["home", "home_cleaning"],
+      deep_clean: ["deep_clean", "deep_cleaning"],
+      deep_cleaning: ["deep_clean", "deep_cleaning"],
+      office: ["office", "office_cleaning"],
+      office_cleaning: ["office", "office_cleaning"],
+      airbnb_turnover: ["airbnb_turnover"],
+      post_construction: ["post_construction"],
+    };
+    const expandedServices = Array.from(
+      new Set(form.services.flatMap((s) => SERVICE_ALIASES[s] ?? [s]))
+    );
+
     const data = new FormData();
     data.set("dateOfBirth", form.dateOfBirth);
     data.set("jobTitle", form.jobTitle || "Home helper");
-    data.set("services", form.services.join(","));
+    data.set("services", expandedServices.join(","));
     data.set("suburbs", form.suburbs.join(","));
     data.set("bio", form.bio);
     data.set("experienceNote", form.experienceNote);

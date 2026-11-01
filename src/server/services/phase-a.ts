@@ -15,6 +15,7 @@ import { randomUUID } from "node:crypto";
 import { generateCheckInCode, hashCheckInCode } from "@/server/services/check-in";
 import { isConfirmationLocked } from "@/server/services/confirmation";
 import { estimateBooking, resolveBookingAmounts, type BookingRateCard } from "@/lib/booking-estimate";
+import { expandServiceAliases } from "@/server/services/rotation";
 import { parseZarToCents } from "@/lib/money";
 import { t } from "@/content/t";
 
@@ -160,7 +161,7 @@ export async function saveHelperProfile(client: Db, helperId: string, input: Hel
       p_helper_id: helperId,
       p_date_of_birth: input.dateOfBirth.toISOString().slice(0, 10),
       p_job_title: input.jobTitle,
-      p_services: input.services,
+      p_services: expandServiceAliases(input.services),
       p_suburbs: input.suburbs,
       p_bio: input.bio ?? "",
       p_experience_note: input.experienceNote ?? "",

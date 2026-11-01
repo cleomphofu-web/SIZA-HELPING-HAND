@@ -11,7 +11,7 @@ import {
   type BookingReadRecord,
   type BookingView,
 } from "@/server/views/booking";
-import { helperCanReceiveOffer, helperCanSeeOpenOffer, selectVisibleOpenSlots, type BookingTimeWindow, type HelperOfferEligibilityProfile } from "@/server/services/rotation";
+import { expandServiceAliases, helperCanReceiveOffer, helperCanSeeOpenOffer, selectVisibleOpenSlots, type BookingTimeWindow, type HelperOfferEligibilityProfile } from "@/server/services/rotation";
 import { getDatabaseNow } from "@/server/views/database-time";
 
 const bookingIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -355,9 +355,10 @@ export async function getHelperOfferSummaries(): Promise<Result<HelperOfferSumma
     const { profile, acceptedBookings } = eligibility.context;
     if (profile.status !== "approved" || !profile.services.length || !profile.suburbs.length) return ok([]);
 
+    const expandedServices = expandServiceAliases(profile.services);
     const { data: bookingRows, error: bookingError } = await client.from("phase_a_bookings")
       .select("id, status, suburb, services, helpers_needed, pay_per_helper_cents, transport_per_helper_cents, start_at, end_at_est")
-      .in("status", ["open", "assigned", "in_progress"]).overlaps("services", profile.services).in("suburb", profile.suburbs);
+      .in("status", ["open", "assigned", "in_progress"]).overlaps("services", expandedServices).in("suburb", profile.suburbs);
     if (bookingError) return fail("internal_error", "We could not load available jobs.");
     const bookings = (bookingRows ?? []).filter((booking) => helperCanReceiveOffer(profile, {
       bookingId: booking.id,
