@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import { t } from "@/content/t";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
 
@@ -129,7 +130,7 @@ export function AccountForm({
 
         {complete ? (
           <div className="mt-8 p-5 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md text-center space-y-4">
-            <div className="text-4xl">✉️</div>
+            <Mail className="size-10 text-white mx-auto" />
             <p className="text-sm text-white font-medium" role="status">
               {message}
             </p>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { MapPin, Coffee } from "lucide-react";
 import { t } from "@/content/t";
 import { requireActor } from "@/server/policies/auth";
 import { getHelperOfferSummaries } from "@/server/views/booking-read";
@@ -79,8 +80,9 @@ export default async function HelperJobsPage() {
                   className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white/[0.06] border border-white/15 backdrop-blur-md"
                 >
                   <div className="space-y-1">
-                    <strong className="text-sm font-semibold text-white block">
-                      📍 {offer.suburb}
+                    <strong className="text-sm font-semibold text-white flex items-center">
+                      <MapPin className="size-3.5 text-emerald-400 inline mr-1 flex-shrink-0" />
+                      {offer.suburb}
                     </strong>
                     <span className="text-xs text-neutral-300 font-medium">
                       {t("helper.jobs.you_receive", { amount })}
@@ -106,8 +108,8 @@ export default async function HelperJobsPage() {
           </ul>
         ) : (
           <div className="mt-8 p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center space-y-2">
-            <div className="text-3xl">☕</div>
-            <p className="starter-copy text-sm text-neutral-300 font-medium">
+            <Coffee className="size-8 text-neutral-400 mx-auto" />
+            <p className="text-sm text-neutral-200 font-medium">
               {t("phase_a.empty_jobs")}
             </p>
             <p className="text-xs text-neutral-400">

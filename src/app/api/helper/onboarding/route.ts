@@ -12,6 +12,7 @@ import { sameOrigin } from "@/server/security/origin";
 function text(form: FormData, key: string) { return String(form.get(key) ?? ""); }
 
 export async function POST(request: NextRequest) {
+  let validationIssues: string[] = [];
   const pipeline = await runRequestPipeline({
     rateLimit: () => limitRequest("upload", request), botCheck: async () => true,
     validate: async () => {
@@ -29,7 +30,10 @@ export async function POST(request: NextRequest) {
         referencePhone: text(form, "referencePhone") || undefined,
         consent: form.get("consent") === "on",
       });
-      if (!parsed.success) return { ok: false as const, error: "invalid" };
+      if (!parsed.success) {
+        validationIssues = parsed.error.issues.map((i) => i.message);
+        return { ok: false as const, error: "invalid" };
+      }
       const idPhoto = form.get("idPhoto"); const selfieCheck = form.get("selfieCheck");
       if (!(idPhoto instanceof File) || !(selfieCheck instanceof File) || idPhoto.size === 0 || selfieCheck.size === 0) return { ok: false as const, error: "missing_documents" };
       return { ok: true as const, data: { profile: parsed.data, idPhoto, selfieCheck } };
@@ -44,7 +48,8 @@ export async function POST(request: NextRequest) {
     if (pipeline.stage === "rate_limit") return rateLimitResponse(pipeline);
     const forbidden = pipeline.stage === "authorization";
     const missingDocs = pipeline.stage === "input_validation" && pipeline.error === "missing_documents";
-    return NextResponse.json({ ok: false, error: { code: forbidden ? "forbidden" : "validation_failed", message: forbidden ? "Only helpers can save this profile." : missingDocs ? "Add both required documents." : "Check the highlighted details." } }, { status: forbidden ? 403 : 400 });
+    const detailMsg = validationIssues.length > 0 ? validationIssues.join(". ") : "Check the highlighted details.";
+    return NextResponse.json({ ok: false, error: { code: forbidden ? "forbidden" : "validation_failed", message: forbidden ? "Only helpers can save this profile." : missingDocs ? "Add both required documents." : detailMsg } }, { status: forbidden ? 403 : 400 });
   }
   const result = pipeline.data;
   if (result.ok) {

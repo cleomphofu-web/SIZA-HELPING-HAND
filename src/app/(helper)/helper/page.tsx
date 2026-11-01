@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { FileEdit, Briefcase, Sliders } from "lucide-react";
 import { t } from "@/content/t";
 import { requireActor } from "@/server/policies/auth";
 
@@ -53,7 +54,7 @@ export default async function HelperAppPage() {
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
           {t("helper.app.title")}
         </h1>
-        <p className="starter-copy text-sm sm:text-base text-neutral-300 mt-2.5 leading-relaxed font-normal">
+        <p className="text-sm sm:text-base text-neutral-200 mt-2.5 leading-relaxed font-normal">
           {t("helper.app.body")}
         </p>
 
@@ -65,13 +66,13 @@ export default async function HelperAppPage() {
             className="group flex items-center justify-between p-4 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 hover:border-white/30 backdrop-blur-md transition-all text-left shadow-sm active:scale-[0.99]"
           >
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-base">📝</span>
+              <div className="flex items-center gap-2.5">
+                <FileEdit className="size-4 text-emerald-400" />
                 <span className="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">
                   {t("helper.onboarding.title")}
                 </span>
               </div>
-              <p className="text-xs text-neutral-400 pl-6">
+              <p className="text-xs text-neutral-400 pl-6.5">
                 Update suburbs, services, and identity documents
               </p>
             </div>
@@ -86,13 +87,13 @@ export default async function HelperAppPage() {
             className="group flex items-center justify-between p-4 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 hover:border-white/30 backdrop-blur-md transition-all text-left shadow-sm active:scale-[0.99]"
           >
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-base">💼</span>
+              <div className="flex items-center gap-2.5">
+                <Briefcase className="size-4 text-emerald-400" />
                 <span className="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">
                   {t("helper.jobs.title")}
                 </span>
               </div>
-              <p className="text-xs text-neutral-400 pl-6">
+              <p className="text-xs text-neutral-400 pl-6.5">
                 See offers in your areas and accept jobs
               </p>
             </div>
@@ -107,13 +108,13 @@ export default async function HelperAppPage() {
             className="group flex items-center justify-between p-4 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 hover:border-white/30 backdrop-blur-md transition-all text-left shadow-sm active:scale-[0.99]"
           >
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-base">⚙️</span>
+              <div className="flex items-center gap-2.5">
+                <Sliders className="size-4 text-emerald-400" />
                 <span className="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">
                   {t("helper.matching.title")}
                 </span>
               </div>
-              <p className="text-xs text-neutral-400 pl-6">
+              <p className="text-xs text-neutral-400 pl-6.5">
                 Optional matching preferences
               </p>
             </div>

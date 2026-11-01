@@ -61,7 +61,7 @@ export function HelperGenderMatchingForm({
         >
           {t("helper.matching.title")}
         </h1>
-        <p className="starter-copy text-sm text-neutral-300 mt-2 leading-relaxed">
+        <p className="text-sm text-neutral-200 mt-2 leading-relaxed">
           {t("helper.matching.body")}
         </p>
 

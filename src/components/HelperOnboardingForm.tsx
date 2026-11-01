@@ -4,20 +4,30 @@
  * HelperOnboardingForm
  *
  * A full-screen, one-question-at-a-time questionnaire for helper profile
- * onboarding. Designed for helpers who may not be confident with technology:
- * large text, big touch targets, clear progress, plain language.
+ * onboarding. Large text, big touch targets, clear progress, plain language.
  *
- * On the final step the component builds a FormData and POSTs it to
- * /api/helper/onboarding (multipart/form-data) so the existing server route
- * receives the exact same field names it already validates.
- *
- * No new runtime dependencies — uses only shadcn/ui primitives already
- * installed in this project (Button, Checkbox, Input, Label, Textarea,
- * Progress) plus a hand-rolled card layout that matches the SIZA design
- * system (monochrome, Geist, editorial).
+ * All emojis removed in compliance with editorial standard (Rule 21: No emojis).
+ * Live South African ID and adult validation to catch errors before final submit.
  */
 
 import React, { useRef, useState } from "react";
+import {
+  Home,
+  Sparkles,
+  Bed,
+  Building2,
+  Hammer,
+  Camera,
+  CheckCircle2,
+  ShieldCheck,
+  Info,
+  UserCheck,
+  Eye,
+  EyeOff,
+  Check,
+  AlertCircle,
+  type LucideIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -43,21 +53,65 @@ const PILOT_SUBURBS = [
   "Vereeniging",
 ] as const;
 
-type ServiceKey = "home_cleaning" | "deep_clean" | "airbnb_turnover" | "office_cleaning" | "post_construction";
+type ServiceKey =
+  | "home_cleaning"
+  | "deep_clean"
+  | "airbnb_turnover"
+  | "office_cleaning"
+  | "post_construction";
 
-const SERVICES: Array<{ key: ServiceKey; label: string; emoji: string }> = [
-  { key: "home_cleaning",    label: t("helper.onboarding.services.home"),              emoji: "🏠" },
-  { key: "deep_clean",       label: t("helper.onboarding.services.deep"),              emoji: "✨" },
-  { key: "airbnb_turnover",  label: t("helper.onboarding.services.airbnb"),            emoji: "🛏️" },
-  { key: "office_cleaning",  label: t("helper.onboarding.services.office"),            emoji: "🏢" },
-  { key: "post_construction",label: t("helper.onboarding.services.post_construction"), emoji: "🔨" },
+const SERVICES: Array<{ key: ServiceKey; label: string; icon: LucideIcon }> = [
+  { key: "home_cleaning", label: t("helper.onboarding.services.home"), icon: Home },
+  { key: "deep_clean", label: t("helper.onboarding.services.deep"), icon: Sparkles },
+  { key: "airbnb_turnover", label: t("helper.onboarding.services.airbnb"), icon: Bed },
+  { key: "office_cleaning", label: t("helper.onboarding.services.office"), icon: Building2 },
+  { key: "post_construction", label: t("helper.onboarding.services.post_construction"), icon: Hammer },
 ];
 
+const TOTAL_STEPS = 10;
+
 // ---------------------------------------------------------------------------
-// Step names — used for the progress indicator
+// SA ID and age validation
 // ---------------------------------------------------------------------------
 
-const TOTAL_STEPS = 10; // Welcome is step 0 (not counted in progress bar)
+function isValidSaIdDate(id: string): boolean {
+  if (id.length !== 13) return false;
+  const year = Number(id.slice(0, 2));
+  const month = Number(id.slice(2, 4));
+  const day = Number(id.slice(4, 6));
+  if (month < 1 || month > 12 || day < 1 || day > 31) return false;
+  return [1900 + year, 2000 + year].some((fullYear) => {
+    const date = new Date(Date.UTC(fullYear, month - 1, day));
+    return (
+      date.getUTCFullYear() === fullYear &&
+      date.getUTCMonth() === month - 1 &&
+      date.getUTCDate() === day
+    );
+  });
+}
+
+function isValidSaIdCheckDigit(id: string): boolean {
+  if (id.length !== 13) return false;
+  let total = 0;
+  for (let index = 0; index < 12; index += 1) {
+    let digit = Number(id[index]);
+    if (index % 2 === 1) {
+      digit *= 2;
+      if (digit > 9) digit -= 9;
+    }
+    total += digit;
+  }
+  return (10 - (total % 10)) % 10 === Number(id[12]);
+}
+
+function isAdult(dobStr: string): boolean {
+  if (!dobStr) return false;
+  const dob = new Date(dobStr);
+  if (isNaN(dob.getTime())) return false;
+  const cutoff = new Date();
+  cutoff.setUTCFullYear(cutoff.getUTCFullYear() - 18);
+  return dob <= cutoff;
+}
 
 // ---------------------------------------------------------------------------
 // Shared layout primitives
@@ -66,12 +120,13 @@ const TOTAL_STEPS = 10; // Welcome is step 0 (not counted in progress bar)
 function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {/* Sticky black header */}
       <header className="sticky top-0 z-50 bg-black text-white px-6 py-4 flex items-center justify-between">
         <span className="text-base font-semibold tracking-tight">siZa.</span>
-        <span className="text-sm text-neutral-400 uppercase tracking-widest">Helper setup</span>
+        <span className="text-sm text-neutral-400 uppercase tracking-widest">
+          Helper setup
+        </span>
       </header>
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-10 max-w-lg mx-auto w-full">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 pt-6 pb-28 max-w-lg mx-auto w-full">
         {children}
       </main>
     </div>
@@ -96,7 +151,9 @@ function StepProgress({ step, total }: { step: number; total: number }) {
 function StepHeading({ title, body }: { title: string; body?: string }) {
   return (
     <div className="mb-8 w-full">
-      <h1 className="text-3xl font-bold tracking-tight text-black leading-tight mb-3">{title}</h1>
+      <h1 className="text-3xl font-bold tracking-tight text-black leading-tight mb-3">
+        {title}
+      </h1>
       {body && <p className="text-base text-neutral-500 leading-relaxed">{body}</p>}
     </div>
   );
@@ -123,7 +180,7 @@ function NavButtons({
         type={isSubmit ? "submit" : "button"}
         onClick={isSubmit ? undefined : onNext}
         disabled={nextDisabled || isLoading}
-        className="w-full h-14 bg-black text-white text-base font-semibold rounded-xl hover:bg-neutral-900 active:bg-neutral-800 disabled:opacity-40 transition-all"
+        className="w-full h-14 bg-black text-white text-base font-semibold rounded-xl hover:bg-neutral-900 active:bg-neutral-800 disabled:opacity-40 transition-all cursor-pointer"
       >
         {isLoading ? "Sending…" : nextLabel}
       </Button>
@@ -133,7 +190,7 @@ function NavButtons({
           variant="ghost"
           onClick={onBack}
           disabled={isLoading}
-          className="w-full h-12 text-neutral-500 text-sm hover:text-black transition-colors"
+          className="w-full h-12 text-neutral-500 text-sm hover:text-black transition-colors cursor-pointer"
         >
           ← Back
         </Button>
@@ -174,7 +231,7 @@ function FileUploadArea({
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className={`w-full border-2 border-dashed rounded-2xl p-10 text-center transition-all ${
+        className={`w-full border-2 border-dashed rounded-2xl p-10 text-center transition-all cursor-pointer ${
           file
             ? "border-black bg-neutral-50"
             : "border-neutral-200 hover:border-neutral-400 bg-white"
@@ -183,13 +240,13 @@ function FileUploadArea({
       >
         {file ? (
           <div className="space-y-2">
-            <div className="text-4xl">✅</div>
+            <CheckCircle2 className="size-10 text-emerald-600 mx-auto" />
             <p className="text-sm font-medium text-black">{file.name}</p>
             <p className="text-xs text-neutral-400">Tap to change</p>
           </div>
         ) : (
           <div className="space-y-3">
-            <div className="text-4xl">📷</div>
+            <Camera className="size-10 text-neutral-400 mx-auto" />
             <p className="text-base font-semibold text-black">{label}</p>
             <p className="text-sm text-neutral-400">{hint}</p>
             <span className="inline-block mt-2 px-4 py-2 bg-black text-white text-sm rounded-lg">
@@ -198,7 +255,9 @@ function FileUploadArea({
           </div>
         )}
       </button>
-      <p id={`${name}-hint`} className="sr-only">{hint}</p>
+      <p id={`${name}-hint`} className="sr-only">
+        {hint}
+      </p>
     </div>
   );
 }
@@ -246,6 +305,7 @@ const EMPTY_FORM: FormState = {
 export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
+  const [showIdNumber, setShowIdNumber] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -346,7 +406,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
     return (
       <Shell>
         <div className="w-full text-center space-y-6">
-          <div className="text-6xl">🎉</div>
+          <CheckCircle2 className="size-16 text-emerald-600 mx-auto" />
           <h1 className="text-3xl font-bold tracking-tight text-black">
             {t("helper.pending.title")}
           </h1>
@@ -362,18 +422,18 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
   if (step === 0) {
     return (
       <Shell>
-        <div className="w-full space-y-6">
-          <div className="text-6xl text-center">👋</div>
-          <h1 className="text-3xl font-bold tracking-tight text-black leading-tight text-center">
+        <div className="w-full space-y-6 text-center">
+          <UserCheck className="size-14 text-black mx-auto" />
+          <h1 className="text-3xl font-bold tracking-tight text-black leading-tight">
             {t("helper.onboarding.welcome.title", { firstName: firstName ?? "there" })}
           </h1>
-          <p className="text-base text-neutral-500 leading-relaxed text-center">
+          <p className="text-base text-neutral-500 leading-relaxed">
             {t("helper.onboarding.welcome.body")}
           </p>
           <Button
             type="button"
             onClick={next}
-            className="w-full h-14 bg-black text-white text-base font-semibold rounded-xl mt-4 hover:bg-neutral-900 transition-all"
+            className="w-full h-14 bg-black text-white text-base font-semibold rounded-xl mt-4 hover:bg-neutral-900 transition-all cursor-pointer"
           >
             {t("helper.onboarding.welcome.cta")}
           </Button>
@@ -384,7 +444,9 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
 
   // ── Step 1: Date of birth ────────────────────────────────────────────────
   if (step === 1) {
-    const isValid = form.dateOfBirth !== "";
+    const hasDob = form.dateOfBirth !== "";
+    const adult = isAdult(form.dateOfBirth);
+    const isValid = hasDob && adult;
     return (
       <Shell>
         <StepProgress step={1} total={TOTAL_STEPS} />
@@ -406,6 +468,11 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
             autoComplete="bday"
             aria-label={t("helper.label.date_of_birth")}
           />
+          {hasDob && !adult && (
+            <p className="text-sm text-red-600 font-medium">
+              Helpers must be 18 or older to register.
+            </p>
+          )}
           <p className="text-sm text-neutral-400">{t("helper.apply.age")}</p>
         </div>
         <NavButtons onBack={back} onNext={next} nextDisabled={!isValid} />
@@ -430,17 +497,19 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
                 key={suburb}
                 type="button"
                 onClick={() => toggleSuburb(suburb)}
-                className={`flex items-center gap-3 px-4 py-4 rounded-xl border-2 text-left transition-all text-sm font-medium ${
+                className={`flex items-center gap-3 px-4 py-4 rounded-xl border-2 text-left transition-all text-sm font-medium cursor-pointer ${
                   checked
                     ? "border-black bg-black text-white"
                     : "border-neutral-200 bg-white text-black hover:border-neutral-400"
                 }`}
                 aria-pressed={checked}
               >
-                <span className={`w-5 h-5 rounded flex items-center justify-center border text-xs flex-shrink-0 ${
-                  checked ? "bg-white border-white text-black" : "border-neutral-300"
-                }`}>
-                  {checked ? "✓" : ""}
+                <span
+                  className={`w-5 h-5 rounded flex items-center justify-center border text-xs flex-shrink-0 ${
+                    checked ? "bg-white border-white text-black" : "border-neutral-300"
+                  }`}
+                >
+                  {checked ? <Check className="size-3 text-black" /> : null}
                 </span>
                 {suburb}
               </button>
@@ -466,26 +535,32 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
           body={t("helper.onboarding.services.body")}
         />
         <div className="w-full space-y-3">
-          {SERVICES.map(({ key, label, emoji }) => {
+          {SERVICES.map(({ key, label, icon: Icon }) => {
             const checked = form.services.includes(key);
             return (
               <button
                 key={key}
                 type="button"
                 onClick={() => toggleService(key)}
-                className={`w-full flex items-center gap-4 px-5 py-5 rounded-2xl border-2 text-left transition-all ${
+                className={`w-full flex items-center gap-4 px-5 py-5 rounded-2xl border-2 text-left transition-all cursor-pointer ${
                   checked
                     ? "border-black bg-black text-white"
                     : "border-neutral-200 bg-white text-black hover:border-neutral-400"
                 }`}
                 aria-pressed={checked}
               >
-                <span className="text-2xl flex-shrink-0">{emoji}</span>
+                <Icon
+                  className={`size-6 flex-shrink-0 ${
+                    checked ? "text-white" : "text-neutral-700"
+                  }`}
+                />
                 <span className="text-base font-medium flex-1">{label}</span>
-                <span className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 text-sm ${
-                  checked ? "bg-white border-white text-black" : "border-neutral-300"
-                }`}>
-                  {checked ? "✓" : ""}
+                <span
+                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 text-sm ${
+                    checked ? "bg-white border-white text-black" : "border-neutral-300"
+                  }`}
+                >
+                  {checked ? <Check className="size-3.5 text-black" /> : null}
                 </span>
               </button>
             );
@@ -536,7 +611,9 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
               rows={4}
               className="text-base border-2 border-neutral-200 rounded-xl focus:border-black resize-none"
             />
-            <p className="text-xs text-neutral-400 text-right">{form.bio.length}/300</p>
+            <p className="text-xs text-neutral-400 text-right">
+              {form.bio.length}/300
+            </p>
           </div>
         </div>
         <NavButtons onBack={back} onNext={next} />
@@ -564,7 +641,9 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
             className="text-base border-2 border-neutral-200 rounded-xl focus:border-black resize-none"
             aria-label={t("helper.label.experience")}
           />
-          <p className="text-xs text-neutral-400 text-right">{form.experienceNote.length}/2000</p>
+          <p className="text-xs text-neutral-400 text-right">
+            {form.experienceNote.length}/2000
+          </p>
           <div className="space-y-2 pt-2">
             <Label htmlFor="rateNote" className="text-sm font-medium text-neutral-500">
               {t("helper.onboarding.rate.title")}
@@ -622,7 +701,9 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
             />
           </div>
         </div>
-        <p className="w-full text-xs text-neutral-400 mt-4">This step is optional — tap Continue to skip.</p>
+        <p className="w-full text-xs text-neutral-400 mt-4">
+          This step is optional — tap Continue to skip.
+        </p>
         <NavButtons onBack={back} onNext={next} />
       </Shell>
     );
@@ -630,6 +711,11 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
 
   // ── Step 7: ID number ────────────────────────────────────────────────────
   if (step === 7) {
+    const is13 = form.idNumber.length === 13;
+    const dateOk = is13 && isValidSaIdDate(form.idNumber);
+    const checkOk = is13 && isValidSaIdCheckDigit(form.idNumber);
+    const isIdValid = dateOk && checkOk;
+
     return (
       <Shell>
         <StepProgress step={7} total={TOTAL_STEPS} />
@@ -641,23 +727,71 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
           <Label htmlFor="idNumber" className="text-base font-medium text-black">
             {t("helper.label.id_number")}
           </Label>
-          <Input
-            id="idNumber"
-            type="password"
-            value={form.idNumber}
-            onChange={(e) => update("idNumber", e.target.value.replace(/\D/g, "").slice(0, 13))}
-            placeholder={t("helper.onboarding.id.placeholder")}
-            maxLength={13}
-            autoComplete="off"
-            inputMode="numeric"
-            className="h-14 text-base border-2 border-neutral-200 rounded-xl focus:border-black tracking-widest"
-            aria-label={t("helper.label.id_number")}
-          />
-          <p className="text-xs text-neutral-400">
-            {form.idNumber.length}/13 digits entered
-          </p>
+          <div className="relative">
+            <Input
+              id="idNumber"
+              type={showIdNumber ? "text" : "password"}
+              value={form.idNumber}
+              onChange={(e) =>
+                update("idNumber", e.target.value.replace(/\D/g, "").slice(0, 13))
+              }
+              placeholder={t("helper.onboarding.id.placeholder")}
+              maxLength={13}
+              autoComplete="off"
+              inputMode="numeric"
+              className="h-14 text-base border-2 border-neutral-200 rounded-xl focus:border-black tracking-widest pr-12 font-mono"
+              aria-label={t("helper.label.id_number")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowIdNumber((v) => !v)}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-black transition-colors p-1"
+              aria-label={showIdNumber ? "Hide ID number" : "Show ID number"}
+            >
+              {showIdNumber ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+            </button>
+          </div>
+
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-neutral-400">
+              {form.idNumber.length}/13 digits entered
+            </span>
+            {isIdValid && (
+              <span className="text-emerald-600 font-semibold flex items-center gap-1">
+                <Check className="size-3.5" /> Valid South African ID
+              </span>
+            )}
+          </div>
+
+          {is13 && !dateOk && (
+            <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-xs p-3 rounded-xl">
+              <AlertCircle className="size-4 flex-shrink-0 mt-0.5" />
+              <span>The first 6 digits must be a valid birth date (YYMMDD).</span>
+            </div>
+          )}
+
+          {is13 && dateOk && !checkOk && (
+            <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-xs p-3 rounded-xl">
+              <AlertCircle className="size-4 flex-shrink-0 mt-0.5" />
+              <span>
+                The ID check digit is not valid. Please verify that all 13 digits match your ID document.
+              </span>
+            </div>
+          )}
+
+          {/* Development / Testing quick helper */}
+          {process.env.NODE_ENV !== "production" && !isIdValid && (
+            <button
+              type="button"
+              onClick={() => update("idNumber", "9001015000085")}
+              className="text-xs text-neutral-500 hover:text-black underline block pt-1 text-left"
+            >
+              Use test SA ID (9001015000085)
+            </button>
+          )}
+
           <div className="flex items-start gap-3 bg-neutral-50 rounded-xl p-4 mt-2">
-            <span className="text-xl flex-shrink-0">🔒</span>
+            <ShieldCheck className="size-5 text-neutral-600 flex-shrink-0 mt-0.5" />
             <p className="text-sm text-neutral-500 leading-relaxed">
               {t("helper.onboarding.id.body")}
             </p>
@@ -666,7 +800,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
         <NavButtons
           onBack={back}
           onNext={next}
-          nextDisabled={form.idNumber.length !== 13}
+          nextDisabled={!isIdValid}
         />
       </Shell>
     );
@@ -715,7 +849,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
             onChange={(f) => update("selfieCheck", f)}
           />
           <div className="flex items-start gap-3 bg-neutral-50 rounded-xl p-4">
-            <span className="text-xl flex-shrink-0">💡</span>
+            <Info className="size-5 text-neutral-600 flex-shrink-0 mt-0.5" />
             <p className="text-sm text-neutral-500 leading-relaxed">
               {t("helper.apply.2.body")}
             </p>
@@ -736,7 +870,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
       <Shell>
         <StepProgress step={10} total={TOTAL_STEPS} />
         <div className="w-full space-y-6">
-          <div className="text-5xl text-center">🙌</div>
+          <UserCheck className="size-12 text-black mx-auto" />
           <StepHeading
             title={t("helper.onboarding.consent.title")}
             body={t("helper.onboarding.consent.body")}
@@ -744,9 +878,24 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
           {/* Summary card */}
           <div className="border border-neutral-200 rounded-2xl p-5 space-y-3 text-sm">
             <SummaryRow label="Areas" value={form.suburbs.join(", ") || "—"} />
-            <SummaryRow label="Services" value={form.services.map((k) => SERVICES.find((s) => s.key === k)?.label ?? k).join(", ") || "—"} />
-            <SummaryRow label="ID photo" value={form.idPhoto ? "✅ Added" : "❌ Missing"} />
-            <SummaryRow label="Selfie" value={form.selfieCheck ? "✅ Added" : "❌ Missing"} />
+            <SummaryRow
+              label="Services"
+              value={
+                form.services
+                  .map((k) => SERVICES.find((s) => s.key === k)?.label ?? k)
+                  .join(", ") || "—"
+              }
+            />
+            <SummaryRow
+              label="ID photo"
+              value={form.idPhoto ? "Added" : "Missing"}
+              isOk={Boolean(form.idPhoto)}
+            />
+            <SummaryRow
+              label="Selfie"
+              value={form.selfieCheck ? "Added" : "Missing"}
+              isOk={Boolean(form.selfieCheck)}
+            />
           </div>
 
           {/* Consent checkbox */}
@@ -755,7 +904,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
               id="consent"
               checked={form.consent}
               onCheckedChange={(v) => update("consent", v === true)}
-              className="mt-0.5 w-6 h-6 border-2 border-neutral-300 data-[state=checked]:bg-black data-[state=checked]:border-black rounded"
+              className="mt-0.5 w-6 h-6 border-2 border-neutral-300 data-[state=checked]:bg-black data-[state=checked]:border-black rounded cursor-pointer"
             />
             <span className="text-sm text-neutral-700 leading-relaxed">
               {t("helper.onboarding.consent.check")}
@@ -763,8 +912,41 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
           </label>
 
           {error && (
-            <div role="alert" className="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700">
-              {error}
+            <div
+              role="alert"
+              className="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700 space-y-2"
+            >
+              <div className="flex items-start gap-2">
+                <AlertCircle className="size-4 flex-shrink-0 mt-0.5 text-red-600" />
+                <p className="font-medium leading-normal">{error}</p>
+              </div>
+              {error.toLowerCase().includes("id") && (
+                <button
+                  type="button"
+                  onClick={() => setStep(7)}
+                  className="text-xs font-semibold text-red-800 underline block pl-6"
+                >
+                  Edit your ID number →
+                </button>
+              )}
+              {error.toLowerCase().includes("document") && (
+                <button
+                  type="button"
+                  onClick={() => setStep(8)}
+                  className="text-xs font-semibold text-red-800 underline block pl-6"
+                >
+                  Update your documents →
+                </button>
+              )}
+              {error.toLowerCase().includes("birth") && (
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="text-xs font-semibold text-red-800 underline block pl-6"
+                >
+                  Edit your birth date →
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -782,12 +964,27 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
   return null;
 }
 
-function SummaryRow({ label, value }: { label: string; value: string }) {
+function SummaryRow({
+  label,
+  value,
+  isOk,
+}: {
+  label: string;
+  value: string;
+  isOk?: boolean;
+}) {
   return (
-    <div className="flex justify-between gap-4">
+    <div className="flex justify-between items-center gap-4">
       <span className="text-neutral-400 flex-shrink-0">{label}</span>
-      <span className="text-black text-right">{value}</span>
+      <span className="text-black text-right font-medium flex items-center gap-1.5">
+        {isOk !== undefined &&
+          (isOk ? (
+            <Check className="size-3.5 text-emerald-600 inline" />
+          ) : (
+            <AlertCircle className="size-3.5 text-red-500 inline" />
+          ))}
+        {value}
+      </span>
     </div>
   );
 }
-

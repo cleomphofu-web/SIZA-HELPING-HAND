@@ -42,6 +42,11 @@ const items: DockItem[] = [
 export function HelperFloatingDock() {
   const pathname = usePathname() ?? "";
 
+  // Do not show the floating dock on the focused onboarding questionnaire flow
+  if (pathname.startsWith("/helper/onboarding")) {
+    return null;
+  }
+
   return (
     <nav
       aria-label="Helper Navigation"
