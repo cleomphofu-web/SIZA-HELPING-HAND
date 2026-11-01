@@ -122,6 +122,53 @@ host.request.transport: Transport per helper
 host.request.load_error.title: We could not load this request
 helper.onboarding.title: Build your helper profile
 helper.onboarding.body: Your profile stays pending until the owner completes the approval checks.
+helper.onboarding.welcome.title: Hi {firstName}! Welcome to siZa.
+helper.onboarding.welcome.body: We just need a few details to set up your helper profile. It takes about 5 minutes. You can do it!
+helper.onboarding.welcome.cta: Let's go
+helper.onboarding.step: Step {step} of {total}
+helper.onboarding.dob.title: When were you born?
+helper.onboarding.dob.body: You must be 18 or older to work as a helper.
+helper.onboarding.suburbs.title: Where do you work?
+helper.onboarding.suburbs.body: Choose the areas near you. You can pick more than one.
+helper.onboarding.services.title: What do you do best?
+helper.onboarding.services.body: Tick the types of cleaning you can do.
+helper.onboarding.services.home: Home cleaning
+helper.onboarding.services.deep: Deep clean
+helper.onboarding.services.airbnb: Airbnb turnover
+helper.onboarding.services.office: Office cleaning
+helper.onboarding.services.post_construction: After-build clean
+helper.onboarding.about.title: Tell us about yourself
+helper.onboarding.about.body: A short description hosts will see on your profile.
+helper.onboarding.about.job_title_label: What do you call your work?
+helper.onboarding.about.job_title_placeholder: e.g. Home helper
+helper.onboarding.about.bio_label: A little about you (optional)
+helper.onboarding.about.bio_placeholder: e.g. I have 5 years of experience and love leaving a home spotless.
+helper.onboarding.experience.title: Your experience
+helper.onboarding.experience.body: Tell us about the cleaning work you have done before. This helps us match you to the right jobs.
+helper.onboarding.experience.placeholder: e.g. I cleaned homes and offices in Sandton for 3 years.
+helper.onboarding.rate.title: Anything else about your rates?
+helper.onboarding.rate.body: Optional. Add any note about your rates or availability.
+helper.onboarding.rate.placeholder: e.g. Available Monday to Friday only.
+helper.onboarding.reference.title: A reference
+helper.onboarding.reference.body: Someone we can call who knows your work. For example, a previous employer.
+helper.onboarding.reference.name_label: Their name
+helper.onboarding.reference.name_placeholder: e.g. Jane Smith
+helper.onboarding.reference.phone_label: Their phone number
+helper.onboarding.reference.phone_placeholder: e.g. 082 123 4567
+helper.onboarding.id.title: Your ID number
+helper.onboarding.id.body: This is kept private. We only use it to check who you are. Only SIZA admin can see it.
+helper.onboarding.id.placeholder: 13-digit ID number
+helper.onboarding.id_photo.title: A photo of your ID
+helper.onboarding.id_photo.body: Take a clear photo of your South African ID document. Make sure all four corners are visible.
+helper.onboarding.selfie.title: A selfie
+helper.onboarding.selfie.body: Take a clear selfie so we can match it to your ID. Good lighting helps.
+helper.onboarding.consent.title: Almost done!
+helper.onboarding.consent.body: By submitting, you agree that siZa can show your profile to hosts under our Privacy policy.
+helper.onboarding.consent.check: I agree to the Privacy policy.
+helper.onboarding.submit: Submit my profile
+helper.onboarding.error.generic: Something went wrong. Please try again.
+helper.onboarding.error.documents: Please add both your ID photo and selfie.
+helper.onboarding.error.validation: Some details are not right. Please check and try again.
 helper.label.date_of_birth: Date of birth
 helper.label.job_title: Job title
 helper.label.services: Services
