@@ -1,11 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
 import { redirect, notFound } from "next/navigation";
+import {
+  MapPin,
+  Clock,
+  CheckCircle2,
+  KeyRound,
+  ShieldAlert,
+  ArrowLeft,
+  Navigation,
+} from "lucide-react";
 import { t } from "@/content/t";
 import { requireActor } from "@/server/policies/auth";
 import { getBookingView } from "@/server/views/booking-read";
 
-export default async function HelperJobPage({
+export default async function HelperJobDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -26,106 +34,144 @@ export default async function HelperJobPage({
   const booking = result.data;
 
   return (
-    <main className="relative min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-hidden bg-black text-white">
-      {/* SIZA atmospheric background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/images/hero/background%20home%20page%20hero.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center filter brightness-[0.35] contrast-[1.15] scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90 backdrop-blur-[2px]" />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[340px] bg-gradient-to-b from-white/10 to-transparent blur-3xl opacity-50 rounded-full"
-        />
-      </div>
-
-      {/* Space-login liquid glass card */}
-      <div className="relative z-10 w-full max-w-[500px] my-auto mx-auto p-7 sm:p-10 rounded-3xl bg-neutral-950/75 backdrop-blur-2xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent">
-        {/* Brand Eyebrow Pill */}
-        <div className="flex items-center justify-between mb-6">
-          <Link
-            href="/helper/jobs"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-semibold tracking-wider text-neutral-300 hover:text-white transition-colors uppercase"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            siZa. Helper
-          </Link>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-400">
-            Assigned Job
-          </span>
-        </div>
-
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">
-          {booking.suburb}
-        </h1>
-        <p className="text-sm text-neutral-200 mt-2 leading-relaxed font-normal">
-          {booking.address}
-        </p>
-
-        {!booking.checkedInAt ? (
-          <form
-            className="phase-a-form mt-6 space-y-4"
-            action="/api/helper/jobs/check-in"
-            method="post"
-          >
-            <input type="hidden" name="bookingId" value={booking.id} />
-            <div className="space-y-1.5">
-              <label
-                htmlFor="checkinCode"
-                className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300"
-              >
-                {t("phase_a.check_in.title")}
-              </label>
-              <input
-                id="checkinCode"
-                name="code"
-                required
-                inputMode="numeric"
-                pattern="[0-9]{6}"
-                maxLength={6}
-                placeholder="6-digit code from host"
-                className="w-full h-12 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.09] border border-white/15 focus:border-white/40 focus:bg-white/[0.12] focus:ring-1 focus:ring-white/30 text-white placeholder:text-neutral-500 backdrop-blur-md transition-all text-center tracking-widest text-lg font-mono outline-none"
-              />
-            </div>
-            <button
-              className="w-full h-12 rounded-xl bg-white text-black font-semibold text-sm tracking-wide hover:bg-neutral-200 active:scale-[0.99] transition-all shadow-lg shadow-white/10 flex items-center justify-center mt-2"
-              type="submit"
-            >
-              {t("helper.mine.checkin")}
-            </button>
-          </form>
-        ) : (
-          <div className="mt-6 space-y-3">
-            <form action="/api/bookings/confirm" method="post">
-              <input type="hidden" name="bookingId" value={booking.id} />
-              <button
-                className="w-full h-12 rounded-xl bg-white text-black font-semibold text-sm tracking-wide hover:bg-neutral-200 active:scale-[0.99] transition-all shadow-lg shadow-white/10 flex items-center justify-center"
-                type="submit"
-              >
-                {t("helper.mine.finish")}
-              </button>
-            </form>
+    <main className="min-h-screen bg-[#f5f5f5] text-black pb-36 font-sans">
+      {/* Top Header */}
+      <header className="sticky top-0 z-30 bg-black/95 text-white backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5 transition-all">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
             <Link
-              className="w-full h-12 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-medium text-xs uppercase tracking-wider flex items-center justify-center transition-all"
-              href={`/helper/report?bookingId=${booking.id}`}
+              href="/helper"
+              className="text-lg font-bold tracking-tighter hover:opacity-80 transition-opacity"
             >
-              {t("host.request.report")}
+              siZa.
             </Link>
+            <span className="text-white/30" aria-hidden="true">/</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-300">
+              Job Specifications
+            </span>
           </div>
-        )}
-
-        <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400">
           <Link
             href="/helper/jobs"
-            className="hover:text-white underline underline-offset-4 transition-colors"
+            className="text-xs font-medium text-neutral-300 hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-white/10"
           >
             ← Back to jobs
           </Link>
+        </div>
+      </header>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-12 space-y-6">
+        {/* Job Header Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-100 pb-4">
+            <div className="space-y-1">
+              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                Confirmed Job Details
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
+                {booking.suburb}
+              </h1>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 self-start sm:self-auto">
+              <CheckCircle2 className="size-3.5" />
+              {booking.checkedInAt ? "Checked In" : "Assigned to You"}
+            </span>
+          </div>
+
+          {/* Location & Access Notes */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-1">
+              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 flex items-center gap-1.5">
+                <Navigation className="size-3.5 text-emerald-600" />
+                Service Address
+              </span>
+              <p className="font-semibold text-neutral-900 leading-relaxed">
+                {booking.address}
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-1">
+              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 flex items-center gap-1.5">
+                <Clock className="size-3.5 text-neutral-400" />
+                Host & Arrival Contact
+              </span>
+              <p className="font-medium text-neutral-800 text-xs leading-relaxed">
+                {booking.hostFirstName ? `${booking.hostFirstName} (${booking.hostPhone || "Direct contact"})` : "Contact details confirmed"}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Check-In / Completion Action Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">
+          {!booking.checkedInAt ? (
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <h2 className="text-lg font-bold text-neutral-900 flex items-center gap-2">
+                  <KeyRound className="size-5 text-emerald-600" />
+                  Enter 6-Digit Check-In Code
+                </h2>
+                <p className="text-xs text-neutral-500">
+                  Ask the host for the 6-digit check-in code shown on their screen upon your arrival.
+                </p>
+              </div>
+
+              <form
+                action="/api/helper/jobs/check-in"
+                method="post"
+                className="space-y-4 max-w-sm"
+              >
+                <input type="hidden" name="bookingId" value={booking.id} />
+                <input
+                  id="checkinCode"
+                  name="code"
+                  required
+                  inputMode="numeric"
+                  pattern="[0-9]{6}"
+                  maxLength={6}
+                  placeholder="••••••"
+                  className="w-full h-14 px-4 rounded-2xl bg-neutral-50 border border-neutral-300 focus:border-black focus:ring-1 focus:ring-black text-center tracking-[0.5em] text-2xl font-mono text-neutral-900 outline-none transition-all"
+                />
+                <button
+                  type="submit"
+                  className="w-full h-12 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm tracking-wide transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                >
+                  Confirm Arrival & Check In
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900">
+                <CheckCircle2 className="size-5 text-emerald-600 shrink-0" />
+                <div>
+                  <p className="text-sm font-bold">You are checked in!</p>
+                  <p className="text-xs text-emerald-700">
+                    Once the cleaning is done and host inspects the work, confirm completion below.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <form action="/api/bookings/confirm" method="post">
+                  <input type="hidden" name="bookingId" value={booking.id} />
+                  <button
+                    type="submit"
+                    className="px-6 h-12 rounded-xl bg-black hover:bg-neutral-800 text-white font-semibold text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                  >
+                    Complete Job
+                  </button>
+                </form>
+
+                <Link
+                  href={`/helper/report?bookingId=${booking.id}`}
+                  className="inline-flex items-center gap-2 px-5 h-12 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs font-semibold transition-colors"
+                >
+                  <ShieldAlert className="size-4 text-neutral-500" />
+                  <span>Report an Issue</span>
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </main>

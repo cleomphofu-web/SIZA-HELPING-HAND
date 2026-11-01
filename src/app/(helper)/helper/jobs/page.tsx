@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { MapPin, Coffee } from "lucide-react";
-import { t } from "@/content/t";
+import { MapPin, Briefcase, CheckCircle2, ArrowRight, Clock, ShieldCheck } from "lucide-react";
 import { requireActor } from "@/server/policies/auth";
 import { getHelperOfferSummaries } from "@/server/views/booking-read";
 
@@ -21,110 +19,166 @@ export default async function HelperJobsPage() {
   const offers = result.ok ? result.data : [];
 
   return (
-    <main className="relative min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-hidden bg-black text-white">
-      {/* SIZA atmospheric background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/images/hero/background%20home%20page%20hero.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center filter brightness-[0.35] contrast-[1.15] scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90 backdrop-blur-[2px]" />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[340px] bg-gradient-to-b from-white/10 to-transparent blur-3xl opacity-50 rounded-full"
-        />
-      </div>
-
-      {/* Space-login liquid glass card */}
-      <div className="relative z-10 w-full max-w-[540px] my-auto mx-auto p-7 sm:p-10 rounded-3xl bg-neutral-950/75 backdrop-blur-2xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent">
-        {/* Brand Eyebrow Pill */}
-        <div className="flex items-center justify-between mb-6">
+    <main className="min-h-screen bg-[#f5f5f5] text-black pb-36 font-sans">
+      {/* Top Header */}
+      <header className="sticky top-0 z-30 bg-black/95 text-white backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5 transition-all">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/helper"
+              className="text-lg font-bold tracking-tighter hover:opacity-80 transition-opacity"
+            >
+              siZa.
+            </Link>
+            <span className="text-white/30" aria-hidden="true">/</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-300">
+              Jobs
+            </span>
+          </div>
           <Link
             href="/helper"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-semibold tracking-wider text-neutral-300 hover:text-white transition-colors uppercase"
+            className="text-xs font-medium text-neutral-300 hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-white/10"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            siZa. Helper
+            ← Back to dashboard
           </Link>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-400">
-            {offers.length} {offers.length === 1 ? "offer" : "offers"}
-          </span>
+        </div>
+      </header>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-12 space-y-6">
+        {/* Title Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="size-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
+                <Briefcase className="size-5" />
+              </div>
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
+                  Available Job Offers
+                </h1>
+                <p className="text-xs text-neutral-500">
+                  Jobs offered to helpers in your suburbs via fair rotation
+                </p>
+              </div>
+            </div>
+            <span className="px-3 py-1 rounded-full bg-neutral-100 text-xs font-semibold text-neutral-700 font-mono">
+              {offers.length} {offers.length === 1 ? "Offer" : "Offers"}
+            </span>
+          </div>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">
-          {t("helper.jobs.title")}
-        </h1>
-        <p className="starter-copy text-sm text-neutral-300 mt-2 leading-relaxed">
-          Open job offers in your service areas. Jobs are awarded to the first helper who accepts.
-        </p>
+        {/* Jobs Table Section */}
+        <div className="bg-white rounded-3xl border border-neutral-200/80 shadow-sm overflow-hidden">
+          {offers.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-neutral-200 bg-neutral-50/80 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                    <th scope="col" className="px-6 py-4">Area / Suburb</th>
+                    <th scope="col" className="px-6 py-4">Slot</th>
+                    <th scope="col" className="px-6 py-4">Total Payout</th>
+                    <th scope="col" className="px-6 py-4">Status</th>
+                    <th scope="col" className="px-6 py-4 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral-100">
+                  {offers.map((offer) => {
+                    const totalCents =
+                      BigInt(offer.payPerHelperCents) +
+                      BigInt(offer.transportPerHelperCents);
+                    const amount = (Number(totalCents) / 100).toLocaleString(
+                      "en-ZA",
+                      {
+                        style: "currency",
+                        currency: "ZAR",
+                      }
+                    );
 
-        {offers.length ? (
-          <ul className="phase-a-list mt-6 space-y-3">
-            {offers.map((offer) => {
-              const amount = (
-                (Number(offer.payPerHelperCents) +
-                  Number(offer.transportPerHelperCents)) /
-                100
-              ).toLocaleString("en-ZA", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              });
+                    return (
+                      <tr
+                        key={`${offer.id}-${offer.slot}`}
+                        className="hover:bg-neutral-50/70 transition-colors group"
+                      >
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2">
+                            <MapPin className="size-4 text-emerald-600 shrink-0" />
+                            <span className="font-semibold text-neutral-900">
+                              {offer.suburb}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-neutral-600 font-mono text-xs">
+                          Slot #{offer.slot}
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="font-bold text-neutral-900">
+                            {amount}
+                          </span>
+                          <span className="block text-[11px] text-neutral-400">
+                            Wage & transport
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+                            <CheckCircle2 className="size-3" />
+                            Available
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <form
+                            action="/api/helper/jobs/accept"
+                            method="post"
+                            className="inline-block"
+                          >
+                            <input
+                              type="hidden"
+                              name="bookingId"
+                              value={offer.id}
+                            />
+                            <input
+                              type="hidden"
+                              name="slot"
+                              value={offer.slot}
+                            />
+                            <button
+                              type="submit"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-all shadow-sm active:scale-[0.98] cursor-pointer"
+                            >
+                              <span>Approve & Accept</span>
+                              <ArrowRight className="size-3.5" />
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="p-12 text-center space-y-3">
+              <Clock className="size-10 text-neutral-400 mx-auto" />
+              <h2 className="text-base font-bold text-neutral-900">
+                No Available Jobs at this Moment
+              </h2>
+              <p className="text-xs text-neutral-500 max-w-md mx-auto leading-relaxed">
+                As soon as a host books cleaning services in your selected suburbs, offers are dispatched fairly and will appear in this table.
+              </p>
+            </div>
+          )}
+        </div>
 
-              return (
-                <li
-                  key={`${offer.id}-${offer.slot}`}
-                  className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white/[0.06] border border-white/15 backdrop-blur-md"
-                >
-                  <div className="space-y-1">
-                    <strong className="text-sm font-semibold text-white flex items-center">
-                      <MapPin className="size-3.5 text-emerald-400 inline mr-1 flex-shrink-0" />
-                      {offer.suburb}
-                    </strong>
-                    <span className="text-xs text-neutral-300 font-medium">
-                      {t("helper.jobs.you_receive", { amount })}
-                    </span>
-                  </div>
-                  <form
-                    action="/api/helper/jobs/accept"
-                    method="post"
-                    className="w-full sm:w-auto"
-                  >
-                    <input type="hidden" name="bookingId" value={offer.id} />
-                    <input type="hidden" name="slot" value={offer.slot} />
-                    <button
-                      className="w-full sm:w-auto px-5 h-10 rounded-xl bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-neutral-200 active:scale-[0.98] transition-all shadow-md"
-                      type="submit"
-                    >
-                      {t("helper.jobs.accept")}
-                    </button>
-                  </form>
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <div className="mt-8 p-6 rounded-2xl bg-white/[0.04] border border-white/10 text-center space-y-2">
-            <Coffee className="size-8 text-neutral-400 mx-auto" />
-            <p className="text-sm text-neutral-200 font-medium">
-              {t("phase_a.empty_jobs")}
+        {/* Guide Notice */}
+        <div className="p-5 rounded-2xl bg-white border border-neutral-200/80 shadow-sm flex items-start gap-3">
+          <ShieldCheck className="size-5 text-emerald-600 shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <p className="text-xs font-bold text-neutral-900">
+              Fair Rotation Policy
             </p>
-            <p className="text-xs text-neutral-400">
-              New offers appear here automatically as hosts create requests.
+            <p className="text-xs text-neutral-500 leading-relaxed">
+              When you click &ldquo;Approve & Accept&rdquo;, the job is immediately assigned to you, and the host&apos;s full address and arrival details will be revealed on your job confirmation page.
             </p>
           </div>
-        )}
-
-        <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400">
-          <Link
-            href="/helper"
-            className="hover:text-white underline underline-offset-4 transition-colors"
-          >
-            ← Back to helper dashboard
-          </Link>
         </div>
       </div>
     </main>

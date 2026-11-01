@@ -1,18 +1,46 @@
 import { redirect } from "next/navigation";
-import { HelperGenderMatchingForm, type HelperMatchingNotice } from "@/components/HelperGenderMatchingForm";
-import { getOwnHelperMatchingView } from "@/server/views/helper-matching-read";
+import { requireActor } from "@/server/policies/auth";
+import { createSupabaseAdminClient } from "@/server/db/admin";
+import { HelperSocialProfile } from "@/components/HelperSocialProfile";
 
-type HelperProfilePageProps = { searchParams: Promise<{ matching?: string | string[] }> };
+export const metadata = { title: "My Profile — siZa." };
 
-export default async function HelperProfilePage({ searchParams }: HelperProfilePageProps) {
-  const [result, query] = await Promise.all([getOwnHelperMatchingView(), searchParams]);
-  if (!result.ok) {
-    if (result.error.code === "unauthenticated") redirect("/login");
-    if (result.error.code === "not_found") redirect("/helper/onboarding");
-    redirect("/helper");
+export default async function HelperProfilePage() {
+  let actor;
+  try {
+    actor = await requireActor();
+  } catch {
+    redirect("/login");
   }
-  const status: HelperMatchingNotice | undefined = query.matching === "saved" || query.matching === "failed" || query.matching === "rate_limited" || query.matching === "unavailable"
-    ? query.matching
-    : undefined;
-  return <HelperGenderMatchingForm enabled={result.data.enabled} currentGroup={result.data.genderMatchGroup} status={status} />;
+  if (actor.role !== "helper") redirect("/");
+
+  const supabase = createSupabaseAdminClient();
+  const [{ data: profile }, { data: helperDetails }] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("id, first_name, last_name, phone")
+      .eq("id", actor.userId)
+      .maybeSingle(),
+    supabase
+      .from("helper_details")
+      .select("status, job_title, suburbs, services, bio")
+      .eq("user_id", actor.userId)
+      .maybeSingle(),
+  ]);
+
+  if (!profile) redirect("/login");
+
+  const profileData = {
+    id: actor.userId,
+    firstName: profile.first_name,
+    lastName: profile.last_name,
+    phone: profile.phone,
+    jobTitle: helperDetails?.job_title || "Professional Helper",
+    suburbs: helperDetails?.suburbs ?? [],
+    services: helperDetails?.services ?? [],
+    bio: helperDetails?.bio ?? "",
+    status: helperDetails?.status ?? "pending",
+  };
+
+  return <HelperSocialProfile profile={profileData} />;
 }

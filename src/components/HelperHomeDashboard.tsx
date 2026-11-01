@@ -7,13 +7,12 @@ import {
   ShieldCheck,
   CheckCircle2,
   Sparkles,
-  Sliders,
-  FileEdit,
-  AlertCircle,
+  Settings,
+  User,
+  Search,
   Banknote,
   Flag,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import type { HelperOfferSummary } from "@/server/views/booking-read";
 
 type HelperHomeDashboardProps = {
@@ -89,13 +88,18 @@ export function HelperHomeDashboard({ profile, helper, offers }: HelperHomeDashb
           <div className="flex items-center gap-2">
             <Link
               href="/helper/profile"
-              className="text-xs font-medium text-neutral-300 hover:text-white transition-colors px-2.5 py-1 rounded-lg hover:bg-white/10"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-300 hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-white/10"
             >
-              Preferences
+              <User className="size-3.5" />
+              <span>Profile</span>
             </Link>
-            <Badge variant="outline" className="text-white/80 border-white/20 text-[11px] font-medium hidden sm:inline-flex">
-              Fair Rotation · Direct Payout
-            </Badge>
+            <Link
+              href="/helper/account"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-300 hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-white/10"
+            >
+              <Settings className="size-3.5" />
+              <span>Settings</span>
+            </Link>
           </div>
         </div>
       </header>
@@ -105,31 +109,27 @@ export function HelperHomeDashboard({ profile, helper, offers }: HelperHomeDashb
         {/* Hero Section */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm relative overflow-hidden">
           <div className="relative z-10 max-w-xl">
-            <div className="flex items-center gap-2 mb-3">
-              <span className={`inline-flex size-2 rounded-full ${isApproved ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`} />
-              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                Johannesburg · {isApproved ? "Active Rotation" : "Profile Setup"}
-              </span>
-            </div>
             <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 mb-3">
               {profile?.firstName ? `Welcome back, ${profile.firstName}` : "Your Helper Workspace"}
             </h1>
             <p className="text-sm sm:text-base text-neutral-600 mb-6 leading-relaxed">
-              See incoming job offers in your suburbs, keep your profile up to date, and track your active bookings.
+              Manage your profile, browse available job requests, and keep your work details up to date.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/helper/jobs"
-                className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-xl bg-black text-white text-sm font-semibold hover:bg-neutral-800 transition-colors shadow-md cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition-all shadow-md shadow-emerald-950/20 active:scale-[0.98] cursor-pointer"
               >
-                <span>View Job Offers</span>
-                <ArrowRight className="size-4" />
+                <Search className="size-4" />
+                <span>Search & View Jobs</span>
+                <ArrowRight className="size-4 ml-0.5 opacity-90" />
               </Link>
               <Link
-                href="/helper/onboarding"
-                className="inline-flex items-center justify-center px-4 h-12 rounded-xl text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 text-sm font-medium transition-colors border border-neutral-200"
+                href="/helper/profile"
+                className="inline-flex items-center justify-center gap-2 px-5 h-12 rounded-xl text-neutral-800 hover:text-black hover:bg-neutral-100 text-sm font-semibold transition-colors border border-neutral-300 shadow-sm"
               >
-                Edit Profile & Suburbs
+                <User className="size-4 text-neutral-500" />
+                <span>View My Profile</span>
               </Link>
             </div>
           </div>
@@ -309,32 +309,32 @@ export function HelperHomeDashboard({ profile, helper, offers }: HelperHomeDashb
         {/* Quick Tools & Settings */}
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Link
-            href="/helper/onboarding"
+            href="/helper/profile"
             className="group p-5 rounded-2xl bg-white border border-neutral-200/80 hover:border-black/30 transition-all shadow-sm space-y-2 block"
           >
-            <div className="size-9 rounded-xl bg-neutral-100 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
-              <FileEdit className="size-4" />
+            <div className="size-9 rounded-xl bg-neutral-100 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+              <User className="size-4" />
             </div>
             <h3 className="text-sm font-semibold text-neutral-900 group-hover:text-black">
-              Profile & Suburbs
+              Profile & Bio
             </h3>
             <p className="text-xs text-neutral-500 leading-relaxed">
-              Update your available suburbs, services, and profile bio.
+              View your public bio, work photos, and experience details.
             </p>
           </Link>
 
           <Link
-            href="/helper/profile"
+            href="/helper/account"
             className="group p-5 rounded-2xl bg-white border border-neutral-200/80 hover:border-black/30 transition-all shadow-sm space-y-2 block"
           >
-            <div className="size-9 rounded-xl bg-neutral-100 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
-              <Sliders className="size-4" />
+            <div className="size-9 rounded-xl bg-neutral-100 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+              <Settings className="size-4" />
             </div>
             <h3 className="text-sm font-semibold text-neutral-900 group-hover:text-black">
-              Optional Preferences
+              Settings & Account
             </h3>
             <p className="text-xs text-neutral-500 leading-relaxed">
-              Manage your optional matching preferences for rotation ties.
+              Manage your login, read helper guides, and adjust account options.
             </p>
           </Link>
 
@@ -342,7 +342,7 @@ export function HelperHomeDashboard({ profile, helper, offers }: HelperHomeDashb
             href="/helper/report"
             className="group p-5 rounded-2xl bg-white border border-neutral-200/80 hover:border-black/30 transition-all shadow-sm space-y-2 block"
           >
-            <div className="size-9 rounded-xl bg-neutral-100 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
+            <div className="size-9 rounded-xl bg-neutral-100 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors">
               <Flag className="size-4" />
             </div>
             <h3 className="text-sm font-semibold text-neutral-900 group-hover:text-black">
@@ -357,3 +357,4 @@ export function HelperHomeDashboard({ profile, helper, offers }: HelperHomeDashb
     </main>
   );
 }
+

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Briefcase, UserCheck, Sliders } from "lucide-react";
+import { Home, Briefcase, User, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type DockItem = {
@@ -20,10 +20,10 @@ const items: DockItem[] = [
     activeMatch: (p) => Boolean(p && p === "/helper"),
   },
   {
-    label: "Setup",
-    href: "/helper/onboarding",
-    icon: UserCheck,
-    activeMatch: (p) => Boolean(p && p.startsWith("/helper/onboarding")),
+    label: "Profile",
+    href: "/helper/profile",
+    icon: User,
+    activeMatch: (p) => Boolean(p && p.startsWith("/helper/profile")),
   },
   {
     label: "Jobs",
@@ -32,10 +32,10 @@ const items: DockItem[] = [
     activeMatch: (p) => Boolean(p && p.startsWith("/helper/jobs")),
   },
   {
-    label: "Preferences",
-    href: "/helper/profile",
-    icon: Sliders,
-    activeMatch: (p) => Boolean(p && p.startsWith("/helper/profile")),
+    label: "Settings",
+    href: "/helper/account",
+    icon: Settings,
+    activeMatch: (p) => Boolean(p && p.startsWith("/helper/account")),
   },
 ];
 
