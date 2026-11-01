@@ -113,9 +113,9 @@ export function AccountForm({
       {/* Liquid Glass Space Card */}
       <div className="relative z-10 w-full max-w-[480px] my-auto mx-auto p-7 sm:p-10 rounded-3xl bg-neutral-950/75 backdrop-blur-2xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent">
         {/* Brand Eyebrow Pill */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[11px] font-semibold tracking-wider text-neutral-300 uppercase">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-6">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-[11px] font-bold tracking-wider text-white uppercase">
             siZa. {signup ? `${roleLabel} Setup` : "Sign In"}
           </span>
         </div>
@@ -124,7 +124,7 @@ export function AccountForm({
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">
           {t(signup ? "account.signup.title" : "account.login.title")}
         </h1>
-        <p className="text-sm text-neutral-300 mt-2 leading-relaxed">
+        <p className="text-sm text-neutral-200 mt-2 leading-relaxed font-normal">
           {t(signup ? "account.signup.body" : "account.login.body")}
         </p>
 
@@ -143,17 +143,17 @@ export function AccountForm({
           </div>
         ) : (
           <form
-            className="phase-a-form mt-7 space-y-4"
+            className="mt-7 space-y-4"
             onSubmit={submit}
           >
             {signup ? (
               <>
                 {/* Role indicator */}
                 <div className="space-y-1.5">
-                  <span className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300">
+                  <span className="block text-xs font-bold uppercase tracking-wider text-neutral-100">
                     {t("account.label.role")}
                   </span>
-                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/[0.06] border border-white/15 text-sm text-white backdrop-blur-md">
+                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-neutral-900/90 border border-neutral-700 text-sm text-white backdrop-blur-md">
                     <span className="font-semibold capitalize text-white">
                       {roleLabel}
                     </span>
@@ -167,7 +167,7 @@ export function AccountForm({
                   <div className="space-y-1.5">
                     <label
                       htmlFor="firstName"
-                      className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300"
+                      className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
                     >
                       {t("account.label.first_name")}
                     </label>
@@ -178,13 +178,13 @@ export function AccountForm({
                       maxLength={80}
                       autoComplete="given-name"
                       placeholder="e.g. Sipho"
-                      className="w-full h-12 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.09] border border-white/15 focus:border-white/40 focus:bg-white/[0.12] focus:ring-1 focus:ring-white/30 text-white placeholder:text-neutral-500 backdrop-blur-md transition-all text-sm outline-none"
+                      className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
                     />
                   </div>
                   <div className="space-y-1.5">
                     <label
                       htmlFor="lastName"
-                      className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300"
+                      className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
                     >
                       {t("account.label.last_name")}
                     </label>
@@ -195,7 +195,7 @@ export function AccountForm({
                       maxLength={120}
                       autoComplete="family-name"
                       placeholder="e.g. Dlamini"
-                      className="w-full h-12 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.09] border border-white/15 focus:border-white/40 focus:bg-white/[0.12] focus:ring-1 focus:ring-white/30 text-white placeholder:text-neutral-500 backdrop-blur-md transition-all text-sm outline-none"
+                      className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
                     />
                   </div>
                 </div>
@@ -204,7 +204,7 @@ export function AccountForm({
                 <div className="space-y-1.5">
                   <label
                     htmlFor="phone"
-                    className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300"
+                    className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
                   >
                     {t("account.label.phone")}
                   </label>
@@ -216,7 +216,7 @@ export function AccountForm({
                     inputMode="tel"
                     autoComplete="tel"
                     placeholder="082 123 4567"
-                    className="w-full h-12 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.09] border border-white/15 focus:border-white/40 focus:bg-white/[0.12] focus:ring-1 focus:ring-white/30 text-white placeholder:text-neutral-500 backdrop-blur-md transition-all text-sm outline-none"
+                    className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
                   />
                 </div>
               </>
@@ -226,7 +226,7 @@ export function AccountForm({
             <div className="space-y-1.5">
               <label
                 htmlFor="email"
-                className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300"
+                className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
               >
                 {t("account.label.email")}
               </label>
@@ -238,7 +238,7 @@ export function AccountForm({
                 maxLength={254}
                 autoComplete="email"
                 placeholder="name@example.com"
-                className="w-full h-12 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.09] border border-white/15 focus:border-white/40 focus:bg-white/[0.12] focus:ring-1 focus:ring-white/30 text-white placeholder:text-neutral-500 backdrop-blur-md transition-all text-sm outline-none"
+                className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
               />
             </div>
 
@@ -246,7 +246,7 @@ export function AccountForm({
             <div className="space-y-1.5">
               <label
                 htmlFor="password"
-                className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300"
+                className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
               >
                 {t("account.label.password")}
               </label>
@@ -259,7 +259,7 @@ export function AccountForm({
                 maxLength={128}
                 autoComplete={signup ? "new-password" : "current-password"}
                 placeholder={signup ? "At least 12 characters" : "••••••••••••"}
-                className="w-full h-12 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.09] border border-white/15 focus:border-white/40 focus:bg-white/[0.12] focus:ring-1 focus:ring-white/30 text-white placeholder:text-neutral-500 backdrop-blur-md transition-all text-sm outline-none"
+                className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
               />
             </div>
 
@@ -274,9 +274,9 @@ export function AccountForm({
                       type="checkbox"
                       name="termsAccepted"
                       required
-                      className="mt-0.5 size-4 rounded border-white/30 bg-white/10 text-black focus:ring-white/30"
+                      className="mt-0.5 size-4 rounded border-white/30 bg-neutral-900 text-white focus:ring-white/30"
                     />
-                    <span className="text-xs text-neutral-300 leading-relaxed group-hover:text-white transition-colors">
+                    <span className="text-xs text-neutral-200 leading-relaxed group-hover:text-white transition-colors">
                       {t("account.label.terms")}
                     </span>
                   </label>
@@ -285,14 +285,14 @@ export function AccountForm({
                       type="checkbox"
                       name="privacyAccepted"
                       required
-                      className="mt-0.5 size-4 rounded border-white/30 bg-white/10 text-black focus:ring-white/30"
+                      className="mt-0.5 size-4 rounded border-white/30 bg-neutral-900 text-white focus:ring-white/30"
                     />
-                    <span className="text-xs text-neutral-300 leading-relaxed group-hover:text-white transition-colors">
+                    <span className="text-xs text-neutral-200 leading-relaxed group-hover:text-white transition-colors">
                       {t("account.label.privacy")}
                     </span>
                   </label>
                 </div>
-                <p className="text-[11px] text-neutral-400 leading-relaxed">
+                <p className="text-xs text-neutral-300 leading-relaxed">
                   {t("account.notice")}
                 </p>
               </>

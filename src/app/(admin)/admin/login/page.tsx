@@ -72,14 +72,14 @@ export default async function AdminLoginPage({
         ) : null}
 
         <form
-          className="siza-form mt-6 space-y-4"
+          className="mt-6 space-y-4"
           action="/api/admin/login"
           method="post"
         >
           <div className="space-y-1.5">
             <label
               htmlFor="email"
-              className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300"
+              className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
             >
               {t("admin.login.email")}
             </label>
@@ -90,14 +90,14 @@ export default async function AdminLoginPage({
               type="email"
               autoComplete="username"
               placeholder="admin@siza.co.za"
-              className="w-full h-12 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.09] border border-white/15 focus:border-white/40 focus:bg-white/[0.12] focus:ring-1 focus:ring-white/30 text-white placeholder:text-neutral-500 backdrop-blur-md transition-all text-sm outline-none"
+              className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
             />
           </div>
 
           <div className="space-y-1.5">
             <label
               htmlFor="password"
-              className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-300"
+              className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
             >
               {t("admin.login.password")}
             </label>
@@ -108,7 +108,7 @@ export default async function AdminLoginPage({
               type="password"
               autoComplete="current-password"
               placeholder="••••••••••••"
-              className="w-full h-12 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.09] border border-white/15 focus:border-white/40 focus:bg-white/[0.12] focus:ring-1 focus:ring-white/30 text-white placeholder:text-neutral-500 backdrop-blur-md transition-all text-sm outline-none"
+              className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
             />
           </div>
 
