@@ -10,6 +10,7 @@ import {
   type BookingReadActor,
   type BookingReadRecord,
   type BookingView,
+  type HelperAssignedJobSummary,
 } from "@/server/views/booking";
 import { expandServiceAliases, helperCanReceiveOffer, helperCanSeeOpenOffer, selectVisibleOpenSlots, type BookingTimeWindow, type HelperOfferEligibilityProfile } from "@/server/services/rotation";
 import { getDatabaseNow } from "@/server/views/database-time";
@@ -399,6 +400,62 @@ export async function getHelperOfferSummaries(): Promise<Result<HelperOfferSumma
     }));
   } catch {
     return fail("internal_error", "We could not load available jobs.");
+  }
+}
+
+export async function getHelperAssignedJobs(): Promise<Result<HelperAssignedJobSummary[]>> {
+  const actor = await authenticatedActor();
+  if (!actor) return fail("unauthenticated", "Please sign in to continue.");
+  if (actor.role !== "helper") return ok([]);
+  try {
+    const client = createSupabaseAdminClient();
+    const { data: assignments, error: assignmentError } = await client
+      .from("booking_assignments")
+      .select("booking_id, slot, status, checked_in_at, created_at")
+      .eq("helper_id", actor.userId)
+      .order("created_at", { ascending: false });
+    if (assignmentError) return fail("internal_error", "We could not load your assigned jobs.");
+    if (!assignments || assignments.length === 0) return ok([]);
+
+    const bookingIds = assignments.map((a) => a.booking_id);
+    const { data: bookings, error: bookingError } = await client
+      .from("phase_a_bookings")
+      .select("id, suburb, address_line, status, start_at, end_at_est, pay_per_helper_cents, transport_per_helper_cents, host_id")
+      .in("id", bookingIds);
+    if (bookingError) return fail("internal_error", "We could not load your assigned jobs.");
+
+    const hostIds = [...new Set((bookings ?? []).map((b) => b.host_id).filter(Boolean))];
+    const { data: hostProfiles } = await client
+      .from("profiles")
+      .select("id, first_name, phone")
+      .in("id", hostIds);
+    const hostsById = new Map((hostProfiles ?? []).map((h) => [h.id, h]));
+    const bookingsById = new Map((bookings ?? []).map((b) => [b.id, b]));
+
+    const summaries: HelperAssignedJobSummary[] = assignments.flatMap((assignment) => {
+      const booking = bookingsById.get(assignment.booking_id);
+      if (!booking) return [];
+      const host = hostsById.get(booking.host_id);
+      return [{
+        bookingId: booking.id,
+        slot: assignment.slot,
+        suburb: booking.suburb,
+        addressLine: booking.address_line,
+        status: booking.status,
+        assignmentStatus: assignment.status,
+        startAt: booking.start_at,
+        endAt: booking.end_at_est,
+        payPerHelperCents: booking.pay_per_helper_cents,
+        transportPerHelperCents: booking.transport_per_helper_cents,
+        checkedInAt: assignment.checked_in_at,
+        hostFirstName: host?.first_name,
+        hostPhone: host?.phone,
+      }];
+    });
+
+    return ok(summaries);
+  } catch {
+    return fail("internal_error", "We could not load your assigned jobs.");
   }
 }
 

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { MapPin, Briefcase, CheckCircle2, ArrowRight, Clock, ShieldCheck } from "lucide-react";
+import { MapPin, Briefcase, CheckCircle2, ArrowRight, Clock, ShieldCheck, KeyRound } from "lucide-react";
 import { requireActor } from "@/server/policies/auth";
-import { getHelperOfferSummaries } from "@/server/views/booking-read";
+import { getHelperAssignedJobs, getHelperOfferSummaries } from "@/server/views/booking-read";
 
 export const metadata = { title: "Available Jobs — siZa." };
 
@@ -15,8 +15,12 @@ export default async function HelperJobsPage() {
   }
   if (actor.role !== "helper") redirect("/");
 
-  const result = await getHelperOfferSummaries();
-  const offers = result.ok ? result.data : [];
+  const [offersResult, assignedResult] = await Promise.all([
+    getHelperOfferSummaries(),
+    getHelperAssignedJobs(),
+  ]);
+  const offers = offersResult.ok ? offersResult.data : [];
+  const assignedJobs = assignedResult.ok ? assignedResult.data : [];
 
   return (
     <main className="min-h-screen bg-[#f5f5f5] text-black pb-36 font-sans">
@@ -45,6 +49,98 @@ export default async function HelperJobsPage() {
       </header>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-12 space-y-6">
+        {/* Active & Assigned Jobs */}
+        {assignedJobs.length > 0 && (
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-emerald-200 shadow-sm space-y-4">
+            <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="size-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                  <KeyRound className="size-5" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900">
+                    My Assigned Jobs
+                  </h2>
+                  <p className="text-xs text-neutral-500">
+                    Jobs accepted by you. Enter check-in code upon arrival.
+                  </p>
+                </div>
+              </div>
+              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold font-mono">
+                {assignedJobs.length} {assignedJobs.length === 1 ? "Active Job" : "Active Jobs"}
+              </span>
+            </div>
+
+            <div className="space-y-3 pt-1">
+              {assignedJobs.map((job) => {
+                const totalCents = BigInt(job.payPerHelperCents) + BigInt(job.transportPerHelperCents);
+                const amount = (Number(totalCents) / 100).toLocaleString("en-ZA", {
+                  style: "currency",
+                  currency: "ZAR",
+                });
+                const isCheckedIn = Boolean(job.checkedInAt);
+                const isCompleted = job.status === "completed" || job.assignmentStatus === "completed";
+
+                return (
+                  <div
+                    key={`${job.bookingId}-${job.slot}`}
+                    className="p-4 sm:p-5 rounded-2xl border border-neutral-200 bg-neutral-50/70 hover:border-black/30 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  >
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="size-4 text-emerald-600 shrink-0" />
+                        <span className="font-bold text-neutral-900 text-base">
+                          {job.suburb}
+                        </span>
+                        {job.addressLine && (
+                          <span className="text-xs text-neutral-600">
+                            · {job.addressLine}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-500">
+                        <span>Slot #{job.slot}</span>
+                        <span>·</span>
+                        <span className="font-semibold text-neutral-900">{amount}</span>
+                        <span>·</span>
+                        <span className="capitalize">{job.status.replace("_", " ")}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      {!isCheckedIn && !isCompleted ? (
+                        <Link
+                          href={`/helper/jobs/${job.bookingId}`}
+                          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-all shadow-sm active:scale-[0.98]"
+                        >
+                          <KeyRound className="size-3.5" />
+                          <span>Enter Check-In Code →</span>
+                        </Link>
+                      ) : isCompleted ? (
+                        <Link
+                          href={`/helper/jobs/${job.bookingId}`}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-300 text-neutral-800 font-semibold text-xs transition-colors"
+                        >
+                          <CheckCircle2 className="size-3.5 text-neutral-600" />
+                          <span>View Completed</span>
+                        </Link>
+                      ) : (
+                        <Link
+                          href={`/helper/jobs/${job.bookingId}`}
+                          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white font-semibold text-xs transition-all shadow-sm active:scale-[0.98]"
+                        >
+                          <CheckCircle2 className="size-3.5 text-emerald-400" />
+                          <span>Checked In · Complete →</span>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* Title Card */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-2">
           <div className="flex items-center justify-between">

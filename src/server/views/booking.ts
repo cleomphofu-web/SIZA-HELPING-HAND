@@ -69,6 +69,22 @@ export type HelperBookingView = {
   checkedInAt?: string | null;
 };
 
+export type HelperAssignedJobSummary = {
+  bookingId: string;
+  slot: number;
+  suburb: string;
+  addressLine?: string;
+  status: string;
+  assignmentStatus: string;
+  startAt: string;
+  endAt: string;
+  payPerHelperCents: number | string;
+  transportPerHelperCents: number | string;
+  checkedInAt: string | null;
+  hostFirstName?: string;
+  hostPhone?: string;
+};
+
 export type AdminBookingView = {
   audience: "admin";
   id: string;
