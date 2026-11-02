@@ -222,7 +222,7 @@ export function HelperHomeDashboard({ profile, helper, offers }: HelperHomeDashb
                 const rands = (Number(totalCents) / 100).toFixed(0);
                 return (
                   <div
-                    key={offer.id}
+                    key={`${offer.id}-${offer.slot}`}
                     className="p-5 rounded-2xl border border-neutral-200 hover:border-black/30 transition-all space-y-3 bg-neutral-50/50"
                   >
                     <div className="flex items-center justify-between">
@@ -237,10 +237,10 @@ export function HelperHomeDashboard({ profile, helper, offers }: HelperHomeDashb
                       Slot #{offer.slot} · Includes pay and transport allowance
                     </p>
                     <Link
-                      href={`/helper/jobs/${offer.id}`}
+                      href="/helper/jobs"
                       className="inline-flex items-center justify-center w-full py-2.5 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 transition-colors"
                     >
-                      Review Offer →
+                      Review & Accept Offer →
                     </Link>
                   </div>
                 );
