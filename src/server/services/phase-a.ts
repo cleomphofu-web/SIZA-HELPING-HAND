@@ -3,6 +3,8 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { z } from "zod";
 import type { checkInCodeRequestSchema, confirmBookingSchema, helperProfileSchema, hostAccountSchema, hostProfileSchema, noShowResolutionSchema, noShowSchema, phaseABookingSchema, reportSchema, repeatIntentSchema, bookAgainSchema } from "@/lib/schemas";
+import type { CancelBookingInput, EditBookingNotesInput } from "@/server/domain/host-booking-manage";
+import type { HelperVoucherSubmissionInput } from "@/server/domain/voucher-subscription";
 import { fail, ok, type Result } from "@/server/services/result";
 import { canAcceptJob } from "@/server/services/subscription";
 import { env } from "@/server/config/env";
@@ -521,4 +523,109 @@ export async function createBookAgainBooking(
   // (If offer expires or is declined, standard rotation takes over automatically)
 
   return ok({ bookingId: newBookingId });
+}
+
+/**
+ * Host cancels a booking. Allowed when booking is 'open' or 'assigned' (prior to check-in).
+ */
+export async function cancelPhaseABookingByHost(
+  client: Db,
+  hostId: string,
+  input: CancelBookingInput,
+): Promise<Result<{ cancelled: boolean }>> {
+  const { data: booking, error: bookingError } = await client
+    .from("phase_a_bookings")
+    .select("id, host_id, status")
+    .eq("id", input.bookingId)
+    .eq("host_id", hostId)
+    .maybeSingle();
+
+  if (bookingError || !booking) return fail("not_found", "We could not find that booking.");
+
+  if (booking.status !== "open" && booking.status !== "assigned") {
+    return fail("conflict", "This booking cannot be cancelled in its current state.");
+  }
+
+  // Update booking status to cancelled
+  const { error: updateError } = await client
+    .from("phase_a_bookings")
+    .update({ status: "cancelled", updated_at: new Date().toISOString() })
+    .eq("id", input.bookingId);
+
+  if (updateError) return fail("internal_error", "Failed to cancel booking. Try again.");
+
+  // Cancel any active assignments
+  await client
+    .from("booking_assignments")
+    .update({ status: "cancelled" })
+    .eq("booking_id", input.bookingId)
+    .in("status", ["accepted"]);
+
+  return ok({ cancelled: true });
+}
+
+/**
+ * Host edits access notes on a booking.
+ */
+export async function editPhaseABookingNotesByHost(
+  client: Db,
+  hostId: string,
+  input: EditBookingNotesInput,
+): Promise<Result<{ updated: boolean }>> {
+  const { data: booking, error: bookingError } = await client
+    .from("phase_a_bookings")
+    .select("id, host_id, status")
+    .eq("id", input.bookingId)
+    .eq("host_id", hostId)
+    .maybeSingle();
+
+  if (bookingError || !booking) return fail("not_found", "We could not find that booking.");
+
+  if (["completed", "cancelled", "expired"].includes(booking.status)) {
+    return fail("conflict", "This booking can no longer be edited.");
+  }
+
+  const { error: updateError } = await client
+    .from("phase_a_bookings")
+    .update({ access_notes: input.accessNotes, updated_at: new Date().toISOString() })
+    .eq("id", input.bookingId);
+
+  if (updateError) return fail("internal_error", "Failed to update booking notes.");
+
+  return ok({ updated: true });
+}
+
+/**
+ * Helper submits prepaid subscription voucher (1voucher, ott, blu_voucher).
+ */
+export async function submitHelperVoucher(
+  client: Db,
+  helperId: string,
+  input: HelperVoucherSubmissionInput,
+): Promise<Result<{ submissionId: string; status: string }>> {
+  const { data: helper, error: helperError } = await client
+    .from("helper_details")
+    .select("user_id, status")
+    .eq("user_id", helperId)
+    .maybeSingle();
+
+  if (helperError || !helper) return fail("not_found", "Helper profile not found.");
+
+  const { data, error } = await client
+    .from("phase_a_voucher_submissions")
+    .insert({
+      helper_id: helperId,
+      provider: input.provider,
+      voucher_pin: input.pin,
+      period_months: input.periodMonths,
+      status: "pending",
+    })
+    .select("id, status")
+    .single();
+
+  if (error || !data) {
+    return fail("internal_error", "Could not submit voucher. Please try again.");
+  }
+
+  return ok({ submissionId: data.id, status: data.status });
 }

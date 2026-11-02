@@ -24,7 +24,7 @@ export default async function HelperAppPage() {
       .maybeSingle(),
     supabase
       .from("helper_details")
-      .select("status, suburbs, services, job_title, bio")
+      .select("status, suburbs, services, job_title, bio, first_job_completed_at, subscription_status, subscription_paid_until")
       .eq("user_id", actor.userId)
       .maybeSingle(),
     getHelperOfferSummaries(),
@@ -47,6 +47,9 @@ export default async function HelperAppPage() {
         services: helperDetails.services ?? [],
         jobTitle: helperDetails.job_title,
         bio: helperDetails.bio,
+        firstJobCompletedAt: helperDetails.first_job_completed_at,
+        subscriptionStatus: helperDetails.subscription_status,
+        subscriptionPaidUntil: helperDetails.subscription_paid_until,
       }
     : null;
 

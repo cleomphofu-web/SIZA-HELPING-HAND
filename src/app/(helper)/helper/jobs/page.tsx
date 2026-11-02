@@ -2,7 +2,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { MapPin, Briefcase, CheckCircle2, ArrowRight, Clock, ShieldCheck, KeyRound } from "lucide-react";
 import { requireActor } from "@/server/policies/auth";
+import { createSupabaseAdminClient } from "@/server/db/admin";
 import { getHelperAssignedJobs, getHelperOfferSummaries } from "@/server/views/booking-read";
+import { HelperSubscriptionBanner } from "@/components/HelperSubscriptionBanner";
 
 export const metadata = { title: "Available Jobs — siZa." };
 
@@ -15,7 +17,13 @@ export default async function HelperJobsPage() {
   }
   if (actor.role !== "helper") redirect("/");
 
-  const [offersResult, assignedResult] = await Promise.all([
+  const supabase = createSupabaseAdminClient();
+  const [{ data: helperDetails }, offersResult, assignedResult] = await Promise.all([
+    supabase
+      .from("helper_details")
+      .select("first_job_completed_at, subscription_status, subscription_paid_until")
+      .eq("user_id", actor.userId)
+      .maybeSingle(),
     getHelperOfferSummaries(),
     getHelperAssignedJobs(),
   ]);
@@ -49,6 +57,13 @@ export default async function HelperJobsPage() {
       </header>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-12 space-y-6">
+        {/* Subscription / Plan Status Banner */}
+        <HelperSubscriptionBanner
+          firstJobCompletedAt={helperDetails?.first_job_completed_at ?? null}
+          subscriptionStatus={helperDetails?.subscription_status ?? "none"}
+          subscriptionPaidUntil={helperDetails?.subscription_paid_until ?? null}
+        />
+
         {/* Active & Assigned Jobs */}
         {assignedJobs.length > 0 && (
           <div className="bg-white rounded-3xl p-6 sm:p-8 border border-emerald-200 shadow-sm space-y-4">

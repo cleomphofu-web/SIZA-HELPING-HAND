@@ -19,6 +19,7 @@ import {
 import type { HelperOfferSummary } from "@/server/views/booking-read";
 import type { HelperAssignedJobSummary } from "@/server/views/booking";
 import type { HelperMetrics } from "@/server/views/booking-read";
+import { HelperSubscriptionBanner } from "@/components/HelperSubscriptionBanner";
 
 type HelperHomeDashboardProps = {
   profile: {
@@ -32,6 +33,9 @@ type HelperHomeDashboardProps = {
     services: string[];
     jobTitle: string;
     bio: string | null;
+    firstJobCompletedAt?: string | null;
+    subscriptionStatus?: string;
+    subscriptionPaidUntil?: string | null;
   } | null;
   offers: HelperOfferSummary[];
   assignedJobs?: HelperAssignedJobSummary[];
@@ -141,6 +145,13 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
             </div>
           </div>
         </div>
+
+        {/* Subscription / Plan Status Banner */}
+        <HelperSubscriptionBanner
+          firstJobCompletedAt={helper?.firstJobCompletedAt ?? null}
+          subscriptionStatus={helper?.subscriptionStatus ?? "none"}
+          subscriptionPaidUntil={helper?.subscriptionPaidUntil ?? null}
+        />
 
         {/* Quick Stats Grid */}
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
