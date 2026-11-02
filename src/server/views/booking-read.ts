@@ -459,6 +459,50 @@ export async function getHelperAssignedJobs(): Promise<Result<HelperAssignedJobS
   }
 }
 
+export type HelperMetrics = {
+  completedJobs: number;
+  totalEarningsCents: number;
+  acceptedJobs: number;
+};
+
+export async function getHelperMetrics(): Promise<Result<HelperMetrics>> {
+  const actor = await authenticatedActor();
+  if (!actor) return fail("unauthenticated", "Please sign in to continue.");
+  if (actor.role !== "helper") return fail("forbidden", "Not a helper account.");
+  try {
+    const client = createSupabaseAdminClient();
+    const { data: assignments, error } = await client
+      .from("booking_assignments")
+      .select("status, booking_id")
+      .eq("helper_id", actor.userId)
+      .in("status", ["accepted", "completed"]);
+    if (error) return fail("internal_error", "We could not load your metrics.");
+    const rows = assignments ?? [];
+    const completedIds = rows
+      .filter((a) => a.status === "completed")
+      .map((a) => a.booking_id);
+    const acceptedJobs = rows.length;
+    const completedJobs = completedIds.length;
+
+    let totalEarningsCents = 0;
+    if (completedIds.length > 0) {
+      const { data: bookings, error: bookingError } = await client
+        .from("phase_a_bookings")
+        .select("pay_per_helper_cents, transport_per_helper_cents")
+        .in("id", completedIds);
+      if (bookingError) return fail("internal_error", "We could not load your metrics.");
+      for (const b of bookings ?? []) {
+        totalEarningsCents +=
+          Number(b.pay_per_helper_cents) + Number(b.transport_per_helper_cents);
+      }
+    }
+
+    return ok({ completedJobs, totalEarningsCents, acceptedJobs });
+  } catch {
+    return fail("internal_error", "We could not load your metrics.");
+  }
+}
+
 export async function getAdminBookingSummaries(): Promise<Result<AdminBookingSummary[]>> {
   const actor = await authenticatedActor();
   if (!actor) return fail("unauthenticated", "Please sign in to continue.");

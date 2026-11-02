@@ -189,3 +189,16 @@ export const reportSchema = z.object({
   category: z.enum(["no_show", "safety", "payment", "conduct", "other"]),
   text: z.string().trim().min(1).max(3000),
 }).strict();
+
+/** Host post-job private survey: "Would you book this helper again through SIZA?" */
+export const repeatIntentSchema = z.object({
+  bookingId: z.string().uuid(),
+  helperId: z.string().uuid(),
+  intent: z.enum(["yes", "no"]),
+}).strict();
+
+/** Host "Book Again" request — creates a new booking pre-filled from a past one */
+export const bookAgainSchema = z.object({
+  sourceBookingId: z.string().uuid(),
+  helperId: z.string().uuid(),
+}).strict();

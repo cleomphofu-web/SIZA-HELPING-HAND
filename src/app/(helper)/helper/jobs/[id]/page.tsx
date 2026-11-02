@@ -28,7 +28,7 @@ export default async function HelperJobDetailPage({
 
   const { id } = await params;
   const result = await getBookingView(id);
-  if (!result.ok || result.data.audience !== "helper" || !result.data.address) {
+  if (!result.ok || result.data.audience !== "helper") {
     notFound();
   }
   const booking = result.data;
@@ -73,7 +73,7 @@ export default async function HelperJobDetailPage({
             </div>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 self-start sm:self-auto">
               <CheckCircle2 className="size-3.5" />
-              {booking.checkedInAt ? "Checked In" : "Assigned to You"}
+              {booking.status === "completed" ? "Completed Job" : booking.checkedInAt ? "Checked In" : "Assigned to You"}
             </span>
           </div>
 
@@ -85,7 +85,7 @@ export default async function HelperJobDetailPage({
                 Service Address
               </span>
               <p className="font-semibold text-neutral-900 leading-relaxed">
-                {booking.address}
+                {booking.address || "Address protected after completion"}
               </p>
             </div>
 
@@ -103,7 +103,34 @@ export default async function HelperJobDetailPage({
 
         {/* Check-In / Completion Action Card */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">
-          {!booking.checkedInAt ? (
+          {booking.status === "completed" ? (
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900">
+                <CheckCircle2 className="size-5 text-emerald-600 shrink-0" />
+                <div>
+                  <p className="text-sm font-bold">Job Completed & Confirmed</p>
+                  <p className="text-xs text-emerald-700">
+                    This job has been marked complete. Direct wage and transport allowance have been confirmed with the host.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 pt-2">
+                <Link
+                  href="/helper/jobs"
+                  className="px-5 py-2.5 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 transition-colors"
+                >
+                  ← Back to Available Jobs
+                </Link>
+                <Link
+                  href={`/helper/report?bookingId=${booking.id}`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs font-semibold transition-colors"
+                >
+                  <ShieldAlert className="size-4 text-neutral-500" />
+                  <span>Report an Issue</span>
+                </Link>
+              </div>
+            </div>
+          ) : !booking.checkedInAt ? (
             <div className="space-y-4">
               <div className="space-y-1">
                 <h2 className="text-lg font-bold text-neutral-900 flex items-center gap-2">

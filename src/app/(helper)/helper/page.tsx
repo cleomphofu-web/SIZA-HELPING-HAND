@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { requireActor } from "@/server/policies/auth";
 import { createSupabaseAdminClient } from "@/server/db/admin";
-import { getHelperAssignedJobs, getHelperOfferSummaries } from "@/server/views/booking-read";
+import { getHelperAssignedJobs, getHelperMetrics, getHelperOfferSummaries } from "@/server/views/booking-read";
 import { HelperHomeDashboard } from "@/components/HelperHomeDashboard";
 
 export const metadata = { title: "Helper Dashboard — siZa." };
@@ -16,7 +16,7 @@ export default async function HelperAppPage() {
   if (actor.role !== "helper") redirect("/");
 
   const supabase = createSupabaseAdminClient();
-  const [{ data: profile }, { data: helperDetails }, offersResult, assignedResult] = await Promise.all([
+  const [{ data: profile }, { data: helperDetails }, offersResult, assignedResult, metricsResult] = await Promise.all([
     supabase
       .from("profiles")
       .select("first_name, last_name, phone")
@@ -29,6 +29,7 @@ export default async function HelperAppPage() {
       .maybeSingle(),
     getHelperOfferSummaries(),
     getHelperAssignedJobs(),
+    getHelperMetrics(),
   ]);
 
   const mappedProfile = profile
@@ -51,6 +52,7 @@ export default async function HelperAppPage() {
 
   const offers = offersResult.ok ? offersResult.data : [];
   const assignedJobs = assignedResult.ok ? assignedResult.data : [];
+  const metrics = metricsResult.ok ? metricsResult.data : null;
 
   return (
     <HelperHomeDashboard
@@ -58,6 +60,7 @@ export default async function HelperAppPage() {
       helper={mappedHelper}
       offers={offers}
       assignedJobs={assignedJobs}
+      metrics={metrics}
     />
   );
 }

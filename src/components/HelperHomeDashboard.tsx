@@ -14,9 +14,11 @@ import {
   Flag,
   KeyRound,
   Navigation,
+  TrendingUp,
 } from "lucide-react";
 import type { HelperOfferSummary } from "@/server/views/booking-read";
 import type { HelperAssignedJobSummary } from "@/server/views/booking";
+import type { HelperMetrics } from "@/server/views/booking-read";
 
 type HelperHomeDashboardProps = {
   profile: {
@@ -33,6 +35,7 @@ type HelperHomeDashboardProps = {
   } | null;
   offers: HelperOfferSummary[];
   assignedJobs?: HelperAssignedJobSummary[];
+  metrics?: HelperMetrics | null;
 };
 
 const guideCards = [
@@ -66,7 +69,7 @@ const guideCards = [
   },
 ];
 
-export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = [] }: HelperHomeDashboardProps) {
+export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = [], metrics }: HelperHomeDashboardProps) {
   const isApproved = helper?.status === "approved";
   const isPending = helper?.status === "pending" || !helper;
   const suburbsCount = helper?.suburbs?.length ?? 0;
@@ -199,6 +202,49 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
             </p>
           </div>
         </section>
+
+        {/* Helper Metrics Card — platform value loop */}
+        {metrics ? (
+          <section className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">
+            <div className="flex items-center gap-2 border-b border-neutral-100 pb-4">
+              <div className="size-8 rounded-xl bg-neutral-900 text-white flex items-center justify-center">
+                <TrendingUp className="size-4" />
+              </div>
+              <div>
+                <h2 className="text-lg font-bold tracking-tight text-neutral-900">Your Platform Metrics</h2>
+                <p className="text-xs text-neutral-500">Jobs completed and value through SIZA</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Jobs Done</span>
+                <p className="text-2xl font-bold text-neutral-900">{metrics.completedJobs}</p>
+                <p className="text-xs text-neutral-500">Completed via SIZA</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Active Jobs</span>
+                <p className="text-2xl font-bold text-neutral-900">{metrics.acceptedJobs - metrics.completedJobs}</p>
+                <p className="text-xs text-neutral-500">Currently assigned</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-100 space-y-1 col-span-2 sm:col-span-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-emerald-600">Total Earned</span>
+                <p className="text-2xl font-bold text-emerald-900">
+                  R{(metrics.totalEarningsCents / 100).toFixed(0)}
+                </p>
+                <p className="text-xs text-emerald-700">Paid directly by hosts</p>
+              </div>
+            </div>
+            <div className="p-4 rounded-2xl bg-neutral-900 text-white space-y-2">
+              <p className="text-xs font-bold uppercase tracking-wider text-white/60">Platform Benefits</p>
+              <ul className="space-y-1.5 text-xs text-white/80 leading-relaxed">
+                <li>✓ Fair rotation — jobs come to you, no chasing</li>
+                <li>✓ Platform-verified reviews and ratings (coming soon)</li>
+                <li>✓ Direct full pay — no agency deductions</li>
+                <li>✓ Dispute support and job-cancellation protection</li>
+              </ul>
+            </div>
+          </section>
+        ) : null}
 
         {/* My Assigned / Active Jobs Section */}
         {assignedJobs.length > 0 && (

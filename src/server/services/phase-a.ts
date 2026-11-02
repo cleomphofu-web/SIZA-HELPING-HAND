@@ -2,7 +2,7 @@ import "server-only";
 
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { z } from "zod";
-import type { checkInCodeRequestSchema, confirmBookingSchema, helperProfileSchema, hostAccountSchema, hostProfileSchema, noShowResolutionSchema, noShowSchema, phaseABookingSchema, reportSchema } from "@/lib/schemas";
+import type { checkInCodeRequestSchema, confirmBookingSchema, helperProfileSchema, hostAccountSchema, hostProfileSchema, noShowResolutionSchema, noShowSchema, phaseABookingSchema, reportSchema, repeatIntentSchema, bookAgainSchema } from "@/lib/schemas";
 import { fail, ok, type Result } from "@/server/services/result";
 import { canAcceptJob } from "@/server/services/subscription";
 import { env } from "@/server/config/env";
@@ -30,6 +30,8 @@ type CheckInCodeRequest = z.infer<typeof checkInCodeRequestSchema>;
 type ConfirmBookingInput = z.infer<typeof confirmBookingSchema>;
 type NoShowInput = z.infer<typeof noShowSchema>;
 type NoShowResolutionInput = z.infer<typeof noShowResolutionSchema>;
+type RepeatIntentInput = z.infer<typeof repeatIntentSchema>;
+type BookAgainInput = z.infer<typeof bookAgainSchema>;
 
 function nestedProfileRole(value: unknown): string {
   const profile = Array.isArray(value) ? value[0] : value;
@@ -401,4 +403,122 @@ export async function checkInPhaseABooking(client: Db, helperId: string, input: 
       : fail("conflict", "That code was not accepted. Check the code and try again.");
   }
   return ok({ checkedIn: true });
+}
+
+/**
+ * Record a host's private "Would you book this helper again?" survey answer.
+ * Only the booking's host may submit; the answer is never exposed to helpers.
+ */
+export async function recordRepeatIntent(
+  client: Db,
+  hostId: string,
+  input: RepeatIntentInput,
+): Promise<Result<{ recorded: boolean }>> {
+  // Verify the host owns this booking and it is completed
+  const { data: booking, error: bookingError } = await client
+    .from("phase_a_bookings")
+    .select("id, host_id, status")
+    .eq("id", input.bookingId)
+    .eq("host_id", hostId)
+    .eq("status", "completed")
+    .maybeSingle();
+  if (bookingError || !booking) return fail("not_found", "We could not find that booking.");
+
+  // Verify the helper was actually assigned and completed the job
+  const { data: assignment, error: assignmentError } = await client
+    .from("booking_assignments")
+    .select("id")
+    .eq("booking_id", input.bookingId)
+    .eq("helper_id", input.helperId)
+    .eq("status", "completed")
+    .maybeSingle();
+  if (assignmentError || !assignment) return fail("not_found", "We could not find that assignment.");
+
+  const { error: updateError } = await client
+    .from("booking_assignments")
+    .update({ repeat_intent: input.intent === "yes" })
+    .eq("id", assignment.id);
+  if (updateError) return fail("internal_error", "We could not save your feedback. Try again in a minute.");
+
+  return ok({ recorded: true });
+}
+
+/**
+ * "Book Again" — creates a new booking pre-filled from a previously completed one,
+ * with the chosen helper receiving the first offer window.
+ * Only available to hosts with ≥3 completed bookings.
+ */
+export async function createBookAgainBooking(
+  client: Db,
+  hostId: string,
+  input: BookAgainInput,
+): Promise<Result<{ bookingId: string }>> {
+  // Gate: host must have ≥3 completed bookings
+  const { count, error: countError } = await client
+    .from("phase_a_bookings")
+    .select("id", { count: "exact", head: true })
+    .eq("host_id", hostId)
+    .eq("status", "completed");
+  if (countError) return fail("internal_error", "We could not check your booking history.");
+  if ((count ?? 0) < 3) return fail("forbidden", "The \"Book Again\" feature is available after your 3rd completed booking.");
+
+  // Load the source booking — must belong to this host and be completed
+  const { data: source, error: sourceError } = await client
+    .from("phase_a_bookings")
+    .select("id, suburb, city, address_line, access_notes, services, helpers_needed, pay_per_helper_cents, transport_per_helper_cents")
+    .eq("id", input.sourceBookingId)
+    .eq("host_id", hostId)
+    .eq("status", "completed")
+    .maybeSingle();
+  if (sourceError || !source) return fail("not_found", "We could not find that booking.");
+
+  // Verify the preferred helper is still approved and covers the suburb
+  const { data: helperDetails, error: helperError } = await client
+    .from("helper_details")
+    .select("status, suburbs, services")
+    .eq("user_id", input.helperId)
+    .maybeSingle();
+  if (helperError || !helperDetails) return fail("not_found", "We could not find that helper.");
+  if (helperDetails.status !== "approved") return fail("conflict", "That helper is not currently available.");
+  if (!helperDetails.suburbs.includes(source.suburb))
+    return fail("conflict", "That helper does not cover this suburb.");
+
+  // Create the new booking — start_at set 7 days from now at 08:00 SAST as a placeholder
+  // Host will still need to confirm timing in their dashboard
+  const startPlaceholder = new Date();
+  startPlaceholder.setUTCDate(startPlaceholder.getUTCDate() + 7);
+  startPlaceholder.setUTCHours(6, 0, 0, 0); // 06:00 UTC = 08:00 SAST
+  const endPlaceholder = new Date(startPlaceholder.getTime() + 4 * 60 * 60 * 1000); // +4h estimate
+
+  const newBookingId = randomUUID();
+  const { error: insertError } = await client.from("phase_a_bookings").insert({
+    id: newBookingId,
+    host_id: hostId,
+    suburb: source.suburb,
+    city: source.city,
+    address_line: source.address_line,
+    access_notes: source.access_notes,
+    services: source.services,
+    helpers_needed: source.helpers_needed,
+    pay_per_helper_cents: source.pay_per_helper_cents,
+    transport_per_helper_cents: source.transport_per_helper_cents,
+    start_at: startPlaceholder.toISOString(),
+    end_at_est: endPlaceholder.toISOString(),
+    status: "open",
+  });
+  if (insertError) return fail("internal_error", "We could not create your booking. Try again in a minute.");
+
+  // Give the preferred helper the first offer slot (offer_round = 0, expires in 30 min)
+  const offerExpiresAt = new Date(Date.now() + 30 * 60 * 1000);
+  await client.from("booking_offers").insert({
+    booking_id: newBookingId,
+    helper_id: input.helperId,
+    slot: 1,
+    offer_round: 0,
+    offered_at: new Date().toISOString(),
+    expires_at: offerExpiresAt.toISOString(),
+  });
+  // (If offer expires or is declined, standard rotation takes over automatically)
+
+  return ok({ bookingId: newBookingId });
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, MapPin, Calendar, Clock, DollarSign, KeyRound, ShieldAlert, PhoneCall } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Clock, DollarSign, KeyRound, ShieldAlert, PhoneCall, RefreshCw, Star } from "lucide-react";
 import { CheckInCodeForm } from "@/components/CheckInCodeForm";
 import { t } from "@/content/t";
 import { formatZarCents } from "@/lib/money";
@@ -7,7 +7,7 @@ import { formatHostBookingDate, hostBookingStatusCopy } from "@/lib/host-booking
 import type { HostBookingView } from "@/server/views/booking";
 import { Badge } from "@/components/ui/badge";
 
-export function HostRequestDetails({ booking, notice }: { booking: HostBookingView; notice?: string }) {
+export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: { booking: HostBookingView; notice?: string; hostCompletedJobs?: number }) {
   return (
     <main className="min-h-screen bg-[#f5f5f5] text-black pb-36 font-sans phase-a-shell">
       {/* Top Header */}
@@ -215,6 +215,74 @@ export function HostRequestDetails({ booking, notice }: { booking: HostBookingVi
                   </div>
                 );
               })}
+            </section>
+          ) : null}
+
+          {/* Post-Job Survey + Book Again (completed bookings only) */}
+          {booking.status === "completed" && booking.assignedHelpers.length > 0 ? (
+            <section className="space-y-4" aria-labelledby="post-job-section-title">
+              <h2 id="post-job-section-title" className="text-sm font-semibold uppercase tracking-wider text-neutral-700 flex items-center gap-2">
+                <Star className="size-4 text-amber-500" />
+                After Your Booking
+              </h2>
+
+              {/* Private "Book Again?" survey — one per assigned helper */}
+              {booking.assignedHelpers.map((helper) => (
+                <div key={helper.helperId} className="p-5 rounded-2xl bg-amber-50 border border-amber-200 space-y-3">
+                  <p className="text-sm font-medium text-amber-900">
+                    Would you book <strong>{helper.firstName}</strong> again through SIZA?
+                  </p>
+                  <p className="text-xs text-amber-700">
+                    This is private feedback that helps us highlight reliable helpers and improve rotation quality.
+                  </p>
+                  <form action="/api/host/repeat-intent" method="post" className="flex items-center gap-3">
+                    <input type="hidden" name="bookingId" value={booking.id} />
+                    <input type="hidden" name="helperId" value={helper.helperId} />
+                    <button
+                      name="intent"
+                      value="yes"
+                      type="submit"
+                      className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors shadow-sm"
+                    >
+                      👍 Yes, definitely
+                    </button>
+                    <button
+                      name="intent"
+                      value="no"
+                      type="submit"
+                      className="px-5 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-300 text-neutral-700 text-xs font-semibold transition-colors"
+                    >
+                      Not this time
+                    </button>
+                  </form>
+                </div>
+              ))}
+
+              {/* Book Again — available after 3 completed bookings */}
+              {hostCompletedJobs >= 3 && booking.assignedHelpers.map((helper) => (
+                <div key={`book-again-${helper.helperId}`} className="p-5 rounded-2xl bg-white border border-neutral-200 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <RefreshCw className="size-4 text-emerald-600" />
+                    <p className="text-sm font-semibold text-neutral-900">
+                      Book <strong>{helper.firstName}</strong> again
+                    </p>
+                  </div>
+                  <p className="text-xs text-neutral-500">
+                    A new booking will be created with the same details. {helper.firstName} gets first priority — if unavailable, standard rotation takes over.
+                  </p>
+                  <form action="/api/host/rebook" method="post">
+                    <input type="hidden" name="sourceBookingId" value={booking.id} />
+                    <input type="hidden" name="helperId" value={helper.helperId} />
+                    <button
+                      type="submit"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white text-xs font-semibold transition-colors shadow-sm"
+                    >
+                      <RefreshCw className="size-3.5" />
+                      Book Again with {helper.firstName}
+                    </button>
+                  </form>
+                </div>
+              ))}
             </section>
           ) : null}
 
