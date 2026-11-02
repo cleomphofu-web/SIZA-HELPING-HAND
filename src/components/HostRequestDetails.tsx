@@ -244,7 +244,7 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: {
                       type="submit"
                       className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors shadow-sm"
                     >
-                      👍 Yes, definitely
+                      Yes, definitely
                     </button>
                     <button
                       name="intent"
