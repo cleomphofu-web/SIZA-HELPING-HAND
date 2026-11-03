@@ -77,6 +77,22 @@ account.notice: Your information is used to set up your account and manage your 
 account.success: Your account request was received. Check your email for a confirmation link if asked, then log in.
 account.error: We could not complete that request. Check your details and try again.
 account.turnstile.unavailable: Turnstile is not configured. Account actions are unavailable until it is set up.
+account.forgot_password.title: Reset your password
+account.forgot_password.body: Enter your email and we will send you a link to reset your password.
+account.forgot_password.submit: Send reset link
+account.forgot_password.success: If an account exists with that email, we have sent instructions to reset your password.
+account.reset_password.title: Set a new password
+account.reset_password.body: Choose a strong password for your account.
+account.reset_password.submit: Update password
+account.reset_password.success: Your password has been updated. You can now log in.
+account.verify_email.title: Check your email
+account.verify_email.body: We sent a confirmation link to your email address. Please click it to verify your account.
+account.verify_email.back: Return to log in
+tracking.on_my_way: I am on my way
+tracking.send_whatsapp: Send ETA via WhatsApp
+support.ticket.title: Contact siZa support
+support.ticket.submit: Send message
+support.ticket.success: Your message has been sent. Our team will get back to you shortly.
 button.sending: Sending…
 phase_a.no_access: This area is for signed-in siZa members.
 phase_a.empty_requests: No requests yet. Request a helper to get started.
