@@ -48,7 +48,7 @@ export default async function HostReportPage({
               <span>Back</span>
             </Link>
             <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1 starter-eyebrow">
-              SIZA / HOST
+              siZa / HOST
             </p>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
               {t("phase_a.report.title")}

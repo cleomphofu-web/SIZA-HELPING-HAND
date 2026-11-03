@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Sparkles,
   ShieldCheck,
@@ -31,6 +32,7 @@ const showcaseCards = [
     badge: "Spotless & Fresh",
     description: "Dust-free surfaces, arranged cushions, vacuumed carpets, and tidy living areas.",
     icon: Sparkles,
+    image: "/assets/images/kara-eads-L7EwHkq1B2s-unsplash.jpg",
   },
   {
     title: "Gleaming Kitchens & Counters",
@@ -39,6 +41,7 @@ const showcaseCards = [
     badge: "Sanitized & Degreased",
     description: "Sparkling stovetops, descaled sinks, wiped appliances, and hygienic counters.",
     icon: ShieldCheck,
+    image: "/assets/images/christian-mackie-cc0Gg3BegjE-unsplash.jpg",
   },
   {
     title: "Guest-Ready Bedrooms",
@@ -47,6 +50,7 @@ const showcaseCards = [
     badge: "Crisp & Pristine",
     description: "Hotel-grade hospital folds, fresh linens, polished mirrors, and serene atmosphere.",
     icon: Building,
+    image: "/assets/images/clay-banks-zAvzWN6CE5w-unsplash.jpg",
   },
   {
     title: "Immaculate Bathrooms",
@@ -55,6 +59,7 @@ const showcaseCards = [
     badge: "Descaled & Polished",
     description: "Scrubbed grout, shining chrome fixtures, sparkling mirrors, and fragrant rooms.",
     icon: HomeIcon,
+    image: "/assets/images/sosey-interiors-YABErdnJPGc-unsplash.jpg",
   },
 ];
 
@@ -151,8 +156,16 @@ export function HostHomeDashboard({ requests, loadFailed }: Props) {
                 return (
                   <CarouselItem key={idx} className="pl-3 basis-full sm:basis-1/2">
                     <div
-                      className={`h-64 sm:h-72 rounded-2xl bg-gradient-to-br ${card.accent} p-6 text-white flex flex-col justify-between shadow-sm relative overflow-hidden group`}
+                      className={`h-64 sm:h-72 rounded-2xl bg-gradient-to-br ${card.accent} p-6 text-white flex flex-col justify-between shadow-sm relative overflow-hidden group isolate`}
                     >
+                      <Image
+                        alt=""
+                        aria-hidden="true"
+                        className="object-cover opacity-25 group-hover:scale-105 transition-transform duration-700 pointer-events-none -z-1"
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        src={card.image}
+                      />
                       <div className="relative z-10 flex items-start justify-between">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-[11px] font-medium text-white/90 border border-white/15">
                           <CheckCircle2 className="size-3 text-emerald-400" />

@@ -1,7 +1,7 @@
 type BookingSummaryInput = { suburb: string; start_at: string; property_type: string; helpers_needed: number; access_notes: string };
 
 export function buildJobSummary(booking: BookingSummaryInput) {
-  return [`SIZA job — ${booking.suburb}`, `Date/time: ${new Date(booking.start_at).toLocaleString("en-ZA")}`, `Property: ${booking.property_type}`, `Helpers needed: ${booking.helpers_needed}`, `Access notes: ${booking.access_notes || "None provided"}`].join("\n");
+  return [`siZa job — ${booking.suburb}`, `Date/time: ${new Date(booking.start_at).toLocaleString("en-ZA")}`, `Property: ${booking.property_type}`, `Helpers needed: ${booking.helpers_needed}`, `Access notes: ${booking.access_notes || "None provided"}`].join("\n");
 }
 
 export function whatsappLink(phone: string, text?: string) {

@@ -5,7 +5,7 @@ const envSchema = z.object({
   SUPABASE_ANON_KEY: z.string().min(1),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
   RESEND_API_KEY: z.string().min(1),
-  RESEND_FROM_EMAIL: z.string().min(1).default("SIZA <onboarding@resend.dev>"),
+  RESEND_FROM_EMAIL: z.string().min(1).default("siZa <onboarding@resend.dev>"),
   ID_ENCRYPTION_KEY: z.string().refine((value) => {
     try {
       return Buffer.from(value, "base64").length === 32;

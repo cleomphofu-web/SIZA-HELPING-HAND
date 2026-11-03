@@ -56,7 +56,7 @@ describe("admin authenticator actions", () => {
   it("creates an authenticator setup secret only for the signed-in admin", async () => {
     const state = await startAdminMfaEnrollment(null, formData({ intent: "setup" }));
     expect(state).toEqual({ enrollment: { factorId: "11111111-1111-4111-8111-111111111111", secret: "TEST-SECRET" } });
-    expect(mocks.supabase.auth.mfa.enroll).toHaveBeenCalledWith({ factorType: "totp", friendlyName: "SIZA admin authenticator" });
+    expect(mocks.supabase.auth.mfa.enroll).toHaveBeenCalledWith({ factorType: "totp", friendlyName: "siZa admin authenticator" });
   });
 
   it("clears abandoned unverified factors before creating a new setup", async () => {

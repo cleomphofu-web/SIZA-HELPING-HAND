@@ -259,7 +259,7 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: {
               {booking.assignedHelpers.map((helper) => (
                 <div key={helper.helperId} className="p-5 rounded-2xl bg-amber-50 border border-amber-200 space-y-3">
                   <p className="text-sm font-medium text-amber-900">
-                    Would you book <strong>{helper.firstName}</strong> again through SIZA?
+                    Would you book <strong>{helper.firstName}</strong> again through siZa?
                   </p>
                   <p className="text-xs text-amber-700">
                     This is private feedback that helps us highlight reliable helpers and improve rotation quality.

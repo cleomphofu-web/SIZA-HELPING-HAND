@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Briefcase,
   MapPin,
@@ -49,6 +50,7 @@ const guideCards = [
     accent: "from-neutral-900 via-neutral-800 to-neutral-700",
     description: "Job requests are offered fairly to approved helpers in the area. The first to accept is assigned to the booking.",
     icon: Sparkles,
+    image: "/assets/images/caroline-badran-xTmez98cqAM-unsplash.jpg",
   },
   {
     title: "Arrival Check-in Code",
@@ -56,13 +58,15 @@ const guideCards = [
     accent: "from-stone-900 via-stone-800 to-neutral-700",
     description: "When you arrive at the booking address, ask the host for their 6-digit check-in code to confirm your arrival.",
     icon: ShieldCheck,
+    image: "/assets/images/look-up-look-down-photography--o7ASOHDV9E-unsplash.jpg",
   },
   {
     title: "100% Direct Payment",
     badge: "Zero Deductions",
     accent: "from-zinc-900 via-zinc-800 to-neutral-700",
-    description: "Hosts pay your full wage and transport allowance directly upon completion. SIZA never skims your earnings.",
+    description: "Hosts pay your full wage and transport allowance directly upon completion. siZa never skims your earnings.",
     icon: Banknote,
+    image: "/assets/images/franco-debartolo-LKI3Dd146vI-unsplash.jpg",
   },
   {
     title: "Support & Reporting",
@@ -70,6 +74,7 @@ const guideCards = [
     accent: "from-neutral-900 via-stone-800 to-neutral-800",
     description: "If an address is unreachable, unsafe, or cancelled, submit an immediate report from your dashboard.",
     icon: Flag,
+    image: "/assets/images/spacejoy-9M66C_w_ToM-unsplash.jpg",
   },
 ];
 
@@ -223,14 +228,14 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
               </div>
               <div>
                 <h2 className="text-lg font-bold tracking-tight text-neutral-900">Your Platform Metrics</h2>
-                <p className="text-xs text-neutral-500">Jobs completed and value through SIZA</p>
+                <p className="text-xs text-neutral-500">Jobs completed and value through siZa</p>
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-1">
                 <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Jobs Done</span>
                 <p className="text-2xl font-bold text-neutral-900">{metrics.completedJobs}</p>
-                <p className="text-xs text-neutral-500">Completed via SIZA</p>
+                <p className="text-xs text-neutral-500">Completed via siZa</p>
               </div>
               <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-100 space-y-1">
                 <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Active Jobs</span>
@@ -248,10 +253,10 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
             <div className="p-4 rounded-2xl bg-neutral-900 text-white space-y-2">
               <p className="text-xs font-bold uppercase tracking-wider text-white/60">Platform Benefits</p>
               <ul className="space-y-1.5 text-xs text-white/80 leading-relaxed">
-                <li>✓ Fair rotation — jobs come to you, no chasing</li>
-                <li>✓ Platform-verified reviews and ratings (coming soon)</li>
-                <li>✓ Direct full pay — no agency deductions</li>
-                <li>✓ Dispute support and job-cancellation protection</li>
+                <li>- Fair rotation — jobs come to you, no chasing</li>
+                <li>- Platform-verified reviews and ratings (coming soon)</li>
+                <li>- Direct full pay — no agency deductions</li>
+                <li>- Dispute support and job-cancellation protection</li>
               </ul>
             </div>
           </section>
@@ -419,7 +424,7 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
         <section className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">
           <div className="border-b border-neutral-100 pb-4">
             <h2 className="text-lg font-bold tracking-tight text-neutral-900">
-              How SIZA Works For Helpers
+              How siZa Works For Helpers
             </h2>
             <p className="text-xs text-neutral-500 mt-0.5">
               Everything you need to know about accepting jobs, check-ins, and payments.
@@ -432,9 +437,17 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
               return (
                 <div
                   key={idx}
-                  className={`rounded-2xl bg-gradient-to-br ${card.accent} p-6 text-white flex flex-col justify-between shadow-sm space-y-4`}
+                  className={`rounded-2xl bg-gradient-to-br ${card.accent} p-6 text-white flex flex-col justify-between shadow-sm space-y-4 relative overflow-hidden group isolate`}
                 >
-                  <div className="flex items-start justify-between">
+                  <Image
+                    alt=""
+                    aria-hidden="true"
+                    className="object-cover opacity-20 group-hover:scale-105 transition-transform duration-700 pointer-events-none -z-1"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    src={card.image}
+                  />
+                  <div className="relative z-10 flex items-start justify-between">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-[11px] font-medium text-white/90 border border-white/15">
                       {card.badge}
                     </span>

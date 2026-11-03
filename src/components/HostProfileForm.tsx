@@ -48,7 +48,7 @@ export function HostProfileForm({
         >
           <div className="border-b border-neutral-100 pb-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1">
-              SIZA / HOST
+              siZa / HOST
             </p>
             <h1 id="host-home-profile-title" className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
               {t(titleKey)}

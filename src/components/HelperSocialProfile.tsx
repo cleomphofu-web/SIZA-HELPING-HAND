@@ -59,7 +59,7 @@ const initialPosts: Post[] = [
     id: "post-2",
     author: "My Cleaning Portfolio",
     timeAgo: "3 days ago",
-    content: "Living room and bedroom turnover ready for new weekend guests. Fresh linen hospital folds and pristine mirrors! ✨",
+    content: "Living room and bedroom turnover ready for new weekend guests. Fresh linen hospital folds and pristine mirrors.",
     likes: 8,
     liked: true,
   },

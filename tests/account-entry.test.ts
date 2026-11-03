@@ -34,7 +34,7 @@ describe("account entry prototype state", () => {
     const page = await SignupPage({ searchParams: Promise.resolve({ role: "helper" }) });
     const markup = renderToStaticMarkup(page);
 
-    expect(markup).toContain("SIZA is coming to");
+    expect(markup).toContain("siZa is coming to");
     expect(markup).not.toContain("<form");
     vi.unstubAllEnvs();
   });
@@ -51,7 +51,7 @@ describe("account entry prototype state", () => {
       }),
     );
 
-    expect(markup).toContain("SIZA is coming to");
+    expect(markup).toContain("siZa is coming to");
     expect(markup).toContain("We are getting ready to open.");
     expect(markup).not.toContain("<form");
     expect(markup).not.toContain('name="email"');

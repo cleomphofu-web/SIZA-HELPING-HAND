@@ -32,7 +32,7 @@ export function HelperSubscriptionBanner({
         <div className="space-y-0.5 text-xs">
           <p className="font-bold">First Completed Job Free</p>
           <p className="text-emerald-700">
-            Your first completed job on SIZA has zero subscription fees. You receive 100% of your earnings directly from the host.
+            Your first completed job on siZa has zero subscription fees. You receive 100% of your earnings directly from the host.
           </p>
         </div>
       </div>
@@ -105,7 +105,7 @@ export function HelperSubscriptionBanner({
             First Job Completed — Subscription Required to View New Jobs
           </h2>
           <p className="text-xs text-amber-800 leading-relaxed">
-            Congratulations on completing your first job! In accordance with SIZA Fair Rotation policy, your free introductory job has been completed. To keep receiving high-paying job offers in your selected suburbs, renew your helper plan below.
+            Congratulations on completing your first job! In accordance with siZa Fair Rotation policy, your free introductory job has been completed. To keep receiving high-paying job offers in your selected suburbs, renew your helper plan below.
           </p>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { PublicHomeSections } from "@/components/PublicHomeSections";
 import { t } from "@/content/t";
 import { publicConfig } from "@/server/config/public";
 import Link from "next/link";
+import Image from "next/image";
 import { homeSectionRoutes } from "@/lib/public-home-content";
 
 export default function HomePage() {
@@ -37,11 +38,19 @@ export default function HomePage() {
         </section>
         <PublicHomeSections />
       </main>
-      <footer className="public-footer">
-        <Link className="public-footer-wordmark" href="/">{t("site.name")}</Link>
-        <p>{t("footer.tagline")}</p>
-        <p>{t("footer.areas")}</p>
-        <nav aria-label={t("nav.menu")}>
+      <footer className="public-footer relative overflow-hidden isolate">
+        <Image
+          alt=""
+          aria-hidden="true"
+          className="object-cover opacity-25 -z-1 pointer-events-none"
+          fill
+          sizes="100vw"
+          src="/assets/images/footer/Footer%20bg%20img.png"
+        />
+        <Link className="public-footer-wordmark relative z-1" href="/">{t("site.name")}</Link>
+        <p className="relative z-1">{t("footer.tagline")}</p>
+        <p className="relative z-1">{t("footer.areas")}</p>
+        <nav aria-label={t("nav.menu")} className="relative z-1">
           <Link href="/about">{t("nav.about")}</Link>
           <Link href={homeSectionRoutes.services}>{t("home.services.title")}</Link>
           <Link href={homeSectionRoutes.howItWorks}>{t("home.how.label")}</Link>
@@ -49,7 +58,7 @@ export default function HomePage() {
           <Link href="/privacy">{t("footer.privacy")}</Link>
           <Link href="/terms">{t("footer.terms")}</Link>
         </nav>
-        <small>{t("footer.rights", { year: String(new Date().getFullYear()) })}</small>
+        <small className="relative z-1">{t("footer.rights", { year: String(new Date().getFullYear()) })}</small>
       </footer>
     </>
   );

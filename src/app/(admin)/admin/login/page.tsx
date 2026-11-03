@@ -22,7 +22,7 @@ export default async function AdminLoginPage({
 
   return (
     <main className="relative min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-hidden bg-black text-white">
-      {/* SIZA atmospheric architectural background image */}
+      {/* siZa atmospheric architectural background image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/assets/images/hero/background%20home%20page%20hero.png"

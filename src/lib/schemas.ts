@@ -190,7 +190,7 @@ export const reportSchema = z.object({
   text: z.string().trim().min(1).max(3000),
 }).strict();
 
-/** Host post-job private survey: "Would you book this helper again through SIZA?" */
+/** Host post-job private survey: "Would you book this helper again through siZa?" */
 export const repeatIntentSchema = z.object({
   bookingId: z.string().uuid(),
   helperId: z.string().uuid(),

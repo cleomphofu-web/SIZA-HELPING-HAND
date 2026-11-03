@@ -12,3 +12,4 @@ export const HelperVoucherSubmissionSchema = z.object({
 }).strict();
 
 export type HelperVoucherSubmissionInput = z.infer<typeof HelperVoucherSubmissionSchema>;
+

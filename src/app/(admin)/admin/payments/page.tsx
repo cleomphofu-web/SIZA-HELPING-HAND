@@ -11,7 +11,7 @@ export default async function AdminPaymentsPage() {
   return (
     <AdminShell>
       <div className="admin-main">
-        <p className="siza-label">SIZA / payments</p>
+        <p className="siza-label">siZa / payments</p>
         <h1 className="admin-title">Helper Subscriptions & Payments</h1>
         <p className="admin-subtitle">
           Record cleared prepaid subscription payments received via EFT or direct transfer.

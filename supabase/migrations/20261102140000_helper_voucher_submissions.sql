@@ -31,3 +31,4 @@ create policy helper_voucher_insert on public.phase_a_voucher_submissions
 create policy voucher_admin_all on public.phase_a_voucher_submissions
   for all to authenticated
   using (public.is_admin());
+

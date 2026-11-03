@@ -9,7 +9,7 @@ export default async function AdminPage() {
     <AdminShell>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1">
-          SIZA / Admin
+          siZa / Admin
         </p>
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 mb-8">
           Keep the marketplace moving.

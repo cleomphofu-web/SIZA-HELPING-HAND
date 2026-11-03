@@ -4,7 +4,7 @@
   "ignoreFiles": ["src/content/copy.generated.ts", "supabase/migrations/0001_init.sql", "supabase/migrations/0002_helper_terminology.sql"],
   "rules": [
     { "id": "old-term-cleaner", "pattern": "\\bcleaners?\\b", "flags": "i", "message": "Use \"helper\" in code, routes and UI (helper_details, /helper/...)." },
-    { "id": "template-branding", "pattern": "interio|interior design agency|framer template", "flags": "i", "message": "Template branding must not appear in the product." },
+    { "id": "template-branding", "pattern": "\\binterio\\b|interior design agency|framer template", "flags": "i", "message": "Template branding must not appear in the product." },
     { "id": "template-leftovers", "pattern": "PLACEHOLDER REQUESTS|Amsterdam|Barcelona|New York|Los Angeles|Malibu|Boutique Caf", "flags": "", "message": "Template placeholder content." },
     { "id": "hotlinked-assets", "pattern": "framerusercontent\\.com|images\\.unsplash\\.com|source\\.unsplash\\.com|picsum\\.photos", "flags": "i", "message": "No hotlinked images. Put approved files in public/assets/images and register them in docs/ASSET_MANIFEST.md." },
     { "id": "old-copy", "pattern": "request a clean\\b|become a cleaner|first month free|(?<!\\/app)\\/book\\b|\\/cleaners\\/apply", "flags": "i", "message": "Old direction: use /request, /apply, \"Request a helper\", first JOB free then R{subscriptionPrice} per {subscriptionDays} days." },

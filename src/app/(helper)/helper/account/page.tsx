@@ -43,7 +43,7 @@ export default async function HelperAccountPage() {
     },
     {
       title: "Direct Host Payment Rules",
-      description: "Hosts pay your full wage and transport allowance directly in cash or EFT upon job completion. SIZA does not hold or skim any part of your daily wage.",
+      description: "Hosts pay your full wage and transport allowance directly in cash or EFT upon job completion. siZa does not hold or skim any part of your daily wage.",
     },
     {
       title: "Fair Rotation & Job Offers",

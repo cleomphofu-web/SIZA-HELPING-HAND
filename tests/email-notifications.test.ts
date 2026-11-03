@@ -5,7 +5,7 @@ const mocks = vi.hoisted(() => ({ send: vi.fn() }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/server/config/env", () => ({ env: {
   RESEND_API_KEY: "test-only-key",
-  RESEND_FROM_EMAIL: "SIZA <test@example.test>",
+  RESEND_FROM_EMAIL: "siZa <test@example.test>",
   ADMIN_NOTIFY_EMAIL: "admin@example.test",
 } }));
 vi.mock("resend", () => ({ Resend: class { emails = { send: mocks.send }; } }));
@@ -31,7 +31,7 @@ describe("transactional email boundary", () => {
   it("uses generated approved-helper copy and a stable provider idempotency key", async () => {
     await sendHelperApproved("helper@example.test", "Nandi", helperId);
     expect(mocks.send).toHaveBeenCalledWith(expect.objectContaining({
-      from: "SIZA <test@example.test>",
+      from: "siZa <test@example.test>",
       to: "helper@example.test",
       subject: "You are approved",
       text: expect.stringContaining("Your first completed job is free."),

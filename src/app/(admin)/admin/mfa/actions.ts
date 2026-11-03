@@ -29,7 +29,7 @@ export async function startAdminMfaEnrollment(_previous: AdminMfaActionState | n
         const { error } = await supabase.auth.mfa.unenroll({ factorId: factor.id });
         if (error) return { ok: false as const };
       }
-      const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", friendlyName: "SIZA admin authenticator" });
+      const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", friendlyName: "siZa admin authenticator" });
       if (error || !data?.totp?.secret || !data.id) return { ok: false as const };
       return { ok: true as const, enrollment: { factorId: data.id, secret: data.totp.secret } };
     },

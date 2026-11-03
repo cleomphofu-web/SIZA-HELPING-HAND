@@ -13,3 +13,4 @@ export const EditBookingNotesSchema = z.object({
 }).strict();
 
 export type EditBookingNotesInput = z.infer<typeof EditBookingNotesSchema>;
+

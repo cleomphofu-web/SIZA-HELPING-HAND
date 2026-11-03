@@ -1,4 +1,4 @@
-# SIZA copy deck (single source of all words on the site)
+# siZa copy deck (single source of all words on the site)
 
 **How this file works.** One line per piece of text: `key: text`. Lines starting with `#`, `>` or blank are ignored by the build. Run `npm run build:copy` to generate `src/content/copy.generated.ts` (never edit that file, never type site text in components). Variables in `{braces}` are filled by code: `{supportEmail}`, `{whatsappUrl}`, `{subscriptionPrice}`, `{subscriptionDays}`, `{year}`, `{firstName}`, `{areas}` and the per-key ones named in the text.
 **Rules (checked by the build).** Words per `siza-brand-voice-and-copy`. Banned anywhere: guarantee, insured, background check, secure payment, escrow, 100% safe, "you choose". The word "vetted" and the ID-check claims live only in keys starting `claim.`, which the site shows only when the matching switch is on (set when the code enforces it). `[OWNER: ...]` and `[CONFIRM: ...]` mark facts only the owner can supply: the build lists them and, in strict mode (production), fails until they are resolved. No invented numbers, people, quotes or reviews.
@@ -22,7 +22,7 @@ footer.areas: Serving Johannesburg and the Vaal
 footer.privacy: Privacy policy
 footer.terms: Terms and conditions
 footer.contact: Contact us
-footer.rights: © {year} SIZA. All rights reserved.
+footer.rights: © {year} siZa. All rights reserved.
 button.request: Request a helper
 button.apply: Apply to be a helper
 button.book_team: Book a team
@@ -44,7 +44,7 @@ label.optional: Optional
 label.draft: Draft
 
 ## Public holding page
-holding.title: SIZA is coming to {areas}.
+holding.title: siZa is coming to {areas}.
 holding.body: Help for your home and fair work for helpers. We are getting ready to open.
 holding.contact: Questions? Email {supportEmail}.
 
@@ -57,9 +57,9 @@ public.hero.apply: APPLY
 public.hero.contact: CONTACT
 
 ## Accounts and Phase A actions
-account.signup.title: Create your SIZA account
+account.signup.title: Create your siZa account
 account.signup.body: Continue with the details we need to set up your account.
-account.login.title: Log in to SIZA
+account.login.title: Log in to siZa
 account.login.body: Use the email and password you signed up with.
 account.login.challenge: Complete the security check, then try signing in again.
 account.role.host: I need help at home
@@ -73,12 +73,12 @@ account.label.role: I am here to
 account.label.terms: I agree to the Terms and conditions.
 account.label.privacy: I agree to the Privacy policy.
 account.label.turnstile: Verification
-account.notice: Your information is used to set up your account and manage your SIZA requests.
+account.notice: Your information is used to set up your account and manage your siZa requests.
 account.success: Your account request was received. Check your email for a confirmation link if asked, then log in.
 account.error: We could not complete that request. Check your details and try again.
 account.turnstile.unavailable: Turnstile is not configured. Account actions are unavailable until it is set up.
 button.sending: Sending…
-phase_a.no_access: This area is for signed-in SIZA members.
+phase_a.no_access: This area is for signed-in siZa members.
 phase_a.empty_requests: No requests yet. Request a helper to get started.
 phase_a.empty_jobs: No jobs in your areas right now. New offers will appear here.
 phase_a.subscription_required: Your first completed job is free. A current subscription is needed before you accept later jobs.
@@ -91,7 +91,7 @@ host.onboarding.title: Tell us where you need help
 host.onboarding.body: Save your usual details once, then use them when you make a request.
 host.profile.title: Your profile
 host.account.contact.title: Your contact details
-host.account.contact.body: Use your name and cell number to manage your SIZA account.
+host.account.contact.body: Use your name and cell number to manage your siZa account.
 host.account.contact.phone_not_verified: Changes to your cell number are not verified with a code yet.
 host.account.contact.saved: Your contact details have been saved.
 host.account.contact.failed: We could not save these details. Check them and try again.
@@ -107,7 +107,7 @@ host.label.idempotency: Request reference
 host.requests.title: Your requests
 host.requests.body: Select a request to see its details and current status.
 host.requests.view: View request
-host.app.title: Your SIZA requests
+host.app.title: Your siZa requests
 host.app.body: Create a request, see its status and report a problem when you need to.
 helper.app.title: Your helper work
 helper.app.body: See offers in your areas and keep your profile up to date.
@@ -156,7 +156,7 @@ helper.onboarding.reference.name_placeholder: e.g. Jane Smith
 helper.onboarding.reference.phone_label: Their phone number
 helper.onboarding.reference.phone_placeholder: e.g. 082 123 4567
 helper.onboarding.id.title: Your ID number
-helper.onboarding.id.body: This is kept private. We only use it to check who you are. Only SIZA admin can see it.
+helper.onboarding.id.body: This is kept private. We only use it to check who you are. Only siZa admin can see it.
 helper.onboarding.id.placeholder: 13-digit ID number
 helper.onboarding.id_photo.title: A photo of your ID
 helper.onboarding.id_photo.body: Take a clear photo of your South African ID document. Make sure all four corners are visible.
@@ -204,28 +204,29 @@ host.request.no_show_resolution.done_close: You closed this vacant slot. Other h
 host.request.no_show_resolution.error: We could not save this choice. Refresh the page and try again.
 
 ## Mandatory notices (word for word)
-notice.outside: Agreements made outside SIZA are not SIZA's responsibility.
+notice.outside: Agreements made outside siZa are not siZa's responsibility.
 notice.address: Your address is shared with the helper(s) assigned to you.
-notice.payment.phase_a: Payment is arranged directly between you and the helper after the job. SIZA does not hold funds or cover payment disputes.
-notice.payment.phase_b: In Phase B, card payments are securely authorized in advance and held by our licensed payment provider until completion is confirmed by both host and helper. SIZA ensures fair release and transparent dispute mediation.
+notice.payment.phase_a: Payment is arranged directly between you and the helper after the job. siZa does not hold funds or cover payment disputes.
+notice.payment.phase_b: In Phase B, card payments are securely authorized in advance and held by our licensed payment provider until completion is confirmed by both host and helper. siZa ensures fair release and transparent dispute mediation.
 notice.public_profile: Your first name, photo, job title, services, areas and reviews will be visible to hosts. Your phone number and surname stay private until a job is assigned.
 notice.demo: Demo data. Nothing you enter here is saved or sent.
 notice.price_draft: Draft prices. These will change after we test with real helpers and hosts.
 
 ## SEO
-seo.home.title: SIZA | Help for your home, fair work for helpers
+seo.home.title: siZa | Help for your home, fair work for helpers
 seo.home.description: Request a helper for your home or short-stay property in Johannesburg and the Vaal, or apply to be a helper and see your pay before you accept.
-seo.about.title: About SIZA | Help, made fair
-seo.about.description: SIZA connects people who need a hand with helpers who do the work, fairly. Johannesburg and the Vaal.
-seo.request.title: Request a helper | SIZA
+seo.about.title: About siZa | Help, made fair
+seo.about.description: siZa connects people who need a hand with helpers who do the work, fairly. Johannesburg and the Vaal.
+seo.request.title: Request a helper | siZa
 seo.request.description: Tell us what you need, see the price first, and we find a helper near you.
-seo.apply.title: Apply to be a helper | SIZA
-seo.apply.description: See your pay and transport before you accept a job. Apply to be a SIZA helper in Johannesburg or the Vaal.
-seo.contact.title: Contact | SIZA
-seo.contact.description: Questions, problems or ideas? Reach SIZA by email, WhatsApp or the form.
+seo.apply.title: Apply to be a helper | siZa
+seo.apply.description: See your pay and transport before you accept a job. Apply to be a siZa helper in Johannesburg or the Vaal.
+seo.contact.title: Contact | siZa
+seo.contact.description: Questions, problems or ideas? Reach siZa by email, WhatsApp or the form.
 
 ## Home: hero
-home.hero.eyebrow: SIZA // {areas}
+home.hero.eyebrow: siZa // {areas}
+home.hero.get_started: Get started
 home.hero.switch.host: I need help
 home.hero.switch.helper: I want work
 home.hero.host.title: Guest-ready, between every stay.
@@ -233,7 +234,7 @@ home.hero.host.subtitle: Request a helper for your home or short-stay property. 
 home.hero.host.cta: Request a helper
 home.hero.host.cta_secondary: See how it works
 home.hero.helper.title: Fair work, near you.
-home.hero.helper.subtitle: Apply to be a SIZA helper. See your pay and transport before you accept a job, and keep all of it.
+home.hero.helper.subtitle: Apply to be a siZa helper. See your pay and transport before you accept a job, and keep all of it.
 home.hero.helper.cta: Apply to be a helper
 home.hero.helper.cta_secondary: What helpers earn
 
@@ -272,8 +273,46 @@ service.custom.title: Something else
 service.custom.body: Tell us what you need and we will let you know if we can help.
 service.coming_soon_note: We open each service in a suburb once enough helpers there are approved.
 
-## Home: why SIZA (only claims the product enforces)
-home.why.label: WHY SIZA //
+## Home: verified spaces
+home.spaces.label: VERIFIED SPACES //
+home.spaces.title: Spaces prepared by siZa helpers
+home.spaces.subtitle: Real homes, workplaces, and gardens across Johannesburg and the Vaal.
+
+## Home: helper spotlight (fanned stack)
+home.spotlight.label: SPECIALIST CARE //
+home.spotlight.title: CRAFTED FOR EVERY TASK
+home.spotlight.subtitle: Dedicated helpers matched to your space's exact needs.
+home.spotlight.residential.title: Residential & Estate Care
+home.spotlight.residential.badge: Domestic Sanitation
+home.spotlight.residential.body: Focused on living spaces, kitchens, appliances, and immaculate floors.
+home.spotlight.turnover.title: Airbnb & Turnover Detailing
+home.spotlight.turnover.badge: Short-stay Readiness
+home.spotlight.turnover.body: Crisp linen hospital corners, sanitised washrooms, and fast guest turnaround.
+home.spotlight.grounds.title: Garden & Property Upkeep
+home.spotlight.grounds.badge: Grounds Maintenance
+home.spotlight.grounds.body: Lawns, edge trimming, seasonal sweeping, and tidy outdoor areas.
+
+## Home: transparent pricing & subscription
+home.pricing.label: CLEAR PRICING //
+home.pricing.title: TRANSPARENT RATES. ZERO CUTS.
+home.pricing.subtitle: Upfront daily rates for hosts. No commission taken from helper wages.
+home.pricing.host.title: Host Rate Card
+home.pricing.host.price: From R320
+home.pricing.host.period: per day, paid directly to your helper
+home.pricing.host.benefit1: Standard day allocation for your space
+home.pricing.host.benefit2: 100% of pay and transport goes to helper
+home.pricing.host.benefit3: 4-digit check-in code verification on arrival
+home.pricing.host.benefit4: Zero agency commission or booking markups
+home.pricing.helper.title: Helper Subscription
+home.pricing.helper.price: 1st Job Free
+home.pricing.helper.period: then R{subscriptionPrice} per {subscriptionDays} days
+home.pricing.helper.benefit1: Keep 100% of host pay and transport
+home.pricing.helper.benefit2: Fair rotation queue: jobs come to you
+home.pricing.helper.benefit3: No debit orders — pay with cash vouchers or card
+home.pricing.helper.benefit4: Decline or pause availability anytime with zero penalty
+
+## Home: why siZa (only claims the product enforces)
+home.why.label: WHY siZa //
 home.why.title: BUILT ON FAIRNESS
 home.why.price.title: See the price first
 home.why.price.body: Your price is worked out from the job, and you see the full amount before you confirm.
@@ -284,7 +323,7 @@ home.why.code.body: A check-in code shows your helper is the person we sent.
 home.why.fair.title: Fair turns for helpers
 home.why.fair.body: New jobs are offered first to helpers with the fewest recent jobs, so good work is not only for the fastest phone.
 claim.id_checked.title: ID and selfie checked
-claim.id_checked.body: Every helper's ID and selfie are checked by SIZA before they can accept jobs.
+claim.id_checked.body: Every helper's ID and selfie are checked by siZa before they can accept jobs.
 claim.references.title: References called
 claim.references.body: We call a helper's reference before approving them.
 
@@ -292,9 +331,9 @@ claim.references.body: We call a helper's reference before approving them.
 home.helpers.label: FOR HELPERS //
 home.helpers.title: WORK THAT RESPECTS YOU
 home.helpers.pay.title: See your pay first
-home.helpers.pay.body: Your pay and transport are shown before you accept. SIZA takes no commission from them.
+home.helpers.pay.body: Your pay and transport are shown before you accept. siZa takes no commission from them.
 home.helpers.free.title: Your first job is free
-home.helpers.free.body: Joining is free. After your first completed job, SIZA costs R{subscriptionPrice} for {subscriptionDays} days. No debit orders.
+home.helpers.free.body: Joining is free. After your first completed job, siZa costs R{subscriptionPrice} for {subscriptionDays} days. No debit orders.
 home.helpers.no_penalty.title: Say no, any time
 home.helpers.no_penalty.body: Accept the jobs that suit you. Declining or turning off availability has no penalty.
 home.helpers.cta: Apply to be a helper
@@ -306,7 +345,7 @@ faq.subtitle: *(ANSWERED)
 faq.1.q: How much does it cost?
 faq.1.a: The price depends on the service, the size of your home and where you are. You see the total before you confirm.
 faq.2.q: How do I pay?
-faq.2.a: Payment is arranged directly between you and the helper after the job. SIZA does not hold funds or cover payment disputes.
+faq.2.a: Payment is arranged directly between you and the helper after the job. siZa does not hold funds or cover payment disputes.
 faq.3.q: Is my address safe?
 faq.3.a: Helpers see only your suburb until a helper is assigned to you. Then only that helper sees your address.
 faq.4.q: What if no helper accepts?
@@ -321,15 +360,15 @@ faq.8.q: What is the check-in code?
 faq.8.a: A short code you give your helper when they arrive. It shows the right person turned up and it starts the job.
 faq.9.q: How do I become a helper?
 faq.9.a: Apply online with your South African ID, a clear selfie, your cell number and one reference. You must be 18 or older. We review every application and contact you.
-faq.10.q: What does SIZA cost helpers?
-faq.10.a: Your first completed job is free. After that it is R{subscriptionPrice} for {subscriptionDays} days. SIZA takes no commission from your pay.
+faq.10.q: What does siZa cost helpers?
+faq.10.a: Your first completed job is free. After that it is R{subscriptionPrice} for {subscriptionDays} days. siZa takes no commission from your pay.
 faq.11.q: Can I decline jobs?
 faq.11.a: Yes. Accept the jobs that suit you. There is no penalty for declining or for being unavailable.
 faq.12.q: How do I report a problem?
 faq.12.a: Use the Report button on any job, or contact us. We look at every report.
 faq.13.q: What happens to my personal information?
 faq.13.a: We collect only the information required to verify your identity and coordinate bookings. ID photos and selfies are stored in secure private storage, accessed exclusively by authorized administrators, and permanently deleted 30 days after an application decision. A secure cryptographic hash of your ID is retained to prevent duplicate accounts in accordance with POPIA.
-claim.retention.a: ID photos and selfies are seen only by SIZA's admin and deleted 30 days after we decide on an application.
+claim.retention.a: ID photos and selfies are seen only by siZa's admin and deleted 30 days after we decide on an application.
 
 ## Home: closing band
 home.cta.label: START //
@@ -340,27 +379,27 @@ home.cta.helper.title: Want fair work?
 home.cta.helper.body: Apply to be a helper and see your pay before you accept.
 
 ## About page (concept in docs/ux/about-page.md)
-about.hero.label: ABOUT SIZA //
+about.hero.label: ABOUT siZa //
 about.hero.title: Help, made fair.
 about.hero.subtitle: *(A MARKETPLACE FOR GOOD WORK AND TRUSTED HELP)
-about.hero.body: SIZA connects people who need a hand with helpers who do good work, in {areas}.
+about.hero.body: siZa connects people who need a hand with helpers who do good work, in {areas}.
 about.name.label: THE NAME //
 about.why.label: WHY WE EXIST //
 about.why.title: TWO SIDES OF ONE DOOR
 about.why.note: An everyday story
 about.why.host: Check-out is at 10:00. The next guests arrive at 14:00. The person you trusted just cancelled. You open your phone and start searching.
 about.why.helper: You are good at this work. Good work is hard to find, and fair work is harder. Half your day goes on getting there. Nobody remembers who always shows up.
-about.why.bridge: SIZA is the door between them: clear prices, fair turns, and proof that the right person arrived. We bridge the gap so quality work is respected and homes receive reliable help.
+about.why.bridge: siZa is the door between them: clear prices, fair turns, and proof that the right person arrived. We bridge the gap so quality work is respected and homes receive reliable help.
 about.believe.label: WHAT WE BELIEVE //
 about.believe.1.title: Fair by design
-about.believe.1.body: Helpers keep their full pay and transport. SIZA does not take a commission out of a helper's pay.
+about.believe.1.body: Helpers keep their full pay and transport. siZa does not take a commission out of a helper's pay.
 about.believe.2.title: Everyone gets a turn
 about.believe.2.body: New jobs are offered first to the helpers with the fewest recent jobs, then opened to everyone. Speed should not be the only thing that wins work.
 about.believe.3.title: Safe by design
 about.believe.3.body: Your address stays private until a helper is assigned. A check-in code shows the right person arrived.
 about.believe.4.title: Honest about limits
 about.believe.4.body: We say what we do and what we do not do yet, in plain words.
-about.job.label: A SIZA JOB, START TO FINISH //
+about.job.label: A siZa JOB, START TO FINISH //
 about.job.note: An example job. The people are made up.
 about.job.1: 08:05 Request. Thandi books a standard clean for her two-bedroom flat. She sees the price before she confirms.
 about.job.2: 08:06 Offered. Three helpers nearby are offered the job first.
@@ -372,8 +411,8 @@ about.where.body: We are recruiting in Sandton, Rosebank, Bryanston, Vanderbijlp
 about.where.notify: Not in your suburb yet? Tell us and we will tell you when we arrive.
 about.limits.label: WHAT WE DO NOT DO (YET) //
 about.limits.today.title: Today
-about.limits.today.1: SIZA does not hold your money. You pay your helper directly after the job.
-about.limits.today.2: SIZA does not replace your own home or business cover. SIZA does not currently provide insurance.
+about.limits.today.1: siZa does not hold your money. You pay your helper directly after the job.
+about.limits.today.2: siZa does not replace your own home or business cover. siZa does not currently provide insurance.
 about.limits.coming.title: Coming
 about.limits.coming.1: Protected card payments
 about.limits.coming.2: Reviews and ratings
@@ -383,7 +422,7 @@ about.people.label: THE PEOPLE //
 about.people.founder.name: IKAMVA AUTOMATIONS
 about.people.founder.role: Founder
 about.people.founder.story: Built to bring dignity, fairness, and modern technology to everyday home and short-stay services across South Africa.
-about.cta.label: WORK WITH SIZA //
+about.cta.label: WORK WITH siZa //
 about.cta.host.title: Need a hand?
 about.cta.host.body: Request a helper.
 about.cta.helper.title: Want steady, fair work?
@@ -405,11 +444,11 @@ request.login: Already have an account? Log in
 apply.hero.label: BECOME A HELPER //
 apply.hero.title: Fair work, near you.
 apply.hero.subtitle: *(SEE YOUR PAY BEFORE YOU ACCEPT)
-apply.hero.body: SIZA offers you jobs in {areas}. Accept the ones that suit you and keep your full pay and transport.
+apply.hero.body: siZa offers you jobs in {areas}. Accept the ones that suit you and keep your full pay and transport.
 apply.earn.title: What you earn
-apply.earn.body: Your pay and transport are shown on every job before you accept. SIZA takes no commission from them. For example, a 4-hour home clean at R100/hour plus R50 transport pays you R450 in full directly from the host.
+apply.earn.body: Your pay and transport are shown on every job before you accept. siZa takes no commission from them. For example, a 4-hour home clean at R100/hour plus R50 transport pays you R450 in full directly from the host.
 apply.cost.title: What it costs
-apply.cost.body: Joining is free. After your first completed job, SIZA costs R{subscriptionPrice} for {subscriptionDays} days. You pay on purpose, never by debit order.
+apply.cost.body: Joining is free. After your first completed job, siZa costs R{subscriptionPrice} for {subscriptionDays} days. You pay on purpose, never by debit order.
 apply.need.title: What you need
 apply.need.1: A South African ID
 apply.need.2: A clear selfie, and a selfie holding your ID
@@ -448,9 +487,9 @@ contact.safety.body: If you feel unsafe, leave and call the police or your secur
 
 ## Legal pages
 legal.privacy.title: Privacy policy
-legal.privacy.body: SIZA processes personal information in accordance with the Protection of Personal Information Act (POPIA). We collect names, contact details, service addresses, and identification documents solely for authentication, safety vetting, and service fulfillment. ID documents are stored in private storage, accessible only by verified administrators, and permanently erased 30 days after an application decision. A cryptographic one-way hash of identity numbers is retained solely to prevent duplicate applications. Addresses and contact details are disclosed strictly between assigned participants after a confirmed booking. We never sell or monetize personal data.
+legal.privacy.body: siZa processes personal information in accordance with the Protection of Personal Information Act (POPIA). We collect names, contact details, service addresses, and identification documents solely for authentication, safety vetting, and service fulfillment. ID documents are stored in private storage, accessible only by verified administrators, and permanently erased 30 days after an application decision. A cryptographic one-way hash of identity numbers is retained solely to prevent duplicate applications. Addresses and contact details are disclosed strictly between assigned participants after a confirmed booking. We never sell or monetize personal data.
 legal.terms.title: Terms and conditions
-legal.terms.body: By accessing or using SIZA, you agree to these terms. SIZA operates as a matching platform connecting independent helpers with hosts. In Phase A, agreements and payments for services are made directly between the host and helper; SIZA does not hold customer funds and does not act as an employer. SIZA does not provide insurance cover and users should maintain adequate property and business insurance. Users agree to provide truthful information and adhere to mutual standards of safety, respect, and punctuality.
+legal.terms.body: By accessing or using siZa, you agree to these terms. siZa operates as a matching platform connecting independent helpers with hosts. In Phase A, agreements and payments for services are made directly between the host and helper; siZa does not hold customer funds and does not act as an employer. siZa does not provide insurance cover and users should maintain adequate property and business insurance. Users agree to provide truthful information and adhere to mutual standards of safety, respect, and punctuality.
 legal.updated: Last updated: 29 October 2026
 
 ## Errors, empty states, 404
@@ -512,7 +551,7 @@ host.preview.complex: Complex
 host.preview.home_details: Home details
 host.preview.pay: Recommended pay
 host.preview.pay_pending: Shown after service and area details
-host.preview.pay_help: SIZA calculates the guide from the service and area settings. You can raise it, not lower it.
+host.preview.pay_help: siZa calculates the guide from the service and area settings. You can raise it, not lower it.
 host.preview.preference: Helper preference
 host.preview.any: Any
 host.preview.female: Female
@@ -537,7 +576,7 @@ host.home.view_requests: View all requests
 host.home.carousel.title: Homes cared for with pride
 host.home.carousel.subtitle: Real spaces refreshed by trusted local helpers across Johannesburg.
 host.home.impact.title: Every request changes a household
-host.home.impact.body: When you book on SIZA, your helper keeps their earnings and transport. Your request brings reliable, dignified income directly to hardworking individuals providing for their families.
+host.home.impact.body: When you book on siZa, your helper keeps their earnings and transport. Your request brings reliable, dignified income directly to hardworking individuals providing for their families.
 host.home.status.open: Looking for a helper
 host.home.status.assigned: Helper confirmed
 host.home.status.in_progress: Job in progress
@@ -661,7 +700,7 @@ helper.apply.title: Apply to be a helper
 helper.apply.progress: Step {step} of {total}
 helper.apply.1.title: About you
 helper.apply.2.title: Your documents
-helper.apply.2.body: We use these to check who you are. Only SIZA's admin sees them, and they are deleted 30 days after we decide.
+helper.apply.2.body: We use these to check who you are. Only siZa's admin sees them, and they are deleted 30 days after we decide.
 helper.apply.2.id: South African ID (photo of the document)
 helper.apply.2.selfie: A clear selfie
 helper.apply.2.selfie_id: A selfie holding your ID
@@ -725,7 +764,7 @@ admin.nav.reports: Reports
 admin.nav.payments: Payments
 admin.nav.settings: Settings
 admin.nav.audit: Audit log
-admin.overview.eyebrow: SIZA / admin / overview
+admin.overview.eyebrow: siZa / admin / overview
 admin.overview.title: Marketplace snapshot
 admin.overview.intro: These counts refresh when you open or reload this page. They do not show who is online right now.
 admin.overview.metric.hosts: Registered hosts
@@ -764,9 +803,9 @@ admin.login.submit: Sign in
 admin.login.error.invalid: Those sign-in details were not accepted. Check them and try again.
 admin.login.error.try_again: We could not check sign-in just now. Please try again.
 admin.audit.home.summary: Review a record of changes made in the app.
-admin.audit.eyebrow: SIZA / admin / audit log
+admin.audit.eyebrow: siZa / admin / audit log
 admin.audit.title: Recent admin activity
-admin.audit.intro: See changes recorded by SIZA. This list does not show live errors.
+admin.audit.intro: See changes recorded by siZa. This list does not show live errors.
 admin.audit.action: Recorded action
 admin.audit.entity: Record type
 admin.audit.time: When
@@ -794,7 +833,7 @@ admin.audit.action.unknown: Other recorded change
 admin.audit.entity.helper_details: Helper application
 admin.audit.entity.phase_a_bookings: Booking request
 admin.audit.entity.booking_assignments: Helper assignment
-admin.audit.entity.unknown: SIZA record
+admin.audit.entity.unknown: siZa record
 admin.helper.approve: Approve
 admin.helper.decline: Decline
 admin.helper.check.id_matches: ID matches the selfie
@@ -802,7 +841,7 @@ admin.helper.check.id_readable: ID is readable and valid
 admin.helper.check.reference: Reference called
 admin.helper.approve_blocked: Tick all three checks to approve.
 admin.settings.title: Marketplace settings
-admin.settings.eyebrow: SIZA / admin / settings
+admin.settings.eyebrow: siZa / admin / settings
 admin.settings.intro: Changes take effect immediately. All prices are in South African rand.
 admin.settings.rate_card.title: Service rates
 admin.settings.rate_card.service: Service
@@ -844,12 +883,12 @@ email.host.assigned.body: Hi {firstName}, {helperName} will do your {service} on
 email.host.no_helper.subject: No helper has accepted yet
 email.host.no_helper.body: Hi {firstName}, nobody has accepted your request yet. You can raise the pay, change the time, or try again later.
 email.helper.approved.subject: You are approved
-email.helper.approved.body: Hi {firstName}, welcome to SIZA. You can now see and accept jobs. Your first completed job is free.
+email.helper.approved.body: Hi {firstName}, welcome to siZa. You can now see and accept jobs. Your first completed job is free.
 email.helper.declined.subject: About your application
 email.helper.declined.body: Hi {firstName}, we cannot approve your profile right now. Please check your account for an update.
 email.helper.job_assigned.subject: Your job is confirmed
 email.helper.job_assigned.body: Hi {firstName}, the job on {date} is yours. The address and the host's contact details are in your app.
-email.helper.plan_reminder.subject: Your SIZA plan ends soon
+email.helper.plan_reminder.subject: Your siZa plan ends soon
 email.helper.plan_reminder.body: Hi {firstName}, your plan ends on {date}. Pay R{subscriptionPrice} to keep seeing new jobs. Use the reference {reference}.
 email.admin.new_request.subject: New request
 email.admin.new_request.body: A new request is waiting in the admin area.

@@ -45,3 +45,25 @@ Put your files in `public/assets/images/<folder>/` (videos in `public/assets/vid
 | heading.request | og/Rustic Wooden Request Typography.png | Request below-hero heading | owner supplied PNG | Carved REQUEST lettering | Decorative | supplied by owner |
 | heading.apply | og/Carved Wooden APPLY Letters.png | Apply below-hero heading | owner supplied PNG | Carved APPLY lettering | Decorative | supplied by owner |
 | heading.contact | og/Carved Wooden CONTACT Typography.png | Contact below-hero heading | owner supplied PNG | Carved CONTACT lettering | Decorative | supplied by owner |
+| footer.background | footer/Footer bg img.png | Public footer background | owner supplied PNG | Nature floral background | Decorative | supplied by owner |
+| contact.form.background | about/contact us form background image.png | Contact form backdrop | owner supplied PNG | Atmospheric evening residence | Decorative | supplied by owner |
+| service.card.home-cleaning | images/christian-mackie-cc0Gg3BegjE-unsplash.jpg | Home cleaning service card | Unsplash download | Clean kitchen island and produce | Freshly cleaned kitchen | supplied |
+| service.card.airbnb-turnover | images/clay-banks-zAvzWN6CE5w-unsplash.jpg | Airbnb service card | Unsplash download | Immaculate modern kitchen | Guest-ready kitchen | supplied |
+| service.card.office | images/aalo-lens-QVVHV24DA_o-unsplash.jpg | Office cleaning service card | Unsplash download | Modern open-plan office | Clean modern workspace | supplied |
+| service.card.garden | images/crystal-jo-PKcTuA_CRAo-unsplash.jpg | Garden care service card | Unsplash download | Gardener trimming shrub with shears | Garden care in progress | supplied |
+| service.card.handyman | images/erik-mclean-RfkaDKptt-A-unsplash.jpg | Handyman service card | Unsplash download | Applying window sealant with caulk gun | Handyman repairs | supplied |
+| service.card.custom | images/stefan-lehner-biRt6RXejuk-unsplash.jpg | Custom/Deep clean service card | Unsplash download | Renovation space being cleared | Deep clean restoration | supplied |
+| how.step.1 | images/clay-banks-IE0m2PUI4Fg-unsplash.jpg | How it works step 1 | Unsplash download | Light-filled living room | Comfortable living space | supplied |
+| how.step.2 | images/caroline-badran-xTmez98cqAM-unsplash.jpg | How it works step 2 | Unsplash download | Modern office room | Work meeting area | supplied |
+| how.step.3 | images/ashwini-chaudhary-monty-Iu6parQAO-U-unsplash.jpg | How it works step 3 | Unsplash download | Cleaning cart and vacuum | Cleaning equipment ready | supplied |
+| how.step.4 | images/franco-debartolo-LKI3Dd146vI-unsplash.jpg | How it works step 4 | Unsplash download | Pristine room with leather ottoman | Immaculate living room | supplied |
+| gallery.space.1 | images/kara-eads-L7EwHkq1B2s-unsplash.jpg | Verified spaces gallery | Unsplash download | Bright apartment living room | Living space | supplied |
+| gallery.space.2 | images/clay-banks-awkEbEmwn3I-unsplash.jpg | Verified spaces gallery | Unsplash download | Cozy stone fireplace room | Hearth and armchairs | supplied |
+| gallery.space.3 | images/glen-carrie-y8dgMhxaoKk-unsplash.jpg | Verified spaces gallery | Unsplash download | Lush green garden and lawn | Landscaped garden | supplied |
+| gallery.space.4 | images/sehajpal-singh-uPpr9zcTrkY-unsplash.jpg | Verified spaces gallery | Unsplash download | Vibrant flower-lined garden path | Garden path | supplied |
+| gallery.space.5 | images/sosey-interiors-YABErdnJPGc-unsplash.jpg | Verified spaces gallery | Unsplash download | Rustic kitchen island with copper pots | Rustic kitchen | supplied |
+| gallery.space.6 | images/spacejoy-9M66C_w_ToM-unsplash.jpg | Verified spaces gallery | Unsplash download | Contemporary living room with houseplants | Contemporary lounge | supplied |
+| gallery.space.7 | images/spacejoy-XpbtQfr9Skg-unsplash.jpg | Verified spaces gallery | Unsplash download | Blue bookshelf wall and fireplace | Study and library | supplied |
+| gallery.space.8 | images/look-up-look-down-photography--o7ASOHDV9E-unsplash.jpg | Verified spaces gallery | Unsplash download | Architectural garden steps and palms | Manicured garden | supplied |
+| gallery.space.9 | images/nastuh-abootalebi-yWwob8kwOCk-unsplash.jpg | Verified spaces gallery | Unsplash download | Glass-partitioned office corridor | Clean office corridor | supplied |
+| gallery.space.10 | images/theme-photos-Klby0nxseY8-unsplash.jpg | Verified spaces gallery | Unsplash download | Handyman power drill tightening hardware | Precision handyman tools | supplied |
