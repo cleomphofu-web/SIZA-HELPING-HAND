@@ -1,0 +1,8 @@
+# Build command and publish folder are set in the Netlify UI.
+
+[build.environment]
+  # NEXT_PUBLIC_HERO_VIDEO_ID is a public value: Next.js inlines it into the
+  # browser bundle by design, so it is not a secret. Its current value is a
+  # common word that also appears in docs and the built site, which made
+  # secrets scanning fail the deploy. Real secrets are still scanned.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_HERO_VIDEO_ID"
