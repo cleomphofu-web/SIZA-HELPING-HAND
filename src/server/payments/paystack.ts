@@ -2,9 +2,7 @@ import "server-only";
 
 import type {
   PaymentProvider,
-  WebhookEvent,
-  RefundResult,
-} from "@/server/domain/payment-provider";
+    } from "@/server/domain/payment-provider";
 
 const PAYSTACK_BASE = "https://api.paystack.co";
 
@@ -41,8 +39,7 @@ export function createPaystackProvider(secretKey: string, webhookSecret: string)
       });
 
       if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Paystack checkout creation failed: ${res.status}`);
+                throw new Error(`Paystack checkout creation failed: ${res.status}`);
       }
 
       const data = await res.json();

@@ -303,6 +303,7 @@ const EMPTY_FORM: FormState = {
 // ---------------------------------------------------------------------------
 
 export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
+  const [maxDob] = useState(() => new Date(Date.now() - 18 * 365.25 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10));
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [showIdNumber, setShowIdNumber] = useState(false);
@@ -478,7 +479,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
             value={form.dateOfBirth}
             onChange={(e) => update("dateOfBirth", e.target.value)}
             className="h-14 text-base border-2 border-neutral-200 rounded-xl focus:border-black transition-colors"
-            max={new Date(Date.now() - 18 * 365.25 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)}
+            max={maxDob}
             autoComplete="bday"
             aria-label={t("helper.label.date_of_birth")}
           />

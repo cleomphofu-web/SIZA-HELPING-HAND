@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, MapPin, Calendar, Clock, DollarSign, KeyRound, ShieldAlert, PhoneCall, RefreshCw, Star, Trash2, Edit3 } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, DollarSign, KeyRound, ShieldAlert, PhoneCall, RefreshCw, Star, Trash2, Edit3 } from "lucide-react";
 import { CheckInCodeForm } from "@/components/CheckInCodeForm";
 import { t } from "@/content/t";
 import { formatZarCents } from "@/lib/money";

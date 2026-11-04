@@ -38,7 +38,7 @@ export function validateSouthAfricanId(idNumber: string): { valid: boolean; reas
   }
 
   // Validate DOB components
-  const year = parseInt(cleaned.substring(0, 2), 10);
+  const _year = parseInt(cleaned.substring(0, 2), 10);
   const month = parseInt(cleaned.substring(2, 4), 10);
   const day = parseInt(cleaned.substring(4, 6), 10);
 

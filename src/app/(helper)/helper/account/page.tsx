@@ -1,13 +1,10 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
-  User,
   LogOut,
   HelpCircle,
   ShieldCheck,
   FileText,
-  KeyRound,
-  Trash2,
   ChevronRight,
   BookOpen,
   Mail,

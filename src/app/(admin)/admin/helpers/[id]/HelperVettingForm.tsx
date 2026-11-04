@@ -23,8 +23,8 @@ export function VettingForm({ id }: { id: string }) {
       await approveHelper(id, checks);
       setMessage("Helper approved successfully!");
       window.location.reload();
-    } catch (e: any) {
-      setMessage(e.message || "Failed to approve helper");
+    } catch (e: unknown) {
+      setMessage(e instanceof Error ? e.message : "Failed to approve helper");
       setIsSubmitting(false);
     }
   }
@@ -38,8 +38,8 @@ export function VettingForm({ id }: { id: string }) {
       await rejectHelper(id);
       setMessage("Helper application declined.");
       window.location.reload();
-    } catch (e: any) {
-      setMessage(e.message || "Failed to decline application");
+    } catch (e: unknown) {
+      setMessage(e instanceof Error ? e.message : "Failed to decline application");
       setIsSubmitting(false);
     }
   }

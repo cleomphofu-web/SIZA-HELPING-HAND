@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { redirect, notFound } from "next/navigation";
 import {
-  MapPin,
-  Clock,
+    Clock,
   CheckCircle2,
   KeyRound,
   ShieldAlert,
-  ArrowLeft,
-  Navigation,
+    Navigation,
 } from "lucide-react";
 import { t } from "@/content/t";
 import { requireActor } from "@/server/policies/auth";

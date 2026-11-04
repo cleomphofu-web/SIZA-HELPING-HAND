@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/server/policies/auth";
 import { createSupabaseAdminClient } from "@/server/db/admin";
-import { getSignedDocumentUrl } from "@/app/(admin)/admin/helpers/actions";
 import { AdminShell } from "@/components/AdminShell";
 import { VettingForm } from "./HelperVettingForm";
 

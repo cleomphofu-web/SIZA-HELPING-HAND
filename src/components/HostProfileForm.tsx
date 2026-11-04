@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { User, MapPin, Building, FileText } from "lucide-react";
+import { } from "lucide-react";
 import { t } from "@/content/t";
 import { HostAccountForm, type HostAccountNotice } from "@/components/HostAccountForm";
 import type { HostAccountView } from "@/server/views/host-account";

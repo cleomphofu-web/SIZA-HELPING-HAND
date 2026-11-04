@@ -14,9 +14,7 @@ import {
   Heart,
   MessageSquare,
   Image as ImageIcon,
-  PlusCircle,
-  Briefcase,
-  Star,
+      Star,
   ShieldCheck,
   Send,
 } from "lucide-react";

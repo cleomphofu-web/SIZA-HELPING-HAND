@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CreditCard, CheckCircle2, Ticket, AlertCircle } from "lucide-react";
+import { CheckCircle2, Ticket, AlertCircle } from "lucide-react";
 
 type HelperSubscriptionBannerProps = {
   firstJobCompletedAt: string | null;
@@ -21,8 +21,9 @@ export function HelperSubscriptionBanner({
   const [submitting, setSubmitting] = useState(false);
 
   // Check if helper is past their first job and has no active subscription
+  const [currentTime] = useState(() => Date.now());
   const isPastFirstJob = Boolean(firstJobCompletedAt);
-  const isActive = subscriptionStatus === "active" && subscriptionPaidUntil && new Date(subscriptionPaidUntil).getTime() > Date.now();
+  const isActive = subscriptionStatus === "active" && subscriptionPaidUntil && new Date(subscriptionPaidUntil).getTime() > currentTime;
 
   if (!isPastFirstJob) {
     // Helper is still on their free first job!

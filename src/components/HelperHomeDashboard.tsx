@@ -14,8 +14,7 @@ import {
   Banknote,
   Flag,
   KeyRound,
-  Navigation,
-  TrendingUp,
+    TrendingUp,
 } from "lucide-react";
 import type { HelperOfferSummary } from "@/server/views/booking-read";
 import type { HelperAssignedJobSummary } from "@/server/views/booking";
@@ -82,8 +81,7 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
   const isApproved = helper?.status === "approved";
   const isPending = helper?.status === "pending" || !helper;
   const suburbsCount = helper?.suburbs?.length ?? 0;
-  const servicesCount = helper?.services?.length ?? 0;
-
+  
   return (
     <main className="min-h-screen bg-[#f5f5f5] text-black pb-36 font-sans">
       {/* Top Header */}

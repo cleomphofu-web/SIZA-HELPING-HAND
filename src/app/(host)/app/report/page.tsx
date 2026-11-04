@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { randomUUID } from "node:crypto";
-import { AlertTriangle, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { t } from "@/content/t";
 import { Badge } from "@/components/ui/badge";
 
