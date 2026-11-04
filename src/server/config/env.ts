@@ -18,7 +18,6 @@ const envSchema = z.object({
   MAINTENANCE_JOB_SECRET: z.string().min(32).optional(),
   TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),
-  NEXT_PUBLIC_HERO_VIDEO_ID: z.string().min(1),
 });
 
 export type Env = z.infer<typeof envSchema>;

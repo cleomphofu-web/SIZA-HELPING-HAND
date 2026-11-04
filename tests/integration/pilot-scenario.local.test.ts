@@ -11,7 +11,6 @@ vi.mock("@/server/config/env", () => ({
     ID_ENCRYPTION_KEY: "mock_id_key",
     WHATSAPP_GROUP_LINK: "https://chat.whatsapp.com/mock",
     ADMIN_NOTIFY_EMAIL: "admin@siza.co.za",
-    NEXT_PUBLIC_HERO_VIDEO_ID: "mock_video",
   },
 }));
 
