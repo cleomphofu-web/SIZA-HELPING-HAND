@@ -108,8 +108,11 @@ export function generateWhatsAppEtaLink(input: {
   helperFirstName: string;
   etaMinutes: number;
 }): string {
-  // Clean phone number to digits only (e.g. +27... -> 27...)
-  const phoneDigits = input.hostPhone.replace(/\D/g, "");
+  // Clean phone number to digits only (e.g. +27... -> 27..., 082... -> 2782...)
+  let phoneDigits = input.hostPhone.replace(/\D/g, "");
+  if (phoneDigits.startsWith("0") && phoneDigits.length === 10) {
+    phoneDigits = `27${phoneDigits.slice(1)}`;
+  }
   const message = `Hi! I am on my way to your booking. My estimated arrival is in ${input.etaMinutes} minutes. - ${input.helperFirstName} (via siZa)`;
   return `https://wa.me/${phoneDigits}?text=${encodeURIComponent(message)}`;
 }

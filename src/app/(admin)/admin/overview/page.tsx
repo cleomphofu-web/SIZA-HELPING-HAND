@@ -45,6 +45,8 @@ export default async function AdminOverviewPage() {
         <Link className="siza-row" href="/admin/helpers"><span className="siza-row-title">{t("admin.overview.queue.helpers")}</span><span className="siza-row-arrow" aria-hidden="true">↗</span></Link>
         <Link className="siza-row" href="/admin/bookings"><span className="siza-row-title">{t("admin.overview.queue.bookings")}</span><span className="siza-row-arrow" aria-hidden="true">↗</span></Link>
         <Link className="siza-row" href="/admin/reports"><span className="siza-row-title">{t("admin.overview.queue.reports")}</span><span className="siza-row-arrow" aria-hidden="true">↗</span></Link>
+        <Link className="siza-row" href="/admin/payments"><span className="siza-row-title">{t("admin.overview.queue.payments")}</span><span className="siza-row-arrow" aria-hidden="true">↗</span></Link>
+        <Link className="siza-row" href="/admin/ledger"><span className="siza-row-title">{t("admin.overview.queue.ledger")}</span><span className="siza-row-arrow" aria-hidden="true">↗</span></Link>
         <Link className="siza-row" href="/admin/settings"><span className="siza-row-title">{t("admin.overview.queue.settings")}</span><span className="siza-row-arrow" aria-hidden="true">↗</span></Link>
       </div>
     </section>

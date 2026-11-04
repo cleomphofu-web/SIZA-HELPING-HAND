@@ -12,6 +12,7 @@ import {
 import { t } from "@/content/t";
 import { requireActor } from "@/server/policies/auth";
 import { getBookingView } from "@/server/views/booking-read";
+import { OnMyWayButton } from "@/components/OnMyWayButton";
 
 export default async function HelperJobDetailPage({
   params,
@@ -101,9 +102,24 @@ export default async function HelperJobDetailPage({
           </div>
         </div>
 
+        {/* On My Way Card — only shown when assigned and not yet checked in */}
+        {booking.status !== "completed" && !booking.checkedInAt && (
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-4">
+            <div className="space-y-1">
+              <h2 className="text-lg font-bold text-neutral-900 flex items-center gap-2">
+                <Navigation className="size-5 text-black" />
+                {t("tracking.on_my_way_title")}
+              </h2>
+              <p className="text-xs text-neutral-500">
+                {t("tracking.on_my_way_body")}
+              </p>
+            </div>
+            <OnMyWayButton bookingId={booking.id} />
+          </div>
+        )}
+
         {/* Check-In / Completion Action Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">
-          {booking.status === "completed" ? (
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">          {booking.status === "completed" ? (
             <div className="space-y-4">
               <div className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900">
                 <CheckCircle2 className="size-5 text-emerald-600 shrink-0" />

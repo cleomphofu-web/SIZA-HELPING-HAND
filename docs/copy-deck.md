@@ -890,6 +890,8 @@ admin.settings.config.error: Could not save setting. Try again.
 admin.settings.error.title: Settings unavailable
 admin.settings.error.body: The settings could not be loaded. Please reload the page.
 admin.overview.queue.settings: Rates, zones and operational settings
+admin.overview.queue.payments: Helper subscriptions and cleared payments
+admin.overview.queue.ledger: Ledger entries and payouts
 
 ## Emails (subject, body)
 email.host.requested.subject: We got your request
@@ -910,3 +912,26 @@ email.admin.new_request.subject: New request
 email.admin.new_request.body: A new request is waiting in the admin area.
 email.admin.new_application.subject: New helper application
 email.admin.new_application.body: A helper application is ready for review in the admin area.
+tracking.on_my_way_title: I am on my way
+tracking.on_my_way_body: Tap this once you have left for the job. This lets you send the host a WhatsApp ETA message.
+tracking.whatsapp_sent: ETA sent via WhatsApp
+tracking.already_en_route: You have already marked yourself as on the way.
+kyc.title: Verify your identity
+kyc.body: To protect hosts and helpers on siZa, we need to verify your South African identity. Your ID number is encrypted and used only for verification.
+kyc.id_label: South African ID number
+kyc.consent_label: I consent to siZa verifying my identity against the Department of Home Affairs records for safety vetting purposes, as required under POPIA Section 11.
+kyc.submit: Submit for verification
+kyc.pending: Your identity verification is pending. We will notify you once reviewed.
+kyc.verified: Your identity has been verified.
+kyc.failed: Verification could not be completed. Please contact support.
+kyc.error.no_consent: You must give consent before submitting.
+kyc.error.invalid_id: Please enter a valid 13-digit South African ID number.
+kyc.error.already_submitted: Your identity has already been submitted for verification.
+admin.ledger.title: Ledger and payouts
+admin.ledger.body: View all payment ledger entries and record EFT payouts to helpers.
+admin.ledger.no_entries: No ledger entries found.
+admin.payout.mark_sent: Mark EFT sent
+admin.payout.sent: Payout recorded
+admin.payout.ref_label: Payment reference
+admin.payout.amount_label: Amount (rands)
+admin.payout.error: Could not record the payout. Please check the details and try again.
