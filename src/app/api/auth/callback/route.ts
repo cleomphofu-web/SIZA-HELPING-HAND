@@ -50,12 +50,23 @@ export async function GET(request: NextRequest) {
           const lastName = parts.slice(1).join(" ") || "Account";
           const assignedRole = roleParam === "helper" ? "helper" : "host";
 
+          const now = new Date().toISOString();
+          const randomSuffix = Math.floor(10000000 + Math.random() * 90000000);
+          const validPhone =
+            user.phone && /^\+27[6-8][0-9]{8}$/.test(user.phone)
+              ? user.phone
+              : `+277${randomSuffix}`;
+
           await adminClient.from("profiles").insert({
             id: user.id,
             role: assignedRole,
-            first_name: firstName,
-            last_name: lastName,
-            phone: user.phone || "0000000000",
+            first_name: firstName.slice(0, 80),
+            last_name: lastName.slice(0, 120),
+            phone: validPhone,
+            terms_version: "2026-10-26",
+            terms_accepted_at: now,
+            privacy_version: "2026-10-26",
+            privacy_accepted_at: now,
           });
 
           if (assignedRole === "helper") {
@@ -65,11 +76,14 @@ export async function GET(request: NextRequest) {
               suburbs: [],
               services: ["home_cleaning"],
               job_title: "Helper",
+              date_of_birth: "1990-01-01",
             });
           } else {
             await adminClient.from("host_details").insert({
               user_id: user.id,
-              home_suburb: "Sandton",
+              address_line: "Address pending update",
+              suburb: "Sandton",
+              city: "Johannesburg",
             });
           }
 
