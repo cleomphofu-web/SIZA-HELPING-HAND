@@ -89,20 +89,20 @@ export function VettingForm({ id }: { id: string }) {
         <button
           disabled={!ready || isSubmitting}
           onClick={handleApprove}
-          className="w-full h-11 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 disabled:opacity-40 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full h-12 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 disabled:opacity-40 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
           type="button"
         >
-          <Check className="size-3.5" />
+          <Check className="size-4" />
           <span>{isSubmitting ? "Processing…" : "Approve Helper"}</span>
         </button>
 
         <button
           disabled={isSubmitting}
           onClick={handleReject}
-          className="w-full h-10 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full min-h-[44px] rounded-xl bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
           type="button"
         >
-          <X className="size-3.5" />
+          <X className="size-4" />
           <span>Reject application</span>
         </button>
       </div>

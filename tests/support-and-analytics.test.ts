@@ -161,7 +161,7 @@ describe("Support and Analytics Services", () => {
 
     it("aggregates event counts since timestamp", async () => {
       const db = {
-        from: (table: string) => ({
+        from: (_table: string) => ({
           select: () => ({
             gte: async () => ({
               data: [

@@ -11,6 +11,7 @@ import { t } from "@/content/t";
 import { requireActor } from "@/server/policies/auth";
 import { getBookingView } from "@/server/views/booking-read";
 import { OnMyWayButton } from "@/components/OnMyWayButton";
+import { FlowButton } from "@/components/ui/flow-button";
 
 export default async function HelperJobDetailPage({
   params,
@@ -172,12 +173,13 @@ export default async function HelperJobDetailPage({
                   placeholder="••••••"
                   className="w-full h-14 px-4 rounded-2xl bg-neutral-50 border border-neutral-300 focus:border-black focus:ring-1 focus:ring-black text-center tracking-[0.5em] text-2xl font-mono text-neutral-900 outline-none transition-all"
                 />
-                <button
+                <FlowButton
                   type="submit"
-                  className="w-full h-12 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm tracking-wide transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                  variant="emerald"
+                  fullWidth
                 >
                   Confirm Arrival & Check In
-                </button>
+                </FlowButton>
               </form>
             </div>
           ) : (
@@ -195,12 +197,12 @@ export default async function HelperJobDetailPage({
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <form action="/api/bookings/confirm" method="post">
                   <input type="hidden" name="bookingId" value={booking.id} />
-                  <button
+                  <FlowButton
                     type="submit"
-                    className="px-6 h-12 rounded-xl bg-black hover:bg-neutral-800 text-white font-semibold text-sm transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                    variant="primary"
                   >
                     Complete Job
-                  </button>
+                  </FlowButton>
                 </form>
 
                 <Link

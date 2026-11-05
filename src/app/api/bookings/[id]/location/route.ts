@@ -6,7 +6,7 @@ import { runRequestPipeline } from "@/server/policies/request-pipeline";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
 import { sameOrigin } from "@/server/security/origin";
-import { recordLocationPing } from "@/server/services/location-tracking";
+import { recordLocationPing, getLatestLocation } from "@/server/services/location-tracking";
 
 const locationSchema = z.object({
   lat: z.number().min(-90).max(90),
@@ -73,4 +73,17 @@ export async function POST(
   }
 
   return NextResponse.json({ pingId: result.data.pingId }, { status: 201 });
+}
+
+export async function GET(
+  _request: NextRequest,
+  context: { params: Promise<{ id: string }> },
+) {
+  const { id: bookingId } = await context.params;
+  const adminDb = createSupabaseAdminClient();
+  const result = await getLatestLocation(adminDb, bookingId);
+  if (!result.ok) {
+    return NextResponse.json({ error: result.error.message }, { status: 500 });
+  }
+  return NextResponse.json({ data: result.data }, { status: 200 });
 }

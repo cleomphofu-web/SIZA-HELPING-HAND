@@ -6,6 +6,7 @@ import { formatZarCents } from "@/lib/money";
 import { formatHostBookingDate, hostBookingStatusCopy } from "@/lib/host-booking-display";
 import type { HostBookingView } from "@/server/views/booking";
 import { Badge } from "@/components/ui/badge";
+import { JohannesburgTrackingCard } from "@/components/ui/map-marker-tooltip";
 
 export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: { booking: HostBookingView; notice?: string; hostCompletedJobs?: number }) {
   return (
@@ -148,6 +149,15 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: {
               </dd>
             </div>
           </dl>
+
+          {/* Live Location / Suburb Map Marker Tooltip Card */}
+          {booking.status === "assigned" || booking.status === "in_progress" ? (
+            <JohannesburgTrackingCard
+              suburb={booking.suburb}
+              helperName={booking.assignedHelpers[0]?.firstName}
+              isLive={booking.status === "assigned"}
+            />
+          ) : null}
 
           {/* Assigned Helpers */}
           {booking.assignedHelpers.length > 0 ? (

@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import { Mail, Eye, EyeOff } from "lucide-react";
 import { t } from "@/content/t";
 import { TurnstileWidget } from "@/components/TurnstileWidget";
+import { FlowButton } from "@/components/ui/flow-button";
+import { SignInPageLayout } from "@/components/ui/sign-in";
 
 type AccountFormProps = {
   mode: "signup" | "login";
@@ -23,6 +24,7 @@ export function AccountForm({
   const [pending, setPending] = useState(false);
   const [complete, setComplete] = useState(false);
   const [challengeRequired, setChallengeRequired] = useState(signup);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -91,27 +93,9 @@ export function AccountForm({
       : t("account.role.helper");
 
   return (
-    <main className="relative min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-hidden bg-black text-white">
-      {/* siZa-related atmospheric background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/images/hero/background%20home%20page%20hero.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center filter brightness-[0.35] contrast-[1.15] scale-105"
-        />
-        {/* Liquid dark backdrop and atmospheric horizon glow (Space Login style) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90 backdrop-blur-[2px]" />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[340px] bg-gradient-to-b from-white/12 to-transparent blur-3xl opacity-50 rounded-full"
-        />
-      </div>
-
-      {/* Liquid Glass Space Card */}
-      <div className="relative z-10 w-full max-w-[480px] my-auto mx-auto p-7 sm:p-10 rounded-3xl bg-neutral-950/75 backdrop-blur-2xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent">
+    <SignInPageLayout role={defaultRole} mode={mode}>
+      {/* Interactive Liquid Glass Space Card */}
+      <div className="relative z-10 w-full p-6 sm:p-9 md:p-10 rounded-3xl bg-neutral-950/85 backdrop-blur-2xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent">
         {/* Brand Eyebrow Pill */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-6">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -147,9 +131,10 @@ export function AccountForm({
             <div className="mt-6 space-y-3">
               <a
                 href={`/api/auth/oauth?provider=google&role=${defaultRole}`}
-                className="w-full h-12 rounded-xl bg-white hover:bg-neutral-100 text-black font-semibold text-xs tracking-wider flex items-center justify-center gap-3 transition-all shadow-md active:scale-[0.99]"
+                className="w-full h-12 rounded-xl bg-white hover:bg-neutral-100 text-black font-semibold text-xs tracking-wider flex items-center justify-center gap-3 transition-all shadow-md active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                aria-label="Continue with Google"
               >
-                <svg className="size-4" viewBox="0 0 24 24">
+                <svg className="size-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     fill="#4285F4"
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -182,234 +167,262 @@ export function AccountForm({
               className="space-y-4"
               onSubmit={submit}
             >
-            {signup ? (
-              <>
-                {/* Role indicator */}
-                <div className="space-y-1.5">
-                  <span className="block text-xs font-bold uppercase tracking-wider text-neutral-100">
-                    {t("account.label.role")}
-                  </span>
-                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-neutral-900/90 border border-neutral-700 text-sm text-white backdrop-blur-md">
-                    <span className="font-semibold capitalize text-white">
-                      {roleLabel}
+              {signup ? (
+                <>
+                  {/* Role indicator */}
+                  <div className="space-y-1.5">
+                    <span className="block text-xs font-bold uppercase tracking-wider text-neutral-100">
+                      {t("account.label.role")}
                     </span>
-                    <span className="text-xs text-neutral-400">Fixed role</span>
+                    <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-neutral-900/90 border border-neutral-700 text-sm text-white backdrop-blur-md">
+                      <span className="font-semibold capitalize text-white">
+                        {roleLabel}
+                      </span>
+                      <span className="text-xs text-neutral-400">Fixed role</span>
+                    </div>
+                    <input type="hidden" name="role" value={defaultRole} />
                   </div>
-                  <input type="hidden" name="role" value={defaultRole} />
-                </div>
 
-                {/* First and Last Name */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* First and Last Name */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="firstName"
+                        className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
+                      >
+                        {t("account.label.first_name")}
+                      </label>
+                      <input
+                        id="firstName"
+                        name="firstName"
+                        required
+                        maxLength={80}
+                        autoComplete="given-name"
+                        placeholder="e.g. Sipho"
+                        className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label
+                        htmlFor="lastName"
+                        className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
+                      >
+                        {t("account.label.last_name")}
+                      </label>
+                      <input
+                        id="lastName"
+                        name="lastName"
+                        required
+                        maxLength={120}
+                        autoComplete="family-name"
+                        placeholder="e.g. Dlamini"
+                        className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Phone */}
                   <div className="space-y-1.5">
                     <label
-                      htmlFor="firstName"
+                      htmlFor="phone"
                       className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
                     >
-                      {t("account.label.first_name")}
+                      {t("account.label.phone")}
                     </label>
                     <input
-                      id="firstName"
-                      name="firstName"
+                      id="phone"
+                      name="phone"
                       required
-                      maxLength={80}
-                      autoComplete="given-name"
-                      placeholder="e.g. Sipho"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      placeholder="082 123 4567"
                       className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
                     />
                   </div>
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="lastName"
-                      className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
-                    >
-                      {t("account.label.last_name")}
-                    </label>
-                    <input
-                      id="lastName"
-                      name="lastName"
-                      required
-                      maxLength={120}
-                      autoComplete="family-name"
-                      placeholder="e.g. Dlamini"
-                      className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
-                    />
-                  </div>
-                </div>
+                </>
+              ) : null}
 
-                {/* Phone */}
-                <div className="space-y-1.5">
+              {/* Email */}
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="email"
+                  className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
+                >
+                  {t("account.label.email")}
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  required
+                  type="email"
+                  maxLength={254}
+                  autoComplete="email"
+                  placeholder="name@example.com"
+                  className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
+                />
+              </div>
+
+              {/* Password */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
                   <label
-                    htmlFor="phone"
+                    htmlFor="password"
                     className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
                   >
-                    {t("account.label.phone")}
+                    {t("account.label.password")}
                   </label>
+                  {!signup && (
+                    <Link
+                      href="/reset-password"
+                      className="text-xs text-neutral-400 hover:text-white transition-colors"
+                    >
+                      Forgot password?
+                    </Link>
+                  )}
+                </div>
+                <div className="relative">
                   <input
-                    id="phone"
-                    name="phone"
+                    id="password"
+                    name="password"
                     required
-                    type="tel"
-                    inputMode="tel"
-                    autoComplete="tel"
-                    placeholder="082 123 4567"
-                    className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
+                    type={showPassword ? "text" : "password"}
+                    minLength={signup ? 12 : 1}
+                    maxLength={128}
+                    autoComplete={signup ? "new-password" : "current-password"}
+                    placeholder={signup ? "At least 12 characters" : "••••••••••••"}
+                    className="w-full h-12 pl-4 pr-11 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white p-1 rounded-md transition-colors"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="size-4" />
+                    ) : (
+                      <Eye className="size-4" />
+                    )}
+                  </button>
                 </div>
-              </>
-            ) : null}
-
-            {/* Email */}
-            <div className="space-y-1.5">
-              <label
-                htmlFor="email"
-                className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
-              >
-                {t("account.label.email")}
-              </label>
-              <input
-                id="email"
-                name="email"
-                required
-                type="email"
-                maxLength={254}
-                autoComplete="email"
-                placeholder="name@example.com"
-                className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
-              />
-            </div>
-
-            {/* Password */}
-            <div className="space-y-1.5">
-              <label
-                htmlFor="password"
-                className="block text-xs font-bold uppercase tracking-wider text-neutral-100"
-              >
-                {t("account.label.password")}
-              </label>
-              <input
-                id="password"
-                name="password"
-                required
-                type="password"
-                minLength={signup ? 12 : 1}
-                maxLength={128}
-                autoComplete={signup ? "new-password" : "current-password"}
-                placeholder={signup ? "At least 12 characters" : "••••••••••••"}
-                className="w-full h-12 px-4 rounded-xl bg-neutral-900/90 hover:bg-neutral-900 border border-neutral-700 focus:border-white focus:bg-neutral-950 focus:ring-1 focus:ring-white text-white placeholder:text-neutral-400 backdrop-blur-md transition-all text-sm outline-none"
-              />
-            </div>
-
-            {signup ? (
-              <>
-                <input type="hidden" name="termsVersion" value="v1" />
-                <input type="hidden" name="privacyVersion" value="v1" />
-
-                <div className="space-y-2.5 pt-1">
-                  <label className="flex items-start gap-3 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      name="termsAccepted"
-                      required
-                      className="mt-0.5 size-4 rounded border-white/30 bg-neutral-900 text-white focus:ring-white/30"
-                    />
-                    <span className="text-xs text-neutral-200 leading-relaxed group-hover:text-white transition-colors">
-                      {t("account.label.terms")}
-                    </span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      name="privacyAccepted"
-                      required
-                      className="mt-0.5 size-4 rounded border-white/30 bg-neutral-900 text-white focus:ring-white/30"
-                    />
-                    <span className="text-xs text-neutral-200 leading-relaxed group-hover:text-white transition-colors">
-                      {t("account.label.privacy")}
-                    </span>
-                  </label>
-                </div>
-                <p className="text-xs text-neutral-300 leading-relaxed">
-                  {t("account.notice")}
-                </p>
-              </>
-            ) : null}
-
-            {/* Honeypot */}
-            <input
-              className="sr-only"
-              tabIndex={-1}
-              aria-hidden="true"
-              name="honeypot"
-              autoComplete="off"
-            />
-
-            {/* Turnstile verification check */}
-            {signup || challengeRequired ? (
-              <div className="pt-1 flex justify-center">
-                <TurnstileWidget siteKey={turnstileSiteKey} />
               </div>
-            ) : null}
 
-            {(signup || challengeRequired) && !turnstileSiteKey ? (
-              <p
-                className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs text-center"
-                role="alert"
-              >
-                {t("account.turnstile.unavailable")}
-              </p>
-            ) : null}
-
-            {/* Error or validation message */}
-            {message ? (
-              <p
-                className="p-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-200 text-xs text-center font-medium"
-                role="alert"
-                aria-live="polite"
-              >
-                {message}
-              </p>
-            ) : null}
-
-            {/* Submit Action Button */}
-            <button
-              className="w-full h-12 rounded-xl bg-white text-black font-semibold text-sm tracking-wide hover:bg-neutral-200 active:scale-[0.99] transition-all shadow-lg shadow-white/10 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-              type="submit"
-              disabled={
-                pending ||
-                ((signup || challengeRequired) && !turnstileSiteKey)
-              }
-            >
-              {t(pending ? "button.sending" : "button.continue")}
-            </button>
-
-            {/* Switch between Login and Signup */}
-            <div className="pt-4 border-t border-white/10 text-center">
               {signup ? (
-                <p className="text-xs text-neutral-400">
-                  Already have an account?{" "}
-                  <Link
-                    href="/login"
-                    className="text-white font-medium underline underline-offset-4 hover:text-neutral-200 transition-colors"
-                  >
-                    Log in
-                  </Link>
+                <>
+                  <input type="hidden" name="termsVersion" value="v1" />
+                  <input type="hidden" name="privacyVersion" value="v1" />
+
+                  <div className="space-y-2.5 pt-1">
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        name="termsAccepted"
+                        required
+                        className="mt-0.5 size-4 rounded border-white/30 bg-neutral-900 text-white focus:ring-white/30"
+                      />
+                      <span className="text-xs text-neutral-200 leading-relaxed group-hover:text-white transition-colors">
+                        {t("account.label.terms")}
+                      </span>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        name="privacyAccepted"
+                        required
+                        className="mt-0.5 size-4 rounded border-white/30 bg-neutral-900 text-white focus:ring-white/30"
+                      />
+                      <span className="text-xs text-neutral-200 leading-relaxed group-hover:text-white transition-colors">
+                        {t("account.label.privacy")}
+                      </span>
+                    </label>
+                  </div>
+                  <p className="text-xs text-neutral-300 leading-relaxed">
+                    {t("account.notice")}
+                  </p>
+                </>
+              ) : null}
+
+              {/* Honeypot */}
+              <input
+                className="sr-only"
+                tabIndex={-1}
+                aria-hidden="true"
+                name="honeypot"
+                autoComplete="off"
+              />
+
+              {/* Turnstile verification check */}
+              {signup || challengeRequired ? (
+                <div className="pt-1 flex justify-center">
+                  <TurnstileWidget siteKey={turnstileSiteKey} />
+                </div>
+              ) : null}
+
+              {(signup || challengeRequired) && !turnstileSiteKey ? (
+                <p
+                  className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs text-center"
+                  role="alert"
+                >
+                  {t("account.turnstile.unavailable")}
                 </p>
-              ) : (
-                <p className="text-xs text-neutral-400">
-                  Don&apos;t have an account?{" "}
-                  <Link
-                    href={`/signup?role=${defaultRole}`}
-                    className="text-white font-medium underline underline-offset-4 hover:text-neutral-200 transition-colors"
-                  >
-                    Create account
-                  </Link>
+              ) : null}
+
+              {/* Error or validation message */}
+              {message ? (
+                <p
+                  className="p-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-200 text-xs text-center font-medium"
+                  role="alert"
+                  aria-live="polite"
+                >
+                  {message}
                 </p>
-              )}
-            </div>
-          </form>
+              ) : null}
+
+              {/* Submit FlowButton */}
+              <div className="pt-2">
+                <FlowButton
+                  type="submit"
+                  variant="secondary"
+                  size="md"
+                  fullWidth
+                  loading={pending}
+                  disabled={
+                    pending ||
+                    ((signup || challengeRequired) && !turnstileSiteKey)
+                  }
+                  text={t(pending ? "button.sending" : "button.continue")}
+                />
+              </div>
+
+              {/* Switch between Login and Signup */}
+              <div className="pt-4 border-t border-white/10 text-center">
+                {signup ? (
+                  <p className="text-xs text-neutral-400">
+                    Already have an account?{" "}
+                    <Link
+                      href="/login"
+                      className="text-white font-medium underline underline-offset-4 hover:text-neutral-200 transition-colors"
+                    >
+                      Log in
+                    </Link>
+                  </p>
+                ) : (
+                  <p className="text-xs text-neutral-400">
+                    Don&apos;t have an account?{" "}
+                    <Link
+                      href={`/signup?role=${defaultRole}`}
+                      className="text-white font-medium underline underline-offset-4 hover:text-neutral-200 transition-colors"
+                    >
+                      Create account
+                    </Link>
+                  </p>
+                )}
+              </div>
+            </form>
           </>
         )}
       </div>
-    </main>
+    </SignInPageLayout>
   );
 }

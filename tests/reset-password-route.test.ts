@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from "vitest";
+import { z } from "zod";
 
 vi.mock("server-only", () => ({}));
 
 describe("Reset Password API Route", () => {
-  it("validates request schemas correctly", async () => {
-    const { z } = await import("zod");
+  it("validates request schemas correctly", () => {
 
     const requestSchema = z.object({
       email: z.string().email(),

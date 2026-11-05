@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import CloudSky from "@/components/originkit/ui/cloud-sky";
 import { PublicHeader } from "@/components/PublicHeader";
+import { FlowButton } from "@/components/ui/flow-button";
 import { animateHero } from "@/lib/gsap";
 import { t } from "@/content/t";
 
@@ -58,12 +58,13 @@ export function HomeHeroClient({ siteName }: { siteName: string }) {
         </div>
 
         <div ref={ctaRef} className="pointer-events-auto">
-          <Link
+          <FlowButton
             href="/request"
-            className="inline-flex items-center justify-center min-h-[50px] px-9 py-3.5 rounded-full bg-black text-white font-bold text-xs sm:text-sm tracking-widest uppercase hover:bg-neutral-800 hover:scale-105 active:scale-95 transition-all shadow-2xl border border-white/20"
-          >
-            {t("home.hero.get_started")}
-          </Link>
+            variant="primary"
+            size="lg"
+            className="rounded-full shadow-2xl border-white/25 px-9 tracking-widest uppercase text-xs sm:text-sm font-bold min-h-[50px] hover:scale-105 active:scale-95"
+            text={t("home.hero.get_started")}
+          />
         </div>
       </div>
     </section>
