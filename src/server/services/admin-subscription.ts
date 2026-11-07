@@ -29,6 +29,9 @@ export async function recordClearedHelperSubscription(
     if (error?.message?.includes("helper_not_found")) {
       return fail("not_found", "The specified helper profile does not exist.");
     }
+    if (error?.message?.includes("duplicate_reference") || error?.code === "23505") {
+      return fail("conflict", "This payment reference has already been recorded. It cannot be used twice.");
+    }
     return fail("internal_error", "We could not record this subscription payment. Try again.");
   }
 

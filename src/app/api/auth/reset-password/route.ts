@@ -4,7 +4,7 @@ import { createSupabaseServerClient } from "@/server/db/server";
 import { runRequestPipeline } from "@/server/policies/request-pipeline";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
-import { sameOrigin } from "@/server/security/origin";
+import { resolveCanonicalSiteOrigin, sameOrigin } from "@/server/security/origin";
 
 const requestResetSchema = z.object({
   email: z.string().email(),
@@ -40,9 +40,10 @@ export async function POST(request: NextRequest) {
     service: async (input) => {
       const supabase = await createSupabaseServerClient();
       if (input.action === "request") {
-        const origin = request.nextUrl.origin;
+        // REMOVED: old Host-header derived origin
+        const siteOrigin = resolveCanonicalSiteOrigin(request);
         await supabase.auth.resetPasswordForEmail(input.email, {
-          redirectTo: `${origin}/reset-password`,
+          redirectTo: `${siteOrigin}/reset-password`,
         });
         return { ok: true };
       }

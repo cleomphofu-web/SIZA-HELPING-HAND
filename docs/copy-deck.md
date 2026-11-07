@@ -77,6 +77,8 @@ account.notice: Your information is used to set up your account and manage your 
 account.success: Your account request was received. Check your email for a confirmation link if asked, then log in.
 account.error: We could not complete that request. Check your details and try again.
 account.turnstile.unavailable: Turnstile is not configured. Account actions are unavailable until it is set up.
+account.verified: Your email is confirmed. Please sign in to continue.
+account.link_expired: This confirmation link has expired or was already used. Please sign in or request a new link.
 account.forgot_password.title: Reset your password
 account.forgot_password.body: Enter your email and we will send you a link to reset your password.
 account.forgot_password.submit: Send reset link
@@ -243,6 +245,8 @@ seo.contact.description: Questions, problems or ideas? Reach siZa by email, What
 ## Home: hero
 home.hero.eyebrow: siZa // {areas}
 home.hero.get_started: Get started
+home.hero.description: Reliable on-demand and scheduled help for your home across Johannesburg and the Vaal. Fair work for helpers, transparent rates for hosts.
+home.hero.guide: Book or apply below
 home.hero.switch.host: I need help
 home.hero.switch.helper: I want work
 home.hero.host.title: Guest-ready, between every stay.
@@ -608,6 +612,18 @@ host.book.type: What kind of clean?
 host.book.type.standard: Standard clean
 host.book.type.deep: Deep clean
 host.book.type.turnover: Airbnb turnover
+host.book.presets.title: Popular Packages
+host.book.presets.subtitle: Pick a ready-made package or customize room by room below.
+host.book.presets.standard.title: Standard Clean
+host.book.presets.standard.tagline: Everyday upkeep for flats & homes
+host.book.presets.standard.badge: Most Popular
+host.book.presets.deep.title: Deep Clean
+host.book.presets.deep.tagline: Intensive top-to-bottom refresh
+host.book.presets.deep.badge: Thorough
+host.book.presets.turnover.title: Airbnb Turnover
+host.book.presets.turnover.tagline: Fast linen & guest turnover reset
+host.book.presets.turnover.badge: Short-Stay
+host.book.presets.custom: Customized
 host.book.bedrooms: Bedrooms
 host.book.bathrooms: Bathrooms
 host.book.size_band: Home size
@@ -751,6 +767,22 @@ helper.plan.pay: How to pay
 helper.plan.reference: Use this payment reference: {reference}
 helper.plan.note: We mark your payment once the money has cleared in our bank account.
 helper.plan.reminder: Your plan ends in {days} days.
+helper.plan.exhausted.title: Introductory Free Job Completed
+helper.plan.exhausted.body: You completed your free first job! To keep seeing available jobs in your suburbs and receiving fair rotation offers, activate your helper monthly plan.
+helper.plan.fixed_fee: R{subscriptionPrice} for 30 days
+helper.plan.yoco.cta: Pay R{subscriptionPrice} with Yoco
+helper.plan.yoco.step1.title: Step 1: Copy your reference
+helper.plan.yoco.step1.body: Paste this reference when paying on Yoco so we can connect your payment to your account immediately.
+helper.plan.yoco.step2.title: Step 2: Pay R{subscriptionPrice} securely
+helper.plan.yoco.step2.body: Tap the button to open Yoco in a new tab. Pay with your Debit Card, Credit Card, or Capitec Pay.
+helper.plan.yoco.step3.title: Step 3: Activate your plan
+helper.plan.yoco.step3.body: Enter your payment reference below to submit it for immediate verification.
+helper.plan.yoco.ref_placeholder: Enter Yoco payment reference
+helper.plan.yoco.submit: Submit Reference & Activate
+helper.plan.yoco.double_charge_shield: Payment safeguard: Each payment reference can only be used once. Early renewal extends from your existing expiry date so you never lose days or pay double.
+helper.plan.whatsapp.help: Need help paying? Chat with siZa Admin on WhatsApp
+helper.jobs.locked.title: Available Jobs Paused
+helper.jobs.locked.body: You have completed your free first job. Activate your R{subscriptionPrice} monthly plan to unlock jobs in your selected suburbs.
 helper.account.title: Account
 helper.account.available: I am available for jobs
 helper.account.available_help: Turning this off has no penalty.
@@ -771,6 +803,53 @@ helper.nav.jobs: Jobs
 helper.nav.mine: My jobs
 helper.nav.plan: Plan
 helper.nav.account: Account
+helper.offer.title: New Job Offer
+helper.offer.subtitle: Fair rotation dispatch · First helper to accept gets the job
+helper.offer.accept: Accept Job
+helper.offer.decline: Pass offer
+helper.offer.accepting: Securing slot...
+helper.offer.net_earnings: {amount} NET
+helper.offer.net_note: 100% direct pay · Zero agency cut
+helper.offer.slot_label: Slot #{slot}
+helper.offer.time_remaining: {seconds}s left to accept
+helper.offer.expired: Offer window expired
+helper.offer.expired_note: This offer has rotated to the next helper.
+helper.offer.already_taken: Another helper just accepted this job.
+helper.offer.accepted_success: Job secured! Opening details...
+host.feedback.title: How was your cleaning?
+host.feedback.rate_helper: Rate your helper
+host.feedback.repeat_question: Would you book {firstName} again?
+host.feedback.repeat_yes: Yes, definitely
+host.feedback.repeat_no: Not this time
+host.feedback.tags_label: What stood out?
+host.feedback.comment_placeholder: Optional: Add a note about your experience...
+host.feedback.submit: Submit Feedback
+host.feedback.submitting: Submitting...
+host.feedback.thank_you: Thank you for your feedback!
+host.feedback.thank_you_body: Your feedback directly supports dedicated helpers in Johannesburg.
+helper.safety.title: Report an Issue or Emergency
+helper.safety.subtitle: siZa is committed to your safety on every job.
+helper.safety.sos_notice: In immediate danger? Call South African Emergency Services (10111) first.
+helper.safety.call_saps: Call 10111 (SAPS)
+helper.safety.call_medical: Call 10177 (Ambulance)
+helper.safety.category_label: What happened?
+helper.safety.details_placeholder: Describe the situation for siZa admin review...
+helper.safety.submit: Submit Urgent Report
+helper.safety.submitting: Dispatching report...
+helper.safety.success_title: Report Logged with Priority
+helper.safety.success_body: Admin will review this immediately. If you are in an unsafe area, please leave right away.
+
+## Arrival Notes / Message Board
+booking.messages.title: Arrival Notes & Access Details
+booking.messages.empty: No arrival notes yet. Use this board to share gate codes and entry details.
+booking.messages.placeholder: e.g. Gate code is #4921 · Please ring the bell · I am outside...
+booking.messages.send: Send Note
+booking.messages.sending: Sending...
+booking.messages.host_badge: Host
+booking.messages.helper_badge: Helper
+booking.messages.admin_badge: Admin
+booking.messages.char_count: {count} / 1 000
+booking.messages.error_send: Could not send your note. Please try again.
 
 ## Admin (labels only)
 admin.nav.overview: Overview

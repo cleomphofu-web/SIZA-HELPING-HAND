@@ -59,8 +59,16 @@ export function buildHostBookingFormView(input: {
   floorPercent: number | null;
   genderMatchingEnabled?: boolean;
   now?: Date;
+  /**
+   * Minimum number of eligible helpers required for a service-set combination
+   * to appear in the booking form. Sourced from app_config
+   * (`booking_form_min_helpers`). Defaults to 1 so suburbs are visible during
+   * the pilot even with a single approved helper.
+   */
+  minHelpers?: number;
 }): HostBookingFormView {
   const now = input.now ?? new Date();
+  const minHelpers = Math.max(1, input.minHelpers ?? 1);
   const availableCategories = new Map(input.categories
     .filter((category) => category.enabled && category.pricing === "rate_card")
     .map((category) => [category.name, category]));
@@ -75,7 +83,7 @@ export function buildHostBookingFormView(input: {
     for (let mask = 1; mask < 2 ** keys.length; mask += 1) {
       const selection = keys.filter((_, index) => (mask & (1 << index)) !== 0);
       const count = helpers.filter((helper) => selection.every((service) => helper.services.includes(service))).length;
-      if (count >= 3) result.push({ services: selection, eligibleHelperCount: count });
+      if (count >= minHelpers) result.push({ services: selection, eligibleHelperCount: count });
     }
     return result;
   };

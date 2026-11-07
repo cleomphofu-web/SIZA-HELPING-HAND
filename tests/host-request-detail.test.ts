@@ -122,4 +122,21 @@ describe("host request detail screen", () => {
     expect(formatZarCents("55001")).toBe("R 550,01");
     expect(formatZarCents(0)).toBe("R 0,00");
   });
+
+  it("renders live in-app ETA alert banner when helper is en route", () => {
+    const enRouteBooking: HostBookingView = {
+      ...booking,
+      status: "assigned",
+      enRoute: { etaMinutes: 25, enRouteAt: new Date().toISOString() },
+    };
+    const markup = renderToStaticMarkup(createElement(HostRequestDetails, { booking: enRouteBooking }));
+    expect(markup).toContain("is on the way!");
+    expect(markup).toContain("Estimated Arrival: ~25 mins");
+    expect(markup).toContain("6-digit check-in code");
+  });
+
+  it("renders CancelBookingDialog trigger for open or assigned bookings", () => {
+    const markup = renderToStaticMarkup(createElement(HostRequestDetails, { booking }));
+    expect(markup).toContain("Cancel Request");
+  });
 });

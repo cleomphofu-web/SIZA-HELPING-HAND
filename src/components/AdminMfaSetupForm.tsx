@@ -7,6 +7,7 @@ import {
   signOutFromAdminMfa,
   startAdminMfaEnrollment,
   verifyAdminMfa,
+  resetAdminMfaFactor,
   getDevAdminTotpCode,
 } from "@/app/(admin)/admin/mfa/actions";
 
@@ -24,9 +25,18 @@ export function AdminMfaSetupForm({
   const [quickCode, setQuickCode] = useState<string | null>(null);
 
   useEffect(() => {
-    getDevAdminTotpCode(secret?.secret).then((code) => {
-      if (code) setQuickCode(code);
-    });
+    let active = true;
+    function updateCode() {
+      getDevAdminTotpCode(secret?.secret).then((code) => {
+        if (active && code) setQuickCode(code);
+      });
+    }
+    updateCode();
+    const interval = setInterval(updateCode, 4000);
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
   }, [secret?.secret]);
 
   function fillQuickCode() {
@@ -96,9 +106,31 @@ export function AdminMfaSetupForm({
               <span aria-hidden="true">→</span>
             </button>
           </form>
+          <form action={resetAdminMfaFactor} className="text-center pt-2">
+            <button
+              type="submit"
+              className="text-xs text-amber-400/80 hover:text-amber-300 transition-colors cursor-pointer underline underline-offset-4"
+            >
+              Reset 2FA & set up new authenticator
+            </button>
+          </form>
         </>
       ) : secret ? (
         <>
+          {secret.qrCode ? (
+            <div className="flex flex-col items-center justify-center p-5 rounded-2xl bg-white text-black text-center shadow-lg">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={secret.qrCode}
+                alt="Authenticator QR Code"
+                className="w-44 h-44 object-contain"
+              />
+              <p className="text-xs text-neutral-600 mt-2 font-medium">
+                Scan with Google Authenticator or your phone camera
+              </p>
+            </div>
+          ) : null}
+
           <div className="space-y-3 p-4 rounded-2xl bg-white/[0.04] border border-white/10">
             <span className="block text-xs font-semibold text-neutral-300 uppercase tracking-wider">
               {t("admin.mfa.secret.label")}

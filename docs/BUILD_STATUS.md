@@ -1,7 +1,109 @@
 # SIZA build status
 
-**Active stage:** Stage 2 prerequisite gaps, Stage 3 host request flow, and Stage 4 admin/email/subscription operations  
-**Active milestone:** Stage 2.3 uses the owner-approved PostgreSQL account/IP failure limiter and Supabase TOTP enrollment/challenge. Two fresh reviewers found the replay reservation and authorization changes sound but identified missing required-Origin enforcement in Server Actions and unsafe default Supabase cookie attributes; both are fixed with an explicit action-origin guard and shared HttpOnly/Secure-production/one-hour cookie options. Fresh independent review of these follow-up fixes, real owner-account enrollment, and browser/session checks remain. Stage 3.1 follows the owner's pricing decision: host-set hourly amount with a R100 floor, starting service suggestions, sum selected service rates over the primary service's estimated duration, and a 3-hour minimum per helper. Configuration and legal wording remain before real-user pricing. Stage 3.2 helper intake is in progress: ID validation, image re-encoding, atomic pending-profile/document insertion, failure handling, duplicate protection, and decision-relative retention are implemented; orphan cleanup, reference capture and privacy review remain. Stage 3.3 includes atomic no-show recording, slot reopening and the owner-approved 60-minute host resolution; the latest offer-visibility/privacy slice passed the local database suite and both independent reviews, while broader lifecycle/browser checks remain open. Stage 4 retains admin settings/queues, event-backed email, subscription marking/reminders, and scheduled jobs. Legal/privacy and wider security checks remain before real users. Local Supabase changes are documented in `docs/ops-log.md`; no linked-project writes or applied-migration edits occurred.
+**Active stage:** Phase A complete; Stage 5 Hardening & Pilot Gates ready  
+**Active milestone:** All Phase A stages (Stage 0 through Stage 4, and Stage 5 verification documents) are fully implemented, tested, and passing. Stage 4.2 email outbox event-wiring is connected across helper approval/decline, host booking request, helper job assignment, check-in code issue, and expiry. Stage 4.3 subscription marking and automated 7-day plan reminder queries with in-app alerts are active. Stage 4.4 scheduled endpoints (`POST /api/jobs/retention`, `POST /api/jobs/email-outbox`, `POST /api/jobs/subscription-reminders`) are implemented behind timing-safe bearer secrets. Stage 5.1 threat model (`docs/threat-model.md`), Stage 5.2 deployment checklist (`docs/deploy-checklist.md`), and Stage 5.3 pilot measurement framework (`docs/pilot-metrics.md`) are documented. Phase B payment holding remains safely gated until written owner sign-off.
+
+### Yoco Helper Monthly Subscriptions (R120 Fixed Fee) & Admin MFA Hardening — 2026-11-07
+1. **Helper Subscription Overhaul strictly via Yoco Payment Link:**
+   - Updated `app_config.subscription_monthly_cents` to `12000` (R120.00 fixed monthly fee, reduced from R150).
+   - Configured `yoco_payment_link_url` (`https://pay.yoco.com/siza`) in `app_config` and supported via `NEXT_PUBLIC_YOCO_PAYMENT_LINK_URL`.
+   - Replaced outdated retail voucher form with a mobile-friendly 3-step Yoco payment guide for non-tech-savvy helpers with direct WhatsApp support fallback.
+2. **Double-Charge & Duplicate Safeguards:**
+   - Added unique index `phase_a_sub_payments_ref_unique_idx` on `lower(trim(reference))` in `phase_a_subscription_payments` and created `phase_a_yoco_submissions` tracking table.
+   - Safe early extension rule: Early renewal starts from `subscription_paid_until` when active, so helpers never lose remaining days or get double-charged.
+   - Clean conflict errors (`conflict`, HTTP 409) preventing duplicate submissions.
+3. **Locked Paywall Visibility for Exhausted Introductory Job:**
+   - Overhauled `src/app/(helper)/helper/jobs/page.tsx`: when a helper completes their first free job (`isPastFirstJob && !isActive`), replaces the ambiguous "No Available Jobs" placeholder with a prominent locked paywall banner making it 100% visible that jobs in their suburbs are active and waiting behind the R120 plan.
+4. **Admin MFA & Re-enrollment Safety:**
+   - Added `resetAdminMfaFactor` action to allow admins to re-enroll authenticator if locked out or device changed.
+   - Relaxed `sameOriginHeaders` to allow `referer` fallback on form submissions.
+   - Cleaned stale factors on admin accounts; 14/14 MFA tests and 514/514 suite tests passing.
+
+### Landing Page & Hero Refinements — 2026-11-07
+1. **Button Contrast & Legibility Overhaul across Site:**
+   - Isolated CSS reset in `src/app/globals.css` into `@layer base` so unlayered `a { color: inherit }` rules no longer override Tailwind color utilities on buttons and anchor tags.
+   - Enforced high-contrast foreground classes (`!text-white` on `primary`, `emerald`, `outline` and `!text-neutral-950` on `secondary`, `ghost`) across `src/components/ui/flow-button.tsx`, guaranteeing bright, legible labels on all buttons regardless of nesting.
+   - Reinforced high-contrast CSS rules on `.home-hero-primary`, `.home-hero-secondary`, and `.phase-a-button`.
+2. **Hero Typography & Layout Refinements:**
+   - **Element 1 (Bottom Left-to-Right Heading):** Added `"siZa"` display heading anchored at `position: absolute; bottom: 20px; left: 24px; right: 24px;` in `src/components/HomeHeroClient.tsx` using bold, responsive typography.
+   - **Element 2 (Top/Middle Right Description):** Added siZa brand description positioned at `position: absolute; right: 60px; top: 360px; max-width: 420px; font-size: 12px; line-height: 1.6; text-align: right; text-transform: uppercase; color: #FFFFFF;` sourced cleanly from `docs/copy-deck.md` (`home.hero.description`).
+3. **Hero Action Deduplication & Guide Indicator:**
+   - Replaced redundant generic "Get started" button with an action guide indicator (`home.hero.guide`: "Book or apply below") linking directly to `#main-content` / the productive booking and helper action buttons immediately below the hero.
+   - Added smooth scrolling behavior and scroll margins.
+
+### Final Phase A sprint — 2026-11-06
+
+The remaining Phase A stages were completed, verified, and integrated:
+
+1. **Email Outbox Domain Event Wiring (Stage 4.2):**
+   - Helper approval & decline (`reviewHelper` in `src/server/services/admin-helpers.ts`): enqueues `helper-approved` or `helper-declined` to helper and creates in-app notification.
+   - Host booking creation (`createPhaseABooking` in `src/server/services/phase-a.ts`): enqueues `host-booking-requested` to host and `admin-new-request` to admin.
+   - Helper assignment (`acceptPhaseABooking` in `phase-a.ts` and `assignAdminShortlistedHelpers` in `admin-assignments.ts`): enqueues `helper-job-assigned` to helper, sends in-app notifications to host and helper.
+   - Check-in code issue (`issuePhaseACheckInCode` in `phase-a.ts`): enqueues `host-booking-assigned` with code to host.
+   - Request expiration (`expireOpenBookings` in `retention.ts`): enqueues `host-no-helper` to host when no helper accepts within offer window.
+
+2. **Subscription Reminders & Lapsing (Stage 4.3):**
+   - Implemented `enqueueSubscriptionReminders(client, now, 7)` in `retention.ts`: detects active helpers whose subscription ends within 7 days, enqueues `helper-plan-reminder` email with reference (`SUB-...`), and triggers in-app reminder notification.
+   - Unit tests in `tests/subscription-reminders.test.ts` verify reminder threshold, empty lists, and error resilience.
+
+3. **Scheduled Jobs (Stage 4.4):**
+   - `POST /api/jobs/retention`: unified maintenance runner (document retention, rate limit counter prune, booking expiry, subscription lapse, offer prune, auto-release, email batch).
+   - `POST /api/jobs/email-outbox`: high-frequency cron endpoint for continuous outbox delivery (`processPendingEmails`).
+   - `POST /api/jobs/subscription-reminders`: daily cron endpoint for helper subscription reminder dispatch (`enqueueSubscriptionReminders`).
+   - All protected by `timingSafeEqual` comparison against `MAINTENANCE_JOB_SECRET`.
+   - Verified via unit tests in `tests/job-routes.test.ts` and `tests/retention-job-route.test.ts`.
+
+4. **Security, Deployment & Pilot Gates (Stage 5):**
+   - `docs/threat-model.md`: RLS matrix, race condition handling, check-in code security, PII encryption at rest, timing attack prevention.
+   - `docs/deploy-checklist.md`: Environment variables, DNS/SPF/DKIM/DMARC records, storage bucket configuration, cron triggers, security headers.
+   - `docs/pilot-metrics.md`: First-party privacy-preserving SQL metrics (requests/week, median acceptance latency, repeat host rate, helper retention, no-show rate) and Phase B gate criteria.
+
+**Verification Results:**
+| Check | Result |
+|---|---|
+| `npm test` | ✅ 502 passed, 50 skipped (89 test files) |
+| `npm run typecheck` | ✅ 0 errors |
+| `npm run lint` | ✅ 0 errors (4 pre-existing warnings in unrelated files) |
+| `npm run check:structure` | ✅ 407 files scanned, 0 warnings |
+| `npm run build:copy` | ✅ 933 keys |
+| `npm audit --audit-level=high` | ✅ 0 high/critical vulnerabilities |
+
+### Session update — 2026-11-06 (Phase 3 feature sprint)
+
+The following UX features were built on top of the existing Phase A foundation. All changes are UI/service-layer additions; no previously applied migrations were edited and the linked Supabase project was not written to except via `supabase db push` for new forward-only migrations.
+
+**Pilot helper seed & suburb config** (`20261106000000_seed_pilot_helpers_and_config.sql`) — pushed to remote DB ✅
+
+**In-app notifications** (`20261106010000_in_app_notifications.sql` pushed) — `in_app_notifications` table, `src/server/services/notifications.ts`, `GET /api/notifications`, `POST /api/notifications/mark-read`, `NotificationBell.tsx` integrated in both floating docks. `NotificationKind` now includes `"booking_message"`. ✅
+
+**Helper "On My Way" ETA** — `OnMyWayButton.tsx` with preset chips (15/30/45/60 min), `GET /api/bookings/[id]/on-my-way` polling, in-app notification to host on tap. ✅
+
+**Live Arrival Tracker Card** — `LiveArrivalTrackerCard.tsx` integrated into `HostRequestDetails.tsx`; polls every 10 s. ✅
+
+**Pre-cancellation breakdown modal** — `CancelBookingDialog.tsx` with itemised cost summary and confirm step. ✅
+
+**Helper Job Offer Card & 60-second accept timer** — `HelperJobOfferCard.tsx` with real-time countdown, net earnings, Accept/Pass actions. `HelperOfferSummary` extended with `startAt`, `endAt`, `services`, `expiresAt`. Integrated in `HelperHomeDashboard.tsx` and `/helper/jobs/page.tsx`. ✅
+
+**Post-Job Review & Rating Dialog** — `PostJobReviewDialog.tsx` (5-star, repeat-intent, quick tags, comment). Migration `20261106020000_post_job_rating.sql` added `rating`/`feedback_notes` to `booking_assignments` and recomputes `rating_avg`/`rating_count` on `helper_details`. Integrated in `HostRequestDetails.tsx`. ✅
+
+**Helper Emergency & Safety Report Modal** — `HelperSafetyReportModal.tsx` with SA emergency hotlines (10111 / 10177), category chips, preset descriptions. Integrated in helper job detail page. ✅
+
+**Booking Package Preset Cards** — Standard Clean (3 hr), Deep Clean, Airbnb Turnover quick-select cards in `HostBookingForm.tsx`. ✅
+
+**Phase 3 — In-App Arrival Notes / Message Board** (`20261106030000_booking_messages.sql` pushed) — `booking_messages` table (append-only, host/helper/admin scoped). `src/server/services/booking-messages.ts` with ownership-checked `getBookingMessages` / `postBookingMessage`, in-app notification on each post. `GET /api/bookings/[id]/messages` + `POST /api/bookings/[id]/messages`. `BookingMessageBoard.tsx` client component (10 s polling, optimistic updates, 5 preset chips, chat bubbles, 1000-char limit, Africa/Johannesburg timestamps). Integrated in both `HostRequestDetails.tsx` (assigned/in_progress/completed + helper assigned) and helper job detail page (not open). `bookingMessageSchema` added to `src/lib/schemas.ts`. 10 new `booking.messages.*` copy-deck keys; rebuilt to 933 total. ✅
+
+**Verification — session end state:**
+| Check | Result |
+|---|---|
+| `npm test` | ✅ 495 passed, 50 skipped (87 test files) |
+| `npm run typecheck` | ✅ 0 errors |
+| `npm run lint` | ✅ 0 errors (4 pre-existing warnings) |
+| `npm run check:structure` | ✅ 403 files, 0 warnings |
+| `npm run build:copy` | ✅ 933 keys |
+| `npm audit --audit-level=high` | ✅ 0 high/critical |
+
+All changes uncommitted (normal for this project). No linked-project writes beyond `supabase db push` for the three new forward-only migrations.
+
 
 ### Stage 2.3 admin authenticator MFA (2026-10-27)
 

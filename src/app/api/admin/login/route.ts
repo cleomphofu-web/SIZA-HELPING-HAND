@@ -54,7 +54,8 @@ export async function POST(request: NextRequest) {
         supabase.auth.mfa.getAuthenticatorAssuranceLevel(),
       ]);
       if (factorError || assuranceError || !factors) return "/admin/mfa?error=setup";
-      const hasVerifiedTotp = factors.totp.some((factor) => factor.status === "verified");
+      const allFactors = factors.all ?? factors.totp ?? [];
+      const hasVerifiedTotp = allFactors.some((factor) => factor.status === "verified");
       return adminPostLoginDestination({
         role: profile.role,
         isMember: true,

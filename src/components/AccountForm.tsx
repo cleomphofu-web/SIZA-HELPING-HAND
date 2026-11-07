@@ -12,15 +12,36 @@ type AccountFormProps = {
   mode: "signup" | "login";
   defaultRole?: "host" | "helper";
   turnstileSiteKey: string;
+  initialError?: string;
+  initialVerified?: boolean;
 };
 
 export function AccountForm({
   mode,
   defaultRole = "host",
   turnstileSiteKey,
+  initialError,
+  initialVerified,
 }: AccountFormProps) {
   const signup = mode === "signup";
-  const [message, setMessage] = useState("");
+  const [statusTone, setStatusTone] = useState<"error" | "success">(
+    initialVerified ? "success" : "error"
+  );
+  const [message, setMessage] = useState(() => {
+    if (initialVerified) return t("account.verified");
+    if (initialError) {
+      const err = initialError.toLowerCase();
+      if (
+        err.includes("expired") ||
+        err.includes("auth_verify_failed") ||
+        err.includes("otp_expired")
+      ) {
+        return t("account.link_expired");
+      }
+      return t("account.error");
+    }
+    return "";
+  });
   const [pending, setPending] = useState(false);
   const [complete, setComplete] = useState(false);
   const [challengeRequired, setChallengeRequired] = useState(signup);
@@ -37,10 +58,12 @@ export function AccountForm({
       turnstileSiteKey &&
       (!token || String(token).trim() === "")
     ) {
+      setStatusTone("error");
       setMessage("Please complete the verification check before continuing.");
       return;
     }
     setPending(true);
+    setStatusTone("error");
     setMessage("");
     try {
       const response = await fetch(
@@ -95,7 +118,7 @@ export function AccountForm({
   return (
     <SignInPageLayout role={defaultRole} mode={mode}>
       {/* Interactive Liquid Glass Space Card */}
-      <div className="relative z-10 w-full p-6 sm:p-9 md:p-10 rounded-3xl bg-neutral-950/85 backdrop-blur-2xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent">
+      <div className="relative z-10 w-full p-6 sm:p-9 md:p-10 rounded-3xl bg-neutral-950/65 backdrop-blur-[8px] border border-white/20 shadow-2xl before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent">
         {/* Brand Eyebrow Pill */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-6">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -371,7 +394,11 @@ export function AccountForm({
               {/* Error or validation message */}
               {message ? (
                 <p
-                  className="p-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-200 text-xs text-center font-medium"
+                  className={`p-3 rounded-xl ${
+                    statusTone === "success"
+                      ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-200"
+                      : "bg-red-500/15 border border-red-500/30 text-red-200"
+                  } text-xs text-center font-medium`}
                   role="alert"
                   aria-live="polite"
                 >

@@ -3,6 +3,7 @@ import { runRequestPipeline } from "@/server/policies/request-pipeline";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
 import { createSupabaseServerClient } from "@/server/db/server";
+import { resolveCanonicalSiteOrigin } from "@/server/security/origin";
 
 export async function GET(request: NextRequest) {
   const pipeline = await runRequestPipeline({
@@ -11,26 +12,28 @@ export async function GET(request: NextRequest) {
     validate: async () => ({ ok: true as const, data: null }),
     authorize: async () => ({ ok: true as const, data: null }),
     service: async () => {
-      const { searchParams, origin } = new URL(request.url);
+      // REMOVED: old Host-header derived origin
+      const siteOrigin = resolveCanonicalSiteOrigin(request);
+      const { searchParams } = new URL(request.url);
       const provider = searchParams.get("provider") || "google";
       const role = searchParams.get("role") || "host";
       if (provider !== "google") {
-        return { url: `${origin}/login?error=unsupported_provider` };
+        return { url: `${siteOrigin}/login?error=unsupported_provider` };
       }
       try {
         const supabase = await createSupabaseServerClient();
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: "google",
           options: {
-            redirectTo: `${origin}/api/auth/callback?role=${encodeURIComponent(role)}`,
+            redirectTo: `${siteOrigin}/api/auth/callback?role=${encodeURIComponent(role)}`,
           },
         });
         if (error || !data?.url) {
-          return { url: `${origin}/login?error=oauth_unavailable` };
+          return { url: `${siteOrigin}/login?error=oauth_unavailable` };
         }
         return { url: data.url };
       } catch {
-        return { url: `${origin}/login?error=oauth_error` };
+        return { url: `${siteOrigin}/login?error=oauth_error` };
       }
     },
   });
@@ -40,5 +43,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(new URL("/login?error=oauth_failed", request.url));
   }
 
-  return NextResponse.redirect(pipeline.data.url);
+  const { searchParams } = new URL(request.url);
+  const role = searchParams.get("role") === "helper" ? "helper" : "host";
+  const response = NextResponse.redirect(pipeline.data.url);
+  response.cookies.set("siza_oauth_role", role, {
+    httpOnly: true,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 600,
+  });
+  return response;
 }

@@ -20,6 +20,7 @@ import type { HelperOfferSummary } from "@/server/views/booking-read";
 import type { HelperAssignedJobSummary } from "@/server/views/booking";
 import type { HelperMetrics } from "@/server/views/booking-read";
 import { HelperSubscriptionBanner } from "@/components/HelperSubscriptionBanner";
+import { HelperJobOfferCard } from "@/components/HelperJobOfferCard";
 
 type HelperHomeDashboardProps = {
   profile: {
@@ -28,6 +29,7 @@ type HelperHomeDashboardProps = {
     phone: string;
   } | null;
   helper: {
+    id?: string;
     status: string;
     suburbs: string[];
     services: string[];
@@ -154,6 +156,8 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
           firstJobCompletedAt={helper?.firstJobCompletedAt ?? null}
           subscriptionStatus={helper?.subscriptionStatus ?? "none"}
           subscriptionPaidUntil={helper?.subscriptionPaidUntil ?? null}
+          helperId={helper?.id}
+          helperPhone={profile?.phone}
         />
 
         {/* Quick Stats Grid */}
@@ -370,34 +374,12 @@ export function HelperHomeDashboard({ profile, helper, offers, assignedJobs = []
 
           {offers.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {offers.map((offer) => {
-                const totalCents = BigInt(offer.payPerHelperCents) + BigInt(offer.transportPerHelperCents);
-                const rands = (Number(totalCents) / 100).toFixed(0);
-                return (
-                  <div
-                    key={`${offer.id}-${offer.slot}`}
-                    className="p-5 rounded-2xl border border-neutral-200 hover:border-black/30 transition-all space-y-3 bg-neutral-50/50"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                        {offer.suburb}
-                      </span>
-                      <span className="text-base font-bold text-neutral-900">
-                        R{rands}
-                      </span>
-                    </div>
-                    <p className="text-xs text-neutral-500">
-                      Slot #{offer.slot} · Includes pay and transport allowance
-                    </p>
-                    <Link
-                      href="/helper/jobs"
-                      className="inline-flex items-center justify-center w-full py-2.5 rounded-xl bg-black text-white text-xs font-semibold hover:bg-neutral-800 transition-colors"
-                    >
-                      Review & Accept Offer →
-                    </Link>
-                  </div>
-                );
-              })}
+              {offers.map((offer) => (
+                <HelperJobOfferCard
+                  key={`${offer.id}-${offer.slot}`}
+                  offer={offer}
+                />
+              ))}
             </div>
           ) : (
             <div className="p-8 rounded-2xl bg-neutral-50 border border-neutral-100 text-center space-y-3">

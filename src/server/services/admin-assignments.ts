@@ -93,6 +93,61 @@ export async function assignAdminShortlistedHelpers(actorId: string, bookingId: 
     return fail("conflict", "One or more helpers are no longer eligible, or the request has changed.");
   }
 
+  try {
+    if (typeof supabase.from === "function") {
+      const { enqueueEmail } = await import("@/server/email/outbox");
+      const { createNotification } = await import("@/server/services/notifications");
+      const { data: bookingData } = await supabase.from("phase_a_bookings").select("start_at, host_id").eq("id", bookingId).maybeSingle();
+      const startAtDate = bookingData?.start_at ? new Date(bookingData.start_at) : new Date();
+      const formattedDate = startAtDate.toLocaleString("en-ZA", {
+        timeZone: "Africa/Johannesburg",
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+
+      for (const hId of selectedHelperIds) {
+        let helperEmail: string | null = null;
+        if (supabase.auth?.admin?.getUserById) {
+          const { data: u } = await supabase.auth.admin.getUserById(hId);
+          helperEmail = u?.user?.email ?? null;
+        }
+        const { data: hProfile } = await supabase.from("profiles").select("first_name").eq("id", hId).maybeSingle();
+        const hFirstName = hProfile?.first_name || "Helper";
+
+        if (helperEmail) {
+          await enqueueEmail(supabase, {
+            eventType: "helper-job-assigned",
+            recipient: helperEmail,
+            entityId: `${bookingId}:${hId}`,
+            variables: { firstName: hFirstName, date: formattedDate },
+          });
+        }
+
+        await createNotification({
+          userId: hId,
+          kind: "booking_confirmed",
+          title: "Job assigned",
+          body: `You have been assigned to a job on ${formattedDate}.`,
+          actionPath: `/helper/jobs/${bookingId}`,
+          referenceId: bookingId,
+        });
+      }
+
+      if (bookingData?.host_id) {
+        await createNotification({
+          userId: bookingData.host_id,
+          kind: "booking_confirmed",
+          title: "Helpers assigned",
+          body: "Helpers have been confirmed for your request.",
+          actionPath: `/app/requests/${bookingId}`,
+          referenceId: bookingId,
+        });
+      }
+    }
+  } catch {
+    // Non-blocking
+  }
+
   return ok({ assignedCount: data });
 }
 

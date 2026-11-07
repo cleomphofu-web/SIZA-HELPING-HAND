@@ -22,5 +22,5 @@ export default async function HostRequestPage({ params, searchParams }: { params
   const completedJobs = summariesResult.ok
     ? summariesResult.data.filter((b) => b.status === "completed").length
     : 0;
-  return <HostRequestDetails booking={result.data} notice={notice} hostCompletedJobs={completedJobs} />;
+  return <HostRequestDetails booking={result.data} notice={notice} hostCompletedJobs={completedJobs} currentUserId={actor.userId} />;
 }

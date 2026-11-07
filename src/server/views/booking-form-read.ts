@@ -11,15 +11,16 @@ export async function getOwnHostBookingFormView(): Promise<Result<HostBookingFor
   if (actor.role !== "host") return fail("forbidden", "Only hosts can request a helper.");
 
   const client = createSupabaseAdminClient();
-  const [{ data: categories, error: categoryError }, { data: rates, error: rateError }, { data: zones, error: zoneError }, { data: approvedHelpers, error: helperError }, { data: floor, error: floorError }, { data: matchingGate, error: matchingGateError }] = await Promise.all([
+  const [{ data: categories, error: categoryError }, { data: rates, error: rateError }, { data: zones, error: zoneError }, { data: approvedHelpers, error: helperError }, { data: floor, error: floorError }, { data: matchingGate, error: matchingGateError }, { data: minHelpersRow, error: minHelpersError }] = await Promise.all([
     client.from("service_categories").select("name, enabled, pricing"),
     client.from("rate_card").select("service, hourly_cents, per_bedroom_minutes, per_bathroom_minutes, size_band_minutes, addon_minutes"),
     client.from("transport_zones").select("suburb, transport_cents, enabled"),
     client.from("helper_details").select("status, suburbs, services, first_job_completed_at, subscription_status, subscription_paid_until, profiles!inner(role)").eq("status", "approved"),
     client.from("app_config").select("value").eq("key", "floor_percent").maybeSingle(),
     client.from("app_config").select("value").eq("key", "helper_gender_matching_enabled").maybeSingle(),
+    client.from("app_config").select("value").eq("key", "booking_form_min_helpers").maybeSingle(),
   ]);
-  if (categoryError || rateError || zoneError || helperError || floorError || matchingGateError) return fail("internal_error", "We could not load request options. Try again in a minute.");
+  if (categoryError || rateError || zoneError || helperError || floorError || matchingGateError || minHelpersError) return fail("internal_error", "We could not load request options. Try again in a minute.");
   const floorPercent = Number(floor?.value);
 
   return ok(buildHostBookingFormView({
@@ -32,5 +33,12 @@ export async function getOwnHostBookingFormView(): Promise<Result<HostBookingFor
     }),
     floorPercent: Number.isInteger(floorPercent) && floorPercent >= 0 && floorPercent <= 100 ? floorPercent : null,
     genderMatchingEnabled: matchingGate?.value === true,
+    // booking_form_min_helpers controls how many eligible helpers must exist per
+    // service-set before the suburb appears in the booking form. Defaults to 1
+    // so suburbs are visible during the pilot; raise it in app_config once you
+    // have enough approved helpers for high availability.
+    minHelpers: typeof minHelpersRow?.value === "number" && Number.isInteger(minHelpersRow.value) && minHelpersRow.value >= 1
+      ? minHelpersRow.value
+      : 1,
   }));
 }

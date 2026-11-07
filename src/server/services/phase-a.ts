@@ -35,6 +35,14 @@ type NoShowResolutionInput = z.infer<typeof noShowResolutionSchema>;
 type RepeatIntentInput = z.infer<typeof repeatIntentSchema>;
 type BookAgainInput = z.infer<typeof bookAgainSchema>;
 
+function formatJobDate(date: Date): string {
+  try {
+    return date.toLocaleString("en-ZA", { timeZone: "Africa/Johannesburg", dateStyle: "medium", timeStyle: "short" });
+  } catch {
+    return date.toISOString();
+  }
+}
+
 function nestedProfileRole(value: unknown): string {
   const profile = Array.isArray(value) ? value[0] : value;
   if (!profile || typeof profile !== "object" || !("role" in profile) || typeof profile.role !== "string") return "";
@@ -58,7 +66,7 @@ async function calculatePay(client: Db, input: BookingInput): Promise<Result<{ p
   const now = Date.now();
   const eligibleHelpers = (approvedHelpers ?? []).filter((helper) =>
     nestedProfileRole(helper.profiles) === "helper"
-      && (!helper.first_job_completed_at || (helper.subscription_status === "active" && helper.subscription_paid_until && new Date(helper.subscription_paid_until).getTime() > now)),
+    && (!helper.first_job_completed_at || (helper.subscription_status === "active" && helper.subscription_paid_until && new Date(helper.subscription_paid_until).getTime() > now)),
   );
   if (eligibleHelpers.filter((helper) => input.services.every((service) => helper.services.includes(service))).length < Math.max(3, input.helpersNeeded)) {
     return fail("conflict", "That service is not open in this area yet.");
@@ -278,6 +286,27 @@ export async function createPhaseABooking(client: Db, hostId: string, input: Boo
       recipient: env.ADMIN_NOTIFY_EMAIL,
       entityId: booking.id,
     });
+
+    if (typeof client.from === "function") {
+      let hostEmail: string | null = null;
+      if (client.auth?.admin?.getUserById) {
+        const { data: u } = await client.auth.admin.getUserById(hostId);
+        hostEmail = u?.user?.email ?? null;
+      }
+      const { data: hostProfile } = await client.from("profiles").select("first_name").eq("id", hostId).maybeSingle();
+      const firstName = hostProfile?.first_name || "Host";
+      const primaryService = input.services[0] || "Cleaning";
+      const dateStr = formatJobDate(input.startAt);
+
+      if (hostEmail) {
+        await enqueueEmail(client, {
+          eventType: "host-booking-requested",
+          recipient: hostEmail,
+          entityId: booking.id,
+          variables: { firstName, service: primaryService, date: dateStr },
+        });
+      }
+    }
   } catch {
     // Non-blocking outbox insertion: never abort a successfully committed booking transaction
   }
@@ -302,6 +331,45 @@ export async function issuePhaseACheckInCode(client: Db, hostId: string, input: 
     .maybeSingle();
   if (updateError) return fail("internal_error", "We could not issue a check-in code. Try again in a minute.");
   if (!updated) return fail("conflict", "This check-in code is no longer available. Refresh the request and try again.");
+
+  try {
+    if (typeof client.from === "function") {
+      let hostEmail: string | null = null;
+      if (client.auth?.admin?.getUserById) {
+        const { data: u } = await client.auth.admin.getUserById(hostId);
+        hostEmail = u?.user?.email ?? null;
+      }
+      const { data: hostProfile } = await client.from("profiles").select("first_name").eq("id", hostId).maybeSingle();
+      const { data: fullBooking } = await client.from("phase_a_bookings").select("services, start_at").eq("id", booking.id).maybeSingle();
+      const { data: assignmentRow } = await client.from("booking_assignments").select("helper_id").eq("booking_id", booking.id).eq("status", "accepted").limit(1).maybeSingle();
+
+      let helperName = "Your helper";
+      if (assignmentRow?.helper_id) {
+        const { data: helperProfile } = await client.from("profiles").select("first_name").eq("id", assignmentRow.helper_id).maybeSingle();
+        if (helperProfile?.first_name) helperName = helperProfile.first_name;
+      }
+
+      if (hostEmail && fullBooking) {
+        const { enqueueEmail } = await import("@/server/email/outbox");
+        const dateStr = formatJobDate(new Date(fullBooking.start_at));
+        await enqueueEmail(client, {
+          eventType: "host-booking-assigned",
+          recipient: hostEmail,
+          entityId: booking.id,
+          variables: {
+            firstName: hostProfile?.first_name || "Host",
+            helperName,
+            service: fullBooking.services?.[0] || "Cleaning",
+            date: dateStr,
+            code,
+          },
+        });
+      }
+    }
+  } catch {
+    // Non-blocking email outbox
+  }
+
   return ok({ code, expiresAt });
 }
 
@@ -363,6 +431,58 @@ export async function acceptPhaseABooking(client: Db, helperId: string, bookingI
   const { data: rawData, error } = await client.rpc("claim_phase_a_slot", { p_booking_id: bookingId, p_helper_id: helperId, p_slot: slot }).single();
   const data = rawData as { id: string } | null;
   if (error || !data) return fail("already_taken", "Another helper accepted this job first.");
+
+  try {
+    if (typeof client.from === "function") {
+      const { enqueueEmail } = await import("@/server/email/outbox");
+      const { createNotification } = await import("@/server/services/notifications");
+
+      const { data: bookingData } = await client.from("phase_a_bookings").select("start_at, host_id, services").eq("id", bookingId).maybeSingle();
+      const { data: helperProfile } = await client.from("profiles").select("first_name").eq("id", helperId).maybeSingle();
+      const helperFirstName = helperProfile?.first_name || "Helper";
+
+      let helperEmail: string | null = null;
+      if (client.auth?.admin?.getUserById) {
+        const { data: u } = await client.auth.admin.getUserById(helperId);
+        helperEmail = u?.user?.email ?? null;
+      }
+
+      const startAtDate = bookingData?.start_at ? new Date(bookingData.start_at) : new Date();
+      const dateStr = formatJobDate(startAtDate);
+
+      if (helperEmail) {
+        await enqueueEmail(client, {
+          eventType: "helper-job-assigned",
+          recipient: helperEmail,
+          entityId: data.id,
+          variables: { firstName: helperFirstName, date: dateStr },
+        });
+      }
+
+      await createNotification({
+        userId: helperId,
+        kind: "booking_confirmed",
+        title: "Job confirmed",
+        body: `Your job on ${dateStr} is confirmed.`,
+        actionPath: `/helper/jobs/${bookingId}`,
+        referenceId: bookingId,
+      });
+
+      if (bookingData?.host_id) {
+        await createNotification({
+          userId: bookingData.host_id,
+          kind: "booking_confirmed",
+          title: "Helper confirmed",
+          body: `${helperFirstName} has accepted your request.`,
+          actionPath: `/app/requests/${bookingId}`,
+          referenceId: bookingId,
+        });
+      }
+    }
+  } catch {
+    // Non-blocking notification
+  }
+
   return ok({ assignmentId: data.id });
 }
 
@@ -436,11 +556,39 @@ export async function recordRepeatIntent(
     .maybeSingle();
   if (assignmentError || !assignment) return fail("not_found", "We could not find that assignment.");
 
+  const updates: Record<string, unknown> = {
+    repeat_intent: input.intent === "yes",
+  };
+  if (input.rating !== undefined) {
+    updates.rating = input.rating;
+  }
+  if (input.feedback !== undefined) {
+    updates.feedback_notes = input.feedback;
+  }
+
   const { error: updateError } = await client
     .from("booking_assignments")
-    .update({ repeat_intent: input.intent === "yes" })
+    .update(updates)
     .eq("id", assignment.id);
   if (updateError) return fail("internal_error", "We could not save your feedback. Try again in a minute.");
+
+  // If rating is provided, update helper_details aggregate stats
+  if (input.rating !== undefined) {
+    const { data: allRatings } = await client
+      .from("booking_assignments")
+      .select("rating")
+      .eq("helper_id", input.helperId)
+      .not("rating", "is", null);
+    if (allRatings && allRatings.length > 0) {
+      const count = allRatings.length;
+      const sum = allRatings.reduce((acc, row) => acc + (row.rating ?? 0), 0);
+      const avg = Number((sum / count).toFixed(2));
+      await client
+        .from("helper_details")
+        .update({ rating_avg: avg, rating_count: count })
+        .eq("user_id", input.helperId);
+    }
+  }
 
   return ok({ recorded: true });
 }

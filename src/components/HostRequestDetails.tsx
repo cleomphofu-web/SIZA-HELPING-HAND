@@ -1,14 +1,18 @@
 import Link from "next/link";
-import { ArrowLeft, MapPin, Calendar, DollarSign, KeyRound, ShieldAlert, PhoneCall, RefreshCw, Star, Trash2, Edit3 } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, DollarSign, KeyRound, ShieldAlert, PhoneCall, RefreshCw, Star, Edit3 } from "lucide-react";
 import { CheckInCodeForm } from "@/components/CheckInCodeForm";
+import { CancelBookingDialog } from "@/components/CancelBookingDialog";
 import { t } from "@/content/t";
 import { formatZarCents } from "@/lib/money";
 import { formatHostBookingDate, hostBookingStatusCopy } from "@/lib/host-booking-display";
 import type { HostBookingView } from "@/server/views/booking";
 import { Badge } from "@/components/ui/badge";
 import { JohannesburgTrackingCard } from "@/components/ui/map-marker-tooltip";
+import { LiveArrivalTrackerCard } from "@/components/LiveArrivalTrackerCard";
+import { PostJobReviewDialog } from "@/components/PostJobReviewDialog";
+import { BookingMessageBoard } from "@/components/BookingMessageBoard";
 
-export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: { booking: HostBookingView; notice?: string; hostCompletedJobs?: number }) {
+export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0, currentUserId }: { booking: HostBookingView; notice?: string; hostCompletedJobs?: number; currentUserId?: string }) {
   return (
     <main className="min-h-screen bg-[#f5f5f5] text-black pb-36 font-sans phase-a-shell">
       {/* Top Header */}
@@ -150,6 +154,17 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: {
             </div>
           </dl>
 
+          {/* Live Arrival & ETA Tracker Card */}
+          {booking.status === "assigned" || booking.status === "in_progress" ? (
+            <LiveArrivalTrackerCard
+              bookingId={booking.id}
+              suburb={booking.suburb}
+              initialEnRoute={booking.enRoute}
+              bookingStatus={booking.status}
+              assignedHelpers={booking.assignedHelpers}
+            />
+          ) : null}
+
           {/* Live Location / Suburb Map Marker Tooltip Card */}
           {booking.status === "assigned" || booking.status === "in_progress" ? (
             <JohannesburgTrackingCard
@@ -199,6 +214,14 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: {
                 {t("host.finish.confirm")}
               </button>
             </form>
+          ) : null}
+
+          {/* Arrival Notes & Access Details message board */}
+          {(booking.status === "assigned" || booking.status === "in_progress" || booking.status === "completed") && booking.assignedHelpers.length > 0 && currentUserId ? (
+            <BookingMessageBoard
+              bookingId={booking.id}
+              currentUserId={currentUserId}
+            />
           ) : null}
 
           {/* No Show Slots */}
@@ -265,35 +288,48 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: {
                 After Your Booking
               </h2>
 
-              {/* Private "Book Again?" survey — one per assigned helper */}
+              {/* Feedback & Review card — one per assigned helper */}
               {booking.assignedHelpers.map((helper) => (
                 <div key={helper.helperId} className="p-5 rounded-2xl bg-amber-50 border border-amber-200 space-y-3">
-                  <p className="text-sm font-medium text-amber-900">
-                    Would you book <strong>{helper.firstName}</strong> again through siZa?
-                  </p>
-                  <p className="text-xs text-amber-700">
-                    This is private feedback that helps us highlight reliable helpers and improve rotation quality.
-                  </p>
-                  <form action="/api/host/repeat-intent" method="post" className="flex items-center gap-3">
-                    <input type="hidden" name="bookingId" value={booking.id} />
-                    <input type="hidden" name="helperId" value={helper.helperId} />
-                    <button
-                      name="intent"
-                      value="yes"
-                      type="submit"
-                      className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors shadow-sm"
-                    >
-                      Yes, definitely
-                    </button>
-                    <button
-                      name="intent"
-                      value="no"
-                      type="submit"
-                      className="px-5 py-2 rounded-xl bg-neutral-200 hover:bg-neutral-300 text-neutral-700 text-xs font-semibold transition-colors"
-                    >
-                      Not this time
-                    </button>
-                  </form>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-medium text-amber-900">
+                        How did <strong>{helper.firstName}</strong> do?
+                      </p>
+                      <p className="text-xs text-amber-700">
+                        Leave a 5-star rating and private feedback to support their standing on siZa.
+                      </p>
+                    </div>
+                    <PostJobReviewDialog
+                      bookingId={booking.id}
+                      helperId={helper.helperId}
+                      helperFirstName={helper.firstName}
+                    />
+                  </div>
+
+                  <div className="pt-2 border-t border-amber-200/60 flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <span className="text-amber-800 font-medium">Quick repeat intent:</span>
+                    <form action="/api/host/repeat-intent" method="post" className="flex items-center gap-2">
+                      <input type="hidden" name="bookingId" value={booking.id} />
+                      <input type="hidden" name="helperId" value={helper.helperId} />
+                      <button
+                        name="intent"
+                        value="yes"
+                        type="submit"
+                        className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors shadow-xs"
+                      >
+                        ✓ Book again
+                      </button>
+                      <button
+                        name="intent"
+                        value="no"
+                        type="submit"
+                        className="px-3.5 py-1.5 rounded-lg bg-white/80 hover:bg-white text-neutral-700 border border-amber-300 text-xs font-semibold transition-colors"
+                      >
+                        Not this time
+                      </button>
+                    </form>
+                  </div>
                 </div>
               ))}
 
@@ -328,16 +364,12 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0 }: {
           {/* Cancel & Report Actions */}
           <div className="pt-2 flex flex-wrap items-center gap-3">
             {(booking.status === "open" || booking.status === "assigned") && (
-              <form action="/api/host/bookings/cancel" method="post">
-                <input type="hidden" name="bookingId" value={booking.id} />
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-red-200 bg-red-50 text-red-700 hover:bg-red-100 text-xs font-semibold transition-colors cursor-pointer"
-                >
-                  <Trash2 className="size-3.5" />
-                  <span>Cancel Request</span>
-                </button>
-              </form>
+              <CancelBookingDialog
+                bookingId={booking.id}
+                startAt={booking.startAt}
+                hasAssignedHelper={booking.assignedHelpers.length > 0}
+                isEnRoute={Boolean(booking.enRoute)}
+              />
             )}
 
             <Link

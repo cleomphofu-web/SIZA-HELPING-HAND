@@ -32,6 +32,7 @@ export type BookingReadRecord = {
   assignments: BookingAssignmentRead[];
   noShowSlots: BookingNoShowSlotRead[];
   noShowRecoveryMinutes: number | null;
+  enRoute?: { etaMinutes: number; enRouteAt: string } | null;
 };
 
 export type HostBookingView = {
@@ -51,6 +52,7 @@ export type HostBookingView = {
   assignedHelpers: Array<{ helperId: string; firstName: string; phone: string; checkedInAt: string | null }>;
   noShowSlots: BookingNoShowSlotRead[];
   noShowRecoveryMinutes: number | null;
+  enRoute?: { etaMinutes: number; enRouteAt: string } | null;
 };
 
 export type HelperBookingView = {
@@ -138,6 +140,7 @@ export function viewBookingForHost(booking: BookingReadRecord, actor: BookingRea
     assignedHelpers,
     noShowSlots: [...latestNoShowBySlot.values()].sort((left, right) => left.slot - right.slot),
     noShowRecoveryMinutes: booking.noShowRecoveryMinutes,
+    enRoute: booking.enRoute ?? null,
   };
 }
 

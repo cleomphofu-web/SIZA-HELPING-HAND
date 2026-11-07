@@ -1,17 +1,18 @@
 import Link from "next/link";
 import { redirect, notFound } from "next/navigation";
 import {
-    Clock,
+  Clock,
   CheckCircle2,
   KeyRound,
-  ShieldAlert,
-    Navigation,
+  Navigation,
 } from "lucide-react";
 import { t } from "@/content/t";
 import { requireActor } from "@/server/policies/auth";
 import { getBookingView } from "@/server/views/booking-read";
 import { OnMyWayButton } from "@/components/OnMyWayButton";
 import { FlowButton } from "@/components/ui/flow-button";
+import { HelperSafetyReportModal } from "@/components/HelperSafetyReportModal";
+import { BookingMessageBoard } from "@/components/BookingMessageBoard";
 
 export default async function HelperJobDetailPage({
   params,
@@ -71,10 +72,13 @@ export default async function HelperJobDetailPage({
                 {booking.suburb}
               </h1>
             </div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 self-start sm:self-auto">
-              <CheckCircle2 className="size-3.5" />
-              {booking.status === "completed" ? "Completed Job" : booking.checkedInAt ? "Checked In" : "Assigned to You"}
-            </span>
+            <div className="flex items-center gap-2.5 self-start sm:self-auto">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+                <CheckCircle2 className="size-3.5" />
+                {booking.status === "completed" ? "Completed Job" : booking.checkedInAt ? "Checked In" : "Assigned to You"}
+              </span>
+              <HelperSafetyReportModal bookingId={booking.id} />
+            </div>
           </div>
 
           {/* Location & Access Notes */}
@@ -136,13 +140,7 @@ export default async function HelperJobDetailPage({
                 >
                   ← Back to Available Jobs
                 </Link>
-                <Link
-                  href={`/helper/report?bookingId=${booking.id}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs font-semibold transition-colors"
-                >
-                  <ShieldAlert className="size-4 text-neutral-500" />
-                  <span>Report an Issue</span>
-                </Link>
+                <HelperSafetyReportModal bookingId={booking.id} />
               </div>
             </div>
           ) : !booking.checkedInAt ? (
@@ -205,17 +203,19 @@ export default async function HelperJobDetailPage({
                   </FlowButton>
                 </form>
 
-                <Link
-                  href={`/helper/report?bookingId=${booking.id}`}
-                  className="inline-flex items-center gap-2 px-5 h-12 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs font-semibold transition-colors"
-                >
-                  <ShieldAlert className="size-4 text-neutral-500" />
-                  <span>Report an Issue</span>
-                </Link>
+                <HelperSafetyReportModal bookingId={booking.id} />
               </div>
             </div>
           )}
         </div>
+
+        {/* Arrival Notes & Access Details message board — shown once assigned */}
+        {booking.status !== "open" && (
+          <BookingMessageBoard
+            bookingId={booking.id}
+            currentUserId={actor.userId}
+          />
+        )}
       </div>
     </main>
   );

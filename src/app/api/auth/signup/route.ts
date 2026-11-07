@@ -6,7 +6,7 @@ import { runRequestPipeline } from "@/server/policies/request-pipeline";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
 import { verifyTurnstile } from "@/server/security/turnstile";
-import { sameOrigin } from "@/server/security/origin";
+import { resolveCanonicalSiteOrigin, sameOrigin } from "@/server/security/origin";
 
 function clientIp(request: NextRequest) { return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown"; }
 
@@ -29,7 +29,10 @@ export async function POST(request: NextRequest) {
     service: async (input) => {
       if (input.honeypot) return { ok: true as const, data: { accepted: true } };
       try {
-        await createAccount(input, await createSupabaseServerClient());
+        // REMOVED: old Host-header derived origin
+        const siteOrigin = resolveCanonicalSiteOrigin(request);
+        const emailRedirectTo = `${siteOrigin}/api/auth/callback?role=${encodeURIComponent(input.role)}`;
+        await createAccount(input, await createSupabaseServerClient(), { emailRedirectTo });
       } catch {
         // Keep account existence and provider failures out of the public response.
       }

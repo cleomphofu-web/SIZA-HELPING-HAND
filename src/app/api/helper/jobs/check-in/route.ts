@@ -8,6 +8,7 @@ import { checkInPhaseABooking } from "@/server/services/phase-a";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
 import { sameOrigin } from "@/server/security/origin";
+import { createNotification } from "@/server/services/notifications";
 
 export async function POST(request: NextRequest) {
   const pipeline = await runRequestPipeline({
@@ -21,7 +22,32 @@ export async function POST(request: NextRequest) {
       if (!sameOrigin(request)) return { ok: false as const, error: "origin" };
       try { const actor = await requireActor(); assertRole(actor, "helper"); return { ok: true as const, data: actor }; } catch { return { ok: false as const, error: "forbidden" }; }
     },
-    service: async (input, actor) => ({ bookingId: input.bookingId, result: await checkInPhaseABooking(createSupabaseAdminClient(), actor.userId, input) }),
+    service: async (input, actor) => {
+      const adminDb = createSupabaseAdminClient();
+      const result = await checkInPhaseABooking(adminDb, actor.userId, input);
+      if (result.ok && result.data.checkedIn) {
+        try {
+          const { data: booking } = await adminDb
+            .from("phase_a_bookings")
+            .select("host_id")
+            .eq("id", input.bookingId)
+            .maybeSingle();
+          if (booking?.host_id) {
+            await createNotification({
+              userId: booking.host_id,
+              kind: "helper_arrived",
+              title: "Helper arrived",
+              body: "Your helper has entered the check-in code and started the job.",
+              actionPath: `/app/requests/${input.bookingId}`,
+              referenceId: input.bookingId,
+            });
+          }
+        } catch {
+          // Notification tracking shouldn't block response
+        }
+      }
+      return { bookingId: input.bookingId, result };
+    },
   });
   if (!pipeline.ok) {
     if (pipeline.stage === "rate_limit") return rateLimitResponse(pipeline);

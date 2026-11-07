@@ -8,10 +8,31 @@ type AccountEntryProps = {
   role?: "host" | "helper";
   supportEmail: string;
   turnstileSiteKey: string;
+  initialError?: string;
+  initialVerified?: boolean;
 };
 
-export function AccountEntry({ areas, enabled, mode, role = "host", supportEmail, turnstileSiteKey }: AccountEntryProps) {
-  if (enabled) return <AccountForm mode={mode} defaultRole={role} turnstileSiteKey={turnstileSiteKey} />;
+export function AccountEntry({
+  areas,
+  enabled,
+  mode,
+  role = "host",
+  supportEmail,
+  turnstileSiteKey,
+  initialError,
+  initialVerified,
+}: AccountEntryProps) {
+  if (enabled) {
+    return (
+      <AccountForm
+        mode={mode}
+        defaultRole={role}
+        turnstileSiteKey={turnstileSiteKey}
+        initialError={initialError}
+        initialVerified={initialVerified}
+      />
+    );
+  }
 
   return (
     <main className="phase-a-shell">

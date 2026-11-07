@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { sameOrigin, sameOriginHeaders } from "@/server/security/origin";
+import { resolveCanonicalSiteOrigin, resolveSafeInternalRedirect, sameOrigin, sameOriginHeaders } from "@/server/security/origin";
 
 describe("cookie route origin validation", () => {
   it("requires an explicit matching Origin header", () => {
@@ -28,5 +28,63 @@ describe("cookie route origin validation", () => {
     expect(sameOriginHeaders(new Headers({ origin: "http://siza.example", host: "siza.example" }))).toBe(false);
     expect(sameOriginHeaders(new Headers({ origin: "https://siza.example", host: "siza.example" }))).toBe(true);
     vi.unstubAllEnvs();
+  });
+});
+
+describe("resolveCanonicalSiteOrigin", () => {
+  it("uses configured APP_BASE_URL when present", () => {
+    vi.stubEnv("APP_BASE_URL", "https://custom.siza.co.za");
+    expect(resolveCanonicalSiteOrigin(new Request("https://attacker.example/api/auth/reset-password"))).toBe("https://custom.siza.co.za");
+    vi.unstubAllEnvs();
+  });
+
+  it("refuses attacker Host headers in production and enforces https://siza.co.za", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("APP_BASE_URL", "");
+    vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
+    expect(resolveCanonicalSiteOrigin(new Request("https://attacker.example/api/auth/reset-password"))).toBe("https://siza.co.za");
+    vi.unstubAllEnvs();
+  });
+
+  it("permits local development origins for local testing", () => {
+    vi.stubEnv("NODE_ENV", "development");
+    vi.stubEnv("APP_BASE_URL", "");
+    vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
+    expect(resolveCanonicalSiteOrigin(new Request("http://localhost:3000/api/auth/reset-password"))).toBe("http://localhost:3000");
+    vi.unstubAllEnvs();
+  });
+});
+
+describe("resolveSafeInternalRedirect", () => {
+  const requestUrl = "https://siza.co.za/api/helper/voucher";
+
+  it("permits safe same-origin internal paths", () => {
+    const result = resolveSafeInternalRedirect("/helper/jobs", "/helper", requestUrl);
+    expect(result.toString()).toBe("https://siza.co.za/helper/jobs");
+  });
+
+  it("permits full same-origin URLs", () => {
+    const result = resolveSafeInternalRedirect("https://siza.co.za/app/requests/123", "/app", requestUrl);
+    expect(result.toString()).toBe("https://siza.co.za/app/requests/123");
+  });
+
+  it("blocks external open redirects and uses the default path", () => {
+    const result = resolveSafeInternalRedirect("https://malicious-site.example/steal", "/helper", requestUrl);
+    expect(result.toString()).toBe("https://siza.co.za/helper");
+  });
+
+  it("blocks protocol-relative URLs", () => {
+    const result = resolveSafeInternalRedirect("//malicious-site.example/steal", "/helper", requestUrl);
+    expect(result.toString()).toBe("https://siza.co.za/helper");
+  });
+
+  it("blocks javascript pseudo-protocols", () => {
+    const result = resolveSafeInternalRedirect("javascript:alert(1)", "/helper", requestUrl);
+    expect(result.toString()).toBe("https://siza.co.za/helper");
+  });
+
+  it("handles null or empty referers with the default path", () => {
+    expect(resolveSafeInternalRedirect(null, "/helper", requestUrl).toString()).toBe("https://siza.co.za/helper");
+    expect(resolveSafeInternalRedirect("", "/helper", requestUrl).toString()).toBe("https://siza.co.za/helper");
   });
 });

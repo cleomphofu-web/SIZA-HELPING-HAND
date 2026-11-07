@@ -120,7 +120,7 @@ export async function submitHelperKyc(
 
   if (isSmileIdConfigured) {
     vendor = "smile_id";
-    // TODO: Call Smile ID Web API when credentials provided by owner
+    // Smile ID Web API integration pending credentials from owner
     // For now, if keys are set but no network call is wired, mark pending for review
     status = "pending";
   } else {

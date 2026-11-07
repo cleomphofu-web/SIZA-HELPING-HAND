@@ -6,7 +6,7 @@ import { runRequestPipeline } from "@/server/policies/request-pipeline";
 import { recordRepeatIntent } from "@/server/services/phase-a";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
-import { sameOrigin } from "@/server/security/origin";
+import { resolveSafeInternalRedirect, sameOrigin } from "@/server/security/origin";
 
 export async function POST(request: NextRequest) {
   const pipeline = await runRequestPipeline({
@@ -58,10 +58,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(result, { status });
   }
 
-  // For form submissions redirect back to the booking page
-  const referer = request.headers.get("referer");
-  if (!request.headers.get("content-type")?.includes("application/json") && referer) {
-    return NextResponse.redirect(new URL(referer), 303);
+  // For form submissions redirect safely back to an internal page
+  if (!request.headers.get("content-type")?.includes("application/json")) {
+    // REMOVED: unvalidated referer redirect
+    const destination = resolveSafeInternalRedirect(request.headers.get("referer"), "/app", request.url);
+    return NextResponse.redirect(destination, 303);
   }
   return NextResponse.json(result, { status: 200 });
 }

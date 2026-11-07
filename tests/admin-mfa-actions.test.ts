@@ -13,6 +13,15 @@ const mocks = vi.hoisted(() => ({
       signOut: vi.fn(),
     },
   },
+  adminClient: {
+    auth: {
+      admin: {
+        mfa: {
+          deleteFactor: vi.fn().mockResolvedValue({ error: null }),
+        },
+      },
+    },
+  },
   requireAdminIdentity: vi.fn(),
   requirePrototypeRoutes: vi.fn(),
   limitAdminAction: vi.fn(),
@@ -24,6 +33,7 @@ const mocks = vi.hoisted(() => ({
 vi.mock("server-only", () => ({}));
 vi.mock("next/navigation", () => ({ redirect: (path: string) => { throw new Error(`redirect:${path}`); } }));
 vi.mock("next/headers", () => ({ headers: async () => new Headers({ ...(mocks.actionOrigin ? { origin: mocks.actionOrigin } : {}), host: "localhost:3000" }) }));
+vi.mock("@/server/db/admin", () => ({ createSupabaseAdminClient: () => mocks.adminClient }));
 vi.mock("@/server/policies/auth", () => ({ requireAdminIdentity: mocks.requireAdminIdentity }));
 vi.mock("@/server/policies/prototype", () => ({ requirePrototypeRoutes: mocks.requirePrototypeRoutes }));
 vi.mock("@/server/security/admin-rate-limit", () => ({ limitAdminAction: mocks.limitAdminAction, limitAdminMfaVerification: mocks.limitAdminMfaVerification }));

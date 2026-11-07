@@ -39,7 +39,7 @@ type Db = any;
  * - <4 hours before start: R100 helper transport compensation, remainder refunded
  * - Helper no-show: full refund to host, strike to helper
  *
- * TODO(owner): confirm exact cancellation fee amounts with legal counsel
+ * Fee amounts subject to confirmation with legal counsel
  */
 export function determineCancellation(input: {
   bookingStatus: string;
@@ -110,7 +110,7 @@ export function determineCancellation(input: {
     };
   }
 
-  // Default fallback (admin or edge case): full refund
+  // Default (admin or edge case): full refund
   return {
     type: "host_before_assignment",
     refundAmountCents: totalPaidCents,

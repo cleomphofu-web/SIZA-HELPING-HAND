@@ -195,10 +195,18 @@ export const repeatIntentSchema = z.object({
   bookingId: z.string().uuid(),
   helperId: z.string().uuid(),
   intent: z.enum(["yes", "no"]),
+  rating: z.coerce.number().int().min(1).max(5).optional(),
+  feedback: z.string().trim().max(1000).optional(),
 }).strict();
 
 /** Host "Book Again" request — creates a new booking pre-filled from a past one */
 export const bookAgainSchema = z.object({
   sourceBookingId: z.string().uuid(),
   helperId: z.string().uuid(),
+}).strict();
+
+/** Arrival notes / message board — post a new message on a booking */
+export const bookingMessageSchema = z.object({
+  bookingId: z.string().uuid(),
+  message: z.string().trim().min(1).max(1000),
 }).strict();

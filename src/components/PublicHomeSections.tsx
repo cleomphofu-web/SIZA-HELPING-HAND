@@ -543,7 +543,7 @@ export function PublicHomeSections() {
                 </span>
               </div>
               <p className="text-sm text-neutral-400 mb-6">
-                {t(homePricingTiers.helper.period, { subscriptionPrice: "150", subscriptionDays: "30" })}
+                {t(homePricingTiers.helper.period, { subscriptionPrice: "120", subscriptionDays: "30" })}
               </p>
               <hr className="border-white/15 mb-6" />
               <ul className="space-y-3 mb-8">

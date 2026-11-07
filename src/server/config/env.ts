@@ -15,6 +15,7 @@ const envSchema = z.object({
   }, "ID_ENCRYPTION_KEY must be a base64-encoded 32-byte key"),
   WHATSAPP_GROUP_LINK: z.string().url(),
   ADMIN_NOTIFY_EMAIL: z.string().email(),
+  APP_BASE_URL: z.string().url().optional(),
   MAINTENANCE_JOB_SECRET: z.string().min(32).optional(),
   TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),

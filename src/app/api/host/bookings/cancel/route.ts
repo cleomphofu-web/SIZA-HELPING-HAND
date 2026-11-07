@@ -7,6 +7,8 @@ import { cancelPhaseABookingByHost } from "@/server/services/phase-a";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
 import { sameOrigin } from "@/server/security/origin";
+import { trackEvent } from "@/server/services/analytics";
+import { createNotification } from "@/server/services/notifications";
 
 export async function POST(request: NextRequest) {
   const pipeline = await runRequestPipeline({
@@ -31,10 +33,48 @@ export async function POST(request: NextRequest) {
         return { ok: false as const, error: "forbidden" };
       }
     },
-    service: async (input, actor) => ({
-      result: await cancelPhaseABookingByHost(createSupabaseAdminClient(), actor.userId, input),
-      bookingId: input.bookingId,
-    }),
+    service: async (input, actor) => {
+      const adminClient = createSupabaseAdminClient();
+
+      // Look up assigned helpers before cancelling
+      const { data: assignments } = await adminClient
+        .from("booking_assignments")
+        .select("helper_id")
+        .eq("booking_id", input.bookingId)
+        .in("status", ["accepted"]);
+
+      const result = await cancelPhaseABookingByHost(adminClient, actor.userId, input);
+      if (result.ok) {
+        try {
+          await trackEvent(adminClient, {
+            eventName: "booking_cancelled",
+            userId: actor.userId,
+            userRole: "host",
+            metadata: { booking_id: input.bookingId },
+          });
+
+          // Notify any assigned helpers that host cancelled
+          for (const assignment of assignments ?? []) {
+            if (assignment.helper_id) {
+              await createNotification({
+                userId: assignment.helper_id,
+                kind: "booking_cancelled",
+                title: "Job cancelled by host",
+                body: "A booking assigned to you was cancelled by the host.",
+                actionPath: "/helper/jobs",
+                referenceId: input.bookingId,
+              });
+            }
+          }
+        } catch {
+          // Tracking failure should not block cancellation
+        }
+      }
+      return {
+        result,
+        bookingId: input.bookingId,
+      };
+    },
   });
 
   if (!pipeline.ok) {

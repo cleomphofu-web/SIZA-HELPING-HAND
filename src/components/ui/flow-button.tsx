@@ -66,15 +66,15 @@ export const FlowButton = React.forwardRef<
 
     const variantClasses = {
       primary:
-        "bg-neutral-950 text-white border border-white/20 hover:border-white/40 hover:bg-black shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_25px_-4px_rgba(0,0,0,0.7)]",
+        "bg-neutral-950 text-white !text-white border border-white/25 hover:border-white/50 hover:bg-black shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_25px_-4px_rgba(0,0,0,0.7)]",
       secondary:
-        "bg-white text-neutral-950 border border-neutral-300 hover:border-neutral-900 hover:bg-neutral-50 shadow-sm",
+        "bg-white text-neutral-950 !text-neutral-950 border border-neutral-300 hover:border-neutral-900 hover:bg-neutral-50 shadow-sm",
       emerald:
-        "bg-emerald-600 text-white border border-emerald-500/40 hover:bg-emerald-500 hover:border-emerald-400 shadow-[0_4px_20px_-4px_rgba(16,185,129,0.3)]",
+        "bg-emerald-600 text-white !text-white border border-emerald-500/40 hover:bg-emerald-500 hover:border-emerald-400 shadow-[0_4px_20px_-4px_rgba(16,185,129,0.3)]",
       outline:
-        "bg-transparent text-white border border-white/30 hover:border-white hover:bg-white/10 backdrop-blur-sm",
+        "bg-transparent text-white !text-white border border-white/30 hover:border-white hover:bg-white/10 backdrop-blur-sm",
       ghost:
-        "bg-transparent text-neutral-800 hover:bg-neutral-100 hover:text-black border border-transparent",
+        "bg-transparent text-neutral-800 !text-neutral-800 hover:bg-neutral-100 hover:text-black border border-transparent",
     }[variant];
 
     const baseClasses = cn(
@@ -97,9 +97,17 @@ export const FlowButton = React.forwardRef<
         />
 
         {/* Content & Icon */}
-        <span className="relative z-10 flex items-center gap-2">
+        <span
+          className={cn(
+            "relative z-10 flex items-center gap-2",
+            (variant === "primary" || variant === "emerald" || variant === "outline") &&
+              "text-white !text-white",
+            (variant === "secondary" || variant === "ghost") &&
+              "text-neutral-950 !text-neutral-950"
+          )}
+        >
           {loading ? (
-            <Loader2 className="size-4 animate-spin shrink-0" aria-hidden="true" />
+            <Loader2 className="size-4 animate-spin shrink-0 text-current" aria-hidden="true" />
           ) : null}
           <span>{children ?? text}</span>
         </span>
@@ -107,7 +115,13 @@ export const FlowButton = React.forwardRef<
         {/* Trailing arrow with fluid slide transition */}
         {!loading && (
           <span
-            className="relative z-10 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1"
+            className={cn(
+              "relative z-10 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1",
+              (variant === "primary" || variant === "emerald" || variant === "outline") &&
+                "text-white !text-white",
+              (variant === "secondary" || variant === "ghost") &&
+                "text-neutral-950 !text-neutral-950"
+            )}
             aria-hidden="true"
           >
             {icon ?? <ArrowRight className="size-4" />}

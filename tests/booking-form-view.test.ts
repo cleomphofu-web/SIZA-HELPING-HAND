@@ -47,15 +47,29 @@ describe("host booking form view", () => {
     expect(JSON.stringify(view)).not.toContain("userId");
   });
 
-  it("does not expose a service area without three matching helpers", () => {
+  it("does not expose a service area without three matching helpers when minHelpers is 3", () => {
     const view = buildHostBookingFormView({
       categories: [{ name: "home", enabled: true, pricing: "rate_card" }],
       rates: [{ service: "home", hourly_cents: "3600", per_bedroom_minutes: 30, per_bathroom_minutes: 20, size_band_minutes: { small: 15 }, addon_minutes: {} }],
       zones: [{ suburb: "Rosebank", transport_cents: "5000", enabled: true }],
       approvedHelpers: [helper(["home"]), helper(["home"])],
       floorPercent: 100,
+      minHelpers: 3,
     });
     expect(view.areas).toEqual([]);
+  });
+
+  it("exposes a service area with a single helper when minHelpers defaults to 1", () => {
+    const view = buildHostBookingFormView({
+      categories: [{ name: "home", enabled: true, pricing: "rate_card" }],
+      rates: [{ service: "home", hourly_cents: "3600", per_bedroom_minutes: 30, per_bathroom_minutes: 20, size_band_minutes: { small: 15, medium: 30, large: 60 }, addon_minutes: { oven: 20 } }],
+      zones: [{ suburb: "Rosebank", transport_cents: "5000", enabled: true }],
+      approvedHelpers: [helper(["home"])],
+      floorPercent: 100,
+    });
+    expect(view.areas).toHaveLength(1);
+    expect(view.areas[0]?.suburb).toBe("Rosebank");
+    expect(view.areas[0]?.serviceSets[0]?.eligibleHelperCount).toBe(1);
   });
 
   it("requires three currently eligible helpers for each complete selected-service combination", () => {

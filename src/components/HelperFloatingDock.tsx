@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Briefcase, User, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { NotificationBell } from "@/components/NotificationBell";
 
 type DockItem = {
   label: string;
@@ -91,6 +92,7 @@ export function HelperFloatingDock() {
             </Link>
           );
         })}
+        <NotificationBell />
       </div>
     </nav>
   );

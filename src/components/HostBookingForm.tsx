@@ -227,9 +227,93 @@ export function HostBookingForm({
       set.services.every((service) => selectedServices.includes(service))
   );
   const selectedServicesAvailable = Boolean(selectedServiceSet);
-  const helperLimit = Math.min(4, selectedServiceSet?.eligibleHelperCount ?? 0);
+  // Fall back to 4 when no service-set is matched yet so the dropdown always
+  // has options; the real cap is enforced on submit via the server.
+  const helperLimit = Math.min(4, selectedServiceSet?.eligibleHelperCount ?? 4);
   const primaryRate = config.services.find((service) => service.service === primaryService);
   const usableAddons = Object.keys(primaryRate?.addonMinutes ?? {}).filter((addon) => addonCopyKeys[addon]);
+
+  const [selectedPresetId, setSelectedPresetId] = useState<string | null>("standard");
+
+  const standardService = availableServices.find(
+    (s) => s.service === "home" || s.service === "home_cleaning" || s.service.includes("standard")
+  )?.service ?? availableServices[0]?.service ?? "";
+
+  const deepService = availableServices.find(
+    (s) => s.service.includes("deep")
+  )?.service ?? standardService;
+
+  const turnoverService = availableServices.find(
+    (s) => s.service.includes("turnover") || s.service.includes("airbnb")
+  )?.service ?? standardService;
+
+  const standardRate = config.services.find((s) => s.service === standardService);
+  const deepRate = config.services.find((s) => s.service === deepService);
+  const turnoverRate = config.services.find((s) => s.service === turnoverService);
+
+  const presets = [
+    {
+      id: "standard" as const,
+      title: t("host.book.presets.standard.title"),
+      tagline: t("host.book.presets.standard.tagline"),
+      badge: t("host.book.presets.standard.badge"),
+      service: standardService,
+      bedrooms: "2",
+      bathrooms: "1",
+      sizeBand: "medium" as const,
+      addons: [] as string[],
+      specs: "2 bed · 1 bath",
+      approxHours: 3,
+      hourlyCents: standardRate?.hourlyCents ?? "10000",
+      available: Boolean(standardService),
+    },
+    {
+      id: "deep" as const,
+      title: t("host.book.presets.deep.title"),
+      tagline: t("host.book.presets.deep.tagline"),
+      badge: t("host.book.presets.deep.badge"),
+      service: deepService,
+      bedrooms: "2",
+      bathrooms: "2",
+      sizeBand: "medium" as const,
+      addons: ["oven"] as string[],
+      specs: "2 bed · 2 bath · oven",
+      approxHours: 4,
+      hourlyCents: deepRate?.hourlyCents ?? "16000",
+      available: Boolean(deepService),
+    },
+    {
+      id: "turnover" as const,
+      title: t("host.book.presets.turnover.title"),
+      tagline: t("host.book.presets.turnover.tagline"),
+      badge: t("host.book.presets.turnover.badge"),
+      service: turnoverService,
+      bedrooms: "1",
+      bathrooms: "1",
+      sizeBand: "small" as const,
+      addons: ["laundry"] as string[],
+      specs: "1 bed · 1 bath · linens",
+      approxHours: 3,
+      hourlyCents: turnoverRate?.hourlyCents ?? "15500",
+      available: Boolean(turnoverService),
+    },
+  ];
+
+  function applyPreset(preset: typeof presets[number]) {
+    if (!preset.available) return;
+    setSelectedPresetId(preset.id);
+    setSelectedServices([preset.service]);
+    setPrimaryService(preset.service);
+    setBedrooms(preset.bedrooms);
+    setBathrooms(preset.bathrooms);
+    setSizeBand(preset.sizeBand);
+    const targetRate = config.services.find((s) => s.service === preset.service);
+    const validAddons = preset.addons.filter((addon) =>
+      targetRate?.addonMinutes && addon in targetRate.addonMinutes && addonCopyKeys[addon]
+    );
+    setAddons(validAddons);
+    setHelpersNeeded("1");
+  }
 
   const estimate = (() => {
     if (
@@ -306,6 +390,7 @@ export function HostBookingForm({
   }
 
   function toggleService(service: string, checked: boolean) {
+    setSelectedPresetId(null);
     const next = checked ? [...selectedServices, service] : selectedServices.filter((item) => item !== service);
     const combination = area?.serviceSets.find(
       (set) => set.services.length === next.length && set.services.every((item) => next.includes(item))
@@ -317,6 +402,7 @@ export function HostBookingForm({
   }
 
   function toggleAddon(addon: string, checked: boolean) {
+    setSelectedPresetId(null);
     setAddons((current) => (checked ? [...current, addon] : current.filter((item) => item !== addon)));
   }
 
@@ -499,6 +585,11 @@ export function HostBookingForm({
                     }}
                     className="w-full h-11 px-3.5 bg-neutral-50 border border-neutral-300 rounded-xl text-sm font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-black"
                   >
+                    {!suburb && (
+                      <option value="" disabled>
+                        — choose suburb —
+                      </option>
+                    )}
                     {config.areas.map((option) => (
                       <option key={option.suburb} value={option.suburb}>
                         {option.suburb}
@@ -622,6 +713,118 @@ export function HostBookingForm({
                 </div>
               </div>
               <Sparkles className="size-5 text-neutral-400" />
+            </div>
+
+            {/* Quick-Select Package Preset Cards */}
+            <div className="space-y-3 pb-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
+                    {t("host.book.presets.title")}
+                  </h3>
+                  <p className="text-[11px] text-neutral-500">
+                    {t("host.book.presets.subtitle")}
+                  </p>
+                </div>
+                {selectedPresetId ? (
+                  <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                    Package applied
+                  </span>
+                ) : (
+                  <span className="text-[11px] font-medium text-neutral-500 bg-neutral-100 px-2.5 py-0.5 rounded-full">
+                    {t("host.book.presets.custom")}
+                  </span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {presets.map((preset) => {
+                  const isSelected = selectedPresetId === preset.id;
+                  const Icon =
+                    preset.id === "standard"
+                      ? Sparkles
+                      : preset.id === "deep"
+                      ? ShieldCheck
+                      : Building;
+
+                  return (
+                    <button
+                      key={preset.id}
+                      type="button"
+                      disabled={!preset.available}
+                      onClick={() => applyPreset(preset)}
+                      className={cn(
+                        "relative flex flex-col justify-between p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer select-none",
+                        isSelected
+                          ? "bg-black text-white border-black shadow-lg ring-2 ring-black"
+                          : preset.available
+                          ? "bg-neutral-50/80 border-neutral-200 hover:border-neutral-400 hover:bg-neutral-100/60 text-neutral-900"
+                          : "bg-neutral-100 border-neutral-200 text-neutral-400 opacity-50 cursor-not-allowed"
+                      )}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div
+                          className={cn(
+                            "size-8 rounded-xl flex items-center justify-center shrink-0",
+                            isSelected ? "bg-white/10 text-white" : "bg-neutral-200/70 text-neutral-700"
+                          )}
+                        >
+                          <Icon className="size-4" />
+                        </div>
+                        {preset.badge && (
+                          <span
+                            className={cn(
+                              "text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full",
+                              isSelected
+                                ? "bg-white/20 text-white"
+                                : "bg-neutral-200 text-neutral-700"
+                            )}
+                          >
+                            {preset.badge}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="mt-3 space-y-1">
+                        <h4 className="text-sm font-bold tracking-tight leading-snug">
+                          {preset.title}
+                        </h4>
+                        <p
+                          className={cn(
+                            "text-[11px] leading-tight line-clamp-1",
+                            isSelected ? "text-neutral-300" : "text-neutral-500"
+                          )}
+                        >
+                          {preset.tagline}
+                        </p>
+                      </div>
+
+                      <div className="mt-3 pt-3 border-t border-neutral-200/30 flex items-center justify-between text-xs">
+                        <span
+                          className={cn(
+                            "text-[10px] font-medium",
+                            isSelected ? "text-neutral-300" : "text-neutral-500"
+                          )}
+                        >
+                          {preset.specs}
+                        </span>
+                        <span className="font-bold">
+                          {preset.approxHours}h · {formatZarCents(BigInt(preset.hourlyCents) * BigInt(preset.approxHours))}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="border-t border-neutral-100 pt-4">
+              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-600 block mb-1">
+                Or Customize Services &amp; Sizing
+              </span>
+              <p className="text-[11px] text-neutral-500 mb-3">
+                Select specific services, change room counts, and add extras below.
+              </p>
             </div>
 
             {/* Apple Cards Carousel for Services */}
@@ -751,7 +954,10 @@ export function HostBookingForm({
                       <button
                         key={count}
                         type="button"
-                        onClick={() => setBedrooms(count)}
+                        onClick={() => {
+                          setBedrooms(count);
+                          setSelectedPresetId(null);
+                        }}
                         className={cn(
                           "flex-1 h-10 rounded-lg text-xs font-semibold border transition-all",
                           bedrooms === count
@@ -781,7 +987,10 @@ export function HostBookingForm({
                       <button
                         key={count}
                         type="button"
-                        onClick={() => setBathrooms(count)}
+                        onClick={() => {
+                          setBathrooms(count);
+                          setSelectedPresetId(null);
+                        }}
                         className={cn(
                           "flex-1 h-10 rounded-lg text-xs font-semibold border transition-all",
                           bathrooms === count
@@ -816,7 +1025,10 @@ export function HostBookingForm({
                     <button
                       key={band.id}
                       type="button"
-                      onClick={() => setSizeBand(band.id as BookingEstimateInput["sizeBand"])}
+                      onClick={() => {
+                        setSizeBand(band.id as BookingEstimateInput["sizeBand"]);
+                        setSelectedPresetId(null);
+                      }}
                       className={cn(
                         "p-3 rounded-xl border text-left transition-all",
                         sizeBand === band.id
@@ -994,7 +1206,7 @@ export function HostBookingForm({
                     className="w-full h-11 px-3.5 bg-neutral-50 border border-neutral-300 rounded-xl text-sm font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-black"
                   >
                     {[1, 2, 3, 4]
-                      .filter((count) => count <= helperLimit)
+                      .filter((count) => count <= Math.max(1, helperLimit))
                       .map((count) => (
                         <option key={count} value={count}>
                           {count}
@@ -1003,7 +1215,9 @@ export function HostBookingForm({
                   </select>
                 </div>
                 <p className="text-[11px] text-neutral-500 mt-1">
-                  Fair rotation: Up to {helperLimit} helpers available in {suburb}.
+                  {selectedServiceSet
+                    ? `Fair rotation: Up to ${helperLimit} helper${helperLimit === 1 ? "" : "s"} available in ${suburb}.`
+                    : "Select a service to see helper availability."}
                 </p>
               </div>
 

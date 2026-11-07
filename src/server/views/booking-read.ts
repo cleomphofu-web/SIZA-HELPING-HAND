@@ -43,10 +43,27 @@ type RawAssignment = {
 };
 
 export type HostBookingSummary = { id: string; suburb: string; startAt: string; status: BookingReadRecord["status"]; helpersNeeded: number };
-export type HelperOfferSummary = { id: string; suburb: string; payPerHelperCents: number | string; transportPerHelperCents: number | string; slot: number };
+export type HelperOfferSummary = {
+  id: string;
+  suburb: string;
+  payPerHelperCents: number | string;
+  transportPerHelperCents: number | string;
+  slot: number;
+  startAt?: string;
+  endAt?: string;
+  services?: string[];
+  expiresAt?: string | null;
+};
 export type AdminBookingSummary = { id: string; suburb: string; services: string[]; startAt: string; status: BookingReadRecord["status"]; helpersNeeded: number };
 
-function mapBooking(raw: RawBooking, host: { first_name: string; phone: string }, assignments: BookingReadRecord["assignments"], noShowSlots: BookingReadRecord["noShowSlots"] = [], noShowRecoveryMinutes: number | null = null): BookingReadRecord {
+function mapBooking(
+  raw: RawBooking,
+  host: { first_name: string; phone: string },
+  assignments: BookingReadRecord["assignments"],
+  noShowSlots: BookingReadRecord["noShowSlots"] = [],
+  noShowRecoveryMinutes: number | null = null,
+  enRoute: BookingReadRecord["enRoute"] = null,
+): BookingReadRecord {
   return {
     id: raw.id,
     hostId: raw.host_id ?? "",
@@ -66,6 +83,7 @@ function mapBooking(raw: RawBooking, host: { first_name: string; phone: string }
     assignments,
     noShowSlots,
     noShowRecoveryMinutes,
+    enRoute: enRoute ?? null,
   };
 }
 
@@ -304,7 +322,31 @@ export async function getBookingView(bookingId: string): Promise<Result<BookingV
         canResolve: row.can_resolve === true,
         canProceedWithFewer: row.can_proceed_with_fewer === true,
       }));
-      const record = mapBooking(raw, hostResult.data, assignments, noShowSlots, recoveryMinutes);
+      let enRoute: BookingReadRecord["enRoute"] = null;
+      if (assignments.length > 0) {
+        try {
+          const { data: eventData } = await client
+            .from("analytics_events")
+            .select("created_at, metadata")
+            .eq("event_name", "helper_on_my_way")
+            .order("created_at", { ascending: false })
+            .limit(10);
+          const match = (eventData ?? []).find(
+            (e: { metadata?: Record<string, unknown> }) =>
+              e.metadata?.booking_id === bookingId || e.metadata?.bookingId === bookingId,
+          );
+          if (match && typeof match === "object") {
+            const meta = (match as { metadata?: Record<string, unknown>; created_at: string }).metadata;
+            enRoute = {
+              etaMinutes: Number(meta?.eta_minutes ?? meta?.etaMinutes ?? 30),
+              enRouteAt: (match as { created_at: string }).created_at,
+            };
+          }
+        } catch {
+          // Metadata read failure is non-critical
+        }
+      }
+      const record = mapBooking(raw, hostResult.data, assignments, noShowSlots, recoveryMinutes, enRoute);
       const view = viewBookingForHost(record, actor);
       return view ? ok(view) : fail("not_found", "We could not find that booking.");
     } else {
@@ -394,9 +436,24 @@ export async function getHelperOfferSummaries(): Promise<Result<HelperOfferSumma
       now,
     );
     const bookingById = new Map(bookings.map((booking) => [booking.id, booking]));
+    const offersList = offerResult.data ?? [];
     return ok(visible.flatMap(({ bookingId, slot }) => {
       const booking = bookingById.get(bookingId);
-      return booking ? [{ id: booking.id, suburb: booking.suburb, payPerHelperCents: booking.pay_per_helper_cents, transportPerHelperCents: booking.transport_per_helper_cents, slot }] : [];
+      if (!booking) return [];
+      const specificOffer = offersList.find(
+        (o) => o.booking_id === bookingId && o.slot === slot && o.helper_id === actor.userId
+      );
+      return [{
+        id: booking.id,
+        suburb: booking.suburb,
+        payPerHelperCents: booking.pay_per_helper_cents,
+        transportPerHelperCents: booking.transport_per_helper_cents,
+        slot,
+        startAt: booking.start_at,
+        endAt: booking.end_at_est,
+        services: booking.services ?? [],
+        expiresAt: specificOffer?.expires_at ?? null,
+      }];
     }));
   } catch {
     return fail("internal_error", "We could not load available jobs.");

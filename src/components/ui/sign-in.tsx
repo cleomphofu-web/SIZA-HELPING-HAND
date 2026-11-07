@@ -61,9 +61,20 @@ export interface SignInPageLayoutProps {
  */
 export function SignInPageLayout({
   children,
+  role = "host",
+  mode = "login",
   testimonials = defaultMarketplaceTestimonials,
 }: SignInPageLayoutProps) {
   const [activeTestimonial, setActiveTestimonial] = React.useState(0);
+
+  // Background image based on role requested by owner:
+  // Both images are crisp landscape (1.50 aspect ratio, 3400x2267+ px) that fit the screen edge-to-edge
+  // Helper signup/apply: clay-banks-IE0m2PUI4Fg (bright, clean, spacious welcoming living space)
+  // Host signup/login: glen-carrie-y8dgMhxaoKk (beautiful, bright, airy modern garden/home)
+  const isHelper = role === "helper";
+  const bgImageSrc = isHelper
+    ? "/assets/images/clay-banks-IE0m2PUI4Fg-unsplash.jpg"
+    : "/assets/images/glen-carrie-y8dgMhxaoKk-unsplash.jpg";
 
   // Auto-rotate testimonials gently
   React.useEffect(() => {
@@ -77,22 +88,19 @@ export function SignInPageLayout({
   const current = testimonials[activeTestimonial] || testimonials[0];
 
   return (
-    <main className="relative min-h-screen w-full flex flex-col lg:flex-row bg-black text-white overflow-x-hidden">
-      {/* Background Atmosphere */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+    <main className="relative min-h-screen w-full flex flex-col lg:flex-row bg-neutral-950 text-white overflow-x-hidden">
+      {/* Background Atmosphere - Vivid, natural light photograph fitting screen edge-to-edge without heavy darkening or over-saturation */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <Image
-          src="/assets/images/hero/background%20home%20page%20hero.png"
+          src={bgImageSrc}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.25] contrast-[1.15]"
+          className="object-cover object-center w-full h-full filter brightness-[0.92] contrast-[1.02]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/95 backdrop-blur-[2px]" />
-        <div
-          aria-hidden="true"
-          className="absolute -top-32 left-1/4 w-[600px] h-[300px] bg-gradient-to-b from-white/10 to-transparent blur-3xl opacity-40 rounded-full"
-        />
+        {/* Subtle translucent ambient tint so the photo shines through brightly while guaranteeing text legibility */}
+        <div className="absolute inset-0 bg-black/20" />
       </div>
 
       {/* Left/Form Container: Focused and tactile */}
@@ -105,9 +113,9 @@ export function SignInPageLayout({
         </div>
       </section>
 
-      {/* Right/Social Proof Showcase: Visible on lg+ displays (Jahed-style split) */}
+      {/* Right/Social Proof Showcase: Visible on lg+ displays (Jahed-style split) with 25% glass blur */}
       <aside
-        className="relative z-10 hidden lg:flex lg:w-5/12 xl:w-1/2 flex-col justify-between p-10 xl:p-16 border-l border-white/10 bg-neutral-950/40 backdrop-blur-xl"
+        className="relative z-10 hidden lg:flex lg:w-5/12 xl:w-1/2 flex-col justify-between p-10 xl:p-16 border-l border-white/20 bg-neutral-950/40 backdrop-blur-[8px]"
         aria-label="Community reviews and trust"
       >
         {/* Top Wordmark & Trust Badge */}

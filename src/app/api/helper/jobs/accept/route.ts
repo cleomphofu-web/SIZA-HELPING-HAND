@@ -8,6 +8,7 @@ import { acceptPhaseABooking } from "@/server/services/phase-a";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
 import { sameOrigin } from "@/server/security/origin";
+import { createNotification } from "@/server/services/notifications";
 
 export async function POST(request: NextRequest) {
   const pipeline = await runRequestPipeline({
@@ -21,7 +22,31 @@ export async function POST(request: NextRequest) {
       if (!sameOrigin(request)) return { ok: false as const, error: "origin" };
       try { const actor = await requireActor(); assertRole(actor, "helper"); return { ok: true as const, data: actor }; } catch { return { ok: false as const, error: "forbidden" }; }
     },
-    service: async (input, actor) => ({ bookingId: input.bookingId, result: await acceptPhaseABooking(createSupabaseAdminClient(), actor.userId, input.bookingId, input.slot) }),
+    service: async (input, actor) => {
+      const adminDb = createSupabaseAdminClient();
+      const result = await acceptPhaseABooking(adminDb, actor.userId, input.bookingId, input.slot);
+      if (result.ok) {
+        try {
+          const [{ data: booking }, { data: helperProfile }] = await Promise.all([
+            adminDb.from("phase_a_bookings").select("host_id").eq("id", input.bookingId).maybeSingle(),
+            adminDb.from("profiles").select("first_name").eq("id", actor.userId).maybeSingle(),
+          ]);
+          if (booking?.host_id) {
+            await createNotification({
+              userId: booking.host_id,
+              kind: "booking_confirmed",
+              title: "Helper assigned",
+              body: `${helperProfile?.first_name ?? "A helper"} accepted your booking request.`,
+              actionPath: `/app/requests/${input.bookingId}`,
+              referenceId: input.bookingId,
+            });
+          }
+        } catch {
+          // Notification tracking shouldn't block response
+        }
+      }
+      return { bookingId: input.bookingId, result };
+    },
   });
   if (!pipeline.ok) {
     if (pipeline.stage === "rate_limit") return rateLimitResponse(pipeline);

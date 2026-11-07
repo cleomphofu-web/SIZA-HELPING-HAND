@@ -40,8 +40,8 @@ export function RecordPaymentForm() {
             name="amountCents"
             type="number"
             required
-            defaultValue="15000"
-            placeholder="15000 for R150.00"
+            defaultValue="12000"
+            placeholder="12000 for R120.00"
             style={{ padding: "8px 12px", borderRadius: "4px", border: "1px solid var(--color-border)" }}
           />
         </label>

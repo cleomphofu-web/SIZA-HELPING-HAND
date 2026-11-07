@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import type { EmailOtpType } from "@supabase/supabase-js";
 import { runRequestPipeline } from "@/server/policies/request-pipeline";
 import { limitRequest } from "@/server/security/request-rate-limit";
 import { rateLimitResponse } from "@/server/http/pipeline-responses";
 import { createSupabaseServerClient } from "@/server/db/server";
 import { createSupabaseAdminClient } from "@/server/db/admin";
 import { accountDestinationForRole } from "@/lib/account-destination";
+import { resolveCanonicalSiteOrigin } from "@/server/security/origin";
 
 export async function GET(request: NextRequest) {
   const pipeline = await runRequestPipeline({
@@ -13,19 +16,43 @@ export async function GET(request: NextRequest) {
     validate: async () => ({ ok: true as const, data: null }),
     authorize: async () => ({ ok: true as const, data: null }),
     service: async () => {
-      const { searchParams, origin } = new URL(request.url);
-      const code = searchParams.get("code");
-      const roleParam = searchParams.get("role") || "host";
+      // REMOVED: old Host-header derived origin
+      const origin = resolveCanonicalSiteOrigin(request);
+      const { searchParams } = new URL(request.url);
+      const incomingError =
+        searchParams.get("error_description") || searchParams.get("error");
+      if (incomingError) {
+        return { destination: `${origin}/login?error=${encodeURIComponent(incomingError)}` };
+      }
 
-      if (!code) {
+      const code = searchParams.get("code");
+      const tokenHash = searchParams.get("token_hash");
+      const type = searchParams.get("type") as EmailOtpType | null;
+
+      const cookieStore = await cookies();
+      const cookieRole = cookieStore.get("siza_oauth_role")?.value;
+      const roleParam = searchParams.get("role") || cookieRole || "host";
+
+      if (!code && !tokenHash) {
         return { destination: `${origin}/login?error=missing_code` };
       }
 
       try {
         const supabase = await createSupabaseServerClient();
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
-        if (error) {
-          return { destination: `${origin}/login?error=auth_exchange_failed` };
+        if (tokenHash) {
+          const otpType: EmailOtpType = type ?? "email";
+          const { error } = await supabase.auth.verifyOtp({
+            token_hash: tokenHash,
+            type: otpType,
+          });
+          if (error) {
+            return { destination: `${origin}/login?error=auth_verify_failed` };
+          }
+        } else if (code) {
+          const { error } = await supabase.auth.exchangeCodeForSession(code);
+          if (error) {
+            return { destination: `${origin}/login?error=auth_exchange_failed` };
+          }
         }
 
         const {
@@ -78,6 +105,7 @@ export async function GET(request: NextRequest) {
               job_title: "Helper",
               date_of_birth: "1990-01-01",
             });
+            return { destination: `${origin}/helper/onboarding` };
           } else {
             await adminClient.from("host_details").insert({
               user_id: user.id,
@@ -104,5 +132,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(new URL("/login?error=auth_callback_failed", request.url));
   }
 
-  return NextResponse.redirect(pipeline.data.destination);
+  const response = NextResponse.redirect(pipeline.data.destination);
+  response.cookies.delete("siza_oauth_role");
+  return response;
 }

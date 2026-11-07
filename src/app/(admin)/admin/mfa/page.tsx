@@ -30,7 +30,8 @@ export default async function AdminMfaPage({
     redirect("/admin");
   }
 
-  const verifiedFactor = factors?.totp.find((factor) => factor.status === "verified");
+  const allFactors = factors?.all ?? factors?.totp ?? [];
+  const verifiedFactor = allFactors.find((factor) => factor.status === "verified");
 
   return (
     <main className="relative min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-hidden bg-black text-white">

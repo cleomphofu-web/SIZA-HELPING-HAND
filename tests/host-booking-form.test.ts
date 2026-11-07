@@ -69,4 +69,18 @@ describe("host booking request form", () => {
     expect(markup).toContain('name="genderPreference"');
     expect(markup).toContain('value="any"');
   });
+
+  it("renders popular package preset cards with badges and descriptions", () => {
+    const markup = renderToStaticMarkup(createElement(HostBookingForm, {
+      profile,
+      config,
+      turnstileSiteKey: "site-key",
+      idempotencyKey: "00000000-0000-4000-8000-000000000001",
+    }));
+    expect(markup).toContain("Popular Packages");
+    expect(markup).toContain("Standard Clean");
+    expect(markup).toContain("Deep Clean");
+    expect(markup).toContain("Airbnb Turnover");
+    expect(markup).toContain("Most Popular");
+  });
 });

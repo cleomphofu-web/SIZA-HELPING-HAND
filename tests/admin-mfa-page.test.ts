@@ -15,6 +15,8 @@ vi.mock("@/app/(admin)/admin/mfa/actions", () => ({
   signOutFromAdminMfa: vi.fn(),
   startAdminMfaEnrollment: vi.fn(),
   verifyAdminMfa: vi.fn(),
+  resetAdminMfaFactor: vi.fn(),
+  getDevAdminTotpCode: vi.fn().mockResolvedValue(null),
 }));
 
 import AdminMfaPage from "@/app/(admin)/admin/mfa/page";

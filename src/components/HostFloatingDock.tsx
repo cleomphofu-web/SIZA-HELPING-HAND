@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, CalendarPlus, ClipboardList, User } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { NotificationBell } from "@/components/NotificationBell";
 
 type DockItem = {
   label: string;
@@ -79,6 +80,7 @@ export function HostFloatingDock() {
             </Link>
           );
         })}
+        <NotificationBell />
       </div>
     </nav>
   );
