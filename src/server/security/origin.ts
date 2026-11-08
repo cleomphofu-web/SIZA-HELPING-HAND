@@ -25,7 +25,10 @@ export function sameOriginHeaders(headers: Pick<Headers, "get">): boolean {
  * In production, it defaults strictly to https://siza.co.za to protect against Host header spoofing.
  */
 export function resolveCanonicalSiteOrigin(request?: Request): string {
-  const configured = process.env.APP_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+  const configured =
+    process.env.APP_BASE_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
   if (configured) {
     try {
       return new URL(configured).origin;
@@ -34,20 +37,26 @@ export function resolveCanonicalSiteOrigin(request?: Request): string {
     }
   }
 
-  if (process.env.NODE_ENV === "production") {
-    return "https://siza.co.za";
-  }
-
   if (request) {
     try {
       const parsed = new URL(request.url);
       const host = parsed.hostname.toLowerCase();
-      if (host === "localhost" || host === "127.0.0.1" || host.endsWith(".test") || host.endsWith(".example")) {
+      if (host.endsWith(".vercel.app")) {
+        return parsed.origin;
+      }
+      if (
+        process.env.NODE_ENV !== "production" &&
+        (host === "localhost" || host === "127.0.0.1" || host.endsWith(".test") || host.endsWith(".example"))
+      ) {
         return parsed.origin;
       }
     } catch {
       // Ignore invalid request URL
     }
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    return "https://siza.co.za";
   }
 
   return "http://localhost:3000";

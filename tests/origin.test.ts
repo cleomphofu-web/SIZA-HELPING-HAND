@@ -38,10 +38,29 @@ describe("resolveCanonicalSiteOrigin", () => {
     vi.unstubAllEnvs();
   });
 
+  it("supports VERCEL_URL automatically", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("APP_BASE_URL", "");
+    vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
+    vi.stubEnv("VERCEL_URL", "siza-preview-abc.vercel.app");
+    expect(resolveCanonicalSiteOrigin(new Request("https://siza-preview-abc.vercel.app/api/auth/reset-password"))).toBe("https://siza-preview-abc.vercel.app");
+    vi.unstubAllEnvs();
+  });
+
+  it("supports vercel.app domains directly from request in production", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("APP_BASE_URL", "");
+    vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
+    vi.stubEnv("VERCEL_URL", "");
+    expect(resolveCanonicalSiteOrigin(new Request("https://siza-cleaners.vercel.app/api/auth/reset-password"))).toBe("https://siza-cleaners.vercel.app");
+    vi.unstubAllEnvs();
+  });
+
   it("refuses attacker Host headers in production and enforces https://siza.co.za", () => {
     vi.stubEnv("NODE_ENV", "production");
     vi.stubEnv("APP_BASE_URL", "");
     vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
+    vi.stubEnv("VERCEL_URL", "");
     expect(resolveCanonicalSiteOrigin(new Request("https://attacker.example/api/auth/reset-password"))).toBe("https://siza.co.za");
     vi.unstubAllEnvs();
   });
