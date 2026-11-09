@@ -243,42 +243,42 @@ seo.contact.title: Contact | siZa
 seo.contact.description: Questions, problems or ideas? Reach siZa by email, WhatsApp or the form.
 
 ## Home: hero
-home.hero.eyebrow: siZa // {areas}
-home.hero.get_started: Get started
+home.hero.eyebrow: siZa — {areas}
+home.hero.get_started: Request a helper
 home.hero.description: Reliable on-demand and scheduled help for your home across Johannesburg and the Vaal. Fair work for helpers, transparent rates for hosts.
-home.hero.guide: Book or apply below
-home.hero.switch.host: I need help
-home.hero.switch.helper: I want work
-home.hero.host.title: Guest-ready, between every stay.
-home.hero.host.subtitle: Request a helper for your home or short-stay property. See the price before you confirm. Your request goes to helpers near you.
+home.hero.guide: Request a helper
+home.hero.switch.host: I need a helper
+home.hero.switch.helper: I want to work
+home.hero.host.title: Trusted home & Airbnb turnovers in Joburg & the Vaal.
+home.hero.host.subtitle: Request an ID-verified helper for your home or short-stay property. See the upfront price, verify arrival with a 4-digit code, and pay directly with zero commission.
 home.hero.host.cta: Request a helper
-home.hero.host.cta_secondary: See how it works
+home.hero.host.cta_secondary: How it works
 home.hero.helper.title: Fair work, near you.
-home.hero.helper.subtitle: Apply to be a siZa helper. See your pay and transport before you accept a job, and keep all of it.
+home.hero.helper.subtitle: Apply to be a siZa helper. See your pay and transport before you accept a job, and keep 100% of it.
 home.hero.helper.cta: Apply to be a helper
 home.hero.helper.cta_secondary: What helpers earn
 
 ## Home: how it works (hosts)
-home.how.label: HOW IT WORKS //
-home.how.title: FOR HOSTS
-home.how.subtitle: *(FOUR SIMPLE STEPS)
-home.how.host.1.label: //Step 01
+home.how.label: How it works
+home.how.title: Four steps to trusted help
+home.how.subtitle: Simple, transparent, and direct
+home.how.host.1.label: Step 1
 home.how.host.1.title: Tell us what you need
 home.how.host.1.body: Pick a service, a date and a time. See the price before you confirm.
-home.how.host.2.label: //Step 02
+home.how.host.2.label: Step 2
 home.how.host.2.title: We find a helper near you
-home.how.host.2.body: Your request goes to helpers in your area. The first to accept gets the job.
-home.how.host.3.label: //Step 03
+home.how.host.2.body: Your request goes to verified helpers in your area. The first to accept gets the job.
+home.how.host.3.label: Step 3
 home.how.host.3.title: Meet your helper
-home.how.host.3.body: See their profile and get your check-in code. Your address is shared only with the helper assigned to you.
-home.how.host.4.label: //Step 04
-home.how.host.4.title: Check in and get it done
-home.how.host.4.body: Give your helper the code when they arrive. When the job is done, confirm it.
+home.how.host.3.body: See their profile and get your 4-digit check-in code. Your address is shared only with the helper assigned to you.
+home.how.host.4.label: Step 4
+home.how.host.4.title: Confirm done and pay directly
+home.how.host.4.body: Give your helper the code on arrival. When the job is done, inspect the space and pay your helper directly via cash or instant EFT. siZa charges zero commission on helper wages.
 
 ## Home: services
-home.services.label: WHAT WE DO //
-home.services.title: SERVICES
-home.services.subtitle: *(START WITH HOME CLEANING)
+home.services.label: Services
+home.services.title: Services
+home.services.subtitle: Dedicated help for every space
 service.home_cleaning.title: Home cleaning
 service.home_cleaning.body: Regular and once-off cleans for flats and houses.
 service.airbnb_turnover.title: Airbnb turnover
@@ -294,46 +294,46 @@ service.custom.body: Tell us what you need and we will let you know if we can he
 service.coming_soon_note: We open each service in a suburb once enough helpers there are approved.
 
 ## Home: verified spaces
-home.spaces.label: VERIFIED SPACES //
-home.spaces.title: Spaces prepared by siZa helpers
-home.spaces.subtitle: Real homes, workplaces, and gardens across Johannesburg and the Vaal.
+home.spaces.label: Safety & Trust
+home.spaces.title: Built on verified trust
+home.spaces.subtitle: Every helper is pre-screened with ID verification and references before their first job.
 
 ## Home: helper spotlight (fanned stack)
-home.spotlight.label: SPECIALIST CARE //
-home.spotlight.title: CRAFTED FOR EVERY TASK
-home.spotlight.subtitle: Dedicated helpers matched to your space's exact needs.
+home.spotlight.label: Care
+home.spotlight.title: Helpers matched to your space
+home.spotlight.subtitle: Dedicated helpers for your specific requirements.
 home.spotlight.residential.title: Residential & Estate Care
-home.spotlight.residential.badge: Domestic Sanitation
+home.spotlight.residential.badge: Home cleaning
 home.spotlight.residential.body: Focused on living spaces, kitchens, appliances, and immaculate floors.
 home.spotlight.turnover.title: Airbnb & Turnover Detailing
-home.spotlight.turnover.badge: Short-stay Readiness
+home.spotlight.turnover.badge: Airbnb turnover
 home.spotlight.turnover.body: Crisp linen hospital corners, sanitised washrooms, and fast guest turnaround.
 home.spotlight.grounds.title: Garden & Property Upkeep
-home.spotlight.grounds.badge: Grounds Maintenance
+home.spotlight.grounds.badge: Garden upkeep
 home.spotlight.grounds.body: Lawns, edge trimming, seasonal sweeping, and tidy outdoor areas.
 
 ## Home: transparent pricing & subscription
-home.pricing.label: CLEAR PRICING //
-home.pricing.title: TRANSPARENT RATES. ZERO CUTS.
+home.pricing.label: Pricing
+home.pricing.title: Transparent rates. Zero cuts.
 home.pricing.subtitle: Upfront daily rates for hosts. No commission taken from helper wages.
-home.pricing.host.title: Host Rate Card
+home.pricing.host.title: Daily rates for hosts
 home.pricing.host.price: From R320
 home.pricing.host.period: per day, paid directly to your helper
-home.pricing.host.benefit1: Standard day allocation for your space
+home.pricing.host.benefit1: Up to 8 hours of dedicated help
 home.pricing.host.benefit2: 100% of pay and transport goes to helper
 home.pricing.host.benefit3: 4-digit check-in code verification on arrival
 home.pricing.host.benefit4: Zero agency commission or booking markups
-home.pricing.helper.title: Helper Subscription
+home.pricing.helper.title: Helper subscription
 home.pricing.helper.price: 1st Job Free
 home.pricing.helper.period: then R{subscriptionPrice} per {subscriptionDays} days
 home.pricing.helper.benefit1: Keep 100% of host pay and transport
-home.pricing.helper.benefit2: Fair rotation queue: jobs come to you
+home.pricing.helper.benefit2: Fair rotation: jobs offered based on recent work
 home.pricing.helper.benefit3: No debit orders — pay with cash vouchers or card
 home.pricing.helper.benefit4: Decline or pause availability anytime with zero penalty
 
 ## Home: why siZa (only claims the product enforces)
-home.why.label: WHY siZa //
-home.why.title: BUILT ON FAIRNESS
+home.why.label: Why siZa
+home.why.title: Built on fairness
 home.why.price.title: See the price first
 home.why.price.body: Your price is worked out from the job, and you see the full amount before you confirm.
 home.why.address.title: Your address stays private
@@ -348,8 +348,8 @@ claim.references.title: References called
 claim.references.body: We call a helper's reference before approving them.
 
 ## Home: for helpers
-home.helpers.label: FOR HELPERS //
-home.helpers.title: WORK THAT RESPECTS YOU
+home.helpers.label: For helpers
+home.helpers.title: Work that respects you
 home.helpers.pay.title: See your pay first
 home.helpers.pay.body: Your pay and transport are shown before you accept. siZa takes no commission from them.
 home.helpers.free.title: Your first job is free
@@ -359,9 +359,9 @@ home.helpers.no_penalty.body: Accept the jobs that suit you. Declining or turnin
 home.helpers.cta: Apply to be a helper
 
 ## Home: FAQ
-faq.label: FREQUENTLY ASKED //
-faq.title: QUESTIONS
-faq.subtitle: *(ANSWERED)
+faq.label: Common questions
+faq.title: Questions
+faq.subtitle: Straightforward answers
 faq.1.q: How much does it cost?
 faq.1.a: The price depends on the service, the size of your home and where you are. You see the total before you confirm.
 faq.2.q: How do I pay?
@@ -391,26 +391,26 @@ faq.13.a: We collect only the information required to verify your identity and c
 claim.retention.a: ID photos and selfies are seen only by siZa's admin and deleted 30 days after we decide on an application.
 
 ## Home: closing band
-home.cta.label: START //
-home.cta.title: NEED A HAND, OR WANT WORK?
+home.cta.label: Get started
+home.cta.title: Need a hand, or want work?
 home.cta.host.title: Need a hand?
 home.cta.host.body: Request a helper for your home or short-stay property.
 home.cta.helper.title: Want fair work?
 home.cta.helper.body: Apply to be a helper and see your pay before you accept.
 
 ## About page (concept in docs/ux/about-page.md)
-about.hero.label: ABOUT siZa //
+about.hero.label: About siZa
 about.hero.title: Help, made fair.
-about.hero.subtitle: *(A MARKETPLACE FOR GOOD WORK AND TRUSTED HELP)
+about.hero.subtitle: A marketplace for good work and trusted help
 about.hero.body: siZa connects people who need a hand with helpers who do good work, in {areas}.
-about.name.label: THE NAME //
-about.why.label: WHY WE EXIST //
-about.why.title: TWO SIDES OF ONE DOOR
+about.name.label: The name
+about.why.label: Why we exist
+about.why.title: Two sides of one door
 about.why.note: An everyday story
 about.why.host: Check-out is at 10:00. The next guests arrive at 14:00. The person you trusted just cancelled. You open your phone and start searching.
 about.why.helper: You are good at this work. Good work is hard to find, and fair work is harder. Half your day goes on getting there. Nobody remembers who always shows up.
 about.why.bridge: siZa is the door between them: clear prices, fair turns, and proof that the right person arrived. We bridge the gap so quality work is respected and homes receive reliable help.
-about.believe.label: WHAT WE BELIEVE //
+about.believe.label: What we believe
 about.believe.1.title: Fair by design
 about.believe.1.body: Helpers keep their full pay and transport. siZa does not take a commission out of a helper's pay.
 about.believe.2.title: Everyone gets a turn
@@ -419,17 +419,17 @@ about.believe.3.title: Safe by design
 about.believe.3.body: Your address stays private until a helper is assigned. A check-in code shows the right person arrived.
 about.believe.4.title: Honest about limits
 about.believe.4.body: We say what we do and what we do not do yet, in plain words.
-about.job.label: A siZa JOB, START TO FINISH //
+about.job.label: A siZa job, start to finish
 about.job.note: An example job. The people are made up.
 about.job.1: 08:05 Request. Thandi books a standard clean for her two-bedroom flat. She sees the price before she confirms.
 about.job.2: 08:06 Offered. Three helpers nearby are offered the job first.
 about.job.3: 08:11 Accepted. Lerato accepts. Thandi sees her profile and her check-in code.
 about.job.4: 10:00 Arrival. Lerato enters the code Thandi gives her. Both know the right person is there.
 about.job.5: 13:30 Done. Both confirm. Thandi pays Lerato directly.
-about.where.label: FROM JOHANNESBURG TO THE VAAL //
+about.where.label: From Johannesburg to the Vaal
 about.where.body: We are recruiting in Sandton, Rosebank, Bryanston, Vanderbijlpark and Vereeniging. A suburb opens for host requests only when at least 3 helpers there are approved.
 about.where.notify: Not in your suburb yet? Tell us and we will tell you when we arrive.
-about.limits.label: WHAT WE DO NOT DO (YET) //
+about.limits.label: What we do not do (yet)
 about.limits.today.title: Today
 about.limits.today.1: siZa does not hold your money. You pay your helper directly after the job.
 about.limits.today.2: siZa does not replace your own home or business cover. siZa does not currently provide insurance.
@@ -438,11 +438,11 @@ about.limits.coming.1: Protected card payments
 about.limits.coming.2: Reviews and ratings
 about.limits.coming.3: More services
 about.limits.closing: We would rather tell you what we cannot do yet than promise what we cannot prove.
-about.people.label: THE PEOPLE //
+about.people.label: The people
 about.people.founder.name: IKAMVA AUTOMATIONS
 about.people.founder.role: Founder
 about.people.founder.story: Built to bring dignity, fairness, and modern technology to everyday home and short-stay services across South Africa.
-about.cta.label: WORK WITH siZa //
+about.cta.label: Work with siZa
 about.cta.host.title: Need a hand?
 about.cta.host.body: Request a helper.
 about.cta.helper.title: Want steady, fair work?
@@ -450,9 +450,9 @@ about.cta.helper.body: Apply to be a helper.
 about.cta.questions: Questions? {supportEmail}
 
 ## Request page
-request.hero.label: REQUEST A HELPER //
+request.hero.label: Request a helper
 request.hero.title: Tell us what you need.
-request.hero.subtitle: *(IT TAKES A FEW MINUTES)
+request.hero.subtitle: It takes a few minutes
 request.hero.body: Create a free account, save your address once, and request a helper whenever you need one.
 request.steps.1: Create your account and save your address.
 request.steps.2: Pick a service, a date and a time, and see the price.
@@ -461,9 +461,9 @@ request.cta: Create your free account
 request.login: Already have an account? Log in
 
 ## Apply page
-apply.hero.label: BECOME A HELPER //
+apply.hero.label: Become a helper
 apply.hero.title: Fair work, near you.
-apply.hero.subtitle: *(SEE YOUR PAY BEFORE YOU ACCEPT)
+apply.hero.subtitle: See your pay before you accept
 apply.hero.body: siZa offers you jobs in {areas}. Accept the ones that suit you and keep your full pay and transport.
 apply.earn.title: What you earn
 apply.earn.body: Your pay and transport are shown on every job before you accept. siZa takes no commission from them. For example, a 4-hour home clean at R100/hour plus R50 transport pays you R450 in full directly from the host.
@@ -481,9 +481,9 @@ apply.cta: Start your application
 apply.login: Already applied? Log in
 
 ## Contact page
-contact.hero.label: CONTACT //
+contact.hero.label: Contact
 contact.hero.title: Ask us anything.
-contact.hero.subtitle: *(WE READ EVERY MESSAGE)
+contact.hero.subtitle: We read every message
 contact.hero.body: Mon to Sat, 07:00 to 18:00. We aim to reply within 4 hours. Email {supportEmail} or message us on WhatsApp.
 contact.whatsapp: Message us on WhatsApp
 contact.email: Email us

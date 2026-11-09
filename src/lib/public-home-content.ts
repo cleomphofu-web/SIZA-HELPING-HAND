@@ -77,58 +77,6 @@ export const homeServices = [
   },
 ] satisfies readonly { title: CopyKey; body: CopyKey; available: boolean; comingSoon: boolean; image: string }[];
 
-export const verifiedSpacesGallery = [
-  {
-    id: "space-1",
-    tag: "Modern Residence",
-    image: "/assets/images/kara-eads-L7EwHkq1B2s-unsplash.jpg",
-  },
-  {
-    id: "space-2",
-    tag: "Cozy Living",
-    image: "/assets/images/clay-banks-awkEbEmwn3I-unsplash.jpg",
-  },
-  {
-    id: "space-3",
-    tag: "Lush Grounds",
-    image: "/assets/images/glen-carrie-y8dgMhxaoKk-unsplash.jpg",
-  },
-  {
-    id: "space-4",
-    tag: "Garden Path",
-    image: "/assets/images/sehajpal-singh-uPpr9zcTrkY-unsplash.jpg",
-  },
-  {
-    id: "space-5",
-    tag: "Kitchen & Dining",
-    image: "/assets/images/sosey-interiors-YABErdnJPGc-unsplash.jpg",
-  },
-  {
-    id: "space-6",
-    tag: "Living Suite",
-    image: "/assets/images/spacejoy-9M66C_w_ToM-unsplash.jpg",
-  },
-  {
-    id: "space-7",
-    tag: "Studio & Study",
-    image: "/assets/images/spacejoy-XpbtQfr9Skg-unsplash.jpg",
-  },
-  {
-    id: "space-8",
-    tag: "Outdoor Steps",
-    image: "/assets/images/look-up-look-down-photography--o7ASOHDV9E-unsplash.jpg",
-  },
-  {
-    id: "space-9",
-    tag: "Workplace Hall",
-    image: "/assets/images/nastuh-abootalebi-yWwob8kwOCk-unsplash.jpg",
-  },
-  {
-    id: "space-10",
-    tag: "Maintenance Craft",
-    image: "/assets/images/theme-photos-Klby0nxseY8-unsplash.jpg",
-  },
-] as const;
 
 export const homeReasons = [
   { title: "home.why.price.title", body: "home.why.price.body" },

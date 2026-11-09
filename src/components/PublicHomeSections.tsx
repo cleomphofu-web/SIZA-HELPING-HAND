@@ -11,7 +11,6 @@ import {
   homeReasons,
   homeServices,
   homeSpotlightItems,
-  verifiedSpacesGallery,
 } from "@/lib/public-home-content";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
@@ -190,27 +189,6 @@ export function PublicHomeSections() {
             ease: "power2.out",
             scrollTrigger: {
               trigger: ".home-spotlight",
-              start: "top 80%",
-              once: true,
-            },
-          }
-        );
-      }
-
-      // 4. Verified spaces gallery reveal
-      const galleryCards = gsap.utils.toArray<HTMLElement>(".home-space-card");
-      if (galleryCards.length) {
-        gsap.fromTo(
-          galleryCards,
-          { opacity: 0, y: 25 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: ".home-spaces",
               start: "top 80%",
               once: true,
             },
@@ -456,32 +434,31 @@ export function PublicHomeSections() {
         </div>
       </section>
 
-      {/* 4. Verified Spaces Showcase */}
+      {/* 4. Safety & Trust Block — replaces stock-photo gallery */}
       <section aria-labelledby="spaces-title" className="home-section home-spaces bg-neutral-100/60 border-y border-neutral-200">
         <p className="home-section-label">{t("home.spaces.label")}</p>
         <h2 id="spaces-title">{t("home.spaces.title")}</h2>
         <p className="home-section-subtitle">{t("home.spaces.subtitle")}</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-[70rem] mx-auto mt-8 px-4">
-          {verifiedSpacesGallery.map((space) => (
-            <div
-              key={space.id}
-              className="home-space-card group relative aspect-4/5 overflow-hidden rounded-lg bg-neutral-900 border border-neutral-200/80 shadow-xs"
-            >
-              <Image
-                alt=""
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 opacity-90 group-hover:opacity-100"
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                src={space.image}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-3">
-                <span className="text-[11px] font-semibold tracking-wider uppercase text-white/90">
-                  {space.tag}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[70rem] mx-auto mt-8 px-4 list-none">
+          <li className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-xs">
+            <p className="text-2xl mb-3" aria-hidden="true">🪪</p>
+            <h3 className="text-base font-semibold text-black mb-1">{t("claim.id_checked.title")}</h3>
+            <p className="text-sm text-neutral-600">{t("claim.id_checked.body")}</p>
+          </li>
+          <li className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-xs">
+            <p className="text-2xl mb-3" aria-hidden="true">📞</p>
+            <h3 className="text-base font-semibold text-black mb-1">{t("claim.references.title")}</h3>
+            <p className="text-sm text-neutral-600">{t("claim.references.body")}</p>
+          </li>
+          <li className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-xs">
+            <h3 className="text-base font-semibold text-black mb-1">{t("home.why.code.title")}</h3>
+            <p className="text-sm text-neutral-600">{t("home.why.code.body")}</p>
+          </li>
+          <li className="bg-white border border-neutral-200 rounded-2xl p-6 shadow-xs">
+            <h3 className="text-base font-semibold text-black mb-1">{t("home.why.address.title")}</h3>
+            <p className="text-sm text-neutral-600">{t("home.why.address.body")}</p>
+          </li>
+        </ul>
       </section>
 
       {/* 5. Transparent Pricing Table */}
@@ -594,6 +571,7 @@ export function PublicHomeSections() {
           </article>
           <article className="home-helper-item">
             <h3>{t("home.helpers.free.title")}</h3>
+            <p>{t("home.helpers.free.body", { subscriptionPrice: "120", subscriptionDays: "30" })}</p>
           </article>
           <article className="home-helper-item">
             <h3>{t("home.helpers.no_penalty.title")}</h3>

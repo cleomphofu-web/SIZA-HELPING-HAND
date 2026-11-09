@@ -52,7 +52,7 @@ describe("resolveCanonicalSiteOrigin", () => {
     vi.stubEnv("APP_BASE_URL", "");
     vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
     vi.stubEnv("VERCEL_URL", "");
-    expect(resolveCanonicalSiteOrigin(new Request("https://siza-cleaners.vercel.app/api/auth/reset-password"))).toBe("https://siza-cleaners.vercel.app");
+    expect(resolveCanonicalSiteOrigin(new Request("https://siza-helpers.vercel.app/api/auth/reset-password"))).toBe("https://siza-helpers.vercel.app");
     vi.unstubAllEnvs();
   });
 
