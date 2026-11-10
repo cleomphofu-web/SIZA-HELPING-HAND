@@ -13,7 +13,25 @@ type PublicHeroProps = {
 };
 
 export function HomeHero() {
-  return <HomeHeroClient siteName={t("site.name")} />;
+  return (
+    <HomeHeroClient
+      siteName={t("site.name")}
+      hostProps={{
+        switchLabel: t("home.hero.switch.host"),
+        title: t("home.hero.host.title"),
+        summary: t("home.hero.host.subtitle"),
+        action: t("home.hero.host.cta"),
+        secondary: t("home.hero.host.cta_secondary"),
+      }}
+      helperProps={{
+        switchLabel: t("home.hero.switch.helper"),
+        title: t("home.hero.helper.title"),
+        summary: t("home.hero.helper.subtitle"),
+        action: t("home.hero.helper.cta"),
+        secondary: t("home.hero.helper.cta_secondary"),
+      }}
+    />
+  );
 }
 
 export function PublicHero({ wordKey, headingKey, headingImage, heroImage }: PublicHeroProps) {

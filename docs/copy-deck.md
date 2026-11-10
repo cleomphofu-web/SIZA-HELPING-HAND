@@ -155,6 +155,7 @@ helper.onboarding.services.deep: Deep clean
 helper.onboarding.services.airbnb: Airbnb turnover
 helper.onboarding.services.office: Office cleaning
 helper.onboarding.services.post_construction: After-build clean
+helper.onboarding.services.garden: Garden maintenance
 helper.onboarding.about.title: Tell us about yourself
 helper.onboarding.about.body: A short description hosts will see on your profile.
 helper.onboarding.about.job_title_label: What do you call your work?
@@ -249,14 +250,29 @@ home.hero.description: Reliable on-demand and scheduled help for your home acros
 home.hero.guide: Request a helper
 home.hero.switch.host: I need a helper
 home.hero.switch.helper: I want to work
-home.hero.host.title: Trusted home & Airbnb turnovers in Joburg & the Vaal.
-home.hero.host.subtitle: Request an ID-verified helper for your home or short-stay property. See the upfront price, verify arrival with a 4-digit code, and pay directly with zero commission.
+home.hero.host.title: Fix your environment. Lift a neighborhood.
+home.hero.host.subtitle: Connect instantly with trusted local helpers in your suburb. We suggest a fair price so neither side is exploited, and you agree directly.
 home.hero.host.cta: Request a helper
 home.hero.host.cta_secondary: How it works
 home.hero.helper.title: Fair work, near you.
 home.hero.helper.subtitle: Apply to be a siZa helper. See your pay and transport before you accept a job, and keep 100% of it.
 home.hero.helper.cta: Apply to be a helper
 home.hero.helper.cta_secondary: What helpers earn
+
+## Home: what is siZa
+home.what.label: What is siZa
+home.what.title_prefix: What is
+home.what.title_suffix: ?
+home.what.body_highlight_1: A direct connection to approved, ID-verified local helpers in your suburb.
+home.what.body_desc_1: Whether you need home cleaning, garden maintenance, or short-stay turnover, we match you with reliable helpers nearby.
+home.what.body_highlight_2: Fair suggested rates so neither hosts nor helpers are exploited.
+home.what.body_desc_2: We suggest a transparent baseline price, you agree on the job directly, and your helper keeps 100% of their earnings with zero commission taken by siZa.
+home.what.pillar1.title: Direct & Transparent
+home.what.pillar1.body: We suggest a fair price, you agree directly. Helpers keep 100% of their earnings with zero commission cuts.
+home.what.pillar2.title: ID-Checked & Reliable
+home.what.pillar2.body: Every helper is verified before their first job. A secure check-in code confirms arrival on the day.
+home.what.pillar3.title: Fair Rotation
+home.what.pillar3.body: Jobs are shared fairly across local helpers so everyone gets an equal opportunity to earn.
 
 ## Home: how it works (hosts)
 home.how.label: How it works
@@ -334,8 +350,8 @@ home.pricing.helper.benefit4: Decline or pause availability anytime with zero pe
 ## Home: why siZa (only claims the product enforces)
 home.why.label: Why siZa
 home.why.title: Built on fairness
-home.why.price.title: See the price first
-home.why.price.body: Your price is worked out from the job, and you see the full amount before you confirm.
+home.why.price.title: Fair, agreed pricing
+home.why.price.body: siZa suggests a fair baseline rate so neither side is exploited. You and your helper agree on the final amount directly.
 home.why.address.title: Your address stays private
 home.why.address.body: Helpers see only your suburb until a helper is assigned to you.
 home.why.code.title: The right person arrives
@@ -484,9 +500,20 @@ apply.login: Already applied? Log in
 contact.hero.label: Contact
 contact.hero.title: Ask us anything.
 contact.hero.subtitle: We read every message
-contact.hero.body: Mon to Sat, 07:00 to 18:00. We aim to reply within 4 hours. Email {supportEmail} or message us on WhatsApp.
+contact.hero.body: You can reach us Monday to Thursday, from 08:00 in the morning to 15:00 in the afternoon. Send a quick note below or contact us directly on WhatsApp, email, or Instagram.
+contact.hours.badge: Monday to Thursday: 08:00 – 15:00
+contact.hours.title: Office & Support Hours
+contact.hours.body: Our team is available from Monday to Thursday, between 08:00 and 15:00. We read every message and respond as quickly as possible.
+contact.channels.title: Direct Contact Channels
+contact.channels.whatsapp_label: WhatsApp
+contact.channels.whatsapp_value: +27 68 357 0176
+contact.channels.email_label: Email
+contact.channels.email_value: sizahelpinghand@gmail.com
+contact.channels.instagram_label: Instagram
+contact.channels.instagram_value: kamva_media
 contact.whatsapp: Message us on WhatsApp
 contact.email: Email us
+contact.form.title: Ask us anything
 contact.form.name: Your name
 contact.form.email: Email address
 contact.form.phone: Cell number (optional)
@@ -497,11 +524,12 @@ contact.form.type.apply: Applying to be a helper
 contact.form.type.report: Reporting a problem
 contact.form.type.other: Something else
 contact.form.suburb: Suburb (optional)
-contact.form.message: Your message
+contact.form.message: Your message or comment
+contact.form.comment_placeholder: Write your question, comment, or message here...
 contact.form.submit: Send message
-contact.form.success: Thank you. We will reply as soon as we can.
-contact.form.error: We could not send your message. Please email {supportEmail} instead.
-contact.form.prototype: This form is not live yet. Please email {supportEmail} or message us on WhatsApp.
+contact.form.success: Thank you! Your message has been received. We will get back to you during support hours.
+contact.form.error: We could not send your message. Please reach out via WhatsApp or email instead.
+contact.form.prototype: This form sends your message directly to our team. You can also reach us on WhatsApp or email.
 contact.safety.title: Is this a safety problem?
 contact.safety.body: If you feel unsafe, leave and call the police or your security company first. Then tell us.
 

@@ -40,6 +40,7 @@ Put your files in `public/assets/images/<folder>/` (videos in `public/assets/vid
 | hero.public.contact | hero/public/contact-room.jpg | Contact hero | local Unsplash download | Home room, no people | Decorative | supplied — credit recorded |
 | hero.public.legacy | hero/Service hero.png | No current route | owner supplied PNG | Previously shared public backdrop | Decorative | retained, unused |
 | heading.about | og/Carved Wooden ABOUT Typography.png | About below-hero heading | owner supplied PNG | Carved ABOUT lettering | Decorative | supplied by owner |
+| heading.what_is_siza | og/Carved Wooden heading style.png | Home What is siZa section heading | owner supplied PNG | Carved siZa heading | Decorative | supplied by owner |
 | heading.services | og/Carved Wooden Service Letters.png | Home Services section heading | owner supplied PNG | Carved SERVICES lettering | Decorative | supplied by owner |
 | heading.how | og/How It Works in Carved Wood.png | Home How it works section heading | owner supplied PNG | Carved HOW IT WORKS lettering | Decorative | supplied by owner |
 | heading.request | og/Rustic Wooden Request Typography.png | Request below-hero heading | owner supplied PNG | Carved REQUEST lettering | Decorative | supplied by owner |

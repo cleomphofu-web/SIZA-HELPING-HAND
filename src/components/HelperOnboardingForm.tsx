@@ -26,6 +26,7 @@ import {
   EyeOff,
   Check,
   AlertCircle,
+  Leaf,
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -58,7 +59,8 @@ type ServiceKey =
   | "deep_clean"
   | "airbnb_turnover"
   | "office_cleaning"
-  | "post_construction";
+  | "post_construction"
+  | "garden";
 
 const SERVICES: Array<{ key: ServiceKey; label: string; icon: LucideIcon }> = [
   { key: "home_cleaning", label: t("helper.onboarding.services.home"), icon: Home },
@@ -66,6 +68,7 @@ const SERVICES: Array<{ key: ServiceKey; label: string; icon: LucideIcon }> = [
   { key: "airbnb_turnover", label: t("helper.onboarding.services.airbnb"), icon: Bed },
   { key: "office_cleaning", label: t("helper.onboarding.services.office"), icon: Building2 },
   { key: "post_construction", label: t("helper.onboarding.services.post_construction"), icon: Hammer },
+  { key: "garden", label: t("helper.onboarding.services.garden"), icon: Leaf },
 ];
 
 const TOTAL_STEPS = 10;
@@ -367,6 +370,8 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
       office_cleaning: ["office", "office_cleaning"],
       airbnb_turnover: ["airbnb_turnover"],
       post_construction: ["post_construction"],
+      garden: ["garden", "gardening", "garden_maintenance"],
+      gardening: ["garden", "gardening", "garden_maintenance"],
     };
     const expandedServices = Array.from(
       new Set(form.services.flatMap((s) => SERVICE_ALIASES[s] ?? [s]))

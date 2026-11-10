@@ -31,8 +31,9 @@ function CarvedHeading({
       <Image
         alt=""
         aria-hidden="true"
+        className="w-full h-auto max-h-[clamp(8rem,24vw,16rem)] object-contain"
         height={725}
-        sizes="(max-width: 767px) 92vw, 65vw"
+        sizes="(max-width: 767px) 94vw, 56rem"
         src={image}
         width={2170}
       />
@@ -288,6 +289,81 @@ export function PublicHomeSections() {
 
   return (
     <div ref={containerRef}>
+      {/* What is siZa? */}
+      <section
+        aria-labelledby="what-title"
+        className="home-section home-what border-b border-neutral-200/80 bg-neutral-50/60"
+        id="what-is-siza"
+      >
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <p className="home-section-label mb-3">{t("home.what.label")}</p>
+
+          {/* Heading with inline carved siZa image */}
+          <div className="inline-flex items-center justify-center flex-wrap gap-1 sm:gap-2 my-2">
+            <span className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-neutral-900">
+              {t("home.what.title_prefix")}
+            </span>
+            <div className="inline-flex items-center justify-center w-[120px] sm:w-[170px] md:w-[210px] mx-0.5 sm:mx-1">
+              <Image
+                alt="siZa"
+                className="w-full h-auto object-contain mix-blend-multiply drop-shadow-xs"
+                height={470}
+                sizes="(max-width: 767px) 150px, 210px"
+                src="/assets/images/og/Carved%20Wooden%20heading%20style.png"
+                width={1354}
+                priority
+              />
+            </div>
+            <span className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-neutral-900">
+              {t("home.what.title_suffix")}
+            </span>
+            <h2 className="sr-only" id="what-title">
+              {t("home.what.label")}
+            </h2>
+          </div>
+
+          {/* Structured body with prominent key messages */}
+          <div className="mt-8 mb-10 max-w-2xl mx-auto space-y-6 text-center px-2">
+            <div className="space-y-2">
+              <p className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-neutral-900 leading-snug">
+                {t("home.what.body_highlight_1")}
+              </p>
+              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed max-w-xl mx-auto">
+                {t("home.what.body_desc_1")}
+              </p>
+            </div>
+
+            <div className="pt-2 space-y-2">
+              <p className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-neutral-900 leading-snug">
+                {t("home.what.body_highlight_2")}
+              </p>
+              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed max-w-xl mx-auto">
+                {t("home.what.body_desc_2")}
+              </p>
+            </div>
+          </div>
+
+          {/* Three straightforward value pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-10 text-left">
+            <div className="p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-2">01</span>
+              <h3 className="text-base font-semibold text-neutral-900 mb-1">{t("home.what.pillar1.title")}</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">{t("home.what.pillar1.body")}</p>
+            </div>
+            <div className="p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-2">02</span>
+              <h3 className="text-base font-semibold text-neutral-900 mb-1">{t("home.what.pillar2.title")}</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">{t("home.what.pillar2.body")}</p>
+            </div>
+            <div className="p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 block mb-2">03</span>
+              <h3 className="text-base font-semibold text-neutral-900 mb-1">{t("home.what.pillar3.title")}</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">{t("home.what.pillar3.body")}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 1. How It Works (Horizontal Pinned Timeline on Desktop) */}
       <section
         aria-labelledby="how-title"

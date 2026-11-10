@@ -1,57 +1,48 @@
 import Image from "next/image";
-import Link from "next/link";
-import { PublicHero } from "@/components/PublicHero";
+import { PublicHeader } from "@/components/PublicHeader";
+import { ContactClient } from "@/components/ContactClient";
 import { t } from "@/content/t";
-import { publicConfig } from "@/server/config/public";
+import { Clock } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <main id="main-content">
-      <PublicHero
-        headingImage="/assets/images/og/Carved%20Wooden%20CONTACT%20Typography.png"
-        headingKey="contact.hero.title"
-        heroImage="/assets/images/hero/public/contact-room.jpg"
-        wordKey="public.hero.contact"
-      />
-      <section className="public-summary max-w-4xl mx-auto px-4 py-12 text-center">
-        <p className="text-lg text-neutral-700 leading-relaxed max-w-2xl mx-auto">
-          {t("contact.hero.body", publicConfig)}
-        </p>
+    <>
+      <PublicHeader />
+      <main id="main-content" className="pt-24 sm:pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        {/* Page starts with Carved Wooden CONTACT Typography */}
+        <section aria-labelledby="contact-heading" className="text-center">
+          <div className="home-carved-heading my-2">
+            <Image
+              alt={t("contact.hero.label")}
+              className="w-full h-auto max-h-[clamp(7rem,20vw,13rem)] object-contain mix-blend-multiply"
+              height={725}
+              priority
+              sizes="(max-width: 767px) 94vw, 56rem"
+              src="/assets/images/og/Carved%20Wooden%20CONTACT%20Typography.png"
+              width={2170}
+            />
+            <h1 className="sr-only" id="contact-heading">
+              {t("contact.hero.label")}
+            </h1>
+          </div>
 
-        {/* Atmospheric Contact Card */}
-        <div className="relative overflow-hidden rounded-3xl max-w-xl mx-auto p-8 sm:p-12 text-white border border-neutral-800 shadow-xl mt-10 isolate">
-          <Image
-            alt=""
-            aria-hidden="true"
-            className="object-cover -z-1 opacity-70 pointer-events-none"
-            fill
-            sizes="(max-width: 767px) 95vw, 600px"
-            src="/assets/images/about/contact%20us%20form%20background%20image.png"
-          />
-          <div className="relative z-1 space-y-6 text-center">
-            <h2 className="text-2xl font-bold tracking-tight">
-              {t("contact.hero.title")}
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                className="inline-flex min-h-[48px] items-center justify-center px-6 rounded-xl bg-white text-black text-xs font-bold uppercase tracking-wider hover:bg-neutral-200 transition-colors"
-                href={`mailto:${publicConfig.supportEmail}`}
-              >
-                {t("contact.email")}
-              </a>
-              <Link
-                className="inline-flex min-h-[48px] items-center justify-center px-6 rounded-xl bg-black/80 backdrop-blur-md text-white border border-white/20 text-xs font-bold uppercase tracking-wider hover:bg-black transition-colors"
-                href="/"
-              >
-                {t("site.name")}
-              </Link>
+          {/* Short description of when users can contact siZa right below heading */}
+          <div className="text-center max-w-2xl mx-auto mt-2 mb-10 px-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100 text-neutral-800 text-xs sm:text-sm font-semibold tracking-wide mb-3 border border-neutral-200 shadow-2xs">
+              <Clock className="w-3.5 h-3.5 text-neutral-500" />
+              <span>{t("contact.hours.badge")}</span>
             </div>
-            <p className="text-xs text-neutral-300">
-              {t("contact.form.prototype", publicConfig)}
+            <p className="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal">
+              {t("contact.hours.body")}
             </p>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        {/* Contact details + "Ask us anything" card */}
+        <section aria-label="Contact options" className="mt-4">
+          <ContactClient />
+        </section>
+      </main>
+    </>
   );
 }

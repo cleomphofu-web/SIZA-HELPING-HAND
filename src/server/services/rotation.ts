@@ -25,6 +25,9 @@ const SERVICE_CANONICAL_MAP: Record<string, string> = {
   airbnb_turnover: "airbnb_turnover",
   post_construction: "post_construction",
   move_out: "deep_cleaning",
+  garden: "garden",
+  gardening: "garden",
+  garden_maintenance: "garden",
 };
 
 export const SERVICE_ALIASES: Record<string, string[]> = {
@@ -37,6 +40,9 @@ export const SERVICE_ALIASES: Record<string, string[]> = {
   airbnb_turnover: ["airbnb_turnover"],
   post_construction: ["post_construction"],
   move_out: ["move_out", "deep_cleaning", "deep_clean"],
+  garden: ["garden", "gardening", "garden_maintenance"],
+  gardening: ["garden", "gardening", "garden_maintenance"],
+  garden_maintenance: ["garden", "gardening", "garden_maintenance"],
 };
 
 export function canonicalService(service: string): string {

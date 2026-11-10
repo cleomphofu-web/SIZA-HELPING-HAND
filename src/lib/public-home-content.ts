@@ -57,8 +57,8 @@ export const homeServices = [
   {
     title: "service.garden.title",
     body: "service.garden.body",
-    available: false,
-    comingSoon: true,
+    available: true,
+    comingSoon: false,
     image: "/assets/images/crystal-jo-PKcTuA_CRAo-unsplash.jpg",
   },
   {

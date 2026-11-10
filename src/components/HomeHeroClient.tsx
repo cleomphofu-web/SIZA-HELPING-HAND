@@ -4,26 +4,49 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import CloudSky from "@/components/originkit/ui/cloud-sky";
 import { PublicHeader } from "@/components/PublicHeader";
-import { FlowButton } from "@/components/ui/flow-button";
+import { HomeHeroActions } from "@/components/HomeHeroActions";
 import { animateHero } from "@/lib/gsap";
-import { t } from "@/content/t";
 
-export function HomeHeroClient({ siteName }: { siteName: string }) {
+type HomeHeroClientProps = {
+  siteName: string;
+  hostProps: {
+    switchLabel: string;
+    title: string;
+    summary: string;
+    action: string;
+    secondary: string;
+  };
+  helperProps: {
+    switchLabel: string;
+    title: string;
+    summary: string;
+    action: string;
+    secondary: string;
+  };
+};
+
+export function HomeHeroClient({ siteName, hostProps, helperProps }: HomeHeroClientProps) {
   const wordmarkRef = useRef<HTMLDivElement | null>(null);
   const bgRef = useRef<HTMLDivElement | null>(null);
-  const ctaRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const ctx = animateHero(wordmarkRef.current, bgRef.current, ctaRef.current);
+    const ctx = animateHero(wordmarkRef.current, bgRef.current, null);
     return () => ctx?.revert();
   }, []);
 
   return (
     <section
       aria-labelledby="hero-heading"
-      className="home-hero relative min-h-screen flex flex-col justify-center items-center overflow-hidden"
+      className="home-hero relative min-h-screen overflow-hidden"
     >
+      {/* Hidden h1 for accessibility — the visual H1 lives in HomeHeroActions */}
+      <h1 id="hero-heading" className="sr-only">
+        {siteName}
+      </h1>
+
       <PublicHeader floating />
+
+      {/* Full-bleed CloudSky background */}
       <div
         ref={bgRef}
         className="absolute inset-0 z-0 overflow-hidden pointer-events-auto"
@@ -41,54 +64,51 @@ export function HomeHeroClient({ siteName }: { siteName: string }) {
         />
       </div>
 
-      {/* 3D Marshmallow Wordmark + single primary CTA */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 pt-24 pb-12 pointer-events-none w-full max-w-4xl mx-auto">
+      {/* Two-column layout: marshmallow LEFT, action panels RIGHT */}
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center min-h-screen pt-28 pb-12 lg:pt-28 lg:pb-12">
+        {/* LEFT — Marshmallow image (56% desktop, full on mobile with reduced height) */}
         <div
           ref={wordmarkRef}
-          className="w-full max-w-[min(78vw,460px)] flex justify-center mb-8 drop-shadow-2xl"
+          className="
+            flex items-center justify-center
+            w-full lg:w-[56%]
+            px-4 lg:px-6
+            py-6 lg:py-0
+            drop-shadow-2xl
+            pointer-events-none
+          "
+          aria-hidden="true"
         >
           <Image
-            alt="siZa."
-            className="w-full h-auto max-h-[36vh] object-contain"
+            alt=""
+            className="
+              w-auto h-auto
+              max-w-[min(72vw,500px)] lg:max-w-none
+              max-h-[38vh] lg:max-h-[72vh]
+              object-contain
+            "
             height={1086}
             priority
-            sizes="(max-width: 767px) 78vw, 460px"
+            sizes="(max-width: 1023px) 72vw, 50vw"
             src="/assets/images/hero/Marshmallow%20home%20page%20hero.png"
             width={1448}
           />
         </div>
 
-        {/* One primary action — hosts scroll to request form below */}
-        <div ref={ctaRef} className="pointer-events-auto">
-          <FlowButton
-            href="/request"
-            variant="primary"
-            size="lg"
-            className="rounded-full shadow-2xl border-white/25 px-8 tracking-widest uppercase text-xs sm:text-sm font-bold min-h-[50px] hover:scale-105 active:scale-95"
-            text={t("home.hero.guide")}
-          />
-        </div>
-      </div>
-
-      {/* Bottom of hero: H1 value prop left, tagline right on desktop */}
-      <div
-        className="hero-main-heading absolute z-10 pointer-events-none select-none flex items-end justify-between"
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          left: "24px",
-          right: "24px",
-        }}
-      >
-        <h1
-          id="hero-heading"
-          className="text-white font-extrabold tracking-tight text-[clamp(2.75rem,8.5vw,7.5rem)] leading-none text-left drop-shadow-lg m-0 p-0"
+        {/* RIGHT — Host / Helper action panels */}
+        <div
+          className="
+            flex items-center justify-center
+            w-full lg:w-[44%]
+            px-6 sm:px-10 lg:px-12
+            pt-4 pb-8 lg:py-0
+            pointer-events-auto
+          "
         >
-          {siteName}
-        </h1>
-        <p className="text-white/80 text-xs sm:text-sm font-medium tracking-wide text-right max-w-[260px] sm:max-w-xs leading-snug drop-shadow-md hidden sm:block">
-          {t("home.hero.description")}
-        </p>
+          <div className="w-full max-w-sm lg:max-w-md">
+            <HomeHeroActions host={hostProps} helper={helperProps} />
+          </div>
+        </div>
       </div>
     </section>
   );
