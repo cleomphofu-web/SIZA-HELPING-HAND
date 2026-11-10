@@ -29,20 +29,16 @@ describe("admin MFA screen", () => {
     mocks.requireAdminIdentity.mockReset().mockResolvedValue({ supabase: { auth: { mfa: { listFactors: mocks.listFactors, getAuthenticatorAssuranceLevel: mocks.getAuthenticatorAssuranceLevel } } } });
   });
 
-  it("shows enrollment as a password-signed-in admin with no verified factor", async () => {
-    const html = renderToStaticMarkup(await AdminMfaPage({ searchParams: Promise.resolve({ setup: "1" }) }));
-    expect(html).toContain("Protect your admin account");
-    expect(html).toContain("Add an authenticator app to your admin account.");
-    expect(html).toContain('name="intent" value="setup"');
-    expect(html).not.toContain("factorId");
+  // MFA enforcement disabled — /admin/mfa now immediately redirects to /admin for all sessions.
+  it("redirects to /admin when no factor is enrolled, while MFA enforcement is disabled", async () => {
+    await expect(AdminMfaPage({ searchParams: Promise.resolve({ setup: "1" }) })).rejects.toThrow("redirect:/admin");
   });
 
-  it("shows a code challenge for an enrolled admin with an aal1 session", async () => {
+  // MFA enforcement disabled — the /admin/mfa page now redirects all sessions to /admin
+  // because adminSessionRequiresMfa() always returns false.
+  it("redirects an enrolled aal1 admin away from /admin/mfa while MFA is disabled", async () => {
     mocks.listFactors.mockResolvedValue({ data: { totp: [{ id: "factor-owned-by-admin", status: "verified" }] }, error: null });
-    const html = renderToStaticMarkup(await AdminMfaPage({ searchParams: Promise.resolve({ challenge: "1" }) }));
-    expect(html).toContain('name="factorId" value="factor-owned-by-admin"');
-    expect(html).toContain('name="code"');
-    expect(html).toContain("Enter the six-digit code from your authenticator app.");
+    await expect(AdminMfaPage({ searchParams: Promise.resolve({ challenge: "1" }) })).rejects.toThrow("redirect:/admin");
   });
 
   it("redirects an aal2 admin away from the challenge screen", async () => {

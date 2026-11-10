@@ -64,18 +64,19 @@ describe("admin login Postgres throttle", () => {
     mocks.verifyTurnstile.mockReset().mockResolvedValue(true);
   });
 
-  it("sends a first-time admin to authenticator setup after password sign-in", async () => {
+  // MFA enforcement disabled — all valid admin logins go straight to /admin.
+  it("sends a first-time admin straight to /admin while MFA is disabled", async () => {
     const response = await POST(request());
     expect(response.status).toBe(303);
-    expect(response.headers.get("location")).toBe("http://localhost:3000/admin/mfa?setup=1");
+    expect(response.headers.get("location")).toBe("http://localhost:3000/admin");
     expect(mocks.verifyTurnstile).not.toHaveBeenCalled();
     expect(mocks.recordSuccessfulLogin).toHaveBeenCalledWith("owner@example.test", "unknown");
   });
 
-  it("sends an enrolled admin with an aal1 session to a TOTP challenge", async () => {
+  it("sends an enrolled admin with an aal1 session straight to /admin while MFA is disabled", async () => {
     mocks.hasVerifiedTotp = true;
     const response = await POST(request());
-    expect(response.headers.get("location")).toBe("http://localhost:3000/admin/mfa?challenge=1");
+    expect(response.headers.get("location")).toBe("http://localhost:3000/admin");
   });
 
   it("lets only an enrolled aal2 admin continue to the admin home", async () => {

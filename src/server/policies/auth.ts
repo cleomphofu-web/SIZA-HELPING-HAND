@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/server/db/server";
 import { createSupabaseAdminClient } from "@/server/db/admin";
-import { adminSessionRequiresMfa } from "@/server/services/admin-mfa";
 
 export type AuthenticatedActor = { id: string; userId: string; role: "host" | "helper" | "admin" };
 
@@ -15,8 +14,8 @@ export async function requireActor(): Promise<AuthenticatedActor> {
     const { data: membership, error: membershipError } = await createSupabaseAdminClient()
       .from("admins").select("user_id").eq("user_id", user.id).maybeSingle();
     if (membershipError || !membership) throw new Error("unauthenticated");
-    const { data: assurance, error: assuranceError } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-    if (assuranceError || adminSessionRequiresMfa(assurance?.currentLevel ?? null)) throw new Error("admin_mfa_required");
+    // MFA enforcement disabled while TOTP setup is pending.
+    // TODO(owner): restore assurance check once authenticator is set up.
   }
   return { id: user.id, userId: user.id, role: profile.role as AuthenticatedActor["role"] };
 }
@@ -36,7 +35,8 @@ export async function requireAdminIdentity() {
 
 export async function requireAdmin() {
   const identity = await requireAdminIdentity();
-  const { data: assurance, error } = await identity.supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-  if (error || adminSessionRequiresMfa(assurance?.currentLevel ?? null)) redirect("/admin/mfa?challenge=1");
+  // MFA enforcement disabled while TOTP setup is pending.
+  // TODO(owner): restore the mfa.getAuthenticatorAssuranceLevel() check once
+  // you have an authenticator app set up and adminSessionRequiresMfa is re-enabled.
   return { userId: identity.userId };
 }

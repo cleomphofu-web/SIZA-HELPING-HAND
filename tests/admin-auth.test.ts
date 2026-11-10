@@ -40,8 +40,9 @@ describe("admin session authorization", () => {
     await expect(requireAdminIdentity()).resolves.toMatchObject({ userId: "admin-1" });
   });
 
-  it("redirects an aal1 admin away from protected pages and actions", async () => {
-    await expect(requireAdmin()).rejects.toThrow("redirect:/admin/mfa?challenge=1");
+  // MFA enforcement disabled — requireAdmin now resolves for any valid admin, regardless of aal level.
+  it("allows a valid admin with an aal1 session while MFA is disabled", async () => {
+    await expect(requireAdmin()).resolves.toEqual({ userId: "admin-1" });
   });
 
   it("allows an admin only after the session reaches aal2", async () => {
@@ -49,8 +50,9 @@ describe("admin session authorization", () => {
     await expect(requireAdmin()).resolves.toEqual({ userId: "admin-1" });
   });
 
-  it("blocks aal1 admin actors from server read seams", async () => {
-    await expect(requireActor()).rejects.toThrow("admin_mfa_required");
+  // MFA enforcement disabled — requireActor no longer blocks aal1 admins.
+  it("allows an aal1 admin actor through server read seams while MFA is disabled", async () => {
+    await expect(requireActor()).resolves.toMatchObject({ userId: "admin-1", role: "admin" });
   });
 
   it("blocks deleted admin actors from server read seams even with aal2 and membership", async () => {

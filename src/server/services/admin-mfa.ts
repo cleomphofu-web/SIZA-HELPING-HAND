@@ -1,7 +1,11 @@
 export type AdminAal = "aal1" | "aal2" | null;
 
-export function adminSessionRequiresMfa(currentLevel: AdminAal): boolean {
-  return currentLevel !== "aal2";
+// MFA enforcement is disabled while TOTP setup is pending.
+// Re-enable by returning `currentLevel !== "aal2"` and restoring
+// adminPostLoginDestination routing below.
+// TODO(owner): re-enable once you have an authenticator app set up.
+export function adminSessionRequiresMfa(_currentLevel: AdminAal): boolean {
+  return false;
 }
 
 export function adminPostLoginDestination(input: {
@@ -11,7 +15,6 @@ export function adminPostLoginDestination(input: {
   currentLevel: AdminAal;
 }): string {
   if (input.role !== "admin" || !input.isMember) return "/admin/login?error=invalid";
-  if (!input.hasVerifiedTotp) return "/admin/mfa?setup=1";
-  if (adminSessionRequiresMfa(input.currentLevel)) return "/admin/mfa?challenge=1";
+  // MFA step skipped while enforcement is disabled.
   return "/admin";
 }
