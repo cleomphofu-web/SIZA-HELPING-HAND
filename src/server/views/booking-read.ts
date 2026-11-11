@@ -399,9 +399,24 @@ export async function getHelperOfferSummaries(): Promise<Result<HelperOfferSumma
     if (profile.status !== "approved" || !profile.services.length || !profile.suburbs.length) return ok([]);
 
     const expandedServices = expandServiceAliases(profile.services);
+    const suburbVariants = Array.from(
+      new Set(
+        profile.suburbs.flatMap((sub) => {
+          const trimmed = sub.trim();
+          const lower = trimmed.toLowerCase();
+          const upper = trimmed.toUpperCase();
+          const capitalized = trimmed.charAt(0).toUpperCase() + trimmed.slice(1).toLowerCase();
+          const titleCase = trimmed
+            .split(" ")
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+            .join(" ");
+          return [trimmed, lower, upper, capitalized, titleCase];
+        })
+      )
+    );
     const { data: bookingRows, error: bookingError } = await client.from("phase_a_bookings")
       .select("id, status, suburb, services, helpers_needed, pay_per_helper_cents, transport_per_helper_cents, start_at, end_at_est")
-      .in("status", ["open", "assigned", "in_progress"]).overlaps("services", expandedServices).in("suburb", profile.suburbs);
+      .in("status", ["open", "assigned", "in_progress"]).overlaps("services", expandedServices).in("suburb", suburbVariants);
     if (bookingError) return fail("internal_error", "We could not load available jobs.");
     const bookings = (bookingRows ?? []).filter((booking) => helperCanReceiveOffer(profile, {
       bookingId: booking.id,

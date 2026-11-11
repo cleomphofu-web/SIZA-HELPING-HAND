@@ -119,7 +119,7 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0, cur
 
             {/* Edit Access Notes (when booking can still be modified) */}
             {(booking.status === "open" || booking.status === "assigned") && (
-              <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 space-y-2 sm:col-span-2">
+              <div id="update-notes-section" className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 space-y-2 sm:col-span-2">
                 <div className="flex items-center gap-1.5 text-neutral-700 font-semibold text-xs">
                   <Edit3 className="size-3.5" />
                   <span>Update Access / Gate Notes</span>
@@ -363,6 +363,16 @@ export function HostRequestDetails({ booking, notice, hostCompletedJobs = 0, cur
 
           {/* Cancel & Report Actions */}
           <div className="pt-2 flex flex-wrap items-center gap-3">
+            {(booking.status === "open" || booking.status === "assigned") && (
+              <a
+                href="#update-notes-section"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-neutral-300 text-neutral-700 hover:text-black hover:border-black text-xs font-semibold transition-colors"
+              >
+                <Edit3 className="size-3.5" />
+                <span>Edit Access Notes</span>
+              </a>
+            )}
+
             {(booking.status === "open" || booking.status === "assigned") && (
               <CancelBookingDialog
                 bookingId={booking.id}

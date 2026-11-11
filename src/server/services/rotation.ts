@@ -101,6 +101,11 @@ export type HelperOfferEligibilityProfile = {
 
 export type HelperOfferBooking = BookingTimeWindow & { suburb: string; services: readonly string[] };
 
+export function suburbMatches(helperSuburbs: readonly string[], bookingSuburb: string): boolean {
+  const target = bookingSuburb.trim().toLowerCase();
+  return helperSuburbs.some((s) => s.trim().toLowerCase() === target);
+}
+
 export function helperCanReceiveOffer(
   helper: HelperOfferEligibilityProfile | null,
   booking: HelperOfferBooking,
@@ -109,7 +114,7 @@ export function helperCanReceiveOffer(
   priorBookingIds: ReadonlySet<string>,
 ): boolean {
   if (!helper || helper.status !== "approved" || helper.services.length === 0 || helper.suburbs.length === 0) return false;
-  if (!helper.suburbs.includes(booking.suburb) || !coversRequiredServices(booking.services, helper.services)) return false;
+  if (!suburbMatches(helper.suburbs, booking.suburb) || !coversRequiredServices(booking.services, helper.services)) return false;
   if (helper.firstJobCompletedAt) {
     const paidUntil = helper.subscriptionPaidUntil ? Date.parse(helper.subscriptionPaidUntil) : Number.NaN;
     if (helper.subscriptionStatus !== "active" || !Number.isFinite(paidUntil) || paidUntil <= now.getTime()) return false;

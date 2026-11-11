@@ -21,12 +21,6 @@ const items: DockItem[] = [
     activeMatch: (p) => Boolean(p && p === "/helper"),
   },
   {
-    label: "Profile",
-    href: "/helper/profile",
-    icon: User,
-    activeMatch: (p) => Boolean(p && p.startsWith("/helper/profile")),
-  },
-  {
     label: "Jobs",
     href: "/helper/jobs",
     icon: Briefcase,
@@ -43,8 +37,8 @@ const items: DockItem[] = [
 export function HelperFloatingDock() {
   const pathname = usePathname() ?? "";
 
-  // Do not show the floating dock on the focused onboarding questionnaire flow
-  if (pathname.startsWith("/helper/onboarding")) {
+  // Helper home has its own dedicated 2-tab bottom bar; onboarding has its own flow
+  if (pathname === "/helper" || pathname.startsWith("/helper/onboarding")) {
     return null;
   }
 
