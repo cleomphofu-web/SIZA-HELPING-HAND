@@ -24,13 +24,13 @@ export default async function HelperAppPage() {
       .maybeSingle(),
     supabase
       .from("helper_details")
-      .select("status, decline_reason, suburbs, services, job_title, bio, first_job_completed_at, subscription_status, subscription_paid_until, id_number_encrypted")
+      .select("status, decline_reason, suburbs, services, job_title, bio, first_job_completed_at, subscription_status, subscription_paid_until")
       .eq("user_id", actor.userId)
       .maybeSingle(),
   ]);
 
   // If onboarding not completed yet, route directly to onboarding questionnaire
-  if (!helperDetails || !helperDetails.id_number_encrypted || !helperDetails.suburbs || helperDetails.suburbs.length === 0) {
+  if (!helperDetails || !helperDetails.suburbs || helperDetails.suburbs.length === 0) {
     redirect("/helper/onboarding");
   }
 
