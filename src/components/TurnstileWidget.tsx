@@ -23,6 +23,18 @@ declare global {
   }
 }
 
+// Cloudflare's official test site keys — treated as "unconfigured" so the
+// widget renders a hidden passthrough input instead of a visible challenge.
+const TURNSTILE_TEST_SITE_KEYS = new Set([
+  "1x00000000000000000000AA", // always passes
+  "2x00000000000000000000AB", // always blocks
+  "3x00000000000000000000FF", // forces an interactive challenge
+]);
+
+function isTurnstileConfigured(key: string): boolean {
+  return Boolean(key) && !TURNSTILE_TEST_SITE_KEYS.has(key);
+}
+
 export function TurnstileWidget({
   siteKey,
   responseFieldName = "turnstileToken",
@@ -32,10 +44,11 @@ export function TurnstileWidget({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const configured = isTurnstileConfigured(siteKey);
 
   const renderWidget = () => {
     const container = containerRef.current;
-    if (!container || !window.turnstile || !siteKey) return;
+    if (!container || !window.turnstile || !configured) return;
 
     if (widgetIdRef.current) {
       try {
@@ -64,7 +77,7 @@ export function TurnstileWidget({
   };
 
   useEffect(() => {
-    if (!siteKey) return;
+    if (!configured) return;
 
     if (window.turnstile) {
       renderWidget();
@@ -101,11 +114,11 @@ export function TurnstileWidget({
     };
   }, [siteKey, responseFieldName]);
 
-  if (!siteKey) {
-    // Turnstile not configured — render a hidden dummy token so the form submits.
-    // The server also allows through when TURNSTILE_SECRET_KEY is unset.
-    // TODO(owner): add NEXT_PUBLIC_TURNSTILE_SITE_KEY to Vercel env vars to enable.
-    return <input type="hidden" name="turnstileToken" value="unconfigured" />;
+  if (!configured) {
+    // Turnstile not configured (or using test keys) — passthrough hidden input.
+    // Server-side verifyTurnstile() also allows through when unconfigured.
+    // TODO(owner): add real NEXT_PUBLIC_TURNSTILE_SITE_KEY to Vercel to enable.
+    return <input type="hidden" name={responseFieldName} value="unconfigured" />;
   }
 
   return (
