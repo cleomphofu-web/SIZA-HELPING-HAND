@@ -562,6 +562,29 @@ export async function acceptPhaseABooking(client: Db, helperId: string, bookingI
       });
 
       if (bookingData?.host_id) {
+        let hostEmail: string | null = null;
+        if (client.auth?.admin?.getUserById) {
+          const { data: u } = await client.auth.admin.getUserById(bookingData.host_id);
+          hostEmail = u?.user?.email ?? null;
+        }
+        const { data: hostProfile } = await client.from("profiles").select("first_name").eq("id", bookingData.host_id).maybeSingle();
+        const hostFirstName = hostProfile?.first_name || "Host";
+
+        if (hostEmail) {
+          await enqueueEmail(client, {
+            eventType: "host-booking-assigned",
+            recipient: hostEmail,
+            entityId: `${bookingId}:${slot}`,
+            variables: {
+              firstName: hostFirstName,
+              helperName: helperFirstName,
+              service: bookingData.services?.[0] || "Cleaning",
+              date: dateStr,
+              code: "Issued on your request page",
+            },
+          });
+        }
+
         await createNotification({
           userId: bookingData.host_id,
           kind: "booking_confirmed",

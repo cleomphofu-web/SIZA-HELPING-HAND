@@ -24,6 +24,7 @@ export function AccountForm({
   initialVerified,
 }: AccountFormProps) {
   const signup = mode === "signup";
+  const [selectedRole, setSelectedRole] = useState<"host" | "helper">(defaultRole);
   const turnstileActive = isTurnstileConfigured(turnstileSiteKey);
   const [statusTone, setStatusTone] = useState<"error" | "success">(
     initialVerified ? "success" : "error"
@@ -112,12 +113,12 @@ export function AccountForm({
   }
 
   const roleLabel =
-    defaultRole === "host"
+    selectedRole === "host"
       ? t("account.role.host")
       : t("account.role.helper");
 
   return (
-    <SignInPageLayout role={defaultRole} mode={mode}>
+    <SignInPageLayout role={selectedRole} mode={mode}>
       {/* Interactive Liquid Glass Space Card */}
       <div className="relative z-10 w-full p-6 sm:p-9 md:p-10 rounded-3xl bg-neutral-950/65 backdrop-blur-[8px] border border-white/20 shadow-2xl before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent">
         {/* Brand Eyebrow Pill */}
@@ -154,7 +155,7 @@ export function AccountForm({
             {/* Social OAuth Options */}
             <div className="mt-6 space-y-3">
               <a
-                href={`/api/auth/oauth?provider=google&role=${defaultRole}`}
+                href={`/api/auth/oauth?provider=google&role=${selectedRole}`}
                 className="w-full h-12 rounded-xl bg-white hover:bg-neutral-100 text-black font-semibold text-xs tracking-wider flex items-center justify-center gap-3 transition-all shadow-md active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 aria-label="Continue with Google"
               >
@@ -193,18 +194,41 @@ export function AccountForm({
             >
               {signup ? (
                 <>
-                  {/* Role indicator */}
+                  {/* Role Selector */}
                   <div className="space-y-1.5">
                     <span className="block text-xs font-bold uppercase tracking-wider text-neutral-100">
                       {t("account.label.role")}
                     </span>
-                    <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-neutral-900/90 border border-neutral-700 text-sm text-white backdrop-blur-md">
-                      <span className="font-semibold capitalize text-white">
-                        {roleLabel}
-                      </span>
-                      <span className="text-xs text-neutral-400">Fixed role</span>
+                    <div className="grid grid-cols-2 gap-2 p-1 rounded-2xl bg-white/10 border border-white/20">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedRole("host")}
+                        className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all text-center cursor-pointer ${
+                          selectedRole === "host"
+                            ? "bg-white text-black font-bold shadow-md"
+                            : "text-neutral-300 hover:text-white hover:bg-white/5"
+                        }`}
+                        aria-pressed={selectedRole === "host"}
+                      >
+                        <span className="text-xs font-bold">Book a Helper</span>
+                        <span className="text-[10px] opacity-80 font-normal">I need help at home/office</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedRole("helper")}
+                        className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all text-center cursor-pointer ${
+                          selectedRole === "helper"
+                            ? "bg-white text-black font-bold shadow-md"
+                            : "text-neutral-300 hover:text-white hover:bg-white/5"
+                        }`}
+                        aria-pressed={selectedRole === "helper"}
+                      >
+                        <span className="text-xs font-bold">Work as a Helper</span>
+                        <span className="text-[10px] opacity-80 font-normal">Earn direct pay on rotation</span>
+                      </button>
                     </div>
-                    <input type="hidden" name="role" value={defaultRole} />
+                    <input type="hidden" name="role" value={selectedRole} />
                   </div>
 
                   {/* First and Last Name */}

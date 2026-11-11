@@ -20,6 +20,14 @@ export async function requireActor(): Promise<AuthenticatedActor> {
   return { id: user.id, userId: user.id, role: profile.role as AuthenticatedActor["role"] };
 }
 
+export async function optionalActor(): Promise<AuthenticatedActor | null> {
+  try {
+    return await requireActor();
+  } catch {
+    return null;
+  }
+}
+
 export async function requireAdminIdentity() {
   const supabase = await createSupabaseServerClient();
   const { data: { user } } = await supabase.auth.getUser();

@@ -52,6 +52,9 @@ export function PublicHeader({ floating = false }: { floating?: boolean } = {}) 
           <li>
             <Link href={homeSectionRoutes.howItWorks}>{t("home.how.label")}</Link>
           </li>
+          <li>
+            <Link href="/login">{t("nav.login")}</Link>
+          </li>
         </ul>
 
         <Link className="nav__cta" href="/request">

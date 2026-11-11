@@ -3,9 +3,18 @@ import { PublicHomeSections } from "@/components/PublicHomeSections";
 import { t } from "@/content/t";
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { homeSectionRoutes } from "@/lib/public-home-content";
+import { optionalActor } from "@/server/policies/auth";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const actor = await optionalActor();
+  if (actor) {
+    if (actor.role === "helper") redirect("/helper");
+    if (actor.role === "host") redirect("/app");
+    if (actor.role === "admin") redirect("/admin");
+  }
+
   return (
     <>
       <HomeHero />
