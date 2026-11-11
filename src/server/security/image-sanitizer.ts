@@ -22,7 +22,7 @@ export async function sanitizeHelperImage(bytes: Uint8Array): Promise<SanitizedH
 
   try {
     const input = sharp(bytes, {
-      failOn: "warning",
+      failOn: "none",
       limitInputPixels: MAX_INPUT_PIXELS,
       limitInputChannels: 4,
       sequentialRead: true,

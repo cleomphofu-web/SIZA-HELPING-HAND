@@ -56,5 +56,13 @@ export async function POST(request: NextRequest) {
     if (!request.headers.get("content-type")?.includes("application/json")) return NextResponse.redirect(new URL("/helper", request.url), 303);
     return NextResponse.json(result, { status: 200 });
   }
-  return NextResponse.json(result, { status: result.error.code === "conflict" ? 409 : 500 });
+  const statusCode =
+    result.error.code === "conflict"
+      ? 409
+      : result.error.code === "validation_failed"
+        ? 400
+        : result.error.code === "forbidden"
+          ? 403
+          : 500;
+  return NextResponse.json(result, { status: statusCode });
 }

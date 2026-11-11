@@ -186,6 +186,7 @@ export async function saveHelperProfile(client: Db, helperId: string, input: Hel
       p_reference_phone: input.referencePhone ?? null,
     });
     if (rpcResult.error) {
+      console.error("[saveHelperProfile] create_helper_application rpcResult error:", rpcResult.error);
       if (rpcResult.error.code === "23505") {
         try {
           const { data: existingRecord } = await client
@@ -284,7 +285,8 @@ export async function saveHelperProfile(client: Db, helperId: string, input: Hel
     } catch {
       // Non-blocking notification
     }
-  } catch {
+  } catch (err) {
+    console.error("[saveHelperProfile] exception in saveHelperProfile:", err);
     if (applicationRpcStarted) {
       // A rejected RPC promise has an unknown commit outcome. Deleting staged
       // files here could break a transaction that committed before its response was lost.

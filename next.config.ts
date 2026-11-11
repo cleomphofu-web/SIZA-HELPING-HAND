@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: false,
+  serverExternalPackages: ["sharp"],
   async headers() {
     const supabaseOrigin = process.env.SUPABASE_URL ?? "https://*.supabase.co";
     const developmentScriptPolicy = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
