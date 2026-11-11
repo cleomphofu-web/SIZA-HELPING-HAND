@@ -10,13 +10,8 @@ import {
   ChevronRight,
   Clock,
   KeyRound,
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
-  Sparkles,
   Flag,
   Settings,
-  ShieldCheck,
   Check,
 } from "lucide-react";
 import type { HelperOfferSummary } from "@/server/views/booking-read";
@@ -116,417 +111,444 @@ export function HelperHomeDashboard({
   }
 
   return (
-    <main className="min-h-screen bg-[#121212] text-white font-sans pb-28 selection:bg-[#E87A41] selection:text-white">
+    <main className="min-h-screen bg-[#f5f5f5] text-black font-sans pb-36">
       {/* Top Header */}
-      <header className="sticky top-0 z-40 bg-[#121212]/90 backdrop-blur-md border-b border-white/10 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Link href="/helper" className="text-xl font-black tracking-tighter text-white">
-            siZa<span className="text-[#E87A41]">.</span>
-          </Link>
-          <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-white/10 text-neutral-300">
-            Helper
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link
-            href="/helper/report"
-            className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/5 transition-colors"
-          >
-            <Flag className="size-3.5 text-red-400" />
-            <span className="hidden sm:inline">Report</span>
-          </Link>
-          <Link
-            href="/helper/account"
-            className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/5 transition-colors"
-          >
-            <Settings className="size-3.5" />
-            <span className="hidden sm:inline">Settings</span>
-          </Link>
+      <header className="sticky top-0 z-30 bg-black/95 text-white backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5 transition-all">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/helper"
+              className="text-lg font-bold tracking-tighter hover:opacity-80 transition-opacity"
+            >
+              siZa.
+            </Link>
+            <span className="text-white/30" aria-hidden="true">/</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-300">
+              Helper
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/helper/report"
+              className="flex items-center gap-1.5 text-xs text-neutral-300 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              <Flag className="size-3.5 text-red-400" />
+              <span className="hidden sm:inline">Report</span>
+            </Link>
+            <Link
+              href="/helper/account"
+              className="flex items-center gap-1.5 text-xs text-neutral-300 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              <Settings className="size-3.5" />
+              <span className="hidden sm:inline">Settings</span>
+            </Link>
+          </div>
         </div>
       </header>
 
       {/* TAB 1: HOME (LOCATION & LIVE JOBS FEED) */}
       {activeTab === "home" && (
-        <div>
-          {/* Warm Orange Top Container */}
-          <section className="bg-gradient-to-b from-[#E87A41] via-[#D36730] to-[#BC5521] px-4 pt-5 pb-8 rounded-b-[36px] shadow-2xl relative overflow-hidden">
-            <div className="max-w-md mx-auto space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs uppercase tracking-wider font-bold text-white/80">
-                    Welcome Back
-                  </p>
-                  <h1 className="text-2xl font-black text-white tracking-tight">
-                    {profile?.firstName ? profile.firstName : "Helper"}
-                  </h1>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-12 space-y-6">
+          {/* Welcome & Location Setter Card */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-100 pb-4">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="inline-flex size-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                    Johannesburg · Fair Rotation Active
+                  </span>
                 </div>
-                <div className="flex items-center gap-1.5 bg-black/25 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-white border border-white/10">
-                  <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Rotation Online</span>
-                </div>
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
+                  Welcome back, {profile?.firstName ? profile.firstName : "Helper"}
+                </h1>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200/60 self-start sm:self-auto">
+                <Check className="size-3.5" />
+                <span>Approved Helper</span>
+              </div>
+            </div>
+
+            {/* Location Setter Box */}
+            <div className="bg-neutral-50 rounded-2xl p-4 border border-neutral-200/80 space-y-2.5">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-neutral-700 font-semibold flex items-center gap-1.5">
+                  <MapPin className="size-3.5 text-black" />
+                  Active Area Suburb
+                </span>
+                {gpsDetected ? (
+                  <span className="text-[10px] text-emerald-700 font-mono font-semibold flex items-center gap-1 bg-emerald-100/70 px-2 py-0.5 rounded-full">
+                    <Check className="size-3" /> GPS Locked
+                  </span>
+                ) : (
+                  <span className="text-[11px] text-neutral-500">
+                    Filter jobs near you
+                  </span>
+                )}
               </div>
 
-              {/* Floating Location Setter Card */}
-              <div className="bg-[#1E1E1E]/95 backdrop-blur-xl p-4 rounded-2xl border border-white/15 shadow-xl space-y-3">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-neutral-400 font-medium flex items-center gap-1.5">
-                    <MapPin className="size-3.5 text-[#E87A41]" />
-                    Active Area
-                  </span>
-                  {gpsDetected && (
-                    <span className="text-[10px] text-emerald-400 font-mono flex items-center gap-1">
-                      <Check className="size-3" /> GPS Locked
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 relative">
-                    <select
-                      value={currentLocation}
-                      onChange={(e) => {
-                        setCurrentLocation(e.target.value);
-                        setGpsDetected(false);
-                      }}
-                      className="w-full h-11 px-3 pr-8 rounded-xl bg-white/10 border border-white/15 text-white text-xs font-semibold focus:outline-none focus:border-[#E87A41] transition-all cursor-pointer appearance-none [&>option]:bg-[#1E1E1E] [&>option]:text-white"
-                    >
-                      {helperSuburbs.length > 0 && (
-                        <optgroup label="My Registered Suburbs">
-                          {helperSuburbs.map((sub) => (
-                            <option key={`my-${sub}`} value={sub}>
-                              {sub} (Registered)
-                            </option>
-                          ))}
-                        </optgroup>
-                      )}
-                      <optgroup label="Regions">
-                        {POPULAR_SUBURBS.map((sub) => (
-                          <option key={sub} value={sub}>
-                            {sub}
+              <div className="flex items-center gap-2">
+                <div className="flex-1 relative">
+                  <select
+                    value={currentLocation}
+                    onChange={(e) => {
+                      setCurrentLocation(e.target.value);
+                      setGpsDetected(false);
+                    }}
+                    className="w-full h-11 px-3.5 pr-8 rounded-xl bg-white border border-neutral-300 text-neutral-900 text-xs font-semibold focus:outline-none focus:border-black transition-all cursor-pointer appearance-none shadow-xs"
+                  >
+                    {helperSuburbs.length > 0 && (
+                      <optgroup label="My Registered Suburbs">
+                        {helperSuburbs.map((sub) => (
+                          <option key={`my-${sub}`} value={sub}>
+                            {sub} (Registered)
                           </option>
                         ))}
                       </optgroup>
-                    </select>
-                    <ChevronRight className="size-4 text-neutral-400 absolute right-3 top-3.5 pointer-events-none rotate-90" />
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={handleDetectGPS}
-                    disabled={isLocating}
-                    className="h-11 px-3.5 rounded-xl bg-[#E87A41] hover:bg-[#d66c35] active:scale-95 text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shrink-0 cursor-pointer disabled:opacity-60"
-                  >
-                    <Navigation className={`size-3.5 ${isLocating ? "animate-spin" : ""}`} />
-                    <span>{isLocating ? "Locating…" : "GPS"}</span>
-                  </button>
+                    )}
+                    <optgroup label="Regions">
+                      {POPULAR_SUBURBS.map((sub) => (
+                        <option key={sub} value={sub}>
+                          {sub}
+                        </option>
+                      ))}
+                    </optgroup>
+                  </select>
+                  <ChevronRight className="size-4 text-neutral-500 absolute right-3 top-3.5 pointer-events-none rotate-90" />
                 </div>
+
+                <button
+                  type="button"
+                  onClick={handleDetectGPS}
+                  disabled={isLocating}
+                  className="h-11 px-4 rounded-xl bg-black hover:bg-neutral-800 active:scale-95 text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm shrink-0 cursor-pointer disabled:opacity-60"
+                >
+                  <Navigation className={`size-3.5 ${isLocating ? "animate-spin" : ""}`} />
+                  <span>{isLocating ? "Locating…" : "GPS"}</span>
+                </button>
               </div>
             </div>
-          </section>
+          </div>
 
-          {/* Lower Jobs Feed Section */}
-          <div className="max-w-md mx-auto px-4 pt-6 space-y-6">
-            {/* Subscription Gate Banner (if applicable) */}
-            <HelperSubscriptionBanner
-              firstJobCompletedAt={helper?.firstJobCompletedAt ?? null}
-              subscriptionStatus={helper?.subscriptionStatus ?? "none"}
-              subscriptionPaidUntil={helper?.subscriptionPaidUntil ?? null}
-              helperId={helper?.id}
-              helperPhone={profile?.phone}
-            />
+          {/* Subscription Gate Banner (if applicable) */}
+          <HelperSubscriptionBanner
+            firstJobCompletedAt={helper?.firstJobCompletedAt ?? null}
+            subscriptionStatus={helper?.subscriptionStatus ?? "none"}
+            subscriptionPaidUntil={helper?.subscriptionPaidUntil ?? null}
+            helperId={helper?.id}
+            helperPhone={profile?.phone}
+          />
 
-            {/* Active Jobs Quick Access */}
-            {activeAssignments.length > 0 && (
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xs font-bold uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
-                    <KeyRound className="size-3.5 text-emerald-400" />
-                    <span>In-Progress &amp; Check-In ({activeAssignments.length})</span>
-                  </h2>
-                </div>
-                <div className="space-y-2">
-                  {activeAssignments.map((job) => {
-                    const totalCents =
-                      BigInt(job.payPerHelperCents) + BigInt(job.transportPerHelperCents);
-                    const rands = (Number(totalCents) / 100).toFixed(0);
-                    return (
-                      <Link
-                        key={`${job.bookingId}-${job.slot}`}
-                        href={`/helper/jobs/${job.bookingId}`}
-                        className="flex items-center justify-between p-3.5 rounded-2xl bg-white/5 border border-emerald-500/30 hover:border-emerald-500/60 transition-all group"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="size-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
-                            <KeyRound className="size-4" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">
-                              {job.suburb}
-                            </p>
-                            <p className="text-xs text-neutral-400">
-                              R{rands} Total Pay · Enter Code
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-1 text-xs text-emerald-400 font-semibold">
-                          <span>Check In</span>
-                          <ChevronRight className="size-4" />
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
+          {/* Active Jobs Quick Access */}
+          {activeAssignments.length > 0 && (
+            <div className="bg-white rounded-3xl p-6 border border-neutral-200/80 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
+                <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 flex items-center gap-2">
+                  <KeyRound className="size-4 text-emerald-600" />
+                  <span>In-Progress &amp; Check-In ({activeAssignments.length})</span>
+                </h2>
               </div>
-            )}
-
-            {/* Available Jobs Feed */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-base font-extrabold text-white tracking-tight flex items-center gap-2">
-                    <span>Available Jobs Near You</span>
-                    <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-                  </h2>
-                  <p className="text-xs text-neutral-400">
-                    Showing requests near {currentLocation}
-                  </p>
-                </div>
-                <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white/10 text-white">
-                  {filteredOffers.length} available
-                </span>
-              </div>
-
-              {filteredOffers.length > 0 ? (
-                <div className="space-y-2.5">
-                  {filteredOffers.map((offer) => {
-                    const totalCents =
-                      BigInt(offer.payPerHelperCents) + BigInt(offer.transportPerHelperCents);
-                    const rands = (Number(totalCents) / 100).toFixed(0);
-                    return (
-                      <div
-                        key={`${offer.id}-${offer.slot}`}
-                        className="p-4 rounded-2xl bg-[#1E1E1E] border border-white/10 hover:border-[#E87A41]/50 transition-all flex items-center justify-between gap-3 shadow-md"
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="size-11 rounded-xl bg-white/5 border border-white/10 text-[#E87A41] flex items-center justify-center shrink-0">
-                            <MapPin className="size-5" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
-                              <h3 className="text-sm font-bold text-white truncate">
-                                {offer.suburb}
-                              </h3>
-                              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-neutral-300">
-                                Slot #{offer.slot}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-2 text-xs text-neutral-400 mt-0.5">
-                              <span className="font-extrabold text-emerald-400">R{rands}</span>
-                              <span>·</span>
-                              <span>Direct Pay</span>
-                            </div>
-                          </div>
+              <div className="space-y-2.5">
+                {activeAssignments.map((job) => {
+                  const totalCents =
+                    BigInt(job.payPerHelperCents) + BigInt(job.transportPerHelperCents);
+                  const rands = (Number(totalCents) / 100).toFixed(0);
+                  return (
+                    <Link
+                      key={`${job.bookingId}-${job.slot}`}
+                      href={`/helper/jobs/${job.bookingId}`}
+                      className="flex items-center justify-between p-4 rounded-2xl bg-emerald-50/50 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group"
+                    >
+                      <div className="flex items-center gap-3.5">
+                        <div className="size-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                          <KeyRound className="size-4" />
                         </div>
-
-                        <Link
-                          href={`/helper/jobs/${offer.id}`}
-                          className="size-10 rounded-xl bg-[#E87A41] hover:bg-[#d66c35] text-white flex items-center justify-center shrink-0 active:scale-95 transition-all shadow-md"
-                          aria-label={`View offer in ${offer.suburb}`}
-                        >
-                          <ChevronRight className="size-5" />
-                        </Link>
+                        <div>
+                          <p className="text-sm font-bold text-neutral-900 group-hover:text-emerald-700 transition-colors">
+                            {job.suburb}
+                          </p>
+                          <p className="text-xs text-neutral-600">
+                            R{rands} Total Pay · Enter Host Code
+                          </p>
+                        </div>
                       </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div className="p-8 rounded-2xl bg-white/5 border border-white/10 text-center space-y-3">
-                  <Clock className="size-8 text-neutral-500 mx-auto" />
-                  <h3 className="text-sm font-semibold text-white">
-                    No open jobs in {currentLocation} right now
-                  </h3>
-                  <p className="text-xs text-neutral-400 max-w-xs mx-auto leading-relaxed">
-                    When hosts book in this area, jobs appear here automatically via fair rotation.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setCurrentLocation("All My Suburbs")}
-                    className="text-xs text-[#E87A41] font-semibold underline underline-offset-4 cursor-pointer"
-                  >
-                    View all my suburbs
-                  </button>
-                </div>
-              )}
+                      <div className="flex items-center gap-1 text-xs text-emerald-700 font-semibold">
+                        <span>Check In</span>
+                        <ChevronRight className="size-4" />
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Available Jobs Feed */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">
+            <div className="flex items-center justify-between border-b border-neutral-100 pb-4">
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold text-neutral-900 tracking-tight flex items-center gap-2">
+                  <span>Available Jobs Near You</span>
+                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                </h2>
+                <p className="text-xs text-neutral-500 mt-0.5">
+                  Showing requests near {currentLocation}
+                </p>
+              </div>
+              <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200">
+                {filteredOffers.length} available
+              </span>
             </div>
 
-            {/* Quick Metrics Bar */}
-            {metrics && (
-              <div className="grid grid-cols-3 gap-2 pt-2">
-                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-center space-y-0.5">
-                  <span className="text-[10px] text-neutral-400 uppercase tracking-wider font-semibold">Done</span>
-                  <p className="text-lg font-black text-white">{metrics.completedJobs}</p>
-                </div>
-                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-center space-y-0.5">
-                  <span className="text-[10px] text-neutral-400 uppercase tracking-wider font-semibold">Active</span>
-                  <p className="text-lg font-black text-[#E87A41]">
-                    {metrics.acceptedJobs - metrics.completedJobs}
-                  </p>
-                </div>
-                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-center space-y-0.5">
-                  <span className="text-[10px] text-neutral-400 uppercase tracking-wider font-semibold">Earned</span>
-                  <p className="text-lg font-black text-emerald-400">
-                    R{(metrics.totalEarningsCents / 100).toFixed(0)}
-                  </p>
-                </div>
+            {filteredOffers.length > 0 ? (
+              <div className="space-y-3">
+                {filteredOffers.map((offer) => {
+                  const totalCents =
+                    BigInt(offer.payPerHelperCents) + BigInt(offer.transportPerHelperCents);
+                  const rands = (Number(totalCents) / 100).toFixed(0);
+                  return (
+                    <div
+                      key={`${offer.id}-${offer.slot}`}
+                      className="p-4 sm:p-5 rounded-2xl bg-neutral-50 border border-neutral-200/80 hover:border-black/30 transition-all flex items-center justify-between gap-3 shadow-xs"
+                    >
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="size-11 rounded-xl bg-white border border-neutral-200 text-black flex items-center justify-center shrink-0 shadow-xs">
+                          <MapPin className="size-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-sm font-bold text-neutral-900 truncate">
+                              {offer.suburb}
+                            </h3>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-200 text-neutral-700 font-semibold">
+                              Slot #{offer.slot}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-neutral-600 mt-1">
+                            <span className="font-extrabold text-neutral-900">R{rands}</span>
+                            <span>·</span>
+                            <span>100% Direct Pay from Host</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Link
+                        href={`/helper/jobs/${offer.id}`}
+                        className="size-11 rounded-xl bg-black hover:bg-neutral-800 text-white flex items-center justify-center shrink-0 active:scale-95 transition-all shadow-sm cursor-pointer"
+                        aria-label={`View offer in ${offer.suburb}`}
+                      >
+                        <ChevronRight className="size-5" />
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="p-8 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-center space-y-3">
+                <Clock className="size-8 text-neutral-400 mx-auto" />
+                <h3 className="text-sm font-semibold text-neutral-900">
+                  No open jobs in {currentLocation} right now
+                </h3>
+                <p className="text-xs text-neutral-500 max-w-xs mx-auto leading-relaxed">
+                  When hosts book in this area, jobs appear here automatically via fair rotation.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setCurrentLocation("All My Suburbs")}
+                  className="text-xs text-black font-semibold underline underline-offset-4 cursor-pointer"
+                >
+                  View all my suburbs
+                </button>
               </div>
             )}
           </div>
+
+          {/* Quick Metrics Bar */}
+          {metrics && (
+            <div className="grid grid-cols-3 gap-3">
+              <div className="p-4 rounded-2xl bg-white border border-neutral-200/80 text-center space-y-1 shadow-sm">
+                <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold">Done</span>
+                <p className="text-xl font-bold text-neutral-900">{metrics.completedJobs}</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-white border border-neutral-200/80 text-center space-y-1 shadow-sm">
+                <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold">Active</span>
+                <p className="text-xl font-bold text-black">
+                  {metrics.acceptedJobs - metrics.completedJobs}
+                </p>
+              </div>
+              <div className="p-4 rounded-2xl bg-white border border-neutral-200/80 text-center space-y-1 shadow-sm">
+                <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold">Earned</span>
+                <p className="text-xl font-bold text-emerald-700">
+                  R{(metrics.totalEarningsCents / 100).toFixed(0)}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
       {/* TAB 2: JOBS (ACCEPTED, DONE, AND DECLINED ACTIVITY HISTORY) */}
       {activeTab === "jobs" && (
-        <div className="max-w-md mx-auto px-4 pt-5 space-y-5">
-          <div>
-            <h1 className="text-2xl font-black text-white tracking-tight">Job Activity</h1>
-            <p className="text-xs text-neutral-400">
-              History of accepted, completed, and past jobs
-            </p>
-          </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-12 space-y-6">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-sm space-y-5">
+            <div className="border-b border-neutral-100 pb-4">
+              <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">Job Activity</h1>
+              <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">
+                History of accepted, completed, and past jobs
+              </p>
+            </div>
 
-          {/* Sub-filter tabs */}
-          <div className="flex items-center gap-1 p-1 rounded-xl bg-white/5 border border-white/10">
-            <button
-              type="button"
-              onClick={() => setJobsSubFilter("active")}
-              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                jobsSubFilter === "active"
-                  ? "bg-[#E87A41] text-white shadow"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Active ({activeAssignments.length})
-            </button>
-            <button
-              type="button"
-              onClick={() => setJobsSubFilter("completed")}
-              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                jobsSubFilter === "completed"
-                  ? "bg-[#E87A41] text-white shadow"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              Done ({completedAssignments.length})
-            </button>
-            <button
-              type="button"
-              onClick={() => setJobsSubFilter("all")}
-              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                jobsSubFilter === "all"
-                  ? "bg-[#E87A41] text-white shadow"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              All ({assignedJobs.length})
-            </button>
-          </div>
+            {/* Sub-filter tabs */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-neutral-100 border border-neutral-200/80 max-w-sm">
+              <button
+                type="button"
+                onClick={() => setJobsSubFilter("active")}
+                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                  jobsSubFilter === "active"
+                    ? "bg-black text-white shadow-sm"
+                    : "text-neutral-600 hover:text-black"
+                }`}
+              >
+                Active ({activeAssignments.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setJobsSubFilter("completed")}
+                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                  jobsSubFilter === "completed"
+                    ? "bg-black text-white shadow-sm"
+                    : "text-neutral-600 hover:text-black"
+                }`}
+              >
+                Done ({completedAssignments.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setJobsSubFilter("all")}
+                className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                  jobsSubFilter === "all"
+                    ? "bg-black text-white shadow-sm"
+                    : "text-neutral-600 hover:text-black"
+                }`}
+              >
+                All ({assignedJobs.length})
+              </button>
+            </div>
 
-          {/* Jobs List */}
-          <div className="space-y-3">
-            {assignedJobs.length === 0 ? (
-              <div className="p-8 rounded-2xl bg-white/5 border border-white/10 text-center space-y-2">
-                <Clock className="size-8 text-neutral-500 mx-auto" />
-                <h3 className="text-sm font-semibold text-white">No jobs recorded yet</h3>
-                <p className="text-xs text-neutral-400">
-                  Accepted jobs will appear here with full history and check-in records.
-                </p>
-              </div>
-            ) : (
-              (jobsSubFilter === "active"
-                ? activeAssignments
-                : jobsSubFilter === "completed"
-                ? completedAssignments
-                : assignedJobs
-              ).map((job) => {
-                const totalCents =
-                  BigInt(job.payPerHelperCents) + BigInt(job.transportPerHelperCents);
-                const rands = (Number(totalCents) / 100).toFixed(0);
-                const isCompleted =
-                  job.status === "completed" || job.assignmentStatus === "completed";
-                const isCancelled =
-                  job.status === "cancelled" || job.assignmentStatus === "cancelled";
+            {/* Jobs List */}
+            <div className="space-y-3">
+              {assignedJobs.length === 0 ? (
+                <div className="p-8 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-center space-y-2">
+                  <Clock className="size-8 text-neutral-400 mx-auto" />
+                  <h3 className="text-sm font-semibold text-neutral-900">No jobs recorded yet</h3>
+                  <p className="text-xs text-neutral-500">
+                    Accepted jobs will appear here with full history and check-in records.
+                  </p>
+                </div>
+              ) : (
+                (jobsSubFilter === "active"
+                  ? activeAssignments
+                  : jobsSubFilter === "completed"
+                  ? completedAssignments
+                  : assignedJobs
+                ).map((job) => {
+                  const totalCents =
+                    BigInt(job.payPerHelperCents) + BigInt(job.transportPerHelperCents);
+                  const rands = (Number(totalCents) / 100).toFixed(0);
+                  const isCompleted =
+                    job.status === "completed" || job.assignmentStatus === "completed";
+                  const isCancelled =
+                    job.status === "cancelled" || job.assignmentStatus === "cancelled";
 
-                return (
-                  <div
-                    key={`${job.bookingId}-${job.slot}`}
-                    className="p-4 rounded-2xl bg-[#1E1E1E] border border-white/10 space-y-3"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-2">
-                        <MapPin className="size-4 text-[#E87A41]" />
-                        <span className="font-bold text-white text-sm">{job.suburb}</span>
-                        {job.addressLine && (
-                          <span className="text-xs text-neutral-400 truncate max-w-[150px]">
-                            · {job.addressLine}
-                          </span>
-                        )}
+                  return (
+                    <div
+                      key={`${job.bookingId}-${job.slot}`}
+                      className="p-4 sm:p-5 rounded-2xl bg-neutral-50 border border-neutral-200/80 space-y-3 shadow-xs"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-2">
+                          <MapPin className="size-4 text-black" />
+                          <span className="font-bold text-neutral-900 text-sm">{job.suburb}</span>
+                          {job.addressLine && (
+                            <span className="text-xs text-neutral-500 truncate max-w-[180px]">
+                              · {job.addressLine}
+                            </span>
+                          )}
+                        </div>
+                        <span
+                          className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+                            isCompleted
+                              ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+                              : isCancelled
+                              ? "bg-red-50 text-red-800 border-red-200"
+                              : "bg-neutral-200 text-neutral-800 border-neutral-300"
+                          }`}
+                        >
+                          {isCompleted ? "Done" : isCancelled ? "Cancelled" : "Accepted"}
+                        </span>
                       </div>
-                      <span
-                        className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                          isCompleted
-                            ? "bg-emerald-500/20 text-emerald-300"
-                            : isCancelled
-                            ? "bg-red-500/20 text-red-300"
-                            : "bg-amber-500/20 text-amber-300"
-                        }`}
-                      >
-                        {isCompleted ? "Done" : isCancelled ? "Cancelled" : "Accepted"}
-                      </span>
-                    </div>
 
-                    <div className="flex items-center justify-between text-xs text-neutral-400 pt-1 border-t border-white/5">
-                      <span>R{rands} Total Direct Pay</span>
-                      <Link
-                        href={`/helper/jobs/${job.bookingId}`}
-                        className="text-[#E87A41] hover:underline font-semibold flex items-center gap-0.5"
-                      >
-                        <span>View Details</span>
-                        <ChevronRight className="size-3.5" />
-                      </Link>
+                      <div className="flex items-center justify-between text-xs text-neutral-600 pt-2 border-t border-neutral-200/60">
+                        <span>R{rands} Total Direct Pay</span>
+                        <Link
+                          href={`/helper/jobs/${job.bookingId}`}
+                          className="text-black hover:underline font-semibold flex items-center gap-0.5"
+                        >
+                          <span>View Details</span>
+                          <ChevronRight className="size-3.5" />
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                );
-              })
-            )}
+                  );
+                })
+              )}
+            </div>
           </div>
         </div>
       )}
 
-      {/* FIXED BOTTOM NAVIGATION BAR (Home & Jobs Only — Profile removed) */}
-      <nav className="fixed bottom-0 inset-x-0 z-50 bg-[#1A1A1A]/95 backdrop-blur-xl border-t border-white/10 px-6 py-2.5">
-        <div className="max-w-md mx-auto flex items-center justify-around">
-          <button
-            type="button"
-            onClick={() => setActiveTab("home")}
-            className={`flex flex-col items-center gap-1 text-[11px] font-bold transition-colors cursor-pointer ${
-              activeTab === "home" ? "text-[#E87A41]" : "text-neutral-400 hover:text-white"
-            }`}
+      {/* FIXED BOTTOM FLOATING NAVIGATION DOCK (SIZA Pill Style — Home & Jobs Only) */}
+      <nav
+        aria-label="Helper Navigation"
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 p-1.5 rounded-full bg-black/95 text-white shadow-2xl backdrop-blur-xl border border-white/15 transition-all duration-300"
+      >
+        <div className="flex items-center gap-1 pl-1">
+          <Link
+            href="/helper"
+            className="min-h-[44px] inline-flex items-center px-2.5 text-xs font-bold tracking-tighter text-neutral-300 hover:text-white transition-colors"
           >
-            <Home className="size-5" />
-            <span>Home</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab("jobs")}
-            className={`flex flex-col items-center gap-1 text-[11px] font-bold transition-colors cursor-pointer ${
-              activeTab === "jobs" ? "text-[#E87A41]" : "text-neutral-400 hover:text-white"
-            }`}
-          >
-            <History className="size-5" />
-            <span>Jobs</span>
-          </button>
+            siZa.
+          </Link>
+          <div className="h-4 w-px bg-white/20 mr-1" aria-hidden="true" />
         </div>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("home")}
+          className={`flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 select-none cursor-pointer ${
+            activeTab === "home"
+              ? "bg-white text-black font-semibold shadow-sm"
+              : "text-neutral-400 hover:text-white hover:bg-white/10"
+          }`}
+          aria-current={activeTab === "home" ? "page" : undefined}
+        >
+          <Home className="size-4" />
+          <span>Home</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("jobs")}
+          className={`flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 select-none cursor-pointer ${
+            activeTab === "jobs"
+              ? "bg-white text-black font-semibold shadow-sm"
+              : "text-neutral-400 hover:text-white hover:bg-white/10"
+          }`}
+          aria-current={activeTab === "jobs" ? "page" : undefined}
+        >
+          <History className="size-4" />
+          <span>Jobs</span>
+        </button>
       </nav>
     </main>
   );
