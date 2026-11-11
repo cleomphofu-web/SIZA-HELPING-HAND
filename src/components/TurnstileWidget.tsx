@@ -31,8 +31,8 @@ const TURNSTILE_TEST_SITE_KEYS = new Set([
   "3x00000000000000000000FF", // forces an interactive challenge
 ]);
 
-function isTurnstileConfigured(key: string): boolean {
-  return Boolean(key) && !TURNSTILE_TEST_SITE_KEYS.has(key);
+export function isTurnstileConfigured(key: string | undefined): boolean {
+  return Boolean(key) && !TURNSTILE_TEST_SITE_KEYS.has(key!);
 }
 
 export function TurnstileWidget({

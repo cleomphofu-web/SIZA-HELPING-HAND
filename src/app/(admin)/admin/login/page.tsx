@@ -119,9 +119,8 @@ export default async function AdminLoginPage({
           ) : null}
 
           <button
-            className="w-full h-12 rounded-xl bg-white text-black font-semibold text-sm tracking-wide hover:bg-neutral-200 active:scale-[0.99] transition-all shadow-lg shadow-white/10 flex items-center justify-center gap-2 disabled:opacity-50 mt-2"
+            className="w-full h-12 rounded-xl bg-white text-black font-semibold text-sm tracking-wide hover:bg-neutral-200 active:scale-[0.99] transition-all shadow-lg shadow-white/10 flex items-center justify-center gap-2 disabled:opacity-50 mt-2 cursor-pointer"
             type="submit"
-            disabled={challengeRequired && !turnstileSiteKey}
           >
             <span>{t("admin.login.submit")}</span>
             <span aria-hidden="true">→</span>

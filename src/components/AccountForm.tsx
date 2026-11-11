@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Mail, Eye, EyeOff } from "lucide-react";
 import { t } from "@/content/t";
-import { TurnstileWidget } from "@/components/TurnstileWidget";
+import { TurnstileWidget, isTurnstileConfigured } from "@/components/TurnstileWidget";
 import { FlowButton } from "@/components/ui/flow-button";
 import { SignInPageLayout } from "@/components/ui/sign-in";
 
@@ -24,6 +24,7 @@ export function AccountForm({
   initialVerified,
 }: AccountFormProps) {
   const signup = mode === "signup";
+  const turnstileActive = isTurnstileConfigured(turnstileSiteKey);
   const [statusTone, setStatusTone] = useState<"error" | "success">(
     initialVerified ? "success" : "error"
   );
@@ -49,14 +50,14 @@ export function AccountForm({
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (pending || ((signup || challengeRequired) && !turnstileSiteKey)) return;
+    if (pending) return;
     const form = event.currentTarget;
     const formData = new FormData(form);
     const token = formData.get("turnstileToken");
     if (
       (signup || challengeRequired) &&
-      turnstileSiteKey &&
-      (!token || String(token).trim() === "")
+      turnstileActive &&
+      (!token || String(token).trim() === "" || token === "unconfigured")
     ) {
       setStatusTone("error");
       setMessage("Please complete the verification check before continuing.");
@@ -382,15 +383,6 @@ export function AccountForm({
                 </div>
               ) : null}
 
-              {(signup || challengeRequired) && !turnstileSiteKey ? (
-                <p
-                  className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs text-center"
-                  role="alert"
-                >
-                  {t("account.turnstile.unavailable")}
-                </p>
-              ) : null}
-
               {/* Error or validation message */}
               {message ? (
                 <p
@@ -414,10 +406,7 @@ export function AccountForm({
                   size="md"
                   fullWidth
                   loading={pending}
-                  disabled={
-                    pending ||
-                    ((signup || challengeRequired) && !turnstileSiteKey)
-                  }
+                  disabled={pending}
                   text={t(pending ? "button.sending" : "button.continue")}
                 />
               </div>

@@ -88,11 +88,12 @@ describe("account entry prototype state", () => {
     expect(markup).not.toContain('name="turnstileToken" value=""');
   });
 
-  it("disables signup and explains the missing Turnstile setup", () => {
+  it("allows signup and renders an unconfigured token when Turnstile is not configured", () => {
     const markup = renderToStaticMarkup(createElement(AccountForm, { mode: "signup", turnstileSiteKey: "" }));
 
-    expect(markup).toContain("Turnstile is not configured");
-    expect(markup).toContain("disabled");
+    expect(markup).not.toContain("Turnstile is not configured");
+    expect(markup).toContain('name="turnstileToken" value="unconfigured"');
+    expect(markup).not.toContain('disabled=""');
   });
 });
 
