@@ -40,3 +40,4 @@ export function BentoCard({ children, className, dark = false }: BentoCardProps)
     </div>
   );
 }
+

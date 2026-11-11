@@ -18,6 +18,7 @@ import type { HelperOfferSummary } from "@/server/views/booking-read";
 import type { HelperAssignedJobSummary } from "@/server/views/booking";
 import type { HelperMetrics } from "@/server/views/booking-read";
 import { HelperSubscriptionBanner } from "@/components/HelperSubscriptionBanner";
+import { GooeyLocationSetter } from "@/components/ui/gooey-location-setter";
 
 type HelperHomeDashboardProps = {
   profile: {
@@ -169,64 +170,20 @@ export function HelperHomeDashboard({
               </div>
             </div>
 
-            {/* Location Setter Box */}
-            <div className="bg-neutral-50 rounded-2xl p-4 border border-neutral-200/80 space-y-2.5">
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-neutral-700 font-semibold flex items-center gap-1.5">
-                  <MapPin className="size-3.5 text-black" />
-                  Active Area Suburb
-                </span>
-                {gpsDetected ? (
-                  <span className="text-[10px] text-emerald-700 font-mono font-semibold flex items-center gap-1 bg-emerald-100/70 px-2 py-0.5 rounded-full">
-                    <Check className="size-3" /> GPS Locked
-                  </span>
-                ) : (
-                  <span className="text-[11px] text-neutral-500">
-                    Filter jobs near you
-                  </span>
-                )}
-              </div>
-
-              <div className="flex items-center gap-2">
-                <div className="flex-1 relative">
-                  <select
-                    value={currentLocation}
-                    onChange={(e) => {
-                      setCurrentLocation(e.target.value);
-                      setGpsDetected(false);
-                    }}
-                    className="w-full h-11 px-3.5 pr-8 rounded-xl bg-white border border-neutral-300 text-neutral-900 text-xs font-semibold focus:outline-none focus:border-black transition-all cursor-pointer appearance-none shadow-xs"
-                  >
-                    {helperSuburbs.length > 0 && (
-                      <optgroup label="My Registered Suburbs">
-                        {helperSuburbs.map((sub) => (
-                          <option key={`my-${sub}`} value={sub}>
-                            {sub} (Registered)
-                          </option>
-                        ))}
-                      </optgroup>
-                    )}
-                    <optgroup label="Regions">
-                      {POPULAR_SUBURBS.map((sub) => (
-                        <option key={sub} value={sub}>
-                          {sub}
-                        </option>
-                      ))}
-                    </optgroup>
-                  </select>
-                  <ChevronRight className="size-4 text-neutral-500 absolute right-3 top-3.5 pointer-events-none rotate-90" />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleDetectGPS}
-                  disabled={isLocating}
-                  className="h-11 px-4 rounded-xl bg-black hover:bg-neutral-800 active:scale-95 text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm shrink-0 cursor-pointer disabled:opacity-60"
-                >
-                  <Navigation className={`size-3.5 ${isLocating ? "animate-spin" : ""}`} />
-                  <span>{isLocating ? "Locating…" : "GPS"}</span>
-                </button>
-              </div>
+            {/* Component 3: Morphing / Gooey Location Setter */}
+            <div className="pt-1">
+              <GooeyLocationSetter
+                currentLocation={currentLocation}
+                onLocationChange={(suburb) => {
+                  setCurrentLocation(suburb);
+                  setGpsDetected(false);
+                }}
+                registeredSuburbs={helperSuburbs}
+                popularSuburbs={POPULAR_SUBURBS}
+                gpsDetected={gpsDetected}
+                onDetectGPS={handleDetectGPS}
+                isLocating={isLocating}
+              />
             </div>
           </div>
 
