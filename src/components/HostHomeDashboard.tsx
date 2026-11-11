@@ -18,6 +18,7 @@ import { formatHostBookingDate, hostBookingStatusCopy } from "@/lib/host-booking
 import type { HostBookingSummary } from "@/server/views/booking-read";
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
 
 type Props = {
   requests: HostBookingSummary[];
@@ -205,40 +206,136 @@ export function HostHomeDashboard({ requests, loadFailed }: Props) {
           </Carousel>
         </section>
 
-        {/* Impact Message Section */}
-        <section className="bg-gradient-to-br from-neutral-900 to-black text-white rounded-3xl p-6 sm:p-8 border border-white/10 shadow-lg space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="size-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/15">
-              <HeartHandshake className="size-5 text-emerald-400" />
-            </div>
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
-                Community Impact
-              </span>
-              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-white">
-                {t("host.home.impact.title")}
-              </h2>
-            </div>
+        {/* Marketplace Bento Grid */}
+        <section aria-label="Host Overview" className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold tracking-tight text-neutral-900">
+              Overview &amp; Quick Actions
+            </h2>
+            <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+              JHB &amp; Vaal
+            </span>
           </div>
 
-          <p className="text-sm text-neutral-300 leading-relaxed max-w-2xl font-normal">
-            {t("host.home.impact.body")}
-          </p>
+          <BentoGrid>
+            {/* Card 1: Active Job / Request Status */}
+            <BentoCard className="md:col-span-2 space-y-4">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="size-9 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-900">
+                    <Clock className="size-4" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+                      Active Status
+                    </span>
+                    <h3 className="text-base font-bold text-neutral-900">
+                      {requests.length > 0 ? `Request in ${requests[0].suburb}` : "Ready for your next request"}
+                    </h3>
+                  </div>
+                </div>
+                {requests.length > 0 && (
+                  <Badge variant="outline" className="text-xs font-medium">
+                    {t(hostBookingStatusCopy[requests[0].status])}
+                  </Badge>
+                )}
+              </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-white/10">
-            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-lg font-bold text-white tracking-tight">100%</p>
-              <p className="text-xs text-neutral-400 mt-0.5">Earnings direct to helper</p>
-            </div>
-            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-lg font-bold text-white tracking-tight">Fair Rotation</p>
-              <p className="text-xs text-neutral-400 mt-0.5">Equal job offers for all</p>
-            </div>
-            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-lg font-bold text-white tracking-tight">R0 Fees</p>
-              <p className="text-xs text-neutral-400 mt-0.5">No wage skim on arrival</p>
-            </div>
-          </div>
+              {requests.length > 0 ? (
+                <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200/80 flex items-center justify-between">
+                  <div className="space-y-1">
+                    <p className="text-xs text-neutral-500">
+                      Scheduled for <time dateTime={requests[0].startAt} className="font-semibold text-neutral-900">{formatHostBookingDate(requests[0].startAt)}</time>
+                    </p>
+                    <p className="text-xs text-neutral-600">
+                      Fair rotation offer dispatched to approved helpers.
+                    </p>
+                  </div>
+                  <Link
+                    href={`/app/requests/${requests[0].id}`}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-black text-white text-xs font-semibold hover:bg-neutral-800 transition-colors shrink-0"
+                  >
+                    <span>View Request</span>
+                    <ChevronRight className="size-3.5" />
+                  </Link>
+                </div>
+              ) : (
+                <p className="text-xs text-neutral-600 leading-relaxed">
+                  No active jobs right now. When you request a helper, fair rotation offers it to approved local helpers immediately.
+                </p>
+              )}
+
+              <div className="flex items-center gap-2 pt-2 border-t border-neutral-100 text-xs text-neutral-500">
+                <CheckCircle2 className="size-3.5 text-emerald-600" />
+                <span>6-digit arrival check-in code protection on every job</span>
+              </div>
+            </BentoCard>
+
+            {/* Card 2: Quick Booking Action Card */}
+            <BentoCard dark className="space-y-4">
+              <div className="space-y-2">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-[10px] font-bold uppercase tracking-wider text-neutral-300">
+                  <Sparkles className="size-3 text-emerald-400" />
+                  Instant Booking
+                </span>
+                <h3 className="text-xl font-bold tracking-tight text-white">
+                  Request a Helper
+                </h3>
+                <p className="text-xs text-neutral-400 leading-relaxed">
+                  Choose your service, duration, and suburb. Minimum R100/hr fair wage floor.
+                </p>
+              </div>
+
+              <Link
+                href="/app/book"
+                className="w-full inline-flex items-center justify-center gap-2 h-11 rounded-xl bg-white text-black text-xs font-bold hover:bg-neutral-200 transition-colors shadow-sm"
+              >
+                <span>{t("button.request")}</span>
+                <ArrowRight className="size-3.5" />
+              </Link>
+            </BentoCard>
+
+            {/* Card 3: Community & Fair Wage Impact */}
+            <BentoCard className="md:col-span-3 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-100 pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="size-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                    <HeartHandshake className="size-4" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+                      Community Impact
+                    </span>
+                    <h3 className="text-base font-bold text-neutral-900">
+                      {t("host.home.impact.title")}
+                    </h3>
+                  </div>
+                </div>
+                <span className="text-xs text-neutral-500">
+                  Johannesburg &amp; the Vaal
+                </span>
+              </div>
+
+              <p className="text-xs text-neutral-600 leading-relaxed font-normal">
+                {t("host.home.impact.body")}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-200/80">
+                  <p className="text-base font-black text-neutral-900">100%</p>
+                  <p className="text-xs text-neutral-500 mt-0.5">Earnings direct to helper</p>
+                </div>
+                <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-200/80">
+                  <p className="text-base font-black text-neutral-900">Fair Rotation</p>
+                  <p className="text-xs text-neutral-500 mt-0.5">Equal job offers for all</p>
+                </div>
+                <div className="p-3 rounded-2xl bg-neutral-50 border border-neutral-200/80">
+                  <p className="text-base font-black text-neutral-900">R0 Fees</p>
+                  <p className="text-xs text-neutral-500 mt-0.5">No wage skim on arrival</p>
+                </div>
+              </div>
+            </BentoCard>
+          </BentoGrid>
         </section>
 
         {/* Recent Requests Section */}
