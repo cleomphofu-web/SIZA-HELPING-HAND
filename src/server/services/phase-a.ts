@@ -253,6 +253,19 @@ export async function saveHelperProfile(client: Db, helperId: string, input: Hel
 
               return ok({ saved: true });
             }
+          } else {
+            const idHash = hashIdentifier(input.idNumber);
+            const { data: otherUser } = await client
+              .from("helper_details")
+              .select("user_id")
+              .eq("id_hash", idHash)
+              .neq("user_id", helperId)
+              .maybeSingle();
+
+            if (otherUser) {
+              try { await storage.remove(stagedPaths); } catch {}
+              return fail("conflict", "That ID number is already registered to another account.");
+            }
           }
         } catch {
           // If table access throws (e.g. in test harness), proceed to standard conflict handling

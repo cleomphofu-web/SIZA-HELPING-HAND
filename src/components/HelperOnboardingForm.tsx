@@ -448,7 +448,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
         body: data,
       });
 
-      if (res.ok || res.status === 303 || res.status === 409) {
+      if (res.ok || res.status === 303) {
         try {
           localStorage.removeItem(DRAFT_STORAGE_KEY);
         } catch {}
