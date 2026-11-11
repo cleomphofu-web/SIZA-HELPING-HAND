@@ -1417,7 +1417,7 @@ export function HostBookingForm({
             <button
               type="button"
               onClick={openReview}
-              disabled={!serviceOptionsAvailable || !config.areas.length || config.floorPercent === null || !estimate || !turnstileSiteKey}
+              disabled={!serviceOptionsAvailable || !config.areas.length || config.floorPercent === null || !estimate}
               className="w-full h-14 bg-black text-white hover:bg-neutral-800 rounded-2xl text-base font-semibold shadow-lg flex items-center justify-between px-6 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {t("host.book.review")}

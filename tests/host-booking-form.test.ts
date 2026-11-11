@@ -46,7 +46,7 @@ describe("host booking request form", () => {
     expect(helperSelect).not.toContain('<option value="4">4</option>');
   });
 
-  it("keeps the request action disabled when configured rates, areas, or Turnstile are missing", () => {
+  it("keeps the request action disabled when configured rates or areas are missing (Turnstile absence no longer blocks)", () => {
     const markup = renderToStaticMarkup(createElement(HostBookingForm, {
       profile,
       config: { services: [], areas: [], floorPercent: null, genderMatchingEnabled: false },
@@ -54,7 +54,10 @@ describe("host booking request form", () => {
       idempotencyKey: "00000000-0000-4000-8000-000000000001",
     }));
     expect(markup).toContain("This service or area is not open for requests yet.");
-    expect(markup).toContain("Turnstile is not configured");
+    // Turnstile widget now renders a hidden input (not a blocking message) when unconfigured
+    expect(markup).not.toContain("Turnstile is not configured");
+    expect(markup).toContain('name="turnstileToken"');
+    // Button still disabled because services/areas/floorPercent are empty
     expect(markup).toMatch(/<button[^>]*disabled=""/);
   });
 

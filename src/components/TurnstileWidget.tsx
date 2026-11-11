@@ -102,7 +102,10 @@ export function TurnstileWidget({
   }, [siteKey, responseFieldName]);
 
   if (!siteKey) {
-    return <p className="phase-a-notice" role="alert">{t("account.turnstile.unavailable")}</p>;
+    // Turnstile not configured — render a hidden dummy token so the form submits.
+    // The server also allows through when TURNSTILE_SECRET_KEY is unset.
+    // TODO(owner): add NEXT_PUBLIC_TURNSTILE_SITE_KEY to Vercel env vars to enable.
+    return <input type="hidden" name="turnstileToken" value="unconfigured" />;
   }
 
   return (
