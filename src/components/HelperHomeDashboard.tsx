@@ -19,6 +19,7 @@ import type { HelperAssignedJobSummary } from "@/server/views/booking";
 import type { HelperMetrics } from "@/server/views/booking-read";
 import { HelperSubscriptionBanner } from "@/components/HelperSubscriptionBanner";
 import { GooeyLocationSetter } from "@/components/ui/gooey-location-setter";
+import { ExpandableJobFeed } from "@/components/ui/expandable-job-card";
 
 type HelperHomeDashboardProps = {
   profile: {
@@ -258,48 +259,10 @@ export function HelperHomeDashboard({
             </div>
 
             {filteredOffers.length > 0 ? (
-              <div className="space-y-3">
-                {filteredOffers.map((offer) => {
-                  const totalCents =
-                    BigInt(offer.payPerHelperCents) + BigInt(offer.transportPerHelperCents);
-                  const rands = (Number(totalCents) / 100).toFixed(0);
-                  return (
-                    <div
-                      key={`${offer.id}-${offer.slot}`}
-                      className="p-4 sm:p-5 rounded-2xl bg-neutral-50 border border-neutral-200/80 hover:border-black/30 transition-all flex items-center justify-between gap-3 shadow-xs"
-                    >
-                      <div className="flex items-center gap-3.5 min-w-0">
-                        <div className="size-11 rounded-xl bg-white border border-neutral-200 text-black flex items-center justify-center shrink-0 shadow-xs">
-                          <MapPin className="size-5" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-2">
-                            <h3 className="text-sm font-bold text-neutral-900 truncate">
-                              {offer.suburb}
-                            </h3>
-                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-200 text-neutral-700 font-semibold">
-                              Slot #{offer.slot}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2 text-xs text-neutral-600 mt-1">
-                            <span className="font-extrabold text-neutral-900">R{rands}</span>
-                            <span>·</span>
-                            <span>100% Direct Pay from Host</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <Link
-                        href={`/helper/jobs/${offer.id}`}
-                        className="size-11 rounded-xl bg-black hover:bg-neutral-800 text-white flex items-center justify-center shrink-0 active:scale-95 transition-all shadow-sm cursor-pointer"
-                        aria-label={`View offer in ${offer.suburb}`}
-                      >
-                        <ChevronRight className="size-5" />
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
+              <ExpandableJobFeed
+                offers={filteredOffers}
+                currentLocation={currentLocation}
+              />
             ) : (
               <div className="p-8 rounded-2xl bg-neutral-50 border border-neutral-200/80 text-center space-y-3">
                 <Clock className="size-8 text-neutral-400 mx-auto" />
