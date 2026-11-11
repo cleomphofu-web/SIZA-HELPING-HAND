@@ -71,6 +71,53 @@ export async function enqueueEmail(
   return { enqueued: true, id: data?.id };
 }
 
+export async function enqueueAndSendEmail(
+  client: SupabaseClient,
+  input: EnqueueOutboxInput,
+): Promise<{ enqueued: boolean; sent: boolean; id?: string }> {
+  const result = await enqueueEmail(client, input);
+  if (!result.enqueued || !result.id) return { ...result, sent: false };
+
+  let sent = false;
+  if (env.RESEND_API_KEY) {
+    try {
+      const { subjectKey, bodyKey } = resolveEmailCopy(input.eventType);
+      const subject = t(subjectKey, input.variables || {});
+      const text = t(bodyKey, input.variables || {});
+      const idempotencyKey = generateOutboxKey(input.eventType, input.entityId);
+
+      const { error: sendError } = await resend.emails.send(
+        {
+          from: env.RESEND_FROM_EMAIL,
+          to: input.recipient,
+          subject,
+          text,
+        },
+        { idempotencyKey },
+      );
+
+      if (!sendError) {
+        sent = true;
+        if (typeof client.from === "function") {
+          await client
+            .from("phase_a_email_outbox")
+            .update({
+              status: "sent",
+              sent_at: new Date().toISOString(),
+              attempts: 1,
+              updated_at: new Date().toISOString(),
+            })
+            .eq("id", result.id)
+            .then?.(() => null, () => null);
+        }
+      }
+    } catch {
+      // Non-blocking immediate send attempt; row remains pending in outbox
+    }
+  }
+  return { ...result, sent };
+}
+
 function resolveEmailCopy(eventType: OutboxEventType): { subjectKey: CopyKey; bodyKey: CopyKey } {
   switch (eventType) {
     case "host-booking-requested":

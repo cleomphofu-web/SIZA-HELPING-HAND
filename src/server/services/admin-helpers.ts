@@ -28,8 +28,8 @@ export async function reviewHelper(actorId: string, helperId: string, action: He
         }
 
         if (email) {
-          const { enqueueEmail } = await import("@/server/email/outbox");
-          await enqueueEmail(supabase, {
+          const { enqueueAndSendEmail } = await import("@/server/email/outbox");
+          await enqueueAndSendEmail(supabase, {
             eventType: action === "approve" ? "helper-approved" : "helper-declined",
             recipient: email,
             entityId: helperId,

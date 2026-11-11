@@ -10,7 +10,7 @@
  * Live South African ID and adult validation to catch errors before final submit.
  */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Home,
   Sparkles,
@@ -33,7 +33,6 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { t } from "@/content/t";
 
@@ -71,7 +70,8 @@ const SERVICES: Array<{ key: ServiceKey; label: string; icon: LucideIcon }> = [
   { key: "garden", label: t("helper.onboarding.services.garden"), icon: Leaf },
 ];
 
-const TOTAL_STEPS = 10;
+const TOTAL_STEPS = 8;
+const DRAFT_STORAGE_KEY = "siza_helper_onboarding_draft";
 
 // ---------------------------------------------------------------------------
 // SA ID and age validation
@@ -314,6 +314,56 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
   const [isLoading, setIsLoading] = useState(false);
   const [done, setDone] = useState(false);
 
+  // Restore onboarding draft from localStorage across page refreshes
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(DRAFT_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object") {
+          setForm((prev) => ({
+            ...prev,
+            dateOfBirth: typeof parsed.dateOfBirth === "string" ? parsed.dateOfBirth : prev.dateOfBirth,
+            suburbs: Array.isArray(parsed.suburbs) ? parsed.suburbs : prev.suburbs,
+            services: Array.isArray(parsed.services) ? parsed.services : prev.services,
+            referenceName: typeof parsed.referenceName === "string" ? parsed.referenceName : prev.referenceName,
+            referencePhone: typeof parsed.referencePhone === "string" ? parsed.referencePhone : prev.referencePhone,
+            idNumber: typeof parsed.idNumber === "string" ? parsed.idNumber : prev.idNumber,
+          }));
+          if (typeof parsed.step === "number" && parsed.step >= 0 && parsed.step <= TOTAL_STEPS) {
+            setStep(parsed.step);
+          }
+        }
+      }
+    } catch {
+      // Ignore storage errors
+    }
+  }, []);
+
+  // Save onboarding draft to localStorage on any state change
+  useEffect(() => {
+    if (done) {
+      try {
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
+      } catch {}
+      return;
+    }
+    try {
+      const draft = {
+        step,
+        dateOfBirth: form.dateOfBirth,
+        suburbs: form.suburbs,
+        services: form.services,
+        referenceName: form.referenceName,
+        referencePhone: form.referencePhone,
+        idNumber: form.idNumber,
+      };
+      localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+    } catch {
+      // Ignore storage errors
+    }
+  }, [done, step, form.dateOfBirth, form.suburbs, form.services, form.referenceName, form.referencePhone, form.idNumber]);
+
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
     setError(null);
@@ -379,12 +429,12 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
 
     const data = new FormData();
     data.set("dateOfBirth", form.dateOfBirth);
-    data.set("jobTitle", form.jobTitle || "Home helper");
+    data.set("jobTitle", "Home helper");
     data.set("services", expandedServices.join(","));
     data.set("suburbs", form.suburbs.join(","));
-    data.set("bio", form.bio);
-    data.set("experienceNote", form.experienceNote);
-    data.set("rateNote", form.rateNote);
+    data.set("bio", "");
+    data.set("experienceNote", "");
+    data.set("rateNote", "");
     data.set("idNumber", form.idNumber);
     data.set("referenceName", form.referenceName);
     data.set("referencePhone", form.referencePhone);
@@ -398,7 +448,10 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
         body: data,
       });
 
-      if (res.ok || res.status === 303) {
+      if (res.ok || res.status === 303 || res.status === 409) {
+        try {
+          localStorage.removeItem(DRAFT_STORAGE_KEY);
+        } catch {}
         setDone(true);
         return;
       }
@@ -406,12 +459,6 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
       const json = (await res.json().catch(() => null)) as
         | { ok: false; error: { message: string } }
         | null;
-
-      if (res.status === 409) {
-        // Already submitted — treat as success
-        setDone(true);
-        return;
-      }
 
       setError(json?.error?.message ?? t("helper.onboarding.error.generic"));
     } catch {
@@ -595,99 +642,11 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
     );
   }
 
-  // ── Step 4: About you ────────────────────────────────────────────────────
+  // ── Step 4: Reference ────────────────────────────────────────────────────
   if (step === 4) {
     return (
       <Shell>
         <StepProgress step={4} total={TOTAL_STEPS} />
-        <StepHeading
-          title={t("helper.onboarding.about.title")}
-          body={t("helper.onboarding.about.body")}
-        />
-        <div className="w-full space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="jobTitle" className="text-base font-medium text-black">
-              {t("helper.onboarding.about.job_title_label")}
-            </Label>
-            <Input
-              id="jobTitle"
-              value={form.jobTitle}
-              onChange={(e) => update("jobTitle", e.target.value)}
-              placeholder={t("helper.onboarding.about.job_title_placeholder")}
-              maxLength={120}
-              className="h-14 text-base border-2 border-neutral-200 rounded-xl focus:border-black"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="bio" className="text-base font-medium text-black">
-              {t("helper.onboarding.about.bio_label")}
-            </Label>
-            <Textarea
-              id="bio"
-              value={form.bio}
-              onChange={(e) => update("bio", e.target.value)}
-              placeholder={t("helper.onboarding.about.bio_placeholder")}
-              maxLength={300}
-              rows={4}
-              className="text-base border-2 border-neutral-200 rounded-xl focus:border-black resize-none"
-            />
-            <p className="text-xs text-neutral-400 text-right">
-              {form.bio.length}/300
-            </p>
-          </div>
-        </div>
-        <NavButtons onBack={back} onNext={next} />
-      </Shell>
-    );
-  }
-
-  // ── Step 5: Experience ───────────────────────────────────────────────────
-  if (step === 5) {
-    return (
-      <Shell>
-        <StepProgress step={5} total={TOTAL_STEPS} />
-        <StepHeading
-          title={t("helper.onboarding.experience.title")}
-          body={t("helper.onboarding.experience.body")}
-        />
-        <div className="w-full space-y-4">
-          <Textarea
-            id="experienceNote"
-            value={form.experienceNote}
-            onChange={(e) => update("experienceNote", e.target.value)}
-            placeholder={t("helper.onboarding.experience.placeholder")}
-            maxLength={2000}
-            rows={6}
-            className="text-base border-2 border-neutral-200 rounded-xl focus:border-black resize-none"
-            aria-label={t("helper.label.experience")}
-          />
-          <p className="text-xs text-neutral-400 text-right">
-            {form.experienceNote.length}/2000
-          </p>
-          <div className="space-y-2 pt-2">
-            <Label htmlFor="rateNote" className="text-sm font-medium text-neutral-500">
-              {t("helper.onboarding.rate.title")}
-            </Label>
-            <Input
-              id="rateNote"
-              value={form.rateNote}
-              onChange={(e) => update("rateNote", e.target.value)}
-              placeholder={t("helper.onboarding.rate.placeholder")}
-              maxLength={500}
-              className="h-12 text-base border-2 border-neutral-200 rounded-xl focus:border-black"
-            />
-          </div>
-        </div>
-        <NavButtons onBack={back} onNext={next} />
-      </Shell>
-    );
-  }
-
-  // ── Step 6: Reference ────────────────────────────────────────────────────
-  if (step === 6) {
-    return (
-      <Shell>
-        <StepProgress step={6} total={TOTAL_STEPS} />
         <StepHeading
           title={t("helper.onboarding.reference.title")}
           body={t("helper.onboarding.reference.body")}
@@ -729,8 +688,8 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
     );
   }
 
-  // ── Step 7: ID number ────────────────────────────────────────────────────
-  if (step === 7) {
+  // ── Step 5: ID number ────────────────────────────────────────────────────
+  if (step === 5) {
     const is13 = form.idNumber.length === 13;
     const dateOk = is13 && isValidSaIdDate(form.idNumber);
     const checkOk = is13 && isValidSaIdCheckDigit(form.idNumber);
@@ -738,7 +697,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
 
     return (
       <Shell>
-        <StepProgress step={7} total={TOTAL_STEPS} />
+        <StepProgress step={5} total={TOTAL_STEPS} />
         <StepHeading
           title={t("helper.onboarding.id.title")}
           body={t("helper.onboarding.id.body")}
@@ -826,11 +785,11 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
     );
   }
 
-  // ── Step 8: ID photo ─────────────────────────────────────────────────────
-  if (step === 8) {
+  // ── Step 6: ID photo ─────────────────────────────────────────────────────
+  if (step === 6) {
     return (
       <Shell>
-        <StepProgress step={8} total={TOTAL_STEPS} />
+        <StepProgress step={6} total={TOTAL_STEPS} />
         <StepHeading
           title={t("helper.onboarding.id_photo.title")}
           body={t("helper.onboarding.id_photo.body")}
@@ -851,11 +810,11 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
     );
   }
 
-  // ── Step 9: Selfie ───────────────────────────────────────────────────────
-  if (step === 9) {
+  // ── Step 7: Selfie ───────────────────────────────────────────────────────
+  if (step === 7) {
     return (
       <Shell>
-        <StepProgress step={9} total={TOTAL_STEPS} />
+        <StepProgress step={7} total={TOTAL_STEPS} />
         <StepHeading
           title={t("helper.onboarding.selfie.title")}
           body={t("helper.onboarding.selfie.body")}
@@ -884,11 +843,11 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
     );
   }
 
-  // ── Step 10: Consent + Submit ────────────────────────────────────────────
-  if (step === 10) {
+  // ── Step 8: Consent + Submit ────────────────────────────────────────────
+  if (step === 8) {
     return (
       <Shell>
-        <StepProgress step={10} total={TOTAL_STEPS} />
+        <StepProgress step={8} total={TOTAL_STEPS} />
         <div className="w-full space-y-6">
           <UserCheck className="size-12 text-black mx-auto" />
           <StepHeading
@@ -943,7 +902,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
               {error.toLowerCase().includes("id") && (
                 <button
                   type="button"
-                  onClick={() => setStep(7)}
+                  onClick={() => setStep(5)}
                   className="text-xs font-semibold text-red-800 underline block pl-6"
                 >
                   Edit your ID number →
@@ -952,7 +911,7 @@ export function HelperOnboardingForm({ firstName }: { firstName?: string }) {
               {error.toLowerCase().includes("document") && (
                 <button
                   type="button"
-                  onClick={() => setStep(8)}
+                  onClick={() => setStep(6)}
                   className="text-xs font-semibold text-red-800 underline block pl-6"
                 >
                   Update your documents →

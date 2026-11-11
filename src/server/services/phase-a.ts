@@ -186,19 +186,97 @@ export async function saveHelperProfile(client: Db, helperId: string, input: Hel
       p_reference_phone: input.referencePhone ?? null,
     });
     if (rpcResult.error) {
+      if (rpcResult.error.code === "23505") {
+        try {
+          const { data: existingRecord } = await client
+            .from("helper_details")
+            .select("user_id, id_hash")
+            .eq("user_id", helperId)
+            .maybeSingle();
+
+          if (existingRecord) {
+            const idHash = hashIdentifier(input.idNumber);
+            const { data: otherUser } = await client
+              .from("helper_details")
+              .select("user_id")
+              .eq("id_hash", idHash)
+              .neq("user_id", helperId)
+              .maybeSingle();
+
+            if (otherUser) {
+              try { await storage.remove(stagedPaths); } catch {}
+              return fail("conflict", "That ID number is already registered to another account.");
+            }
+
+            const { error: updateError } = await client
+              .from("helper_details")
+              .update({
+                date_of_birth: input.dateOfBirth.toISOString().slice(0, 10),
+                job_title: input.jobTitle,
+                services: expandServiceAliases(input.services),
+                suburbs: input.suburbs,
+                bio: input.bio ?? "",
+                experience_note: input.experienceNote ?? "",
+                rate_note: input.rateNote ?? "",
+                status: "pending",
+                id_number_encrypted: encryptIdNumber(input.idNumber),
+                id_hash: idHash,
+                updated_at: new Date().toISOString(),
+              })
+              .eq("user_id", helperId);
+
+            if (!updateError) {
+              await client.from("helper_private_docs").delete().eq("helper_id", helperId);
+              await client.from("helper_private_docs").insert([
+                { helper_id: helperId, type: "id_photo", storage_path: paths.id_photo, delete_after: null },
+                { helper_id: helperId, type: "selfie_check", storage_path: paths.selfie_check, delete_after: null },
+              ]);
+              if (input.referenceName && input.referencePhone) {
+                await client.from("phase_a_helper_references").upsert({
+                  helper_id: helperId,
+                  name: input.referenceName.trim(),
+                  phone: input.referencePhone.trim(),
+                  created_at: new Date().toISOString(),
+                }, { onConflict: "helper_id" });
+              }
+
+              try {
+                const { enqueueAndSendEmail } = await import("@/server/email/outbox");
+                const { env } = await import("@/server/config/env");
+                await enqueueAndSendEmail(client, {
+                  eventType: "admin-new-application",
+                  recipient: env.ADMIN_NOTIFY_EMAIL,
+                  entityId: helperId,
+                });
+              } catch {}
+
+              return ok({ saved: true });
+            }
+          }
+        } catch {
+          // If table access throws (e.g. in test harness), proceed to standard conflict handling
+        }
+
+        try {
+          await storage.remove(stagedPaths);
+        } catch {
+          // Do not expose private object paths or storage provider errors.
+        }
+        return fail("conflict", "We could not save this profile. Check your details and try again.");
+      }
+
       try {
         await storage.remove(stagedPaths);
       } catch {
         // Do not expose private object paths or storage provider errors.
       }
-      if (rpcResult.error.code === "23505") return fail("conflict", "We could not save this profile. Check your details and try again.");
       return fail("internal_error", "We could not save your profile. Try again in a minute.");
     }
 
     try {
-      const { enqueueEmail } = await import("@/server/email/outbox");
+      const { enqueueAndSendEmail } = await import("@/server/email/outbox");
       const { env } = await import("@/server/config/env");
-      await enqueueEmail(client, {
+      await enqueueAndSendEmail(client, {
         eventType: "admin-new-application",
         recipient: env.ADMIN_NOTIFY_EMAIL,
         entityId: helperId,
