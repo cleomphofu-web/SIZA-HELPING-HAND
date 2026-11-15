@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import {
   MapPin,
-  Clock,
   Calendar,
   CheckCircle2,
   X,
@@ -13,9 +12,12 @@ import {
   ChevronRight,
   AlertCircle,
   Loader2,
-  Sparkles,
   ClipboardList,
   Navigation,
+  Star,
+  Check,
+  Upload,
+  Camera,
 } from "lucide-react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import type { HelperOfferSummary } from "@/server/views/booking-read";
@@ -23,75 +25,12 @@ import type { HelperOfferSummary } from "@/server/views/booking-read";
 type ExpandableJobFeedProps = {
   offers: HelperOfferSummary[];
   currentLocation?: string;
+  helperVerificationStatus?: string;
   onOfferAccepted?: (bookingId: string) => void;
   onOfferDeclined?: (bookingId: string) => void;
 };
 
-// Dynamic task checklist tailored to service type
-function getChecklistForServices(services?: string[]): string[] {
-  if (!services || services.length === 0) {
-    return [
-      "Thorough surface dusting & sanitization",
-      "Sweep and damp mop all hard floors",
-      "Vacuum rugs, mats, and living areas",
-      "Sanitize kitchen countertops, sink, and stovetop",
-      "Disinfect bathroom toilet, shower, and basin",
-      "Empty waste bins and replace liners",
-    ];
-  }
-
-  const tasks: string[] = [];
-  const sList = services.map((s) => s.toLowerCase());
-
-  if (sList.some((s) => s.includes("home") || s.includes("residential") || s.includes("deep"))) {
-    tasks.push(
-      "High & low surface dusting (tables, shelves, skirting)",
-      "Sweep, vacuum, and damp mop all rooms",
-      "Kitchen deep wipe: Counters, stove exterior, and sink",
-      "Bathroom hygiene: Toilet, basin, shower, and mirrors",
-      "Empty trash bins and neaten common areas"
-    );
-  }
-
-  if (sList.some((s) => s.includes("office") || s.includes("commercial"))) {
-    tasks.push(
-      "Disinfect office desks, keyboards, and high-touch areas",
-      "Clean kitchenette counters, microwave exterior, and sink",
-      "Vacuum office carpets and damp-mop corridors",
-      "Sanitize office washrooms and restock supplies",
-      "Empty all office paper and general waste bins"
-    );
-  }
-
-  if (sList.some((s) => s.includes("garden") || s.includes("yard"))) {
-    tasks.push(
-      "Lawn mowing and edge trimming",
-      "Rake fallen leaves and sweep paved pathways",
-      "Weed flowerbeds and garden borders",
-      "Neatly bag and stack garden refuse"
-    );
-  }
-
-  if (sList.some((s) => s.includes("handyman") || s.includes("maintenance"))) {
-    tasks.push(
-      "Review specific repair list with host",
-      "Execute requested tasks with safety precautions",
-      "Clean work area and inspect final result with host"
-    );
-  }
-
-  if (tasks.length === 0) {
-    tasks.push(
-      "Complete requested helper tasks per host instructions",
-      "Sanitize working tools and touchpoints",
-      "Review completed work with host prior to check-out"
-    );
-  }
-
-  return tasks;
-}
-
-// Deterministic distance estimation based on suburb name hash (for realistic preview)
+// Deterministic distance estimation based on suburb name hash
 function getEstimatedDistance(suburb: string, slot: number): string {
   let hash = 0;
   for (let i = 0; i < suburb.length; i++) {
@@ -99,32 +38,70 @@ function getEstimatedDistance(suburb: string, slot: number): string {
     hash |= 0;
   }
   const km = ((Math.abs(hash) % 45) / 10 + 1.2 + (slot - 1) * 0.8).toFixed(1);
-  return `${km} km away`;
+  return `${km} km`;
+}
+
+// Format year for Member Since
+function formatMemberSince(isoDate?: string): string {
+  if (!isoDate) return "2024";
+  try {
+    return new Date(isoDate).getFullYear().toString();
+  } catch {
+    return "2024";
+  }
 }
 
 export function ExpandableJobFeed({
   offers,
   currentLocation = "All My Suburbs",
+  helperVerificationStatus = "verified",
   onOfferAccepted,
   onOfferDeclined,
 }: ExpandableJobFeedProps) {
   const [active, setActive] = useState<HelperOfferSummary | null>(null);
   const [acceptingId, setAcceptingId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [checkedRequirements, setCheckedRequirements] = useState<Record<string, boolean>>({});
+  const [currentVerificationStatus, setCurrentVerificationStatus] = useState<string>(
+    helperVerificationStatus
+  );
+
+  // Verification modal state
+  const [showKycModal, setShowKycModal] = useState<boolean>(false);
+  const [kycIdNumber, setKycIdNumber] = useState<string>("");
+  const [kycConsent, setKycConsent] = useState<boolean>(false);
+  const [kycIdUploaded, setKycIdUploaded] = useState<boolean>(false);
+  const [kycSelfieUploaded, setKycSelfieUploaded] = useState<boolean>(false);
+  const [kycSubmitting, setKycSubmitting] = useState<boolean>(false);
+  const [kycError, setKycError] = useState<string | null>(null);
+
   const modalRef = useRef<HTMLDivElement>(null);
+  const kycRef = useRef<HTMLDivElement>(null);
   const id = useId();
   const router = useRouter();
   const [, startTransition] = useTransition();
+
+  // Reset checked requirements when active card changes
+  useEffect(() => {
+    if (active) {
+      setCheckedRequirements({});
+      setErrorMessage(null);
+    }
+  }, [active]);
 
   // Escape key & body overflow lock
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        setActive(null);
+        if (showKycModal) {
+          setShowKycModal(false);
+        } else {
+          setActive(null);
+        }
       }
     }
 
-    if (active) {
+    if (active || showKycModal) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -135,16 +112,42 @@ export function ExpandableJobFeed({
       document.body.style.overflow = "auto";
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [active]);
+  }, [active, showKycModal]);
 
   useOutsideClick(modalRef, () => {
-    if (!acceptingId) {
+    if (!acceptingId && !showKycModal) {
       setActive(null);
     }
   });
 
-  // Handle Accept
-  const handleAccept = async (offer: HelperOfferSummary) => {
+  useOutsideClick(kycRef, () => {
+    if (!kycSubmitting) {
+      setShowKycModal(false);
+    }
+  });
+
+  // Requirements checklist calculation
+  const activeRequirements = active?.requirements && active.requirements.length > 0
+    ? active.requirements
+    : [
+        "Prompt arrival & check-in with host upon entry",
+        "Follow room checklist and surface hygiene standards",
+        "Maintain clean, professional working attire",
+      ];
+
+  const totalReqs = activeRequirements.length;
+  const confirmedReqsCount = activeRequirements.filter((r) => checkedRequirements[r]).length;
+  const allReqsConfirmed = totalReqs > 0 && confirmedReqsCount === totalReqs;
+
+  const toggleRequirement = (req: string) => {
+    setCheckedRequirements((prev) => ({
+      ...prev,
+      [req]: !prev[req],
+    }));
+  };
+
+  // Atomic Job Accept Handler
+  const executeAtomicAccept = async (offer: HelperOfferSummary) => {
     setAcceptingId(offer.id);
     setErrorMessage(null);
 
@@ -166,7 +169,10 @@ export function ExpandableJobFeed({
           router.push(`/helper/jobs/${offer.id}`);
         });
       } else if (res.status === 409 || data?.error?.code === "already_taken") {
-        setErrorMessage("Another helper accepted this offer just now.");
+        setErrorMessage("Another helper in rotation accepted this job just now.");
+        setAcceptingId(null);
+      } else if (data?.error?.code === "unverified_helper") {
+        setShowKycModal(true);
         setAcceptingId(null);
       } else {
         setErrorMessage(data?.error?.message ?? "Could not accept offer. Please retry.");
@@ -175,6 +181,60 @@ export function ExpandableJobFeed({
     } catch {
       setErrorMessage("Network error. Please check your connection and retry.");
       setAcceptingId(null);
+    }
+  };
+
+  // Intercept button click: check verification status
+  const handleAcceptClick = (offer: HelperOfferSummary) => {
+    if (currentVerificationStatus !== "verified") {
+      setShowKycModal(true);
+      return;
+    }
+    executeAtomicAccept(offer);
+  };
+
+  // Submit KYC verification
+  const handleKycSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setKycError(null);
+
+    const cleanedId = kycIdNumber.trim();
+    if (!/^\d{13}$/.test(cleanedId)) {
+      setKycError("Please enter a valid 13-digit South African ID number.");
+      return;
+    }
+    if (!kycConsent) {
+      setKycError("Please accept the POPIA verification consent to proceed.");
+      return;
+    }
+
+    setKycSubmitting(true);
+    try {
+      const res = await fetch("/api/helper/kyc", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          idNumber: cleanedId,
+          consentText: "I consent to DHA identity verification via siZa in accordance with POPIA.",
+          consentVersion: "v1.0",
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (res.ok) {
+        setCurrentVerificationStatus("verified");
+        setShowKycModal(false);
+        if (active) {
+          executeAtomicAccept(active);
+        }
+      } else {
+        setKycError(data?.error || "Identity check failed. Please verify your ID number.");
+      }
+    } catch {
+      setKycError("Network error during verification. Please try again.");
+    } finally {
+      setKycSubmitting(false);
     }
   };
 
@@ -187,14 +247,157 @@ export function ExpandableJobFeed({
     <>
       {/* Dimmed Backdrop with Blur */}
       <AnimatePresence>
-        {active && (
+        {(active || showKycModal) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm h-full w-full z-50"
+            className="fixed inset-0 bg-black/65 backdrop-blur-sm h-full w-full z-50"
           />
         )}
+      </AnimatePresence>
+
+      {/* Action-Gated Identity Verification Modal / Drawer */}
+      <AnimatePresence>
+        {showKycModal ? (
+          <div className="fixed inset-0 grid place-items-center z-50 p-4 sm:p-6 overflow-y-auto">
+            <motion.div
+              ref={kycRef}
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-neutral-200 overflow-hidden my-auto"
+            >
+              <div className="bg-neutral-950 text-white p-6 relative space-y-2">
+                <button
+                  type="button"
+                  onClick={() => setShowKycModal(false)}
+                  className="absolute top-5 right-5 size-8 rounded-full bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+                  aria-label="Close verification modal"
+                >
+                  <X className="size-4" />
+                </button>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="size-5 text-emerald-400" />
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    Identity Verification Required
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold tracking-tight text-white">
+                  Verify South African ID
+                </h3>
+                <p className="text-xs text-neutral-400 leading-relaxed">
+                  Before claiming rotation job offers, South African regulations require verified identity for community safety.
+                </p>
+              </div>
+
+              <form onSubmit={handleKycSubmit} className="p-6 space-y-5">
+                {/* SA ID Input */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wider text-neutral-700">
+                    South African ID Number (13 Digits)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      maxLength={13}
+                      value={kycIdNumber}
+                      onChange={(e) => setKycIdNumber(e.target.value.replace(/\D/g, ""))}
+                      placeholder="e.g. 9205125800084"
+                      className="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-900 font-mono text-sm"
+                      required
+                    />
+                    {kycIdNumber.length === 13 && (
+                      <span className="absolute right-3 top-3 text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                        13 Digits ✓
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-neutral-500">
+                    Validated against Home Affairs (DHA) via secure one-way hash.
+                  </p>
+                </div>
+
+                {/* ID & Selfie Document Upload Previews */}
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setKycIdUploaded(!kycIdUploaded)}
+                    className={`p-3 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center gap-1.5 ${
+                      kycIdUploaded
+                        ? "bg-emerald-50 border-emerald-300 text-emerald-800"
+                        : "bg-neutral-50 border-neutral-200 text-neutral-600 hover:border-neutral-400"
+                    }`}
+                  >
+                    {kycIdUploaded ? (
+                      <Check className="size-5 text-emerald-600" />
+                    ) : (
+                      <Upload className="size-5 text-neutral-500" />
+                    )}
+                    <span className="text-xs font-semibold">
+                      {kycIdUploaded ? "ID Uploaded ✓" : "Upload ID Photo"}
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setKycSelfieUploaded(!kycSelfieUploaded)}
+                    className={`p-3 rounded-xl border text-center transition-all cursor-pointer flex flex-col items-center gap-1.5 ${
+                      kycSelfieUploaded
+                        ? "bg-emerald-50 border-emerald-300 text-emerald-800"
+                        : "bg-neutral-50 border-neutral-200 text-neutral-600 hover:border-neutral-400"
+                    }`}
+                  >
+                    {kycSelfieUploaded ? (
+                      <Check className="size-5 text-emerald-600" />
+                    ) : (
+                      <Camera className="size-5 text-neutral-500" />
+                    )}
+                    <span className="text-xs font-semibold">
+                      {kycSelfieUploaded ? "Selfie Taken ✓" : "Take Live Selfie"}
+                    </span>
+                  </button>
+                </div>
+
+                {/* POPIA Consent */}
+                <label className="flex items-start gap-2.5 cursor-pointer text-xs text-neutral-600 leading-snug">
+                  <input
+                    type="checkbox"
+                    checked={kycConsent}
+                    onChange={(e) => setKycConsent(e.target.checked)}
+                    className="size-4 mt-0.5 rounded border-neutral-300 text-black focus:ring-black shrink-0"
+                    required
+                  />
+                  <span>
+                    I consent to identity validation and POPIA processing by siZa to unlock fair rotation job offers.
+                  </span>
+                </label>
+
+                {kycError && (
+                  <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+                    <AlertCircle className="size-4 shrink-0 text-red-500" />
+                    <span>{kycError}</span>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={kycSubmitting || kycIdNumber.length !== 13 || !kycConsent}
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-neutral-900 hover:bg-black text-white text-sm font-bold shadow-md transition-all cursor-pointer disabled:opacity-50"
+                >
+                  {kycSubmitting ? (
+                    <>
+                      <Loader2 className="size-4 animate-spin" />
+                      <span>Verifying with Home Affairs...</span>
+                    </>
+                  ) : (
+                    <span>Verify Identity &amp; Unlock Acceptance</span>
+                  )}
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        ) : null}
       </AnimatePresence>
 
       {/* Expanded Modal Overlay */}
@@ -236,7 +439,7 @@ export function ExpandableJobFeed({
                     <Navigation className="size-3.5 text-neutral-500" />
                     <span>{getEstimatedDistance(active.suburb, active.slot)}</span>
                     <span>·</span>
-                    <span>Primary Service Zone</span>
+                    <span>{active.city || "Johannesburg"}</span>
                   </p>
                 </div>
 
@@ -257,6 +460,31 @@ export function ExpandableJobFeed({
 
               {/* Modal Body */}
               <div className="p-6 sm:p-7 space-y-6 max-h-[60vh] overflow-y-auto">
+                {/* Host Trust Signals Bar */}
+                <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 space-y-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+                    Host Trust &amp; Safety Rating
+                  </span>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
+                    <div className="flex items-center gap-1.5 text-neutral-800 font-semibold">
+                      <ShieldCheck className="size-4 text-emerald-600 shrink-0" />
+                      <span className="truncate">Payment Verified</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-neutral-800 font-semibold">
+                      <CheckCircle2 className="size-4 text-blue-600 shrink-0" />
+                      <span>{active.hostCompletedJobsCount ?? 3} Hires</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-neutral-800 font-semibold">
+                      <Star className="size-4 text-amber-500 fill-amber-500 shrink-0" />
+                      <span>{active.hostRating ?? 4.9} ★</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-neutral-600">
+                      <Calendar className="size-4 text-neutral-400 shrink-0" />
+                      <span>Since {formatMemberSince(active.hostMemberSince)}</span>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Payout Breakdown */}
                 {(() => {
                   const payCents = BigInt(active.payPerHelperCents ?? 0);
@@ -292,7 +520,7 @@ export function ExpandableJobFeed({
                   );
                 })()}
 
-                {/* Schedule & Duration */}
+                {/* Schedule Window */}
                 {active.startAt && (
                   <div className="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 space-y-1">
                     <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 flex items-center gap-1.5">
@@ -312,33 +540,57 @@ export function ExpandableJobFeed({
                   </div>
                 )}
 
-                {/* Cleaning Checklist */}
+                {/* Mandatory Pre-Acceptance Screening Checklist */}
                 <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900">
-                    <ClipboardList className="size-4 text-emerald-600" />
-                    <span>Job Scope &amp; Checklist</span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900">
+                      <ClipboardList className="size-4 text-emerald-600" />
+                      <span>Job Requirements Checklist</span>
+                    </div>
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-neutral-100 text-neutral-700 font-semibold border border-neutral-200">
+                      {confirmedReqsCount}/{totalReqs} Confirmed
+                    </span>
                   </div>
+                  <p className="text-[11px] text-neutral-500">
+                    Please confirm each host requirement below to enable job acceptance:
+                  </p>
                   <div className="space-y-2">
-                    {getChecklistForServices(active.services).map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-start gap-2.5 text-xs text-neutral-700 leading-relaxed"
-                      >
-                        <CheckCircle2 className="size-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
+                    {activeRequirements.map((item, idx) => {
+                      const isChecked = Boolean(checkedRequirements[item]);
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => toggleRequirement(item)}
+                          className={`p-3 rounded-xl border flex items-start gap-3 cursor-pointer transition-all ${
+                            isChecked
+                              ? "bg-emerald-50/70 border-emerald-300 text-emerald-950"
+                              : "bg-neutral-50/50 border-neutral-200 text-neutral-700 hover:border-neutral-300"
+                          }`}
+                        >
+                          <div
+                            className={`size-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                              isChecked
+                                ? "bg-emerald-600 text-white"
+                                : "border border-neutral-400 bg-white"
+                            }`}
+                          >
+                            {isChecked && <Check className="size-3.5 stroke-[3]" />}
+                          </div>
+                          <span className="text-xs font-medium leading-relaxed">{item}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
-                {/* Host Access & Reveal Notice */}
-                <div className="p-4 rounded-2xl bg-blue-50/60 border border-blue-200/80 text-xs text-blue-950 space-y-1">
+                {/* Pre-Acceptance Address Privacy Notice */}
+                <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-200/80 text-xs text-blue-950 space-y-1">
                   <div className="flex items-center gap-1.5 font-bold">
                     <ShieldCheck className="size-4 text-blue-700" />
-                    <span>Privacy &amp; Safety Protocol</span>
+                    <span>Strict Address Privacy Protocol</span>
                   </div>
                   <p className="text-blue-900/80 leading-relaxed">
-                    Exact street address, gate code, and host phone number are revealed immediately after you accept the job.
+                    Exact street address, unit number, gate intercom code, and host phone number will be unlocked immediately upon your confirmed acceptance.
                   </p>
                 </div>
 
@@ -354,20 +606,22 @@ export function ExpandableJobFeed({
               <div className="p-5 sm:p-6 bg-neutral-50 border-t border-neutral-200 flex items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => handleAccept(active)}
-                  disabled={acceptingId !== null}
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-neutral-900 hover:bg-black active:scale-[0.98] text-white text-sm font-bold shadow-md transition-all cursor-pointer disabled:opacity-75"
+                  onClick={() => handleAcceptClick(active)}
+                  disabled={acceptingId !== null || !allReqsConfirmed}
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-neutral-900 hover:bg-black active:scale-[0.98] text-white text-sm font-bold shadow-md transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {acceptingId === active.id ? (
                     <>
                       <Loader2 className="size-4 animate-spin" />
-                      <span>Accepting Job...</span>
+                      <span>Securing Slot...</span>
                     </>
+                  ) : !allReqsConfirmed ? (
+                    <span>Confirm All Checkboxes ({confirmedReqsCount}/{totalReqs})</span>
                   ) : (
                     <>
                       <CheckCircle2 className="size-4 text-emerald-400" />
                       <span>
-                        Accept Job (R
+                        Confirm &amp; Accept Job (R
                         {(
                           Number(
                             BigInt(active.payPerHelperCents ?? 0) +

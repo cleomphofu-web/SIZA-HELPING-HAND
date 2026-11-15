@@ -507,8 +507,12 @@ export async function resolvePhaseANoShowSlot(client: Db, hostId: string, input:
 }
 
 export async function acceptPhaseABooking(client: Db, helperId: string, bookingId: string, slot: number): Promise<Result<{ assignmentId: string }>> {
-  const { data: helper, error: helperError } = await client.from("helper_details").select("first_job_completed_at, subscription_status, subscription_paid_until, status").eq("user_id", helperId).maybeSingle();
+  const [{ data: helper, error: helperError }, { data: profile }] = await Promise.all([
+    client.from("helper_details").select("first_job_completed_at, subscription_status, subscription_paid_until, status").eq("user_id", helperId).maybeSingle(),
+    client.from("profiles").select("verification_status").eq("id", helperId).maybeSingle(),
+  ]);
   if (helperError || !helper || helper.status !== "approved") return fail("forbidden", "This job is not available to you.");
+  if (profile?.verification_status === "unverified") return fail("forbidden", "Please complete identity verification with your SA ID before accepting jobs.");
   if (!canAcceptJob({ firstJobCompletedAt: helper.first_job_completed_at, subscriptionStatus: helper.subscription_status, paidUntil: helper.subscription_paid_until ? new Date(helper.subscription_paid_until) : null, now: new Date() })) return fail("subscription_required", "A current subscription is needed before you accept later jobs.");
   const { data: graceConfig } = await client.from("app_config").select("value").eq("key", "confirm_grace_hours").maybeSingle();
   const graceHours = Number(graceConfig?.value);

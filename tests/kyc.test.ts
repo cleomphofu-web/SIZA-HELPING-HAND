@@ -99,10 +99,10 @@ describe("KYC Verification Service", () => {
               },
             };
           }
-          if (table === "helper_details") {
+          if (table === "helper_details" || table === "profiles") {
             return {
               update: (data: Record<string, unknown>) => {
-                updatedHelper.push(data);
+                if (table === "helper_details") updatedHelper.push(data);
                 return {
                   eq: async () => ({ error: null }),
                 };
