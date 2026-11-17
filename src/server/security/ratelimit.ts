@@ -4,10 +4,10 @@ import { createHmac } from "node:crypto";
 import { createSupabaseAdminClient } from "@/server/db/admin";
 import { env } from "@/server/config/env";
 
-export type RateLimitBucket = "booking" | "apply" | "upload" | "login" | "accept" | "report" | "code_attempt" | "admin_action" | "mfa_verify";
+export type RateLimitBucket = "booking" | "apply" | "upload" | "login" | "accept" | "report" | "code_attempt" | "admin_action" | "mfa_verify" | "notification";
 type LimitResult = { allowed: boolean; retryAfterSeconds: number };
 
-const buckets = new Set<RateLimitBucket>(["booking", "apply", "upload", "login", "accept", "report", "code_attempt", "admin_action", "mfa_verify"]);
+const buckets = new Set<RateLimitBucket>(["booking", "apply", "upload", "login", "accept", "report", "code_attempt", "admin_action", "mfa_verify", "notification"]);
 
 export function hashRateLimitSubject(bucket: string, subject: string): string {
   return createHmac("sha256", env.SUPABASE_SERVICE_ROLE_KEY)

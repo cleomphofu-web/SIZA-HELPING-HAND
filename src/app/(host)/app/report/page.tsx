@@ -59,7 +59,7 @@ export default async function HostReportPage({
           </div>
 
           {params.bookingId ? (
-            <form className="space-y-4 phase-a-form" action="/api/reports" method="post">
+            <form className="space-y-4 phase-a-form" action="/api/reports?redirect=/app/requests?reported=true" method="post">
               <input type="hidden" name="idempotencyKey" value={randomUUID()} />
               <input type="hidden" name="bookingId" value={params.bookingId} />
 

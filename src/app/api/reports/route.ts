@@ -30,6 +30,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: { code: forbidden ? "forbidden" : "validation_failed", message: forbidden ? "You cannot send this report." : "Tell us what happened before sending the report." } }, { status: forbidden ? 403 : 400 });
   }
   const result = pipeline.data;
-  const status = result.ok ? 201 : result.error.code === "forbidden" ? 403 : result.error.code === "not_found" ? 404 : result.error.code === "validation_failed" ? 400 : 500;
+  if (result.ok) {
+    const isHtmlForm = request.headers.get("accept")?.includes("text/html");
+    if (isHtmlForm) {
+      const redirectUrl = new URL(request.url).searchParams.get("redirect") || "/app?reported=true";
+      return NextResponse.redirect(new URL(redirectUrl, request.url), 303);
+    }
+    return NextResponse.json(result, { status: 201 });
+  }
+  const status = result.error.code === "forbidden" ? 403 : result.error.code === "not_found" ? 404 : result.error.code === "validation_failed" ? 400 : 500;
   return NextResponse.json(result, { status });
 }

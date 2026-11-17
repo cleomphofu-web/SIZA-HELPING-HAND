@@ -152,12 +152,50 @@ export function AccountForm({
           </div>
         ) : (
           <>
+            {/* When signing up, show role picker FIRST so user chooses before proceeding */}
+            {signup && (
+              <div className="mt-6 space-y-2">
+                <span className="block text-xs font-bold uppercase tracking-wider text-neutral-100">
+                  {t("account.label.role")}
+                </span>
+                <div className="grid grid-cols-2 gap-2 p-1 rounded-2xl bg-white/10 border border-white/20">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedRole("host")}
+                    className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all text-center cursor-pointer ${
+                      selectedRole === "host"
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "text-neutral-300 hover:text-white hover:bg-white/5"
+                    }`}
+                    aria-pressed={selectedRole === "host"}
+                  >
+                    <span className="text-xs font-bold">Book a Helper</span>
+                    <span className="text-[10px] opacity-80 font-normal">I need help at home/office</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setSelectedRole("helper")}
+                    className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all text-center cursor-pointer ${
+                      selectedRole === "helper"
+                        ? "bg-white text-black font-bold shadow-md"
+                        : "text-neutral-300 hover:text-white hover:bg-white/5"
+                    }`}
+                    aria-pressed={selectedRole === "helper"}
+                  >
+                    <span className="text-xs font-bold">Work as a Helper</span>
+                    <span className="text-[10px] opacity-80 font-normal">Earn direct pay on rotation</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Social OAuth Options */}
-            <div className="mt-6 space-y-3">
+            <div className="mt-5 space-y-3">
               <a
                 href={`/api/auth/oauth?provider=google&role=${selectedRole}`}
                 className="w-full h-12 rounded-xl bg-white hover:bg-neutral-100 text-black font-semibold text-xs tracking-wider flex items-center justify-center gap-3 transition-all shadow-md active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                aria-label="Continue with Google"
+                aria-label={`Continue with Google as ${roleLabel}`}
               >
                 <svg className="size-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                   <path
@@ -177,7 +215,7 @@ export function AccountForm({
                     d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
                   />
                 </svg>
-                <span>Continue with Google</span>
+                <span>Continue with Google ({roleLabel})</span>
               </a>
 
               <div className="relative flex items-center justify-center my-4 pt-1">
@@ -194,42 +232,7 @@ export function AccountForm({
             >
               {signup ? (
                 <>
-                  {/* Role Selector */}
-                  <div className="space-y-1.5">
-                    <span className="block text-xs font-bold uppercase tracking-wider text-neutral-100">
-                      {t("account.label.role")}
-                    </span>
-                    <div className="grid grid-cols-2 gap-2 p-1 rounded-2xl bg-white/10 border border-white/20">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedRole("host")}
-                        className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all text-center cursor-pointer ${
-                          selectedRole === "host"
-                            ? "bg-white text-black font-bold shadow-md"
-                            : "text-neutral-300 hover:text-white hover:bg-white/5"
-                        }`}
-                        aria-pressed={selectedRole === "host"}
-                      >
-                        <span className="text-xs font-bold">Book a Helper</span>
-                        <span className="text-[10px] opacity-80 font-normal">I need help at home/office</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setSelectedRole("helper")}
-                        className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all text-center cursor-pointer ${
-                          selectedRole === "helper"
-                            ? "bg-white text-black font-bold shadow-md"
-                            : "text-neutral-300 hover:text-white hover:bg-white/5"
-                        }`}
-                        aria-pressed={selectedRole === "helper"}
-                      >
-                        <span className="text-xs font-bold">Work as a Helper</span>
-                        <span className="text-[10px] opacity-80 font-normal">Earn direct pay on rotation</span>
-                      </button>
-                    </div>
-                    <input type="hidden" name="role" value={selectedRole} />
-                  </div>
+                  <input type="hidden" name="role" value={selectedRole} />
 
                   {/* First and Last Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

@@ -102,7 +102,7 @@ export default async function HelperReportPage({
         {activeBookingId ? (
           <form
             className="phase-a-form mt-6 space-y-4"
-            action="/api/reports"
+            action="/api/reports?redirect=/helper?reported=true"
             method="post"
           >
             <input type="hidden" name="idempotencyKey" value={randomUUID()} />

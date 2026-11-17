@@ -23,7 +23,6 @@ export async function GET(
     botCheck: async () => true,
     validate: async () => ({ ok: true as const, data: { bookingId } }),
     authorize: async () => {
-      if (!sameOrigin(request)) return { ok: false as const, error: "origin" };
       try {
         const actor = await requireActor();
         return { ok: true as const, data: actor };

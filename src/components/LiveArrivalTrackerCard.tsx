@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Clock, PhoneCall, Phone, MessageSquare, KeyRound, CheckCircle2, Navigation } from "lucide-react";
+import { getSupabaseBrowserClient } from "@/lib/supabase-browser";
 
 export interface LiveArrivalTrackerCardProps {
   bookingId: string;
@@ -31,42 +32,73 @@ export function LiveArrivalTrackerCard({
   const helperPhone = primaryHelper?.phone ?? "";
   const isCheckedIn = Boolean(primaryHelper?.checkedInAt) || bookingStatus === "in_progress";
 
-  // Background status poll every 15s when assigned and not checked in
-  const pollStatus = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/bookings/${bookingId}/on-my-way`, {
-        credentials: "same-origin",
-      });
-      if (!res.ok) return;
-      const data = (await res.json()) as {
-        status: string;
-        enRoute: { etaMinutes: number; enRouteAt: string } | null;
-      };
-      if (data.enRoute) {
-        setEnRoute(data.enRoute);
-      }
-    } catch {
-      // Non-critical background polling error
-    }
-  }, [bookingId]);
-
+  // Initial status check & Realtime updates for live en-route events (Zero polling)
   useEffect(() => {
     if (bookingStatus !== "assigned" || isCheckedIn) return;
 
-    // Check periodically for updates
-    const pollInterval = setInterval(() => {
-      void pollStatus();
-    }, 15_000);
+    let cancelled = false;
 
-    return () => clearInterval(pollInterval);
-  }, [bookingStatus, isCheckedIn, pollStatus]);
+    // Fetch initial status once on mount
+    async function fetchInitial() {
+      try {
+        const res = await fetch(`/api/bookings/${bookingId}/on-my-way`, {
+          credentials: "same-origin",
+        });
+        if (!res.ok || cancelled) return;
+        const data = (await res.json()) as {
+          status: string;
+          enRoute: { etaMinutes: number; enRouteAt: string } | null;
+        };
+        if (data.enRoute && !cancelled) {
+          setEnRoute(data.enRoute);
+        }
+      } catch {
+        // Non-critical initial fetch error
+      }
+    }
 
-  // Recalculate countdown every 10 seconds
+    void fetchInitial();
+
+    // Subscribe to analytics_events where event_name = 'helper_on_my_way'
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+
+    const channel = supabase
+      .channel(`live_arrival:${bookingId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "analytics_events",
+          filter: "event_name=eq.helper_on_my_way",
+        },
+        (payload: { new: Record<string, unknown> }) => {
+          const row = payload.new;
+          if (!row) return;
+          const meta = (row.metadata as Record<string, unknown>) ?? {};
+          if (meta.booking_id === bookingId || meta.bookingId === bookingId) {
+            setEnRoute({
+              etaMinutes: Number(meta.eta_minutes ?? meta.etaMinutes ?? 30),
+              enRouteAt: String(row.created_at ?? new Date().toISOString()),
+            });
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      cancelled = true;
+      void supabase.removeChannel(channel);
+    };
+  }, [bookingId, bookingStatus, isCheckedIn]);
+
+  // Recalculate countdown display every 60 seconds (local clock ticker, not an API poll)
   useEffect(() => {
     if (!enRoute) return;
     const ticker = setInterval(() => {
       setNow(Date.now());
-    }, 10_000);
+    }, 60_000);
     return () => clearInterval(ticker);
   }, [enRoute]);
 

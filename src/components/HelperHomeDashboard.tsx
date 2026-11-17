@@ -28,6 +28,7 @@ import { HelperSubscriptionBanner } from "@/components/HelperSubscriptionBanner"
 import { GooeyLocationSetter } from "@/components/ui/gooey-location-setter";
 import { ExpandableJobFeed } from "@/components/ui/expandable-job-card";
 import { getSupabaseBrowserClient } from "@/lib/supabase-browser";
+import { NotificationBell } from "@/components/NotificationBell";
 
 type HelperHomeDashboardProps = {
   profile: {
@@ -337,6 +338,9 @@ export function HelperHomeDashboard({
             </span>
           </div>
           <div className="flex items-center gap-2">
+            {helper?.id && (
+              <NotificationBell userId={helper.id} />
+            )}
             <Link
               href="/helper/report"
               className="flex items-center gap-1.5 text-xs text-neutral-300 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors"
@@ -541,6 +545,43 @@ export function HelperHomeDashboard({
                         </div>
                       )}
                     </div>
+                  </div>
+
+                  {/* Scheduled Date, Time & Scope Details */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-neutral-50 border border-neutral-200 text-xs">
+                    <div>
+                      <span className="font-semibold text-neutral-500 block">Scheduled Start Time:</span>
+                      <span className="text-neutral-900 font-medium">
+                        {new Intl.DateTimeFormat("en-ZA", {
+                          timeZone: "Africa/Johannesburg",
+                          weekday: "short",
+                          day: "numeric",
+                          month: "short",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }).format(new Date(primaryActiveJob.startAt))}
+                      </span>
+                    </div>
+                    {primaryActiveJob.services && primaryActiveJob.services.length > 0 && (
+                      <div>
+                        <span className="font-semibold text-neutral-500 block">Requested Services:</span>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {primaryActiveJob.services.map((svc) => (
+                            <span key={svc} className="px-2 py-0.5 rounded-full bg-neutral-200 text-neutral-800 text-[10px] font-bold capitalize">
+                              {svc.replace(/_/g, " ")}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {primaryActiveJob.accessNotes && (
+                      <div className="col-span-full pt-1 border-t border-neutral-200">
+                        <span className="font-semibold text-neutral-500 block">Access & Gate Notes:</span>
+                        <p className="text-neutral-700 text-xs mt-0.5 leading-relaxed">
+                          {primaryActiveJob.accessNotes}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Arrival Check-In Code Section */}

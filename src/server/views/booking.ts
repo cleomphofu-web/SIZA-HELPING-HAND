@@ -85,6 +85,8 @@ export type HelperAssignedJobSummary = {
   checkedInAt: string | null;
   hostFirstName?: string;
   hostPhone?: string;
+  services?: string[];
+  accessNotes?: string;
 };
 
 export type AdminBookingView = {

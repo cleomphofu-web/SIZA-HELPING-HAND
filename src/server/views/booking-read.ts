@@ -514,7 +514,7 @@ export async function getHelperAssignedJobs(): Promise<Result<HelperAssignedJobS
     const bookingIds = assignments.map((a) => a.booking_id);
     const { data: bookings, error: bookingError } = await client
       .from("phase_a_bookings")
-      .select("id, suburb, address_line, status, start_at, end_at_est, pay_per_helper_cents, transport_per_helper_cents, host_id")
+      .select("id, suburb, address_line, status, start_at, end_at_est, pay_per_helper_cents, transport_per_helper_cents, host_id, services, access_notes")
       .in("id", bookingIds);
     if (bookingError) return fail("internal_error", "We could not load your assigned jobs.");
 
@@ -544,6 +544,8 @@ export async function getHelperAssignedJobs(): Promise<Result<HelperAssignedJobS
         checkedInAt: assignment.checked_in_at,
         hostFirstName: host?.first_name,
         hostPhone: host?.phone,
+        services: (booking.services as string[]) ?? [],
+        accessNotes: booking.access_notes ?? undefined,
       }];
     });
 

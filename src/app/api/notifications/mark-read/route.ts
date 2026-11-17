@@ -9,7 +9,7 @@ import { markAllNotificationsRead } from "@/server/services/notifications";
 // Marks all unread notifications for the signed-in user as read.
 export async function POST(request: NextRequest) {
   const pipeline = await runRequestPipeline({
-    rateLimit: () => limitRequest("booking", request),
+    rateLimit: () => limitRequest("notification", request),
     botCheck: async () => true,
     validate: async () => ({ ok: true as const, data: null }),
     authorize: async () => {

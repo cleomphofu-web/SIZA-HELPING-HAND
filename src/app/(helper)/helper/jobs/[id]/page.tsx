@@ -117,7 +117,7 @@ export default async function HelperJobDetailPage({
                 {t("tracking.on_my_way_body")}
               </p>
             </div>
-            <OnMyWayButton bookingId={booking.id} />
+            <OnMyWayButton bookingId={booking.id} startAt={booking.startAt} />
           </div>
         )}
 

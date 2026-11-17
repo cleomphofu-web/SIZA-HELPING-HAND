@@ -9,7 +9,7 @@ import { getNotifications } from "@/server/services/notifications";
 // Returns the signed-in user's 30 most recent notifications + unread count.
 export async function GET(request: NextRequest) {
   const pipeline = await runRequestPipeline({
-    rateLimit: () => limitRequest("booking", request),
+    rateLimit: () => limitRequest("notification", request),
     botCheck: async () => true,
     validate: async () => ({ ok: true as const, data: null }),
     authorize: async () => {

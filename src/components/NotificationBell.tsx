@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { Bell } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getSupabaseBrowserClient } from "@/lib/supabase-browser";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -34,9 +35,11 @@ function timeAgo(iso: string): string {
 type Props = {
   /** Initial unread count from SSR — avoids a flash on first load */
   initialUnreadCount?: number;
+  /** Current user ID for Realtime notifications */
+  userId?: string;
 };
 
-export function NotificationBell({ initialUnreadCount = 0 }: Props) {
+export function NotificationBell({ initialUnreadCount = 0, userId }: Props) {
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(initialUnreadCount);
@@ -75,19 +78,52 @@ export function NotificationBell({ initialUnreadCount = 0 }: Props) {
     }
   }, []);
 
-  // Poll unread count periodically when mounted
+  // Initial fetch on mount (Zero polling: no setInterval)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      void refreshUnread();
-    }, 200);
-    const interval = setInterval(() => {
-      void refreshUnread();
-    }, 60_000);
-    return () => {
-      clearTimeout(timer);
-      clearInterval(interval);
-    };
+    void refreshUnread();
   }, [refreshUnread]);
+
+  // Realtime subscription for live notification events
+  useEffect(() => {
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+
+    // Listen to in_app_notifications inserts
+    const filter = userId ? `user_id=eq.${userId}` : undefined;
+    const channel = supabase
+      .channel(`in_app_notifications:${userId ?? "global"}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "in_app_notifications",
+          ...(filter ? { filter } : {}),
+        },
+        (payload: { new: Record<string, unknown> }) => {
+          const row = payload.new;
+          if (!row) return;
+
+          const newNotif: Notification = {
+            id: String(row.id ?? `notif-${Date.now()}`),
+            kind: String(row.kind ?? "alert"),
+            title: String(row.title ?? "Notification"),
+            body: String(row.body ?? ""),
+            actionPath: (row.action_path as string | null) ?? null,
+            readAt: (row.read_at as string | null) ?? null,
+            createdAt: String(row.created_at ?? new Date().toISOString()),
+          };
+
+          setUnreadCount((c) => c + 1);
+          setNotifications((prev) => [newNotif, ...prev.filter((n) => n.id !== newNotif.id)]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
+  }, [userId]);
 
   // ── Open / close ───────────────────────────────────────────────────────────
 

@@ -7,16 +7,30 @@ import { FlowButton } from "@/components/ui/flow-button";
 
 interface OnMyWayButtonProps {
   bookingId: string;
+  startAt?: string | null;
 }
 
 const ETA_OPTIONS = [15, 30, 45, 60] as const;
 
-export function OnMyWayButton({ bookingId }: OnMyWayButtonProps) {
+export function OnMyWayButton({ bookingId, startAt }: OnMyWayButtonProps) {
   const [selectedEta, setSelectedEta] = useState<number>(30);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [reportedEta, setReportedEta] = useState<number>(30);
   const [whatsappUrl, setWhatsappUrl] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
+
+  // Check if job start is within 3 hours
+  const isEligibleTime = () => {
+    if (!startAt) return true; // If unknown, allow helper to decide
+    const startTime = new Date(startAt).getTime();
+    const now = Date.now();
+    const diffMs = startTime - now;
+    const diffHours = diffMs / (1000 * 60 * 60);
+    // Allow notifying if within 3 hours before start time or already past start time
+    return diffHours <= 3;
+  };
+
+  const eligible = isEligibleTime();
 
   async function handleClick() {
     if (status === "loading") return;
@@ -69,6 +83,29 @@ export function OnMyWayButton({ bookingId }: OnMyWayButtonProps) {
             text={t("tracking.send_whatsapp")}
           />
         )}
+      </div>
+    );
+  }
+
+  if (!eligible && startAt) {
+    const formattedDate = new Intl.DateTimeFormat("en-ZA", {
+      timeZone: "Africa/Johannesburg",
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(new Date(startAt));
+
+    return (
+      <div className="p-4 rounded-2xl bg-neutral-900/40 border border-white/10 space-y-2">
+        <div className="flex items-center gap-2 text-xs font-semibold text-neutral-300">
+          <Clock className="size-4 text-amber-400 shrink-0" />
+          <span>Scheduled for {formattedDate}</span>
+        </div>
+        <p className="text-[11px] text-neutral-400 leading-relaxed">
+          The "On My Way" departure alert unlocks 3 hours before your scheduled arrival time so your host receives an accurate ETA.
+        </p>
       </div>
     );
   }

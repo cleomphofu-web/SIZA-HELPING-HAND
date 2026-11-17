@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { MessageSquare, Send, ChevronDown } from "lucide-react";
 import { t } from "@/content/t";
+import { getSupabaseBrowserClient } from "@/lib/supabase-browser";
 import type { BookingMessage } from "@/server/services/booking-messages";
 
 // Re-export so callers can import the type from one place
@@ -20,7 +21,6 @@ type Props = {
 // ── Constants ────────────────────────────────────────────────────────────────
 
 const MAX_CHARS = 1000;
-const POLL_INTERVAL_MS = 10_000;
 
 const PRESET_CHIPS: string[] = [
   "I am at the gate",
@@ -84,11 +84,11 @@ export function BookingMessageBoard({
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
-  // Polling
+  // Initial fetch + Supabase Realtime subscription
   useEffect(() => {
     let cancelled = false;
 
-    async function poll() {
+    async function fetchMessages() {
       try {
         const res = await fetch(`/api/bookings/${bookingId}/messages`, {
           credentials: "same-origin",
@@ -101,17 +101,58 @@ export function BookingMessageBoard({
           }
         }
       } catch {
-        // Poll silently — do not surface transient network errors
+        // Silently handle transient network errors on initial load
       }
     }
 
-    // Initial fetch
-    poll();
+    void fetchMessages();
 
-    const interval = setInterval(poll, POLL_INTERVAL_MS);
+    // Setup Supabase Realtime channel for live messages (Zero polling)
+    const supabase = getSupabaseBrowserClient();
+    if (!supabase) return;
+
+    const channel = supabase
+      .channel(`booking_messages:${bookingId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "booking_messages",
+          filter: `booking_id=eq.${bookingId}`,
+        },
+        (payload: { new: Record<string, unknown> }) => {
+          const row = payload.new;
+          if (!row) return;
+
+          const newMsg: BookingMessage = {
+            id: String(row.id ?? `msg-${Date.now()}`),
+            bookingId: String(row.booking_id ?? bookingId),
+            senderId: String(row.sender_id ?? ""),
+            senderRole: (row.sender_role as SenderRole) ?? "helper",
+            senderFirstName: String(row.sender_first_name ?? "User"),
+            message: String(row.message ?? ""),
+            createdAt: String(row.created_at ?? new Date().toISOString()),
+          };
+
+          setMessages((prev) => {
+            // Avoid duplicate if message already present
+            if (prev.some((m) => m.id === newMsg.id)) return prev;
+            // Also deduplicate optimistic messages with same text and sender
+            return [
+              ...prev.filter(
+                (m) => !(m.id.startsWith("optimistic-") && m.senderId === newMsg.senderId && m.message === newMsg.message)
+              ),
+              newMsg,
+            ];
+          });
+        }
+      )
+      .subscribe();
+
     return () => {
       cancelled = true;
-      clearInterval(interval);
+      void supabase.removeChannel(channel);
     };
   }, [bookingId]);
 
