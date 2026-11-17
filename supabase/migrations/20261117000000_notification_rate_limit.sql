@@ -1,8 +1,8 @@
 -- Migration: 20261117000000_notification_rate_limit.sql
--- Add 'notification' bucket to rate_limit_counters and consume_rate_limit function
+-- Add 'notification' bucket to rate_limit_counters and expand 'booking' limit
 
 alter table public.rate_limit_counters
-  drop constraint rate_limit_bucket_known;
+  drop constraint if exists rate_limit_bucket_known;
 
 alter table public.rate_limit_counters
   add constraint rate_limit_bucket_known check (bucket in (
@@ -10,9 +10,15 @@ alter table public.rate_limit_counters
     'login_pair', 'login_account', 'mfa_verify', 'notification'
   ));
 
+-- Relax 'booking' bucket limit from 10 to 120 per hour to prevent locking out active users
 insert into public.app_config(key, value)
-values ('rate_limit_notification', '{"limit":120,"window_seconds":3600}'::jsonb)
-on conflict (key) do nothing;
+values ('rate_limit_booking', '{"limit":120,"window_seconds":3600}'::jsonb)
+on conflict (key) do update set value = '{"limit":120,"window_seconds":3600}'::jsonb;
+
+-- Add notification rate limit
+insert into public.app_config(key, value)
+values ('rate_limit_notification', '{"limit":300,"window_seconds":3600}'::jsonb)
+on conflict (key) do update set value = '{"limit":300,"window_seconds":3600}'::jsonb;
 
 create or replace function public.consume_rate_limit(p_bucket text, p_subject_hash text)
 returns jsonb
